@@ -2,7 +2,7 @@
     padding: 0 10px
 }
 nav {
-    background-color: #191414;
+    background-color: #191414 !important;
 }
 .brand-logo i {
     font-size: 50px !important;
