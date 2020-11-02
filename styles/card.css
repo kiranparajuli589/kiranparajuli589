@@ -1,0 +1,27 @@
+.card-column {
+    display: flex;
+    justify-content: center;
+}
+.card {
+    max-width: 600px;
+    height: 800px;
+    margin: 15px;
+    background: linear-gradient(0deg, rgba(14, 1, 1, 0.3), rgba(0, 0, 0, .8)),
+        url(https://ourauckland.aucklandcouncil.govt.nz/media/29859/fx7a7993.jpg) no-repeat center;
+}
+
+.card-title {
+    text-align: center
+}
+.card-content p {
+    text-align: center;
+    color: #ff5353;
+}
+hr {
+    width: 100px;
+    color: slategrey;
+}
+#fun-fact {
+    padding: 5px;
+    text-align: center;
+}
