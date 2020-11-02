@@ -1,4 +1,5 @@
 ### Hi there 👋
+<p align="left"> <img src="https://komarev.com/ghpvc/?username=kiranparajuli589&label=Views&color=brightgreen&style=plastic" alt="Kiran Parajuli" /></p>
 
 - 🔭 I’m currently working on JankariTech Pvt. Ltd.
 - 🌱 I’m currently learning software development with quality assuarance
