@@ -1,4 +1,4 @@
-### Hi there 👋
+### Hi there <img src="https://raw.githubusercontent.com/MartinHeinz/MartinHeinz/master/wave.gif" width="30px" alt="Wave">
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=kiranparajuli589&label=Views&color=brightgreen&style=plastic" alt="Kiran Parajuli" /></p>
 
 - 🔭 I’m currently working on JankariTech Pvt. Ltd.
