@@ -1,3 +1,7 @@
+<p>
+  <a href="#"><img height="450" align="center" src="https://i.ibb.co/xsrdBSm/octo-killer-1.jpg"></a>
+</p>
+
 ![GitHub Views](https://komarev.com/ghpvc/?username=kiranparajuli589&label=Views&color=brightgreen&style=plastic)
 [![Facebook](https://img.shields.io/badge/--facebook?label=Facebook&logo=Facebook&style=social)](https://www.facebook.com/kiran.parajuli.589/)
 [![Twitter](https://img.shields.io/badge/--twitter?label=Twitter&logo=Twitter&style=social)](https://twitter.com/KiranParajuli16)
