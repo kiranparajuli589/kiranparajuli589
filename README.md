@@ -1,5 +1,5 @@
 <p>
-  <a href="#"><img height="450" align="center" src="https://i.ibb.co/xsrdBSm/octo-killer-1.jpg"></a>
+  <a href="#"><img height="450" align="center" src="https://i.ibb.co/5c8S3S9/octo-killer.jpg"></a>
 </p>
 
 ![GitHub Views](https://komarev.com/ghpvc/?username=kiranparajuli589&label=Views&color=brightgreen&style=plastic)
