@@ -5,7 +5,7 @@
 ![GitHub Views](https://komarev.com/ghpvc/?username=kiranparajuli589&label=Views&color=brightgreen&style=plastic)
 [![Facebook](https://img.shields.io/badge/--facebook?label=Facebook&logo=Facebook&style=social)](https://www.facebook.com/kiran.parajuli.589/)
 [![Twitter](https://img.shields.io/badge/--twitter?label=Twitter&logo=Twitter&style=social)](https://twitter.com/KiranParajuli16)
-[![Instagram](https://img.shields.io/badge/--instagram?label=Instageam&logo=Instagram&style=social)](https://www.instagram.com/kiran.parajuli589/?hl=en)
+[![Instagram](https://img.shields.io/badge/--instagram?label=Instagram&logo=Instagram&style=social)](https://www.instagram.com/kiran.parajuli589/?hl=en)
 [![Connect on LinkedIn](https://img.shields.io/badge/--linkedin?label=LinkedIn&logo=LinkedIn&style=social)](https://www.linkedin.com/in/kiranparajuli589/)
 [![Website](https://img.shields.io/badge/Website-know%20more-blue)](https://kiranparajuli.com.np)
 
