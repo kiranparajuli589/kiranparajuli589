@@ -17,4 +17,5 @@
 - ⚡ Fun fact: Movie trailers were originally shown after the movie, which is why they were called “trailers”.
 
 ![My GitHub Stats](https://github-readme-stats.vercel.app/api?username=kiranparajuli589&count_private=true&show_icons=true&theme=great-gatsby&locale=np&custom_title=मेरो+GitHub+तथ्याङ्क)
+
 ![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=kiranparajuli589&langs_count=3)
