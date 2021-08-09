@@ -1,12 +1,20 @@
 ### Hi there, I'm Kiran! <img src="https://raw.githubusercontent.com/MartinHeinz/MartinHeinz/master/wave.gif" width="30px" alt="Wave">
-I'm Kiran Parajuli, a software development enthusiast. I'm passionate about writing code. Apart from that, I am also an avid football fan. I enjoy watching and playing Football ⚽. In my spare time, I also play the guitar 🎸.
+I'm Kiran Parajuli, a software development enthusiast. I'm passionate about writing code. Apart from that, I am also an avid football fan. I enjoy watching and playing Football ⚽. In my spare time, I love to play the guitar 🎸.
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=kiranparajuli589" alt="pKiran" /> </p>
 
+#### Pinned
+
+- ⚡ [Core](https://github.com/kiranparajuli589/core)
+- ⚡ [eStore](https://github.com/kiranparajuli589/core)
+- ⚡ [Dove](https://github.com/SachchaiKendraNepal/DoveFront)
+
+#### Updates
 
 - 🔭 I’m currently working on JankariTech Pvt. Ltd.
+- 🔭 I’m also working as a Freelance Web Developer.
 - 🌱 I’m currently learning software development with quality assurance
+- 👯 I’m looking to collaborate on **Data Science**, **Machine Learning** and **Deep Learning**
 - 📫 How to reach me: kiranparajuli589@gmail.com
-- ⚡ Fun fact: Movie trailers were originally shown after the movie, which is why they were called “trailers”.
 
 
 ### Find me around
