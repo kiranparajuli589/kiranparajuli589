@@ -2,13 +2,13 @@
 I'm Kiran Parajuli, a software development enthusiast. I'm passionate about writing code. Apart from that, I am also an avid football fan. I enjoy watching and playing Football ⚽. In my spare time, I love to play the guitar 🎸.
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=kiranparajuli589" alt="pKiran" /> </p>
 
-#### Pinned
+### Pinned
 
 - ⚡ [Core](https://github.com/kiranparajuli589/core)
 - ⚡ [eStore](https://github.com/kiranparajuli589/core)
 - ⚡ [Dove](https://github.com/SachchaiKendraNepal/DoveFront)
 
-#### Updates
+### Updates
 
 - 🔭 I’m currently working on JankariTech Pvt. Ltd.
 - 🔭 I’m also working as a Freelance Web Developer.
