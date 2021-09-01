@@ -23,9 +23,9 @@ I'm Kiran Parajuli, a software development enthusiast. I'm passionate about writ
 - [![Website](https://img.shields.io/badge/Website-know%20more-blue)](https://kiranparajuli.com.np)
 
 ### Language & Tools
-![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=kiranparajuli589&langs_count=5&theme=radical)
-![Kiran's GitHub Stats](https://github-readme-stats.vercel.app/api?username=kiranparajuli589&count_private=true&show_icons=true&theme=radical&custom_title=Contributions)
+![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=kiranparajuli589&langs_count=5&theme=radical&layout=compact)
+![Kiran's GitHub Stats](https://github-readme-stats.vercel.app/api?username=kiranparajuli589&count_private=true&show_icons=true&theme=radical&hide_title=true)
 
 ### Github Streak
 [![GitHub Streak](https://github-readme-streak-stats.herokuapp.com?user=kiranparajuli589&theme=radical)](https://git.io/streak-stats)
-![](https://activity-graph.herokuapp.com/graph?username=kiranparajuli589&theme=react-dark&area=true)
+![Kiran's Github Activity](https://activity-graph.herokuapp.com/graph?username=kiranparajuli589&theme=react-dark&area=true)
