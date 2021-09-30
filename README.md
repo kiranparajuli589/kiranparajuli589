@@ -10,7 +10,7 @@ I'm Kiran Parajuli, a software development enthusiast. I'm passionate about writ
 
 ### Updates
 
-- 🔭 I’m currently working on JankariTech Pvt. Ltd.
+- 🔭 I’m currently working as a Software Developer on [JankariTech Pvt. Ltd](https://github.com/JankariTech).
 - 🔭 I’m also working as a Freelance Web Developer.
 - 🌱 I’m currently learning software development with quality assurance
 - 👯 I’m looking to collaborate on **Data Science**, **Machine Learning** and **Deep Learning**
