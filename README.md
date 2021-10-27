@@ -29,3 +29,6 @@ I'm Kiran Parajuli, a software development enthusiast. I'm passionate about writ
 ### Github Streak
 [![GitHub Streak](https://github-readme-streak-stats.herokuapp.com?user=kiranparajuli589&theme=radical)](https://git.io/streak-stats)
 ![Kiran's Github Activity](https://activity-graph.herokuapp.com/graph?username=kiranparajuli589&theme=react-dark&area=true)
+
+### CoderRank
+[![Skills Chart](https://cr-skills-chart-widget.azurewebsites.net/api/api?username=kiranparajuli589)](https://profile.codersrank.io/user/kiranparajuli589/)
