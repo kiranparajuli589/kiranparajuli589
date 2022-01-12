@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ### Hi there, I'm Kiran! <img src="https://raw.githubusercontent.com/MartinHeinz/MartinHeinz/master/wave.gif" width="30px" alt="Wave">
 I'm Kiran Parajuli, a software development enthusiast. I'm passionate about writing code. Apart from that, I am also an avid football fan. I enjoy watching and playing Football ⚽. In my spare time, I love to play the guitar 🎸.
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=kiranparajuli589" alt="pKiran" /> </p>
@@ -32,3 +33,24 @@ I'm Kiran Parajuli, a software development enthusiast. I'm passionate about writ
 
 ### CoderRank
 [![Skills Chart](https://cr-skills-chart-widget.azurewebsites.net/api/api?username=kiranparajuli589)](https://profile.codersrank.io/user/kiranparajuli589/)
+=======
+# kiranparajuli589
+
+## Project setup
+```
+yarn install
+```
+
+### Compiles and hot-reloads for development
+```
+yarn serve
+```
+
+### Compiles and minifies for production
+```
+yarn build
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
+>>>>>>> 8e42bfd (init)
