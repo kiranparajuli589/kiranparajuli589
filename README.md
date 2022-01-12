@@ -1,13 +1,6 @@
-<<<<<<< HEAD
 ### Hi there, I'm Kiran! <img src="https://raw.githubusercontent.com/MartinHeinz/MartinHeinz/master/wave.gif" width="30px" alt="Wave">
 I'm Kiran Parajuli, a software development enthusiast. I'm passionate about writing code. Apart from that, I am also an avid football fan. I enjoy watching and playing Football ⚽. In my spare time, I love to play the guitar 🎸.
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=kiranparajuli589" alt="pKiran" /> </p>
-
-### Pinned
-
-- ⚡ [Core](https://github.com/kiranparajuli589/core)
-- ⚡ [eStore](https://github.com/kiranparajuli589/core)
-- ⚡ [Dove](https://github.com/SachchaiKendraNepal/DoveFront)
 
 ### Updates
 
@@ -23,34 +16,16 @@ I'm Kiran Parajuli, a software development enthusiast. I'm passionate about writ
 - [![Connect on LinkedIn](https://img.shields.io/badge/--linkedin?label=LinkedIn&logo=LinkedIn&style=social)](https://www.linkedin.com/in/kiranparajuli589/)
 - [![Website](https://img.shields.io/badge/Website-know%20more-blue)](https://kiranparajuli.com.np)
 
-### Language & Tools
-![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=kiranparajuli589&langs_count=5&theme=radical&layout=compact)
-![Kiran's GitHub Stats](https://github-readme-stats.vercel.app/api?username=kiranparajuli589&count_private=true&show_icons=true&theme=radical&hide_title=true)
+[comment]: <> (### Language & Tools)
+
+[comment]: <> (![Top Langs]&#40;https://github-readme-stats.vercel.app/api/top-langs/?username=kiranparajuli589&langs_count=5&theme=radical&layout=compact&#41;)
+
+[comment]: <> (![Kiran's GitHub Stats]&#40;https://github-readme-stats.vercel.app/api?username=kiranparajuli589&count_private=true&show_icons=true&theme=radical&hide_title=true&#41;)
 
 ### Github Streak
 [![GitHub Streak](https://github-readme-streak-stats.herokuapp.com?user=kiranparajuli589&theme=radical)](https://git.io/streak-stats)
-![Kiran's Github Activity](https://activity-graph.herokuapp.com/graph?username=kiranparajuli589&theme=react-dark&area=true)
+
+[comment]: <> (![Kiran's Github Activity]&#40;https://activity-graph.herokuapp.com/graph?username=kiranparajuli589&theme=react-dark&area=true&#41;)
 
 ### CoderRank
 [![Skills Chart](https://cr-skills-chart-widget.azurewebsites.net/api/api?username=kiranparajuli589)](https://profile.codersrank.io/user/kiranparajuli589/)
-=======
-# kiranparajuli589
-
-## Project setup
-```
-yarn install
-```
-
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
->>>>>>> 8e42bfd (init)
