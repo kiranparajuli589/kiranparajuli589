@@ -1,28 +1,31 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+	<v-app>
+		<side-bar />
+		<v-main>
+			<home-content />
+		</v-main>
+		<scroll-top />
+	</v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import SideBar from "@/components/SideBar"
+import HomeContent from "@/views/HomeContent"
+import ScrollTop from "@/components/ScrollTop"
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
+	name: "App",
+
+	components: {
+		SideBar,
+		HomeContent,
+		ScrollTop,
+	}
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style lang="scss">
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+* {
+  box-sizing: border-box;
+  font-family: 'PT Sans', sans-serif;
 }
 </style>
