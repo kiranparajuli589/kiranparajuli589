@@ -29,13 +29,7 @@ module.exports = {
 		],
 		"vue/script-indent": [
 			"error",
-			"tab",
-			{
-				baseIndent: 0,
-				switchCase: 0,
-				ignores: []
-			}
-		],
+			"tab"],
 		"space-before-function-paren": ["error", {
 			anonymous: "always",
 			named: "never",
