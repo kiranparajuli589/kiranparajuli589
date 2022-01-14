@@ -1,14 +1,14 @@
 <template>
 	<v-card flat tile
-		color="teal darken-3" dark
+		color="teal lighten-3" dark
 		min-height="100vh"
 		class="profile-preview"
 	>
-		<v-card flat tile height="300"
-			color="teal darken-4"
+		<v-card flat tile min-height="200"
+			color="teal lighten-4"
 			class="center-content"
 		>
-			<div class="section-header">Profile</div>
+			<div class="section-header teal--text">Profile</div>
 		</v-card>
 		<div class="full-height">
 			<div class="center-content py-6">
@@ -26,7 +26,7 @@
 						:key="index"
 					>
 						<div class="key">{{ item.key }}</div>
-						<div class="separator" />
+						<div class="separator"/>
 						<div class="value">{{ item.value }}</div>
 					</div>
 				</div>
@@ -51,28 +51,33 @@ export default {
 </script>
 <style scoped lang="scss">
 .profile-picture {
-  border: 4px solid white;
+	border: 4px solid white;
 }
+
 .profile-info {
-  .profile-item {
-    padding: 10px 0;
-    .key {
-      font-size: 1rem;
-      line-height: 1.2rem;
-      width: 200px;
-      text-align: right;
-    }
-    .value {
-      font-size: 1.4rem;
-      line-height: 1.6rem;
-      width: 200px;
-    }
-    .separator {
-      margin: 0 14px;
-      height: 40px;
-      width: 1px;
-      background-color: white;
-    }
-  }
+	.profile-item {
+		padding: 10px 0;
+		color: #015b5b;
+
+		.key {
+			font-size: 1rem;
+			line-height: 1.2rem;
+			width: 200px;
+			text-align: right;
+		}
+
+		.value {
+			font-size: 1.4rem;
+			line-height: 1.6rem;
+			width: 200px;
+		}
+
+		.separator {
+			margin: 0 14px;
+			height: 40px;
+			width: 1px;
+			background-color: #c3f4f4;
+		}
+	}
 }
 </style>
