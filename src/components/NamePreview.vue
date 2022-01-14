@@ -34,8 +34,8 @@ export default {
 	mounted() {
 		gsap.timeline({
 			scrollTrigger: {
-				trigger: ".name-preview",
-				pin: true,   // pin the trigger element while active
+				trigger: ".home-content",
+				pin: false,   // pin the trigger element while active
 				start: "top top", // when the top of the trigger hits the top of the viewport
 				end: "+=100", // end after scrolling 500px beyond the start
 				scrub: 1, // smooth scrubbing, takes 1 second to "catch up" to the scrollbar
@@ -43,15 +43,15 @@ export default {
 		})
 			.from(".letter-qa", {
 				x: -50,
-				duration: .75,
+				duration: .5,
 				opacity: 0
 			})
 			.from(".char-pipe", {
-				rotate: 360,
-				duration: 1,
+				rotate: 360 * 2,
+				duration: 2,
 				ease: "back",
 				opacity: 0,
-				marginLeft: "30px"
+				x: -100
 			})
 			.from(".full-stack", {
 				scale: 0,
@@ -69,6 +69,7 @@ export default {
 	text-align: center;
 	font-size: 4rem;
 	line-height: 4.2rem;
+	font-weight: 600;
 }
 
 .author-bio {
@@ -84,7 +85,7 @@ export default {
 		width: 2px;
 		background-color: grey;
 		height: 32px;
-		margin: 0 5px;
+		margin: 0 15px;
 	}
 }
 </style>
