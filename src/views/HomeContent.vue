@@ -5,6 +5,7 @@
 	>
 		<name-preview />
 		<profile-preview />
+		<experience-preview />
 	</v-card>
 </template>
 
@@ -13,7 +14,8 @@ export default {
 	name: "HomeContent",
 	components: {
 		ProfilePreview: () => import("@/components/ProfilePreview"),
-		NamePreview: () => import("@/components/NamePreview")
+		NamePreview: () => import("@/components/NamePreview"),
+		ExperiencePreview: () => import("@/components/ExperiencePreview")
 	},
 	data: () => ({}),
 	computed: {},

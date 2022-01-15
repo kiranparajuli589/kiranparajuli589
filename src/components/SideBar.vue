@@ -27,7 +27,7 @@ export default {
 		items: [
 			{name: "Home", icon: "mdi-home", goTo: ".name-preview"},
 			{name: "Profile", icon: "mdi-account", goTo: ".profile-preview"},
-			{name: "Experience", icon: "mdi-compass"},
+			{name: "Experience", icon: "mdi-compass", goTo: ".experience-preview"},
 			{name: "Projects", icon: "mdi-projector-screen"},
 			{name: "Technologies", icon: "mdi-powershell"},
 			{name: "Education", icon: "mdi-school"},
