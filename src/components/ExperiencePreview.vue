@@ -12,17 +12,21 @@
 		</v-card>
 		<v-card-text>
 			<div
-				v-for="n in 3"
+				v-for="n in 2"
 				:key="n"
 				class="py-8 px-6"
 			>
 				<v-card elevation="8" max-width="800"
 					min-height="300"
-					class="d-flex justify-center align-center px-6 mx-auto"
+					class="d-flex justify-center align-center flex-wrap px-6 mx-auto"
 				>
-					<v-avatar color="grey" size="260" />
+					<div class="py-8">
+						<v-avatar color="grey" size="240" />
+					</div>
 					<div class="px-4"></div>
-					<div class="pa-2 full-height">
+					<v-card class="px-2 pt-6 pb-12 full-height"
+						max-width="400" flat
+					>
 						<div class="exp-title">
 							<div class="company-name">Lorem Ipsum Dolar</div>
 							<div class="pipe" />
@@ -31,7 +35,7 @@
 						<div class="exp-subtitle">
 							Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Nulla porttitor accumsan tincidunt. Proin eget tortor risus. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Proin eget tortor risus. Donec rutrum congue leo eget malesuada.
 						</div>
-					</div>
+					</v-card>
 				</v-card>
 			</div>
 		</v-card-text>
