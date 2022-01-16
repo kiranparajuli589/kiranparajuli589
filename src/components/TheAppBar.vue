@@ -1,6 +1,6 @@
 <template>
-	<v-app-bar flat>
-		<div class="burger" @click="addRotate">
+	<v-app-bar flat clipped-left>
+		<div class="burger" @click="handleClick">
 			<div id="top-bar"></div>
 			<div id="mid-bar"></div>
 			<div id="bottom-bar"></div>
@@ -9,27 +9,69 @@
 </template>
 
 <script>
+import {mapGetters} from "vuex"
+
 export default {
 	name: "TheAppBar",
+	data: () => ({
+		topBarRotateClass: "rotate-top",
+		bottomBarRotateClass: "rotate-bottom",
+		hideClass: "hide"
+	}),
+	computed: {
+		...mapGetters({
+			drawer: "drawerState"
+		}),
+	},
+	created() {
+		this.$store.dispatch("setDrawer", this.$vuetify.breakpoint.mdAndUp)
+	},
+	watch: {
+		drawer(v) {
+			if (v) this.addRotate()
+			else this.removeRotate()
+		},
+		"$vuetify.breakpoint.width": {
+			handler(v) {
+				this.$store.dispatch("setDrawer", v > 600)
+			}
+		}
+	},
 	methods: {
+		handleClick() {
+			this.$store.dispatch("setDrawer", !this.drawer)
+		},
 		addRotate() {
 			const topBar = document.getElementById("top-bar")
-			const topBarRotateClass = "rotate-top"
-			if (topBar.classList.contains(topBarRotateClass)) {
-				topBar.classList.remove(topBarRotateClass)
-			} else topBar.classList.add(topBarRotateClass)
+			if (!topBar.classList.contains(this.topBarRotateClass)) {
+				topBar.classList.add(this.topBarRotateClass)
+			}
 
 			const bottomBar = document.getElementById("bottom-bar")
-			const bottomBarRotateClass = "rotate-bottom"
-			if (bottomBar.classList.contains(bottomBarRotateClass)) {
-				bottomBar.classList.remove(bottomBarRotateClass)
-			} else bottomBar.classList.add(bottomBarRotateClass)
+			if (!bottomBar.classList.contains(this.bottomBarRotateClass)) {
+				bottomBar.classList.add(this.bottomBarRotateClass)
+			}
 
 			const midBar = document.getElementById("mid-bar")
-			const hideClass = "hide"
-			if (midBar.classList.contains(hideClass))  {
-				midBar.classList.remove(hideClass)
-			} else midBar.classList.add(hideClass)
+			if (!midBar.classList.contains(this.hideClass))  {
+				midBar.classList.add(this.hideClass)
+			}
+		},
+		removeRotate() {
+			const topBar = document.getElementById("top-bar")
+			if (topBar.classList.contains(this.topBarRotateClass)) {
+				topBar.classList.remove(this.topBarRotateClass)
+			}
+
+			const bottomBar = document.getElementById("bottom-bar")
+			if (bottomBar.classList.contains(this.bottomBarRotateClass)) {
+				bottomBar.classList.remove(this.bottomBarRotateClass)
+			}
+
+			const midBar = document.getElementById("mid-bar")
+			if (midBar.classList.contains(this.hideClass))  {
+				midBar.classList.remove(this.hideClass)
+			}
 		}
 	}
 }

@@ -1,5 +1,6 @@
 <template>
 	<v-navigation-drawer
+		v-if="drawer"
 		app permanent
 		width="200"
 		color="rgb(255 255 255 / 60%)"
@@ -34,8 +35,15 @@ export default {
 			{name: "Connect", icon: "mdi-share-variant"},
 		]
 	}),
-	computed: {},
-	created() {
+	computed: {
+		drawer: {
+			get(){
+				return this.$store.getters.drawerState
+			},
+			set(v) {
+				this.$store.dispatch("setDrawer", !!v)
+			}
+		}
 	},
 	methods: {
 		scrollToPreview(target) {
