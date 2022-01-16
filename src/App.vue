@@ -9,16 +9,12 @@
 </template>
 
 <script>
-import SideBar from "@/components/SideBar"
-import HomeContent from "@/views/HomeContent"
-import ScrollTop from "@/components/ScrollTop"
 export default {
 	name: "App",
-
 	components: {
-		SideBar,
-		HomeContent,
-		ScrollTop,
+		SideBar: () => import("@/components/SideBar"),
+		HomeContent: () => import("@/views/HomeContent"),
+		ScrollTop: () => import("@/components/ScrollTop"),
 	}
 }
 </script>

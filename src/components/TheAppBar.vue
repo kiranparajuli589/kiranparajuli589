@@ -1,5 +1,8 @@
 <template>
-	<v-app-bar flat clipped-left>
+	<v-app-bar flat class="app-bar"
+		color="rgb(255 255 255 / 90%)"
+	>
+		<v-spacer />
 		<div class="burger" @click="handleClick">
 			<div id="top-bar"></div>
 			<div id="mid-bar"></div>
@@ -22,9 +25,12 @@ export default {
 		...mapGetters({
 			drawer: "drawerState"
 		}),
+		mdAndUp() {
+			return this.$vuetify.breakpoint.mdAndUp
+		}
 	},
 	created() {
-		this.$store.dispatch("setDrawer", this.$vuetify.breakpoint.mdAndUp)
+		this.$store.dispatch("setDrawer", this.mdAndUp)
 	},
 	watch: {
 		drawer(v) {
@@ -33,7 +39,7 @@ export default {
 		},
 		"$vuetify.breakpoint.width": {
 			handler(v) {
-				this.$store.dispatch("setDrawer", v > 600)
+				this.$store.dispatch("setDrawer", v > 800)
 			}
 		}
 	},
@@ -78,6 +84,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.app-bar {
+	z-index: 1;
+}
 .burger {
 	position: relative;
 	height: 21px;

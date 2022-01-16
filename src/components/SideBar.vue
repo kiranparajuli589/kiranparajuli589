@@ -1,24 +1,26 @@
 <template>
-	<v-navigation-drawer
-		v-if="drawer"
-		app permanent
-		width="200"
-		color="rgb(255 255 255 / 60%)"
-	>
-		<div class="resume grey--text">Resume</div>
-		<v-list dense>
-			<v-list-item v-for="(item, index) in items"
-				:key="index"
-				@click="scrollToPreview(item.goTo)"
-				class="py-1"
-			>
-				<v-list-item-icon>
-					<v-icon color="grey darken-4">{{item.icon}}</v-icon>
-				</v-list-item-icon>
-				<v-list-item-title>{{item.name}}</v-list-item-title>
-			</v-list-item>
-		</v-list>
-	</v-navigation-drawer>
+	<v-slide-x-reverse-transition>
+		<v-navigation-drawer
+			v-if="drawer"
+			app permanent
+			width="200"
+			color="rgb(255 255 255 / 60%)"
+		>
+			<div class="resume grey--text">Resume</div>
+			<v-list dense>
+				<v-list-item v-for="(item, index) in items"
+					:key="index"
+					class="py-1"
+					@click="scrollToPreview(item.goTo)"
+				>
+					<v-list-item-icon>
+						<v-icon color="grey darken-4">{{item.icon}}</v-icon>
+					</v-list-item-icon>
+					<v-list-item-title>{{item.name}}</v-list-item-title>
+				</v-list-item>
+			</v-list>
+		</v-navigation-drawer>
+	</v-slide-x-reverse-transition>
 </template>
 
 <script>
@@ -43,7 +45,7 @@ export default {
 			set(v) {
 				this.$store.dispatch("setDrawer", !!v)
 			}
-		}
+		},
 	},
 	methods: {
 		scrollToPreview(target) {
