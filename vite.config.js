@@ -8,6 +8,10 @@ const path = require("path")
 
 // https://vitejs.dev/config/
 export default defineConfig({
+	build: {
+		// github pages uses docs dir
+		outDir: "./docs"
+	},
 	plugins: [
 		vue(),
 		Components({
