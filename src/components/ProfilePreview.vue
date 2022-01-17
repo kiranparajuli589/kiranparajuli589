@@ -1,38 +1,35 @@
 <template>
-	<v-card flat tile
-		color="teal lighten-3" dark
-		min-height="100vh"
-		class="profile-preview"
-	>
-		<v-card flat tile min-height="200"
-			color="teal lighten-4"
-			class="center-content"
-		>
-			<div class="section-header teal--text">Profile</div>
-		</v-card>
+	<div class="profile-preview">
+		<div class="center-content top-section">
+			<div class="section-header teal--text">
+				Profile
+			</div>
+		</div>
 		<div class="full-height">
 			<div class="center-content py-6">
-				<v-avatar size="300"
-					class="profile-picture"
-					color="white"
-				>
-					<v-img :src="picture"/>
-				</v-avatar>
+				<div class="profile-picture">
+					<img :src="picture" alt="profile">
+				</div>
 			</div>
 			<div class="center-content">
 				<div class="profile-info">
-					<div class="profile-item d-flex align-center"
+					<div
 						v-for="(item, index) in profileItems"
 						:key="index"
+						class="profile-item d-flex align-center"
 					>
-						<div class="key">{{ item.key }}</div>
-						<div class="separator"/>
-						<div class="value">{{ item.value }}</div>
+						<div class="key">
+							{{ item.key }}
+						</div>
+						<div class="separator" />
+						<div class="value">
+							{{ item.value }}
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</v-card>
+	</div>
 </template>
 
 <script>
@@ -50,8 +47,26 @@ export default {
 }
 </script>
 <style scoped lang="scss">
+.profile-preview  {
+	background-color: #3aa7a7;
+	color: white;
+	min-height: 100vh;
+}
+.top-section {
+	min-height: 200px;
+	background-color: #7ed7d7
+}
 .profile-picture {
 	border: 4px solid white;
+	background-color: white;
+	height: 300px;
+	width: 300px;
+	border-radius: 50%;
+	overflow: hidden;
+	img {
+		height: 100%;
+		width: 100%;
+	}
 }
 
 .profile-info {

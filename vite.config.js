@@ -16,7 +16,10 @@ export default defineConfig({
 	plugins: [
 		vue(),
 		Components({
-			resolvers: IconsResolver(),
+			resolvers: IconsResolver({
+				prefix: false,
+				enabledCollections: ["mdi"]
+			}),
 		}),
 		Icons({
 			autoInstall: true
