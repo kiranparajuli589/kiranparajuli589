@@ -1,5 +1,12 @@
 <script setup>
-import { ref } from "vue"
+import {computed, ref} from "vue"
+import  {useStore}  from "vuex"
+
+const store = useStore()
+
+const drawer = computed(() => {
+	return store.getters.drawerState
+})
 
 // eslint-disable-next-line no-undef
 defineProps({
@@ -14,6 +21,10 @@ const count = ref(0)
 
 <template>
 	<h1>{{ msg }}</h1>
+
+	<div>
+		---{{ drawer }}--
+	</div>
 
 	<i-mdi-account-box style="font-size: 2em; color: red" />
 
@@ -32,7 +43,7 @@ const count = ref(0)
 		<a href="https://v3.vuejs.org/" target="_blank">Vue 3 Documentation</a>
 	</p>
 
-	<button type="button" @click="count++">
+	<button type="button" @click="increment">
 		count is: {{ count }}
 	</button>
 	<p>

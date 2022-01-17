@@ -9,7 +9,8 @@
     "lint:fix": "eslint --fix"
   },
   "dependencies": {
-    "vue": "^3.2.25"
+    "vue": "^3.2.25",
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@iconify-json/mdi": "^1.0.12",
@@ -19,6 +20,8 @@
     "unplugin-icons": "^0.13.0",
     "unplugin-vue-components": "^0.17.13",
     "vite": "^2.7.2",
-    "vite-plugin-pwa": "^0.11.13"
+    "vite-plugin-pwa": "^0.11.13",
+    "vite-plugin-windicss": "^1.6.3",
+    "windicss": "^3.4.3"
   }
 }

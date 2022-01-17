@@ -4,7 +4,7 @@ import HelloWorld from "./components/HelloWorld"
 
 <template>
 	<div>
-		<img alt="Vue logo" src="./assets/logo.png">
+		<img alt="Vue logo" src="./assets/logo.png" class="py-4">
 		<HelloWorld msg="Hello Vue 3 + Vite" />
 	</div>
 </template>
