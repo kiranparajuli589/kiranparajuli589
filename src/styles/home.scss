@@ -1,0 +1,182 @@
+.home {
+	padding: 4rem;
+	.section-title {
+		font-size: 3rem;
+	}
+	.section-subtitle {
+		font-size: 1.2rem;
+		font-weight: bold;
+	}
+	.section-divider {
+		width: 100%;
+		max-width: 160px;
+		height: 2px;
+		background-color: #1867C0;
+		margin-block: 1rem 3rem;
+		border-radius: 24px;
+		position: relative;
+		&::before {
+			content: '';
+			width: 8px;
+			height: 8px;
+			background-color: #1867C0;
+			border-radius: 24px;
+			position: absolute;
+			top: -3px;
+			left: 0;
+		}
+	}
+	&--container {
+		margin: auto;
+		position: relative;
+	}
+	&--toolbar {
+		.v-toolbar__content {
+			gap: 1rem;
+			justify-content: space-between;
+			padding-inline: 1rem;
+		}
+		.main {
+			font-size: 1.4rem;
+			font-weight: 600;
+			text-transform: uppercase;
+		}
+		.email {
+			display: flex;
+			gap: .3rem;
+			align-items: center;
+			justify-content: center;
+			&:hover {
+				font-weight: bold;
+			}
+		}
+		.btn {
+			display: flex;
+			gap: .2rem;
+			align-items: center;
+			justify-content: center;
+			padding: .3rem .5rem;
+			border-radius: 4px;
+			transition: all .2s;
+			&:hover {
+				cursor: pointer;
+				background-color: #1867C0;
+				transform: rotate(-4deg);
+				color: white;
+			}
+		}
+	}
+	&--sidebar {
+		position: absolute;
+		top: 64px; left: 0;
+		width: 10rem;
+		height: 100%;
+		.linkedin, .github, .twitter {
+			position: absolute;
+			left: 2rem;
+			font-size: 2rem;
+			text-decoration: none;
+		}
+		.linkedin {
+			top: 300px;
+		}
+		.github {
+			top: 340px;
+			color: black;
+		}
+		.twitter {
+			top: 380px;
+			color: dodgerblue;
+		}
+	}
+	&--content {
+		background-color: #F5F5F5;
+		padding-inline: 10rem 3rem;
+		padding-bottom: 6rem;
+	}
+	&--intro {
+		padding-block: 10rem;
+		display: flex; gap: 1rem;
+		flex-wrap: wrap;
+		justify-content: start;
+		.full-name {
+			font-size: 3rem;
+			font-weight: 900;
+			text-transform: uppercase;
+		}
+		.title {
+			font-size: 1.5rem;
+			font-weight: bold;
+			margin-bottom: 1rem;
+		}
+		.lets-talk {
+			margin-top: 3rem;
+			margin-left: 2rem;
+			background-color: darkorange;
+			color: white;
+			border-radius: 50%;
+			height: 4rem;
+			width: 4rem;
+			text-decoration: none;
+			position: relative;
+			outline: 20px solid orange;
+			.lets, .talk {
+				position: absolute;
+			}
+			.lets {
+				top: .6rem;
+				left: 1rem;
+			}
+			.talk {
+				top: 1.7rem;
+				left: 1.5rem;
+			}
+
+		}
+		.right-panel, .left-panel {
+			padding: 1rem;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		.left-panel {
+			flex-direction: column;
+			align-items: start;
+			flex-basis: 30%;
+		}
+	}
+	&--services {
+		.exp {
+			font-size: 1.2rem;
+			padding-inline: .3rem;
+			margin-bottom: .5rem;
+		}
+		.type-list, .tech-list {
+			display: flex; gap: 1rem;
+			flex-wrap: wrap;
+			justify-content: start;
+		}
+	}
+	&--works {
+		.cards-list {
+			display: flex; gap: 1rem;
+			flex-wrap: wrap;
+			justify-content: start;
+			// take 2 items in a row
+			.work--card {
+				flex-basis: 48%;
+			}
+		}
+		.links {
+			a {
+				font-size: 1rem;
+				text-transform: capitalize;
+				text-decoration: none;
+				color: #1867C0;
+				&:hover {
+					text-decoration: underline;
+				}
+			}
+		}
+	}
+}
