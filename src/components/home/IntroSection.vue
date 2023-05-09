@@ -1,5 +1,5 @@
 <template>
-	<div class="home--intro">
+	<v-card variant="flat" class="home--intro">
 		<div class="left-panel">
 			<div class="full-name">Kiran Parajuli</div>
 			<div class="title">Software Engineer</div>
@@ -17,5 +17,5 @@
 				image="@/assets/avatar.webp"
 			/>
 		</div>
-	</div>
+	</v-card>
 </template>

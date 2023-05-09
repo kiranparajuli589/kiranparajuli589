@@ -31,7 +31,6 @@
 </template>
 <script setup lang="ts">
 import {Service} from "@/customTypes"
-import ItemList from "@/components/home/ItemList.vue"
 
 const services: Service[] = [
 	{

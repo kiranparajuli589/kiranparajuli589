@@ -1,30 +1,43 @@
 <template>
-	<v-app>
+	<v-app :theme="theme">
 		<v-main>
-<!--			<div class="cursor" />-->
 			<router-view />
-			<ScrollTop />
-			<Footer />
 		</v-main>
 	</v-app>
 </template>
 
 <script lang="ts" setup>
-import {onMounted} from "vue"
-import Footer from "@/components/Footer.vue"
-import ScrollTop from "@/components/ScrollTop.vue"
+import {computed, onMounted} from "vue"
+import {isDarkThemeSelected} from "@/helper"
+import {useAppStore} from "@/store/app"
+import {storeToRefs} from "pinia"
 
 onMounted(() => {
-	addMouseMoveEvent()
+	handleTheme()
+	// addMouseMoveEvent()
 })
 
-function addMouseMoveEvent() {
-	const cursor: HTMLElement = document.querySelector(".cursor") as HTMLElement
-	document.addEventListener("mousemove", (e) => {
-		cursor.style.left = `${e.pageX}px`
-		cursor.style.top = `${e.pageY}px`
-	})
+// function addMouseMoveEvent() {
+// 	const cursor: HTMLElement = document.querySelector(".cursor") as HTMLElement
+// 	document.addEventListener("mousemove", (e) => {
+// 		cursor.style.left = `${e.pageX}px`
+// 		cursor.style.top = `${e.pageY}px`
+// 	})
+// }
+
+const appStore = useAppStore()
+
+function handleTheme() {
+	const isDark = isDarkThemeSelected()
+	appStore.updateTheme(isDark)
+	document.body.classList.toggle("dark", isDark)
 }
+
+const {isDarkTheme} = storeToRefs(appStore)
+
+const theme = computed(() => {
+	return isDarkTheme.value ? "dark" : "light"
+})
 </script>
 <style lang="scss">
 @import "@/styles/main.scss";

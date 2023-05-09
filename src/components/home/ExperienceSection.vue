@@ -20,7 +20,7 @@
 				{{exp.description}}
 			</v-card-text>
 			<v-card-text>
-				<h2 class="mb-3">Achievements:</h2>
+				<h2 class="mb-4">Achievements:</h2>
 				<ItemList :items="exp.achievements" no-split />
 			</v-card-text>
 			<v-card-text>
@@ -112,6 +112,34 @@ const experiences: Experience[] = [
 		]
 	},
 	{
+		company: "Tech Himalaya",
+		companyLogo: "https://kaha6.com/wp-content/uploads/Tech-Himalaya-1024x1024.png",
+		companyUrl: "https://techhimalaya.com/",
+		roles: ["Freelance Frontend Developer"],
+		startDate: "2019",
+		endDate: "2020",
+		achievements: [
+			"Learnt to work with a remote team and manage the time to complete the tasks.",
+			"Learnt better strategies to implement websites using VueJS (concept of mixins)."
+		],
+		projects: [
+			{
+				name: "Leave Management Dashboard",
+				description: "A dashboard for a company to manage their employees' leaves.",
+				job: [
+					"Developed the frontend using VueJS and Vuetify",
+				]
+			},
+			{
+				name: "Bit Coins Survey",
+				description: "A survey website for different Bit Coins.",
+				job: [
+					"Developed the frontend using VueJS and Vuetify",
+				]
+			}
+		]
+	},
+	{
 		company: "Nipuna Prabidhik Sewa",
 		roles: ["Software Developer Internship"],
 		startDate: "2018",
@@ -143,7 +171,7 @@ const experiences: Experience[] = [
 			}
 		],
 		companyLogo: "https://nipunasewa.com/wp-content/uploads/2020/01/nipuna-prabidhik-sewa.png",
-		companyUrl: "https://www.nipunasewa.com/"
+		companyUrl: "https://www.nipunasewa.com/",
 	}
 ]
 </script>

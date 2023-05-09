@@ -1,19 +1,22 @@
 <template>
-	<div class="home">
+	<v-card variant="flat" class="home">
 		<v-card variant="elevated" elevation="12"
 			class="home--container" max-width="1200"
 		>
 			<ToolBar />
-			<SideBar />
 			<div class="home--content">
+				<SideBar />
 				<router-view />
 			</div>
 		</v-card>
-	</div>
+		<ScrollTop />
+		<Footer class="mt-10" />
+	</v-card>
 </template>
 <script lang="ts" setup>
-
 import ToolBar from "@/components/home/ToolBar.vue"
+import ScrollTop from "@/components/ScrollTop.vue"
+import Footer from "@/components/Footer.vue"
 import SideBar from "@/components/home/SideBar.vue"
 </script>
 <style lang="scss">

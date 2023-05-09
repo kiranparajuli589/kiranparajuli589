@@ -1,22 +1,24 @@
 <template>
 	<v-footer class="footer">
-		<div class="first-row">
-			<div class="my-name">Kiran</div>
-			<div class="btn-grp">
-				<div v-ripple class="btn" @click="scrollTo.scrollToWorks()">Works</div>
-				<div v-ripple class="btn">Resume</div>
-				<div v-ripple class="btn">Blog</div>
+		<v-card max-width="1000" class="mx-auto" variant="flat">
+			<div class="first-row">
+				<div class="my-name">Kiran</div>
+				<div class="btn-grp">
+					<div v-ripple class="btn" @click="scrollTo.scrollToWorks()">Works</div>
+					<div v-ripple class="btn">Resume</div>
+					<div v-ripple class="btn">Blog</div>
+				</div>
+				<div class="copyright">
+					© {{new Date().getFullYear() }} Kiran. All rights reserved.
+				</div>
 			</div>
-			<div class="copyright">
-				© {{new Date().getFullYear() }} Kiran. All rights reserved.
+			<div class="second-row">
+				<div class="red" />
+				<div class="orange" />
+				<div class="light-orange" />
+				<div class="indigo" />
 			</div>
-		</div>
-		<div class="second-row">
-			<div class="red" />
-			<div class="orange" />
-			<div class="light-orange" />
-			<div class="indigo" />
-		</div>
+		</v-card>
 	</v-footer>
 </template>
 <script setup lang="ts">
@@ -26,9 +28,6 @@ const scrollTo = useScrollTo()
 </script>
 <style lang="scss">
 .footer {
-	min-height: 200px;
-	max-width: 1000px;
-	margin: auto;
 	width: 100%;
 	display: block !important;
 	font-size: .875rem;
