@@ -29,5 +29,10 @@ export type Experience = {
 	achievements?: string[];
 
 	projects?: Project[];
+}
 
+export type Techonlogy = {
+	name: string;
+	tools: string[],
+	maxItemsInAColumn: number;
 }

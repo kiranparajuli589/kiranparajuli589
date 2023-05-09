@@ -1,31 +1,5 @@
 .home {
 	padding: 4rem;
-	.section-title {
-		font-size: 3rem;
-	}
-	.section-subtitle {
-		font-size: 1.2rem;
-		font-weight: bold;
-	}
-	.section-divider {
-		width: 100%;
-		max-width: 160px;
-		height: 2px;
-		background-color: #1867C0;
-		margin-block: 1rem 3rem;
-		border-radius: 24px;
-		position: relative;
-		&::before {
-			content: '';
-			width: 8px;
-			height: 8px;
-			background-color: #1867C0;
-			border-radius: 24px;
-			position: absolute;
-			top: -3px;
-			left: 0;
-		}
-	}
 	&--container {
 		margin: auto;
 		position: relative;
@@ -150,9 +124,10 @@
 		.experience {
 			font-size: 1.2rem;
 		}
+		margin-bottom: 8rem;
 	}
 	&--works {
-		margin-bottom: 4rem;
+		margin-bottom: 8rem;
 		.cards-list {
 			display: flex; gap: 1rem;
 			flex-wrap: wrap;
@@ -175,5 +150,6 @@
 		}
 	}
 	&--experience {
+		margin-bottom: 8rem;
 	}
 }

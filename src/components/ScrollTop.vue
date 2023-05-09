@@ -1,12 +1,11 @@
 <template>
-	<div v-if="showTop" class="scroll-top" v-ripple @click="scrollToTop">Scroll To Top</div>
+	<div v-if="showTop" class="scroll-top" v-ripple @click="scrollTo.top()">Scroll To Top</div>
 </template>
 <script setup lang="ts">
 import {ref} from "vue"
+import useScrollTo from "@/composables/scrollTo"
 
-function scrollToTop() {
-	window.scrollTo({top: 0, behavior: "smooth"})
-}
+const scrollTo = useScrollTo()
 
 const showTop = ref(false)
 

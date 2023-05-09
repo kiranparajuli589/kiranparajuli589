@@ -1,7 +1,7 @@
 <template>
 	<v-app>
 		<v-main>
-			<div class="cursor" />
+<!--			<div class="cursor" />-->
 			<router-view />
 			<ScrollTop />
 			<Footer />

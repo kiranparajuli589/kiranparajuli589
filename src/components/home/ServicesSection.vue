@@ -3,35 +3,30 @@
 		<h1 class="section-title">What can I do?</h1>
 		<div class="section-subtitle">Service Offers</div>
 		<div class="section-divider" />
-		<v-card v-for="service in services"
-			:key="service.name" elevation="4"
-			variant="elevated" class="mb-12"
-		>
-			<v-card-title class="list py-4">
-				<v-icon :color="service.iconColor">mdi-{{service.icon}}</v-icon>
-				<h2>{{service.name}}</h2>
-			</v-card-title>
-			<v-card-text class="pt-0 experience">
+		<div class="d-flex flex-wrap"  style="gap: 2rem;">
+			<v-card v-for="service in services"
+							:key="service.name" elevation="4"
+							variant="elevated"
+							max-width="460"
+			>
+				<v-card-title class="list py-4">
+					<v-icon :color="service.iconColor">mdi-{{service.icon}}</v-icon>
+					<h2>{{service.name}}</h2>
+				</v-card-title>
+				<v-card-text class="pt-0 experience">
 					<p class="mb-1">Experience: <span class="exp">{{service.experience}}</span> years</p>
-			</v-card-text>
-			<!-- eslint-disable-next-line -->
-			<v-card-text v-html="service.description" />
-			<v-card-text v-if="service.types">
-				<div class="list mb-3">
-					<v-icon size="22">mdi-format-list-bulleted-type</v-icon>
-					<h3>Types:</h3>
-				</div>
-				<ItemList :items="service.types" />
-			</v-card-text>
-
-			<v-card-text>
-				<div class="list mb-3">
-					<v-icon size="small">mdi-tools</v-icon>
-					<h3>Technologies:</h3>
-				</div>
-				<ItemList :items="service.techs" />
-			</v-card-text>
-		</v-card>
+				</v-card-text>
+				<!-- eslint-disable-next-line -->
+				<v-card-text v-html="service.description" />
+				<v-card-text v-if="service.types">
+					<div class="list mb-3">
+						<v-icon size="22">mdi-format-list-bulleted-type</v-icon>
+						<h3>Types:</h3>
+					</div>
+					{{service.types.join(', ')}}.
+				</v-card-text>
+			</v-card>
+		</div>
 	</div>
 </template>
 <script setup lang="ts">
@@ -45,14 +40,6 @@ const services: Service[] = [
 			" It is true that I am not the best designer you can hire, but I can implement complex" +
 			" designs on your website.",
 		icon: "web-box", iconColor: "primary",
-		techs: [
-			"HTML",
-			"CSS",
-			"JavaScript",
-			"Vue.js",
-			"Vuetify",
-			"Figma",
-		],
 		experience: new Date().getFullYear() - 2018,
 	},
 	{
@@ -62,17 +49,6 @@ const services: Service[] = [
 			" I also have some experience with microservices architecture. The advanced part of my" +
 			" work entails more engineering work relating to Data Structure operations, Query Optimization, and more.",
 		icon: "server", iconColor: "indigo",
-		techs: [
-			"Python",
-			"Django",
-			"Node.js",
-			"Express.js",
-			"PostgreSQL",
-			"Redis",
-			"Websockets",
-			"GraphQL",
-			"Djangorestframework",
-		],
 		experience: new Date().getFullYear() - 2018,
 	},
 	{
@@ -82,24 +58,6 @@ const services: Service[] = [
 			" reduce flakiness inside existing test cases and implement, maintain" +
 			" and optimize the CI/CD pipelines.",
 		icon: "lightbulb-auto", iconColor: "green",
-		techs: [
-			"Behat",
-			"Behat Mink",
-			"CodeceptJs",
-			"CypressJs",
-			"NightwatchJs",
-			"Jest",
-			"PHPUnit",
-			"Playwright",
-			"Postman",
-			"Vue Unit Tests",
-			"Locust",
-			"GitHub Actions",
-			"GitLab CI",
-			"GitHub CI",
-			"Travis CI",
-			"Drone CI",
-		],
 		types: [
 			"Smoke Testing",
 			"Regression Testing",
@@ -121,13 +79,6 @@ const services: Service[] = [
 			" cloud and organize load balancing for clients or servers." +
 			" I can also create and maintain CI/CD pipelines for your application.",
 		icon: "cloud", iconColor: "grey",
-		techs: [
-			"Docker",
-			"CPanel",
-			"VPS",
-			"Nginx",
-			"Apache",
-		],
 		experience: new Date().getFullYear() - 2020,
 	}
 ]

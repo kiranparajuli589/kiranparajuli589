@@ -17,12 +17,16 @@ const props = defineProps({
 	noSplit: {
 		type: Boolean,
 		default: false
+	},
+	maxItemsInAColumn: {
+		type: Number,
+		default: 4
 	}
 })
 
 const dividedItems = computed(() => {
 	if (props.noSplit) return [props.items]
-	const maxItems = 4
+	const maxItems = props.maxItemsInAColumn
 	if (props.items.length <= maxItems) {
 		return [props.items]
 	} else {
