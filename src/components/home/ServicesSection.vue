@@ -10,55 +10,40 @@
 			<v-card-title class="list py-4">
 				<v-icon :color="service.iconColor">mdi-{{service.icon}}</v-icon>
 				<h2>{{service.name}}</h2>
-				<v-chip color="red">Experience: <span class="exp">{{service.experience}}</span> years</v-chip>
 			</v-card-title>
+			<v-card-text class="pt-0 experience">
+					<p class="mb-1">Experience: <span class="exp">{{service.experience}}</span> years</p>
+			</v-card-text>
+			<!-- eslint-disable-next-line -->
+			<v-card-text v-html="service.description" />
+			<v-card-text v-if="service.types">
+				<div class="list mb-3">
+					<v-icon size="22">mdi-format-list-bulleted-type</v-icon>
+					<h3>Types:</h3>
+				</div>
+				<ItemList :items="service.types" />
+			</v-card-text>
+
 			<v-card-text>
-				{{service.description}}
-			</v-card-text>
-			<v-card-text class="list">
-				<v-icon size="small">mdi-tools</v-icon>
-				<h3>Technologies:</h3>
-			</v-card-text>
-			<v-card-text class="tech-list">
-				<div class="chip"
-					v-for="tech in service.techs"
-					:key="tech"
-				>
-					{{tech}}
+				<div class="list mb-3">
+					<v-icon size="small">mdi-tools</v-icon>
+					<h3>Technologies:</h3>
 				</div>
-			</v-card-text>
-			<v-card-text class="list" v-if="service.types">
-				<v-icon size="22">mdi-format-list-bulleted-type</v-icon>
-				<h3>Types:</h3>
-			</v-card-text>
-			<v-card-text v-if="service.types" class="type-list">
-				<div class="chip"
-					v-for="type in service.types"
-					:key="type"
-				>
-					{{type}}
-				</div>
+				<ItemList :items="service.techs" />
 			</v-card-text>
 		</v-card>
 	</div>
 </template>
 <script setup lang="ts">
-type Service = {
-	name: string;
-	description: string;
-	icon: string;
-	techs: string[];
-
-	types?: string[],
-	experience: number;
-	iconColor: string;
-}
+import {Service} from "@/customTypes"
+import ItemList from "@/components/home/ItemList.vue"
 
 const services: Service[] = [
 	{
 		name: "Frontend Development",
-		description: "I can build a responsive and interactive frontend for your application." +
-			" I'm not the best designer you can hire but I can implement complex designs.",
+		description: "I can build a responsive and interactive frontend for your web application." +
+			" It is true that I am not the best designer you can hire, but I can implement complex" +
+			" designs on your website.",
 		icon: "web-box", iconColor: "primary",
 		techs: [
 			"HTML",
@@ -72,30 +57,30 @@ const services: Service[] = [
 	},
 	{
 		name: "Backend Development",
-		description: "I have been working with different technologies to build a scalable and secure backend." +
-			" I can build REST APIs and Websokets for your application." +
-			" I have few experience in microservices architecture too." +
-			" For the advanced part, I can do more engineering over Data Structure operations," +
-			" Query Optimizations and more.",
+		description: "I have been working with different technologies to build a scalable and" +
+			" secure backend. You can hire me to build REST APIs or Websockets for your application." +
+			" I also have some experience with microservices architecture. The advanced part of my" +
+			" work entails more engineering work relating to Data Structure operations, Query Optimization, and more.",
 		icon: "server", iconColor: "indigo",
 		techs: [
 			"Python",
 			"Django",
-			"Djangorestframework",
 			"Node.js",
 			"Express.js",
 			"PostgreSQL",
 			"Redis",
 			"Websockets",
 			"GraphQL",
+			"Djangorestframework",
 		],
 		experience: new Date().getFullYear() - 2018,
 	},
 	{
 		name: "QA Automation",
-		description: "I can write automated tests for your application." +
-			" We can work together to increase your test coverage, reduce flakiness," +
-			" implement CI/CD, optimize CI/CD pipelines and many more.",
+		description: "I can write <b>automated tests</b> for your application." +
+			" We can work together to increase test coverage of your application," +
+			" reduce flakiness inside existing test cases and implement, maintain" +
+			" and optimize the CI/CD pipelines.",
 		icon: "lightbulb-auto", iconColor: "green",
 		techs: [
 			"Behat",
@@ -108,7 +93,7 @@ const services: Service[] = [
 			"Playwright",
 			"Postman",
 			"Vue Unit Tests",
-			"Locusts",
+			"Locust",
 			"GitHub Actions",
 			"GitLab CI",
 			"GitHub CI",
@@ -132,7 +117,8 @@ const services: Service[] = [
 	},
 	{
 		name: "DevOps",
-		description: "I have few years of experience in DevOps, I can deploy your web application to the cloud and organize load balancing for clients or servers." +
+		description: "I have few years of experience in DevOps, I can deploy your web application to the" +
+			" cloud and organize load balancing for clients or servers." +
 			" I can also create and maintain CI/CD pipelines for your application.",
 		icon: "cloud", iconColor: "grey",
 		techs: [

@@ -1,5 +1,5 @@
 <template>
-	<div class="home--works">
+	<div class="home--works" id="works">
 		<h1 class="section-title">My Works</h1>
 		<div class="section-subtitle">Some of My Projects</div>
 		<div class="section-divider" />

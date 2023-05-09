@@ -8,6 +8,7 @@
 				<SideBar />
 				<IntroSection />
 				<ServicesSection />
+				<ExperienceSection />
 				<MyWorks />
 			</div>
 		</v-card>
@@ -20,6 +21,7 @@ import SideBar from "@/components/home/SideBar.vue"
 import IntroSection from "@/components/home/IntroSection.vue"
 import ServicesSection from "@/components/home/ServicesSection.vue"
 import MyWorks from "@/components/home/MyWorks.vue"
+import ExperienceSection from "@/components/home/ExperienceSection.vue"
 </script>
 <style lang="scss">
 @import "@/styles/home.scss";
