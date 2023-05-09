@@ -13,8 +13,8 @@ import {onMounted} from "vue"
 onMounted(() => {
 	const cursor: HTMLElement = document.querySelector(".cursor") as HTMLElement
 	document.addEventListener("mousemove", (e) => {
-		cursor.style.left = (e.pageX) + "px"
-		cursor.style.top = (e.pageY) + "px"
+		cursor.style.left = `${e.pageX}px`
+		cursor.style.top = `${e.pageY}px`
 	})
 })
 </script>

@@ -5,8 +5,8 @@ import router from "../router"
 
 import type {App} from "vue"
 
-export async function registerPlugins(app: App) {
-	await loadFonts()
+export function registerPlugins(app: App) {
+	loadFonts()
 	app
 		.use(vuetify)
 		.use(router)

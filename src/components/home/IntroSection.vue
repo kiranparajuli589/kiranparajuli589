@@ -14,7 +14,7 @@
 		<div class="right-panel">
 			<v-avatar
 				size="300" color="teal" variant="elevated" class="elevation-10"
-				image="https://cdn3d.iconscout.com/3d/premium/thumb/man-say-hi-6624077-5552823.png"
+				image="@/assets/avatar.webp"
 			/>
 		</div>
 	</div>
