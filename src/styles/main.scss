@@ -31,7 +31,7 @@
 	border-radius: 50%;
 	position: absolute;
 	z-index: 999999999;
-	transition-duration: 400ms;
+	transition-duration: 200ms;
 	transition-timing-function: ease-out;
 	animation: cursorAnim 1s infinite alternate;
 	&::before {
