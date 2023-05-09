@@ -12,7 +12,7 @@
 					<h2>{{work.title}}</h2>
 				</v-card-title>
 				<v-card-text>
-					<v-img :src="getAssetUrl(work.thumbnail)" height="auto" width="100%" />
+					<v-img :src="$getAssetUrl(work.thumbnail)" height="auto" width="100%" />
 				</v-card-text>
 				<v-card-text>
 					{{work.description}}
@@ -30,7 +30,6 @@
 	</div>
 </template>
 <script lang="ts" setup>
-import {getAssetUrl} from "@/helper"
 import {capitalize} from "vue"
 
 type Work = {
