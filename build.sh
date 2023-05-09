@@ -1,17 +1,15 @@
 #!/usr/bin/env sh
 
-BASE_DIR="home/runner/work/kiranparajuli589"
+BASE_DIR="/home/runner/work/kiranparajuli589/kiranparajuli589"
 DIST_BRANCH="dist"
 
 echo "Building Started...."
 pnpm build
+
 echo "Building Completed."
 echo "Deploying Started...."
 mkdir -p "${BASE_DIR}""/temp"
 mv docs "${BASE_DIR}""/temp"
-mkdir -p "${BASE_DIR}""/temp/docs/src"
-cp -r src/assets "${BASE_DIR}""/temp/docs/src/assets"
-rm -rf "${BASE_DIR}""/temp/docs/src/assets/**/*.md"
 
 git fetch origin ${DIST_BRANCH}
 git checkout ${DIST_BRANCH}
