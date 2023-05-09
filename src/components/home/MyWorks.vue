@@ -19,10 +19,10 @@
 				</v-card-text>
 				<v-divider />
 				<v-card-text class="list links">
-					<a v-for="link in Object.keys(work.links)" :key="link" :href="work.links[link]"
-						target="_blank" rel="noopener noreferrer" :title="capitalize(link)"
+					<a v-for="[key, value] in Object.entries(work.links)" :key="key" :href="value"
+						target="_blank" rel="noopener noreferrer" :title="capitalize(key)"
 					>
-						{{link}}
+						{{key}}
 					</a>
 				</v-card-text>
 			</v-card>
@@ -30,8 +30,8 @@
 	</div>
 </template>
 <script lang="ts" setup>
-import {getAssetUrl} from "@/helper"
 import {capitalize} from "vue"
+import {getAssetUrl} from "@/helper"
 
 type Work = {
 	title: string,
