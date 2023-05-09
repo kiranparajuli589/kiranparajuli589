@@ -51,6 +51,7 @@ import ItemList from "@/components/home/ItemList.vue"
 const experiences: Experience[] = [
 	{
 		company: "JankariTech Pvt. Ltd.",
+		description: "An IT company situated at Pokhara, Nepal and specializes in helping customers set up test automation.",
 		roles: ["Software Developer", "Junior Programmer"],
 		startDate: "2019",
 		endDate: "2022",
@@ -116,6 +117,7 @@ const experiences: Experience[] = [
 		companyLogo: "https://kaha6.com/wp-content/uploads/Tech-Himalaya-1024x1024.png",
 		companyUrl: "https://techhimalaya.com/",
 		roles: ["Freelance Frontend Developer"],
+		description: "'Tech Himalaya' is a Nepal's leading IT Company dealing with all sorts of Software, Hardware and Cloud Solutions.",
 		startDate: "2019",
 		endDate: "2020",
 		achievements: [
@@ -141,6 +143,7 @@ const experiences: Experience[] = [
 	},
 	{
 		company: "Nipuna Prabidhik Sewa",
+		description: "Nipuna Prabidhik Sewa is a technology service provider specializing in Web Cloud, Professional, and Managed Services.",
 		roles: ["Software Developer Internship"],
 		startDate: "2018",
 		endDate: "2019",

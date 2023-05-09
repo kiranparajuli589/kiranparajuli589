@@ -2,7 +2,6 @@ export type Service = {
 	name: string;
 	description: string;
 	icon: string;
-	techs: string[];
 
 	types?: string[],
 	experience: number;
@@ -13,7 +12,7 @@ export type Project = {
 	name: string;
 	description: string;
 	job: string[];
-	url: string;
+	url?: string;
 }
 
 export type Experience = {
@@ -31,8 +30,8 @@ export type Experience = {
 	projects?: Project[];
 }
 
-export type Techonlogy = {
+export type Technology = {
 	name: string;
 	tools: string[],
-	maxItemsInAColumn: number;
+	maxItemsInAColumn?: number;
 }

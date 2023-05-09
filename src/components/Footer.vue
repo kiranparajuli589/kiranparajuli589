@@ -4,7 +4,7 @@
 			<div class="first-row">
 				<div class="my-name">Kiran</div>
 				<div class="btn-grp">
-					<div v-ripple class="btn" @click="scrollTo.scrollToWorks()">Works</div>
+					<div v-ripple class="btn" @click="scrollTo.works()">Works</div>
 					<div v-ripple class="btn">Resume</div>
 					<div v-ripple class="btn">Blog</div>
 				</div>

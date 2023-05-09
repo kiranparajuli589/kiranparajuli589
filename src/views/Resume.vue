@@ -18,11 +18,11 @@
 	</div>
 </template>
 <script setup lang="ts">
-import {Techonlogy} from "@/customTypes"
+import {Technology} from "@/customTypes"
 import ItemList from "@/components/home/ItemList.vue"
 import ExperienceSection from "@/components/home/ExperienceSection.vue"
 
-const Techs: Techonlogy[] = [
+const Techs: Technology[] = [
 	{
 		name: "Frontend Development",
 		tools: [
