@@ -35,7 +35,7 @@ work together to achieve your goals.
 - 📫 How to reach me: [LinkedIn](https://www.linkedin.com/in/kiranparajuli589/)
 - 😄 Pronouns: He/His
 - ⚡ Fun fact: I spend almost 12 hours listening songs every day.
-- 📝 [Resume](https://drive.google.com/file/d/1Z3Z3Q4Z3Z3Q4Z3Q4Z3Q4Z3Q4Z3Q4Z3Q4/view?usp=sharing)
+- 📝 [Resume](https://kiranparajuli.com.np/#/resume)
 
 ### Languages and Tools:
 
