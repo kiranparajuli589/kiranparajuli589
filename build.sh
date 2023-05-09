@@ -6,6 +6,8 @@ DIST_BRANCH="dist"
 echo "Building Started...."
 pnpm build
 echo "Building Completed."
+ls -la
+
 echo "Deploying Started...."
 mkdir -p "${BASE_DIR}""/temp"
 mv docs "${BASE_DIR}""/temp"
