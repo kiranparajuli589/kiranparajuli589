@@ -3,7 +3,7 @@ import {createRouter, createWebHistory} from "vue-router"
 const routes = [
 	{
 		path: "/",
-		component: () => import("@/layout/HomeLayout.vue"),
+		component: () => import(/* webpackChunkName: "homeLayout" */ "@/layout/HomeLayout.vue"),
 		children: [
 			{
 				path: "",
