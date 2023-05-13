@@ -12,7 +12,7 @@
 			<v-card-title>{{tech.name}}</v-card-title>
 			<v-divider />
 			<v-card-text class="tech-list">
-				<div v-for="tool in tech.tools" :key="tool" :title="tool.tooltip">
+				<div v-for="(tool, index) in tech.tools" :key="index" :title="tool.tooltip">
 					<i v-if="tool.class" :class="tool.class" style="font-size: 4rem;" />
 					<img v-if="tool.image" :src="getAssetUrl(tool.image)" style="width: 4rem;" />
 				</div>
@@ -62,7 +62,7 @@ const Techs: Technology[] = [
 			{tooltip: "PHPUnit", image: "phpunit.png"},
 			{tooltip: "Playwright", image: "playwright.png"},
 			{tooltip: "Postman", image: "postman.svg"},
-			{class: "devicon-vuejs-plain-wordmark", image: "Vue Unit Tests"},
+			{class: "devicon-vuejs-plain-wordmark", tooltip: "Vue Unit Tests"},
 			{tooltip: "Locust", image: "locust.jpeg"},
 			{class: "devicon-gitlab-original-wordmark", tooltip: "GitLab CI"},
 			{class: "devicon-github-original-wordmark", tooltip: "GitHub CI"},

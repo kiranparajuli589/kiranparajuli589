@@ -41,7 +41,7 @@ export type Technology = {
 	tools: Tool[],
 }
 
-type Work = {
+export type Work = {
 	title: string,
 	description: string,
 	thumbnail: string,

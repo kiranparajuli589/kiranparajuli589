@@ -30,6 +30,7 @@
 	</div>
 </template>
 <script lang="ts" setup>
+import {Work} from "@/customTypes"
 import {capitalize} from "vue"
 import {getAssetUrl} from "@/helper"
 
