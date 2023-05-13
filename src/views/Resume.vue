@@ -1,6 +1,9 @@
 <template>
 	<div class="resume">
-		<h1 class="mb-10 pt-12">Resume</h1>
+		<h1 class="mb-10 pt-12">
+			Resume
+			<v-chip color="primary" @click="downloadPdf">Download Pdf</v-chip>
+		</h1>
 		<h2>Tools I Use</h2>
 		<div class="section-divider" />
 		<p class="mb-7">These are, but not limited to, the techs I use for different services.</p>
@@ -80,6 +83,10 @@ const Techs: Technology[] = [
 		],
 	}
 ]
+
+const downloadPdf = () => {
+
+}
 </script>
 <style lang="scss">
 .tech-list {

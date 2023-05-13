@@ -1,12 +1,12 @@
 <template>
 	<v-card variant="flat" class="home--intro">
 		<div class="left-panel">
-			<div class="full-name">Kiran Parajuli</div>
-			<div class="title">Software Engineer</div>
+			<div class="full-name">{{personalInfo.name}}</div>
+			<div class="title">{{ personalInfo.role }}</div>
 			<div class="subtitle">
-				Full Stack Developer, QA Automation Engineer, and a Tech Enthusiast
+				{{personalInfo.bio}}
 			</div>
-			<a class="lets-talk" v-ripple href="mailto:kiranparajuli589@gmail.com">
+			<a class="lets-talk" v-ripple :href="'mailto:' + personalInfo.email">
 				<span class="lets">let's</span>
 				<span class="talk">talk</span>
 			</a>
@@ -19,3 +19,7 @@
 		</div>
 	</v-card>
 </template>
+<script setup lang="ts">
+import Resume from "@/resume"
+const personalInfo = Resume.personalInfo
+</script>

@@ -30,69 +30,9 @@
 	</div>
 </template>
 <script lang="ts" setup>
-import {Work} from "@/customTypes"
+import Resume from "@/resume"
 import {capitalize} from "vue"
 import {getAssetUrl} from "@/helper"
 
-const works: Work[] = [
-	{
-		title: "VueYtframe",
-		description: "A Vue component to embed YouTube videos in your Vue app.",
-		thumbnail: "vue-ytparser.png",
-		technologies: ["VueJs", "Youtube Iframe API"],
-		links: {
-			github: "https://github.com/kiranparajuli589/vue3-ytframe",
-			demo: "https://kiranparajuli589.github.io/vue3-ytframe/#/docs/ref=getting-started",
-			playground: "https://kiranparajuli589.github.io/vue3-ytframe/#/playground"
-		}
-	},
-	{
-		title: "Markdown Parser",
-		description: "A simple yet powerful markdown parser for NodeJS or Javascript.",
-		thumbnail: "markdown-parser.png",
-		technologies: ["NodeJS", "Javascript", "Modular Programming", "Recursion"],
-		links: {
-			github: "https://github.com/kiranparajuli589/md-parser",
-			demo: "https://kiranparajuli589.github.io/md-parser/",
-		}
-	},
-	{
-		title: "Sachchai Kendra Nepal",
-		description: "A website for Sachchai Kendra Nepal, a non-profit religious organization.",
-		thumbnail: "sachchai-kendra-nepal.png",
-		technologies: ["Vue3", "Vuetify", "Djangorestframework", "MySQL"],
-		links: {
-			demo: "https://sachchaikendranepal.org.np/",
-		}
-	},
-	{
-		title: "FoodSwipe",
-		description: "A food delivery e-commerce website with beautiful carts and powerful order & transaction management.",
-		thumbnail: "foodswipe.png",
-		technologies: ["Vue2", "Vuetify", "Djangorestframework", "MySQL"],
-		links: {
-			demo: "https://foodswipe.com.np/",
-			github: "https://github.com/foodswipe",
-		}
-	},
-	{
-		title: "WordClub",
-		description: "A reddit based social media website for writers and readers.",
-		thumbnail: "wordclub.png",
-		technologies: ["Vue2", "Vuetify", "Djangorestframework", "MySQL"],
-		links: {
-			github: "https://github.com/word-club",
-			demo: "https://wordclub.com.np/",
-		}
-	},
-	{
-		title: "Bagmati Nepal Sports Website",
-		description: "A website for Bagmati Nepal Sports Government, providing news and information about the current sports events.",
-		thumbnail: "bagmati-nepal-sports.png",
-		technologies: ["Vue2", "Vuetify", "Laravel", "MySQL"],
-		links: {
-			website: "https://sports.bagamati.gov.np/",
-		}
-	}
-]
+const works = Resume.works
 </script>
