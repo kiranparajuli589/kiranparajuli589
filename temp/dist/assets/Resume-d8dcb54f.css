@@ -1,0 +1,1 @@
+.item-list{display:flex;gap:1rem}.item-list ul li{margin-bottom:1rem;margin-left:1.5rem;width:fit-content}.tech-list{display:flex;align-items:center;flex-wrap:wrap;gap:1rem}body.dark div[title=Behat],body.dark div[title=VPS]{filter:invert(1)}
