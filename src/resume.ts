@@ -1,10 +1,11 @@
-import { Experience, Service, Work } from "./customTypes"
+import {Experience, Service, Technology, Work} from "./customTypes"
 
 interface ResumeInterface {
 	personalInfo: {[key: string]: string},
 	experiences: Experience[],
 	works: Work[],
 	services: Service[],
+	technologies: Technology[]
 }
 
 const Resume:ResumeInterface = {
@@ -17,9 +18,15 @@ const Resume:ResumeInterface = {
 		phone: "+977 984-3530425",
 		email: "kiranparajuli589@gmail.com",
 		devto: "https://dev.to/kiranparajuli589",
-		linkedin: "https://www.linkedin.com/in/kiranparajuli589/",
-		github: "https://www.github.com/kiranparajuli589/",
-		bio: "Full Stack Developer, QA Automation Engineer, and a Tech Enthusiast"
+		linkedin: "https://linkedin.com/in/kiranparajuli589",
+		github: "https://github.com/kiranparajuli589",
+		website: "https://kiranparajuli.com.np",
+		bio: "Full Stack Developer, QA Automation Engineer, and a Tech Enthusiast",
+		summary: "I'm a software developer and quality assurance engineer. My specialties include Python, PHP, and NodeJS for backend work and database management." +
+			" I'm also skilled in VueJs for creating sophisticated web designs." +
+			" I take great pride in my attention to detail and commitment to delivering high-quality results." +
+			" When I'm not coding, I enjoy playing guitar and listening to music to stay inspired." +
+			" I'm always eager to collaborate with others and help bring their visions to life."
 	},
 	experiences: [
 		{
@@ -125,6 +132,9 @@ const Resume:ResumeInterface = {
 						"Developed the frontend using VueJS and Vuetify"
 					]
 				}
+			],
+			technologies: [
+				"VueJs",
 			]
 		},
 		{
@@ -246,7 +256,7 @@ const Resume:ResumeInterface = {
 			],
 			links: {
 				github: "https://github.com/word-club",
-				demo: "https://wordclub.com.np/"
+				demo: "https://wordclub.kiranparajuli.com.np/"
 			}
 		},
 		{
@@ -311,6 +321,59 @@ const Resume:ResumeInterface = {
 				" I can also create and maintain CI/CD pipelines for your application.",
 			icon: "cloud", iconColor: "grey",
 			experience: new Date().getFullYear() - 2020,
+		}
+	],
+	technologies: [
+		{
+			name: "Frontend Development",
+			tools: [
+				{class: "devicon-html5-plain-wordmark", tooltip: "HTML5"},
+				{class: "devicon-css3-plain-wordmark", tooltip: "CSS3"},
+				{class: "devicon-javascript-plain", tooltip: "JavaScript"},
+				{class: "devicon-vuejs-plain-wordmark", tooltip: "VueJS"},
+				{class: "devicon-vuetify-line", tooltip: "Vuetify"},
+				{class: "devicon-figma-plain-wordmark", tooltip: "Figma"},
+			],
+		},
+		{
+			name: "Backend Development",
+			tools: [
+				{ class: "devicon-python-plain", tooltip: "Python"},
+				{ class: "devicon-django-plain", tooltip: "Django"},
+				{ class: "devicon-nodejs-plain", tooltip: "NodeJS"},
+				{ class: "devicon-postgresql-plain-wordmark", tooltip: "PostgreSQL"},
+				{ class: "devicon-mysql-plain-wordmark", tooltip: "MySQL"},
+				{ class: "devicon-redis-plain-wordmark", tooltip: "Redis"},
+				{ tooltip: "Websockets", image: "websockets.png"},
+				{ tooltip: "Djangorestframework", image: "drf.png"},
+			],
+		},
+		{
+			name: "Quality Assurance",
+			tools: [
+				{tooltip: "Behat", image: "behat.png"},
+				{tooltip: "CypressJs", image: "cypress.png"},
+				{tooltip: "NightwatchJs", image: "nightwatchjs.png"},
+				{class: "devicon-jest-plain",tooltip: "Jest"},
+				{tooltip: "PHPUnit", image: "phpunit.png"},
+				{tooltip: "Playwright", image: "playwright.png"},
+				{tooltip: "Postman", image: "postman.svg"},
+				{class: "devicon-vuejs-plain-wordmark", tooltip: "Vue Unit Tests"},
+				{tooltip: "Locust", image: "locust.jpeg"},
+				{class: "devicon-gitlab-original-wordmark", tooltip: "GitLab CI"},
+				{class: "devicon-github-original-wordmark", tooltip: "GitHub CI"},
+				{tooltip: "Drone CI", image: "droneci.png"},
+			]
+		},
+		{
+			name: "DevOps",
+			tools: [
+				{class: "devicon-docker-plain-wordmark", tooltip: "Docker"},
+				{image: "CPanel.png", tooltip: "Cpanel"},
+				{image: "vps.png", tooltip: "VPS"},
+				{class: "devicon-nginx-plain-wordmark", tooltip: "Nginx"},
+				{class: "devicon-apache-plain-wordmark", tooltip: "Apache"},
+			],
 		}
 	]
 }

@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 DIST_BRANCH="dist"
-BASE_DIR="/home/runner/work/kiranparajuli589/kiranparajuli589"
+BASE_DIR="/home/runner/work/kiranparajuli589"
 
 
 echo "Building Started...."
@@ -12,11 +12,11 @@ echo "Building Completed."
 echo "Deploying Started...."
 mkdir -p "${BASE_DIR}""/temp"
 mv dist "${BASE_DIR}""/temp"
+rm -rf dist
 
 git fetch origin ${DIST_BRANCH}
 git checkout ${DIST_BRANCH}
 
-rm -rf dist
 cp -r "${BASE_DIR}"/temp/dist/* .
 
 if [ -n "$(git status --porcelain)" ]; then

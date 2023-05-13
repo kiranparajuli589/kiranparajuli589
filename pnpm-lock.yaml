@@ -7,9 +7,6 @@ dependencies:
   pinia:
     specifier: ^2.0.35
     version: 2.0.35(typescript@5.0.4)(vue@3.2.47)
-  roboto-fontface:
-    specifier: '*'
-    version: 0.4.1
   vue:
     specifier: ^3.2.47
     version: 3.2.47
@@ -19,9 +16,6 @@ dependencies:
   vuetify:
     specifier: ^3.2.2
     version: 3.2.2(vite-plugin-vuetify@1.0.2)(vue@3.2.47)
-  webfontloader:
-    specifier: ^1.6.28
-    version: 1.6.28
 
 devDependencies:
   '@babel/types':
@@ -1554,10 +1548,6 @@ packages:
       glob: 7.2.3
     dev: true
 
-  /roboto-fontface@0.4.1:
-    resolution: {integrity: sha512-6o8uOKM9EQUZz8O6qoezziPbsdNcEaDXZLXyMcmnDaeqwG1TMtHEROAS2kBWsi/GUxoLBeYdcNKyzDGcBG+QVQ==}
-    dev: false
-
   /rollup@3.21.5:
     resolution: {integrity: sha512-a4NTKS4u9PusbUJcfF4IMxuqjFzjm6ifj76P54a7cKnvVzJaG12BLVR+hgU2YDGHzyMMQNxLAZWuALsn8q2oQg==}
     engines: {node: '>=14.18.0', npm: '>=8.0.0'}
@@ -1840,10 +1830,6 @@ packages:
     dependencies:
       vite-plugin-vuetify: 1.0.2(vite@4.3.5)(vue@3.2.47)(vuetify@3.2.2)
       vue: 3.2.47
-
-  /webfontloader@1.6.28:
-    resolution: {integrity: sha512-Egb0oFEga6f+nSgasH3E0M405Pzn6y3/9tOVanv/DLfa1YBIgcv90L18YyWnvXkRbIM17v5Kv6IT2N6g1x5tvQ==}
-    dev: false
 
   /which@2.0.2:
     resolution: {integrity: sha512-BLI3Tl1TW3Pvl70l3yq3Y64i+awpwXqsGBYWkkqMtnbXgrMD+yj7rhW0kuEDxzJaYXGjEW5ogapKNMEKNMjibA==}

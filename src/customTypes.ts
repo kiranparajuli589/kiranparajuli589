@@ -22,12 +22,13 @@ export type Experience = {
 	endDate: string;
 	description: string;
 
-	companyUrl?: string;
-	companyLogo?: string;
-	technologies?: string[];
-	achievements?: string[];
+	companyUrl: string;
+	companyLogo: string;
+	technologies: string[];
+	achievements: string[];
+	achievementsPdf?: string[];
 
-	projects?: Project[];
+	projects: Project[];
 }
 
 type Tool = {
