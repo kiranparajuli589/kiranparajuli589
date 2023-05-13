@@ -4,8 +4,9 @@
 		<div class="section-subtitle">Where I had been engaged.</div>
 		<div class="section-divider" />
 		<v-card v-for="exp in experiences" :key="exp.company" class="mb-8">
+
 			<v-card-title class="list">
-				<v-avatar :image="exp.companyLogo" size="60" />
+				<v-avatar :image="getAssetUrl(exp.companyLogo)" size="60" />
 				<h3>{{exp.company}}</h3>
 				<a :href="exp.companyUrl" target="_blank" :title="exp.company">
 					<v-icon size="x-small">mdi-open-in-new</v-icon>
@@ -46,6 +47,7 @@
 </template>
 <script setup lang="ts">
 import Resume from "@/resume"
+import {getAssetUrl} from "@/helper"
 import ItemList from "@/components/home/ItemList.vue"
 const experiences = Resume.experiences
 </script>

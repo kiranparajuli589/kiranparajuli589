@@ -1,6 +1,6 @@
 <template>
 	<v-toolbar class="home--toolbar"
-		 density="compact" :extended="width < 820"
+		density="compact" :extended="width < 820"
 	>
 		<div class="main" @click="onMainClick()">Kiran</div>
 		<div v-if="width >= 820" class="btn-grp">
@@ -43,7 +43,7 @@
 					Blog
 				</div>
 				<v-btn size="small" icon title="Change Theme"
-							 @click="changeTheme()"
+					@click="changeTheme()"
 				>
 					<v-icon size="24">
 						{{isDarkTheme ? "mdi-weather-sunny" : "mdi-weather-night"}}
@@ -63,7 +63,7 @@ import {useDisplay} from "vuetify"
 
 const scrollTo = useScrollTo()
 const router = useRouter()
-const {mobile, width} = useDisplay()
+const {width} = useDisplay()
 
 const appStore = useAppStore()
 const {isDarkTheme} = storeToRefs(appStore)
@@ -83,8 +83,3 @@ const changeTheme = () => {
 	document.body.classList.toggle("dark")
 }
 </script>
-<style lang="scss" scoped>
-.email {
-	text-decoration: none;
-}
-</style>

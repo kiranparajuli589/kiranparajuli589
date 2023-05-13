@@ -1,8 +1,16 @@
+@font-face {
+	font-family: 'Century Gothic';
+	src: url("./../assets/century-gothic/CenturyGothic.ttf");
+}
+
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	font-family: 'Playfair Display', serif;
+	font-family: 'Century Gothic', sans-serif;
+	a {
+		text-decoration: none;
+	}
 }
 
 .chip {

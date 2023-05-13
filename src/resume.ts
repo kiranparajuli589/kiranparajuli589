@@ -1,4 +1,4 @@
-import { Experience, Service, Work } from "./customTypes";
+import { Experience, Service, Work } from "./customTypes"
 
 interface ResumeInterface {
 	personalInfo: {[key: string]: string},
@@ -43,17 +43,18 @@ const Resume:ResumeInterface = {
 				"DroneCI"
 			],
 			achievements: [
-				"A blog website for the JankariTech peoples using markdowns and VueJS.",
+				"A blog website for the JankariTech peoples using markdowns and VueJS." +
+				" <a href='https://blog.jankaritech.com' target='_blank' title='blog.jankaritech.com'>🔗</a>",
 				"Help peoples from Programiz team to write unit and e2e tests for their website.",
 				"Organize a workshop on Automation Testing using Playwright.",
 				"Run weekly trainings about different technologies like Websockets, VueJS, Playwright, etc.",
 				"Colab with the fellow programmers to get more quality test infrastructures."
 			],
 			companyUrl: "www.jankaritech.com",
-			companyLogo: "https://scontent.fpkr1-1.fna.fbcdn.net/v/t1.6435-1/162117560_191427782781785_7284501706623852323_n.jpg?stp=dst-jpg_p320x320&_nc_cat=111&ccb=1-7&_nc_sid=c6021c&_nc_ohc=deTdfoGevOYAX9q18Zo&_nc_ht=scontent.fpkr1-1.fna&oh=00_AfB3vZ6YR9sCn-SL1S5bxZEdWnFjAO0rZaScWYD6Eglc7g&oe=648195C0",
+			companyLogo: "jankaritech.jpg",
 			projects: [
 				{
-					name: "Owncloud",
+					name: "QA with Owncloud",
 					description: "'ownCloud' develops and provides open-source software for content collaboration, allowing teams to easily share and work on files seamlessly regardless of device or location.",
 					job: [
 						"Write e2e and unit tests for new features added or bugs fixed.",
@@ -75,7 +76,7 @@ const Resume:ResumeInterface = {
 					url: "https://github.com/nextcloud/integration_openproject"
 				},
 				{
-					name: "Programiz",
+					name: "E2E Tests Workshop with the Programiz Team",
 					description: "'Programiz' helps to learn program with their beginner-friendly tutorials and examples",
 					job: [
 						"Write e2e tests for the new Programiz Pro features.",
@@ -85,7 +86,7 @@ const Resume:ResumeInterface = {
 					url: "https://www.programiz.com/"
 				},
 				{
-					name: "My Second Teacher",
+					name: "E2E Tests for the My Second Teacher Website",
 					description: "'My Second Teacher' is an online learning platform for students to learn from the best teachers in Nepal.",
 					job: [
 						"Write e2e tests for the different features (B2B, B2C) of the website.",
@@ -97,7 +98,7 @@ const Resume:ResumeInterface = {
 		},
 		{
 			company: "Tech Himalaya",
-			companyLogo: "https://kaha6.com/wp-content/uploads/Tech-Himalaya-1024x1024.png",
+			companyLogo: "tech-himalaya.png",
 			companyUrl: "https://techhimalaya.com/",
 			roles: [
 				"Freelance Frontend Developer"
@@ -170,7 +171,7 @@ const Resume:ResumeInterface = {
 					]
 				}
 			],
-			companyLogo: "https://nipunasewa.com/wp-content/uploads/2020/01/nipuna-prabidhik-sewa.png",
+			companyLogo: "nps.png",
 			companyUrl: "https://www.nipunasewa.com/"
 		}
 	],
@@ -314,4 +315,4 @@ const Resume:ResumeInterface = {
 	]
 }
 
-export default Resume;
+export default Resume

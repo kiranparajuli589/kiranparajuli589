@@ -2,7 +2,13 @@
 	<div class="resume">
 		<h1 class="mb-10 pt-12">
 			Resume
-			<v-chip color="primary" @click="downloadPdf">Download Pdf</v-chip>
+			<v-chip color="primary" @click="downloadPdf"
+				title="Download a copy of my resume"
+			>
+				<v-icon>mdi-download</v-icon>
+
+				<span class="px-1 font-weight-bold">Download Pdf</span>
+			</v-chip>
 		</h1>
 		<h2>Tools I Use</h2>
 		<div class="section-divider" />
@@ -16,8 +22,8 @@
 			<v-divider />
 			<v-card-text class="tech-list">
 				<div v-for="(tool, index) in tech.tools" :key="index" :title="tool.tooltip">
-					<i v-if="tool.class" :class="tool.class" style="font-size: 4rem;" />
-					<img v-if="tool.image" :src="getAssetUrl(tool.image)" style="width: 4rem;" />
+					<i v-if="tool.class" class="colored" :class="tool.class" />
+					<img v-if="tool.image" :src="getAssetUrl(tool.image)" />
 				</div>
 			</v-card-text>
 		</v-card>
@@ -94,6 +100,23 @@ const downloadPdf = () => {
 	align-items: center;
 	flex-wrap: wrap;
 	gap: 1rem;
+	i {
+		font-size: 4rem;
+	}
+	img {
+		width: 4rem;
+		height: auto;
+	}
+	filter: grayscale(1);
+	&:hover {
+		filter: grayscale(0);
+	}
+}
+div[title='Behat'] {
+	img {
+		height: 3.8rem;
+		width: 3rem;
+	}
 }
 body.dark {
 	div[title='Behat'], div[title='VPS'] {

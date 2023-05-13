@@ -1,7 +1,7 @@
 <template>
 	<div class="item-list">
 		<ul v-for="(list, listIndex) in dividedItems" :key="listIndex">
-			<li v-for="(item, index) in list" :key="index">{{item}}</li>
+			<li v-for="(item, index) in list" :key="index" v-html="item" />
 		</ul>
 	</div>
 </template>
