@@ -30,8 +30,26 @@ export type Experience = {
 	projects?: Project[];
 }
 
+type Tool = {
+	image?: string;
+	class?: string;
+	tooltip: string;
+}
+
 export type Technology = {
 	name: string;
-	tools: string[],
-	maxItemsInAColumn?: number;
+	tools: Tool[],
+}
+
+type Work = {
+	title: string,
+	description: string,
+	thumbnail: string,
+	technologies: string[],
+	links: {
+		github?: string,
+		demo?: string,
+		playground?: string,
+		website?: string,
+	}
 }

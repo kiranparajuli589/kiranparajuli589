@@ -9,7 +9,7 @@
 				variant="elevated" class="work--card"
 			>
 				<v-card-title>
-					<h2>{{work.title}}</h2>
+					<h2 class="work--card--title">{{work.title}}</h2>
 				</v-card-title>
 				<v-card-text>
 					<v-img :src="getAssetUrl(work.thumbnail)" height="auto" width="100%" />
@@ -32,19 +32,6 @@
 <script lang="ts" setup>
 import {capitalize} from "vue"
 import {getAssetUrl} from "@/helper"
-
-type Work = {
-	title: string,
-	description: string,
-	thumbnail: string,
-	technologies: string[],
-	links: {
-		github?: string,
-		demo?: string,
-		playground?: string,
-		website?: string,
-	}
-}
 
 const works: Work[] = [
 	{

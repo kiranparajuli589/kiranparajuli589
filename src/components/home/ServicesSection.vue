@@ -9,7 +9,7 @@
 							variant="elevated"
 							max-width="460"
 			>
-				<v-card-title class="list py-4">
+				<v-card-title class="list home--services--title">
 					<v-icon :color="service.iconColor">mdi-{{service.icon}}</v-icon>
 					<h2>{{service.name}}</h2>
 				</v-card-title>

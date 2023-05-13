@@ -36,6 +36,7 @@ const scrollTo = useScrollTo()
 		align-items: center;
 		justify-content: space-between;
 		padding-bottom: 1.2rem;
+		flex-wrap: wrap;
 		.my-name {
 			font-size: 1.2rem;
 			text-transform: uppercase;
@@ -43,6 +44,7 @@ const scrollTo = useScrollTo()
 		.btn-grp {
 			padding-left: 8rem;
 			display: flex;
+			flex-wrap: wrap;
 			gap: 1rem;
 			.btn {
 				cursor: pointer;
