@@ -5,8 +5,8 @@
 				<div class="my-name">Kiran</div>
 				<div class="btn-grp">
 					<div v-ripple class="btn" @click="scrollTo.works()">Works</div>
-					<div v-ripple class="btn">Resume</div>
-					<div v-ripple class="btn">Blog</div>
+					<div v-ripple class="btn" @click="router.push({name: 'Resume'})">Resume</div>
+					<div v-ripple class="btn" @click="router.push({name: 'Blog'})">Blog</div>
 				</div>
 				<div class="copyright">
 					© {{new Date().getFullYear() }} Kiran. All rights reserved.
@@ -23,8 +23,10 @@
 </template>
 <script setup lang="ts">
 import useScrollTo from "@/composables/scrollTo"
+import { useRouter } from "vue-router";
 
 const scrollTo = useScrollTo()
+const router = useRouter()
 </script>
 <style lang="scss">
 .footer {
