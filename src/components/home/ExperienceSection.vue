@@ -4,10 +4,9 @@
 		<div class="section-subtitle">Where I had been engaged.</div>
 		<div class="section-divider" />
 		<v-card v-for="exp in experiences" :key="exp.company" class="mb-8">
-
 			<v-card-title class="list">
 				<v-avatar :image="getAssetUrl(exp.companyLogo)" size="60" />
-				<h3>{{exp.company}}</h3>
+				<h3 class="ellipses">{{exp.company}}</h3>
 				<a :href="exp.companyUrl" target="_blank" :title="exp.company">
 					<v-icon size="x-small">mdi-open-in-new</v-icon>
 				</a>
@@ -30,7 +29,7 @@
 								:key="proj.name" class="mb-4" variant="outlined"
 				>
 					<v-card-title class="list">
-						<h4>{{proj.name}}</h4>
+						<h4 class="ellipses" :title="proj.name">{{proj.name}}</h4>
 						<a :href="proj.url" target="_blank" :title="proj.name">
 							<v-icon size="x-small">mdi-open-in-new</v-icon>
 						</a>

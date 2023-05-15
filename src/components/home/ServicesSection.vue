@@ -11,7 +11,7 @@
 			>
 				<v-card-title class="list home--services--title">
 					<v-icon :color="service.iconColor">mdi-{{service.icon}}</v-icon>
-					<h2>{{service.name}}</h2>
+					<h2 class="ellipses">{{service.name}}</h2>
 				</v-card-title>
 				<v-card-text class="pt-0 experience">
 					<p class="mb-1">Experience: <span class="exp">{{service.experience}}</span> years</p>
