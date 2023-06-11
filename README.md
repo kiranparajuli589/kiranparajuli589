@@ -10,6 +10,10 @@ Software Developer, QA, VueJs, Django
   <img src="https://img.shields.io/badge/Website-know%20more-blue" height="28" width="150" >
 </a>
 
+<a href="https://owncloud.com" target="_blank" title="Owncloud">
+	<img src="./public/oc-badge-community-contributor-dark.png" height="28" width="100" >
+</a>
+
 <p>
     Visitor Count<br>
     <img src="https://profile-counter.glitch.me/kiranparajuli589/count.svg" />
@@ -46,7 +50,3 @@ work together to achieve your goals.
 [![My's GitHub stats](https://github-readme-stats.vercel.app/api?username=kiranparajuli589&theme=tokyonight)](https://github.com/kiranparajuli589/github-readme-stats)
 
 [![GitHub Streak](https://streak-stats.demolab.com/?user=kiranparajuli589&theme=tokyonight)](https://git.io/streak-stats)
-
-### Codersrank
-
-[![Kiran's Codersrank stats](https://cr-ss-service.azurewebsites.net/api/ScreenShot?widget=summary&username=kiranparajuli589&badges=3&show-avatar=false&style=--bg-color:rgb(26,27,39);--border-radius:4px;border:2px;--badge-bg-color:rgb(30,30,50);--badge-text-color:white;)](https://profile.codersrank.io/user/kiranparajuli589/)

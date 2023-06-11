@@ -13,6 +13,11 @@ export type Project = {
 	description: string;
 	job: string[];
 	url?: string;
+	badge?: {
+		dark?: string;
+		light?: string;
+		default?: string;
+	};
 }
 
 export type Experience = {

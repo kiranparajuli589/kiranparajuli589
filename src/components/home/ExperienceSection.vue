@@ -30,6 +30,10 @@
 				>
 					<v-card-title class="list">
 						<h4 class="ellipses" :title="proj.name">{{proj.name}}</h4>
+						<template v-if="proj.badge">
+							<v-img v-if="isDarkTheme" :src="proj.badge.dark || proj.badge.default" height="35" max-width="130" />
+							<v-img v-else :src="proj.badge.light || proj.badge.default" height="35" max-width="130" />
+						</template>
 						<a :href="proj.url" target="_blank" :title="proj.name">
 							<v-icon size="x-small">mdi-open-in-new</v-icon>
 						</a>
@@ -48,5 +52,11 @@
 import Resume from "@/resume"
 import {getAssetUrl} from "@/helper"
 import ItemList from "@/components/home/ItemList.vue"
+import {storeToRefs} from "pinia"
+import {useAppStore} from "@/store/app"
 const experiences = Resume.experiences
+
+const AppStore = useAppStore()
+
+const {isDarkTheme} = storeToRefs(AppStore)
 </script>

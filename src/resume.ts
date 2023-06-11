@@ -1,4 +1,5 @@
 import {Experience, Service, Technology, Work} from "./customTypes"
+import {getAssetUrl} from "@/helper"
 
 interface ResumeInterface {
 	personalInfo: {[key: string]: string},
@@ -69,7 +70,11 @@ const Resume:ResumeInterface = {
 						"Automate the product release processes",
 						"Build necessary test infrastructures like 'test-middleware', 'testing-app' for better test coverage and performance"
 					],
-					url: "https://owncloud.com"
+					url: "https://owncloud.com",
+					badge: {
+						dark: "/oc-badge-community-contributor-dark.png",
+						light: "/oc-badge-community-contributor-light.png"
+					}
 				},
 				{
 					name: "Integration app for OpenProject and Nextcloud",
