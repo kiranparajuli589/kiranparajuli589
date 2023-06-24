@@ -1,0 +1,126 @@
+@font-face {
+	font-family: 'Century Gothic';
+	src: url("./../assets/century-gothic/CenturyGothic.ttf");
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Century Gothic', sans-serif;
+
+	a {
+		text-decoration: none;
+	}
+}
+
+.chip {
+	border-radius: 4px;
+	font-size: 1rem;
+	flex-grow: 1;
+	text-align: center;
+	padding: .2rem .5rem;
+	border: 1px solid grey;
+}
+
+.list {
+	display: flex !important;
+	gap: 1rem;
+	flex-wrap: wrap;
+	align-items: center;
+	width: max-content;
+
+	.v-icon {
+		margin-top: 2px;
+	}
+}
+
+.cursor {
+	width: 25px;
+	height: 25px;
+	border: 2px solid white;
+	mix-blend-mode: difference;
+	border-radius: 50%;
+	position: absolute;
+	z-index: 999999999;
+	transition-duration: 200ms;
+	transition-timing-function: ease-out;
+	animation: cursorAnim 1s infinite alternate;
+
+	&::before {
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 3px;
+		height: 3px;
+		transform: translate(-50%, -50%);
+		background-color: white;
+		border-radius: 50%;
+	}
+}
+
+@keyframes cursorAnim {
+	from {
+		transform: scale(1);
+		opacity: .6;
+	}
+
+	to {
+		transform: scale(1.5);
+		opacity: 1;
+	}
+}
+
+.scroll-top {
+	position: fixed;
+	top: 45%;
+	right: -33px;
+	z-index: 999999;
+	background: #1867c0c2;
+	cursor: pointer;
+	color: white;
+	padding: .4rem;
+	transform: rotate(270deg);
+	border-radius: 4px;
+}
+
+.section-title {
+	font-size: 3rem;
+}
+
+.section-subtitle {
+	font-size: 1.2rem;
+	font-weight: bold;
+}
+
+.section-divider {
+	width: 100%;
+	max-width: 120px;
+	height: 2px;
+	background-color: #1867C0;
+	margin-block: 1rem 3rem;
+	border-radius: 24px;
+	position: relative;
+
+	&::before {
+		content: '';
+		width: 8px;
+		height: 8px;
+		background-color: #1867C0;
+		border-radius: 24px;
+		position: absolute;
+		top: -3px;
+		left: 0;
+	}
+}
+
+.v-card-title {
+	width: 100%;
+}
+
+.ellipses {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
