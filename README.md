@@ -33,8 +33,7 @@ work together to achieve your goals.
 - 🔭 I’m currently working on a website for [Sachchai Kendra Nepal](https://sachchaikendranepal.org.np/)
 - 🌱 I’m currently learning [RabbitMQ](https://www.rabbitmq.com/) and [Apache Kafka](https://kafka.apache.org/)
 - 👯 I’m looking to collaborate on [WordClub](https://github.com/word-club/)
-- 🤔 I’m looking for help with [Markdown Parser](https://github.com/kiranparajuli589/md-parser), a project i built to
-  parse markdown to html.
+- 🤔 I’m looking for help with [Markdown Parser](https://github.com/kiranparajuli589/md-parser), a project to parse markdown into HTML.
 - 💬 Ask me about [VueJs](https://vuejs.org/) and [Django](https://www.djangoproject.com/)
 - 📫 How to reach me: [LinkedIn](https://www.linkedin.com/in/kiranparajuli589/)
 - 😄 Pronouns: He/His
