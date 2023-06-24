@@ -1,8 +1,7 @@
 <template>
 	<div class="resume-pdf">
 		<div class="pdf">
-			<h1>{{ personalInfo.name }}
-			</h1>
+			<h1>{{ personalInfo.name }}</h1>
 			<h4>{{ personalInfo.role }}</h4>
 			<p>
 				{{ personalInfo.phone }}
