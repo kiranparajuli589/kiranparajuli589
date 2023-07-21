@@ -12,14 +12,14 @@
     "@mdi/font": "7.2.96",
     "@pinia/nuxt": "^0.4.11",
     "pinia": "^2.1.4",
-    "sass": "^1.63.6",
-    "vuetify": "^3.3.0"
+    "sass": "^1.64.0",
+    "vuetify": "^3.3.9"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
-    "@types/node": "^18",
-    "nuxt": "^3.5.2",
-    "typescript": "^5.1.3",
+    "@types/node": "^18.16.19",
+    "nuxt": "^3.6.5",
+    "typescript": "^5.1.6",
     "vite-plugin-vuetify": "^1.0.2"
   }
 }
