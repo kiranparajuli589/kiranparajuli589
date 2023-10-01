@@ -1,7 +1,7 @@
 <template>
 	<div class="item-list">
 		<ul v-for="(list, listIndex) in dividedItems" :key="listIndex">
-			<li v-for="(item, index) in list" :key="index" v-html="item.tooltip || item" />
+			<li v-for="(item, index) in list" :key="index" v-html="item" />
 		</ul>
 	</div>
 </template>
@@ -10,7 +10,7 @@ import {computed} from "vue"
 import {Tool} from "@/customTypes"
 
 interface Props {
-	items: Array<Tool | string>,
+	items: string[],
 	noSplit?: boolean,
 	maxItemsInAColumn?: number
 }
@@ -42,7 +42,6 @@ const dividedItems = computed(() => {
 	gap: 1rem;
 	ul {
 		li {
-			margin-bottom: 1rem;
 			margin-left: 1.5rem;
 			width: fit-content;
 		}

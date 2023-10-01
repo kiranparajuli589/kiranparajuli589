@@ -99,18 +99,10 @@
 				<ul class="mb-3">
 					<h3>Technologies:</h3>
 					<v-divider />
-					<li v-for="tech in work.technologies" :key="tech" v-html="tech"/>
+					<ItemList :items="work.technologies" />
 				</ul>
 			</div>
 
-			<h2 class="pt-4">Technologies</h2>
-			<divider class="mb-2" height="2" />
-
-			<div v-for="(technology, index) in technologies" :key="technology.name" class="mb-4">
-				<h3>{{index + 1}}. {{ technology.name }}</h3>
-				<v-divider class="mb-2" />
-				<ItemList :items="technology.tools"  />
-			</div>
 		</div>
 		<v-divider/>
 		<v-footer class="d-flex justify-space-between">
