@@ -3,6 +3,7 @@
 DIST_BRANCH="dist"
 BASE_DIR="/home/runner/work/kiranparajuli589"
 
+git stash && git stash clear
 
 echo "Building Started...."
 pnpm build
