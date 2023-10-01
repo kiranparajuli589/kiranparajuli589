@@ -26,3 +26,5 @@ logs
 # IDE caches
 .vscode
 .idea
+
+.vite
