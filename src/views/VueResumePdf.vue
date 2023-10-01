@@ -39,6 +39,31 @@
 				{{ personalInfo.summary }}
 			</p>
 
+			<h2 class="pt-4">Works</h2>
+			<divider class="mb-2" height="2" />
+
+			<div v-for="(work, index) in works" :key="work.title" class="mb-6">
+				<h3>{{index + 1}}. {{ work.title }}</h3>
+				<divider class="mb-2" />
+				<p class="mb-2">
+					{{ work.description }}
+				</p>
+				<div class="list mb-2">
+					<strong>Links:</strong>
+					<template v-for="[key, value] in Object.entries(work.links)" :key="key">
+						<a :href="value" target="_blank" class="text-capitalize">
+							{{ key }}
+							<v-icon size="small">mdi-open-in-new</v-icon>
+						</a>
+					</template>
+				</div>
+				<ul class="mb-3">
+					<h3>Technologies:</h3>
+					<v-divider />
+					<li v-for="tech in work.technologies" :key="tech" v-html="tech"/>
+				</ul>
+			</div>
+
 			<h2 class="pt-4">Experience</h2>
 			<divider class="mb-2" height="2" />
 			<div v-for="(experience, index) in experiences" :key="experience.company" class="mb-4">
@@ -76,31 +101,6 @@
 				<v-divider class="pb-2" />
 
 				<ItemList :items="experience.technologies" />
-			</div>
-
-			<h2 class="pt-4">Works</h2>
-			<divider class="mb-2" height="2" />
-
-			<div v-for="(work, index) in works" :key="work.title" class="mb-6">
-				<h3>{{index + 1}}. {{ work.title }}</h3>
-				<divider class="mb-2" />
-				<p class="mb-2">
-					{{ work.description }}
-				</p>
-				<div class="list mb-2">
-					<strong>Links:</strong>
-					<template v-for="[key, value] in Object.entries(work.links)" :key="key">
-						<a :href="value" target="_blank" class="text-capitalize">
-							{{ key }}
-							<v-icon size="small">mdi-open-in-new</v-icon>
-						</a>
-					</template>
-				</div>
-				<ul class="mb-3">
-					<h3>Technologies:</h3>
-					<v-divider />
-					<li v-for="tech in work.technologies" :key="tech" v-html="tech"/>
-				</ul>
 			</div>
 
 			<h2 class="pt-4">Technologies</h2>

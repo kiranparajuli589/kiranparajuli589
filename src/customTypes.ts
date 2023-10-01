@@ -36,7 +36,7 @@ export type Experience = {
 	projects: Project[];
 }
 
-type Tool = {
+export type Tool = {
 	image?: string;
 	class?: string;
 	tooltip: string;

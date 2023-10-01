@@ -1,15 +1,16 @@
 <template>
 	<div class="item-list">
 		<ul v-for="(list, listIndex) in dividedItems" :key="listIndex">
-			<li v-for="(item, index) in list" :key="index" v-html="item" />
+			<li v-for="(item, index) in list" :key="index" v-html="item.tooltip || item" />
 		</ul>
 	</div>
 </template>
 <script setup lang="ts">
 import {computed} from "vue"
+import {Tool} from "@/customTypes"
 
 interface Props {
-	items: string[] | undefined,
+	items: Array<Tool | string>,
 	noSplit?: boolean,
 	maxItemsInAColumn?: number
 }

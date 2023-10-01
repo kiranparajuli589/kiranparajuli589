@@ -1,5 +1,4 @@
 import {Experience, Service, Technology, Work} from "./customTypes"
-import {getAssetUrl} from "@/helper"
 
 interface ResumeInterface {
 	personalInfo: {[key: string]: string},
@@ -23,8 +22,9 @@ const Resume:ResumeInterface = {
 		github: "https://github.com/kiranparajuli589",
 		website: "https://kiranparajuli.com.np",
 		bio: "Full Stack Developer, QA Automation Engineer, and a Tech Enthusiast",
-		summary: "I'm a software developer and quality assurance engineer. My specialties include Python, PHP, and NodeJS for backend work and database management." +
-			" I'm also skilled in VueJs for creating sophisticated web designs." +
+		summary: "I'm a software developer and quality assurance engineer." +
+			" My specialties include Python, PHP, and NodeJS for backend work and database management." +
+			" I'm skilled in VueJs, SaSS and Javascript for creating sophisticated web designs." +
 			" I take great pride in my attention to detail and commitment to delivering high-quality results." +
 			" When I'm not coding, I enjoy playing guitar and listening to music to stay inspired." +
 			" I'm always eager to collaborate with others and help bring their visions to life."
@@ -38,25 +38,39 @@ const Resume:ResumeInterface = {
 				"Junior Programmer"
 			],
 			startDate: "2019",
-			endDate: "2022",
+			endDate: "2023",
 			technologies: [
-				"VueJs",
-				"Vue Unit Tests",
 				"Playwright",
 				"Behat",
-				"PhpUnit",
 				"NightwatchJs",
+				"PhpUnit",
+				"Postman",
 				"GitHub",
 				"GithubCI",
-				"DroneCI"
+				"GitLab",
+				"GitlabCI",
+				"DroneCI",
+				"TravisCI",
+				"Cypress",
+				"NodeJS",
+				"Locust",
+				"Python",
+				"PHP",
+				"Regex",
+				"Bash",
+				"VueJs",
+				"Vue Unit Tests",
 			],
 			achievements: [
-				"A blog website for the JankariTech peoples using markdowns and VueJS." +
-				" <a href='https://blog.jankaritech.com' target='_blank' title='blog.jankaritech.com'>🔗</a>",
+				"Write webUI, API, CLI, e2e and unit tests for various projects.",
+				"Build and maintain CI/CD pipelines for the daily running builds or tests.",
 				"Help peoples from Programiz team to write unit and e2e tests for their website.",
 				"Organize a workshop on Automation Testing using Playwright.",
-				"Run weekly trainings about different technologies like Websockets, VueJS, Playwright, etc.",
-				"Colab with the fellow programmers to get more quality test infrastructures."
+				"Run weekly trainings about different technologies like Cypress, Websockets, VueJS, Playwright, etc.",
+				"Colab with the fellow programmers to get more quality test infrastructures.",
+				"Remote work with the team and manage the time to complete the tasks.",
+				"A blog website for the JankariTech peoples using markdowns and VueJS." +
+				" <a href='https://blog.jankaritech.com' target='_blank' title='blog.jankaritech.com'>🔗</a>",
 			],
 			companyUrl: "www.jankaritech.com",
 			companyLogo: "jankaritech.jpg",
@@ -65,10 +79,10 @@ const Resume:ResumeInterface = {
 					name: "QA with Owncloud",
 					description: "'ownCloud' develops and provides open-source software for content collaboration, allowing teams to easily share and work on files seamlessly regardless of device or location.",
 					job: [
-						"Write e2e and unit tests for new features added or bugs fixed.",
+						"Write webUI, API, e2e and unit tests for new features added or bugs fixed.",
 						"Maintain CI/CD pipelines for the daily running builds or tests.",
 						"Automate the product release processes",
-						"Build necessary test infrastructures like 'test-middleware', 'testing-app' for better test coverage and performance"
+						"Contribute on necessary test infrastructures like 'test-middleware', 'testing-app' for better test coverage and performance"
 					],
 					url: "https://owncloud.com",
 					badge: {
@@ -93,7 +107,7 @@ const Resume:ResumeInterface = {
 					job: [
 						"Write e2e tests for the new Programiz Pro features.",
 						"Maintain UI test infrastructure to be completely independent of the backend service",
-						"Organize a workshop on Automation Testing using Playwright to help Programiz team to write better tests."
+						"Organize a workshop on Automation Testing using Playwright to help Programiz team to write better UI tests."
 					],
 					url: "https://www.programiz.com/"
 				},
@@ -101,7 +115,7 @@ const Resume:ResumeInterface = {
 					name: "E2E Tests for the My Second Teacher Website",
 					description: "'My Second Teacher' is an online learning platform for students to learn from the best teachers in Nepal.",
 					job: [
-						"Write e2e tests for the different features (B2B, B2C) of the website.",
+						"Write e2e tests for the different features (B2B, B2C) of the website using Cypress.",
 						"Maintain CI/CD pipelines for the daily running builds or tests."
 					],
 					url: "https://www.mysecondteacher.com/"
@@ -125,21 +139,22 @@ const Resume:ResumeInterface = {
 			projects: [
 				{
 					name: "Leave Management Dashboard",
-					description: "A dashboard for a company to manage their employees' leaves.",
+					description: "A web dashboard for a company to manage their employees' leaves." +
+						" Employees can apply for leaves and the admin can approve or reject the leaves.",
 					job: [
 						"Developed the frontend using VueJS and Vuetify"
 					]
 				},
 				{
 					name: "Bit Coins Survey",
-					description: "A survey website for different Bit Coins.",
+					description: "A survey website for different Bit Coins. The website is used to show the survey results to the users in graphs and charts.",
 					job: [
 						"Developed the frontend using VueJS and Vuetify"
 					]
 				}
 			],
 			technologies: [
-				"VueJs",
+				"VueJs", "VuetifyJs", "Sass", "Github"
 			]
 		},
 		{
@@ -163,6 +178,9 @@ const Resume:ResumeInterface = {
 				"Git"
 			],
 			achievements: [
+				"First exposure to the real world of programming",
+				"OOP and basics of Python",
+				"Build APIs and consume them using Ajax in the frontend",
 				"Developed a inventory management system for a small retailer shop",
 				"Developed a attendance system using Raspberry Pi for the company"
 			],
@@ -193,7 +211,7 @@ const Resume:ResumeInterface = {
 	works: [
 		{
 			title: "VueYtframe",
-			description: "A Vue component to embed YouTube videos in your Vue app.",
+			description: "A Vue library to embed YouTube videos in your Vue app.",
 			thumbnail: "vue-ytparser.png",
 			technologies: [
 				"VueJs",
@@ -207,7 +225,8 @@ const Resume:ResumeInterface = {
 		},
 		{
 			title: "Markdown Parser",
-			description: "A simple yet powerful markdown parser for NodeJS or Javascript.",
+			description: "A simple yet powerful markdown parser for NodeJS or Javascript." +
+				" It can parse markdowns to HTML and vice versa.",
 			thumbnail: "markdown-parser.png",
 			technologies: [
 				"NodeJS",
@@ -222,7 +241,9 @@ const Resume:ResumeInterface = {
 		},
 		{
 			title: "Sachchai Kendra Nepal",
-			description: "A website for Sachchai Kendra Nepal, a non-profit religious organization.",
+			description: "A website for Sachchai Kendra Nepal, a non-profit religious organization." +
+				" The website provides social media features like posting, commenting, liking, etc. to the users." +
+				" Also provides a management system for the organization branches and their members.",
 			thumbnail: "sachchai-kendra-nepal.png",
 			technologies: [
 				"Vue3",
@@ -251,7 +272,7 @@ const Resume:ResumeInterface = {
 		},
 		{
 			title: "WordClub",
-			description: "A reddit based social media website for writers and readers.",
+			description: "A reddit based social media website for writers and readers. It is based on Django channels and have live notifications feature.",
 			thumbnail: "wordclub.png",
 			technologies: [
 				"Vue2",
@@ -275,7 +296,7 @@ const Resume:ResumeInterface = {
 				"MySQL"
 			],
 			links: {
-				website: "https://sports.bagamati.gov.np/"
+				website: "http://sports.bagamati.gov.np/"
 			}
 		}
 	],
