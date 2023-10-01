@@ -14,11 +14,6 @@ Software Developer, QA, VueJs, Django
 	<img src="./public/oc-badge-community-contributor-dark.png" height="28" width="100" >
 </a>
 
-<p>
-    Visitor Count<br>
-    <img src="https://profile-counter.glitch.me/kiranparajuli589/count.svg" />
-</p>
-
 ### About me
 
 I'm a software developer with experience as a senior quality assurance engineer. My specialties include Python, PHP, and
@@ -40,13 +35,3 @@ work together to achieve your goals.
 - 😄 Pronouns: He/His
 - ⚡ Fun fact: I spend almost 12 hours listening songs every day.
 - 📝 [Resume](https://drive.google.com/file/d/15GZHEjqzKEzD76dokH7witbfDLNBV1ZB/view?usp=sharing)
-
-### Languages and Tools:
-
-[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=kiranparajuli589&hide_title=true&langs_count=7&theme=tokyonight)](https://github.com/kiranparajuli589/github-readme-stats)
-
-## GithHub Stats
-
-[![My's GitHub stats](https://github-readme-stats.vercel.app/api?username=kiranparajuli589&theme=tokyonight)](https://github.com/kiranparajuli589/github-readme-stats)
-
-[![GitHub Streak](https://streak-stats.demolab.com/?user=kiranparajuli589&theme=tokyonight)](https://git.io/streak-stats)
