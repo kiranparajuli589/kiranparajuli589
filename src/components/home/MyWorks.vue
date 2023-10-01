@@ -12,7 +12,9 @@
 					<h2 class="work--card--title">{{work.title}}</h2>
 				</v-card-title>
 				<v-card-text>
-					<v-img :src="getAssetUrl(work.thumbnail)" height="auto" width="100%" />
+					<v-card color="grey" elevation="6">
+						<v-img :src="getAssetUrl(work.thumbnail)" height="auto" width="100%" />
+					</v-card>
 				</v-card-text>
 				<v-card-text>
 					{{work.description}}

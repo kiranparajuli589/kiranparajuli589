@@ -96,21 +96,46 @@
 .section-divider {
 	width: 100%;
 	max-width: 120px;
-	height: 2px;
+	height: 3px;
 	background-color: #1867C0;
 	margin-block: 1rem 3rem;
 	border-radius: 24px;
 	position: relative;
+	animation: hue-rotate 4s infinite;
+
+	@keyframes hue-rotate {
+		from {
+			filter: hue-rotate(0deg);
+		}
+		to {
+			filter: hue-rotate(360deg);
+		}
+	}
 
 	&::before {
 		content: '';
-		width: 8px;
-		height: 8px;
-		background-color: #1867C0;
-		border-radius: 24px;
+		width: 14px;
+		aspect-ratio: 1;
+		background: #1867C0;
+		border-radius: 50%;
 		position: absolute;
-		top: -3px;
+		top: -5px;
 		left: 0;
+		animation: moving-dot 6s infinite;
+	}
+	@keyframes moving-dot {
+		0% {
+			left: 0;
+			filter: hue-rotate(0deg);
+		}
+		50% {
+			left: 100%;
+			filter: hue-rotate(360deg);
+		}
+		100% {
+			left: 0;
+			filter: hue-rotate(0deg);
+		}
 	}
 }
 

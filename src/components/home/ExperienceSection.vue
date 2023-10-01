@@ -4,17 +4,17 @@
 		<div class="section-subtitle">Where I had been engaged.</div>
 		<div class="section-divider" />
 		<v-card v-for="exp in experiences" :key="exp.company" class="mb-8">
-			<v-card-title class="list">
-				<v-avatar :image="getAssetUrl(exp.companyLogo)" size="60" />
-				<h3 class="ellipses">{{exp.company}}</h3>
-				<a :href="exp.companyUrl" target="_blank" :title="exp.company">
-					<v-icon size="x-small">mdi-open-in-new</v-icon>
-				</a>
-			</v-card-title>
-			<v-card-subtitle>
+			<v-card-title>
 				{{exp.roles.join(', ')}}
 				<span class="mx-2">|</span>
 				{{exp.startDate}} - {{exp.endDate}}
+			</v-card-title>
+			<v-card-subtitle class="list">
+				<v-avatar :image="getAssetUrl(exp.companyLogo)" size="20" />
+				<strong class="ellipses">{{exp.company}}</strong>
+				<a :href="exp.companyUrl" target="_blank" :title="exp.company">
+					<v-icon size="x-small">mdi-open-in-new</v-icon>
+				</a>
 			</v-card-subtitle>
 			<v-card-text>
 				{{exp.description}}
@@ -26,7 +26,7 @@
 			<v-card-text>
 				<h2 class="mb-4">Projects:</h2>
 				<v-card v-for="proj in exp.projects"
-								:key="proj.name" class="mb-4" variant="outlined"
+								:key="proj.name" class="mb-6 pt-1 pb-2" variant="outlined"
 				>
 					<v-card-title class="list">
 						<h4 class="ellipses" :title="proj.name">{{proj.name}}</h4>
@@ -38,6 +38,7 @@
 							<v-icon size="x-small">mdi-open-in-new</v-icon>
 						</a>
 					</v-card-title>
+					<v-divider class="mx-4" />
 					<v-card-text>{{proj.description}}</v-card-text>
 					<v-card-text>
 						<h3 class="mb-3">Responsibilities:</h3>
@@ -60,3 +61,10 @@ const AppStore = useAppStore()
 
 const {isDarkTheme} = storeToRefs(AppStore)
 </script>
+<style lang="scss" scoped>
+	.home--experience {
+		.v-card-subtitle.list {
+			gap: .3rem;
+		}
+	}
+</style>

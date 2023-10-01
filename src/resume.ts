@@ -212,7 +212,7 @@ const Resume:ResumeInterface = {
 		{
 			title: "VueYtframe",
 			description: "A Vue library to embed YouTube videos in your Vue app.",
-			thumbnail: "vue-ytparser.png",
+			thumbnail: "vue-ytframe.png",
 			technologies: [
 				"VueJs",
 				"Youtube Iframe API"
