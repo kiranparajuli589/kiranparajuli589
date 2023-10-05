@@ -1,3 +1,9 @@
+---
+title: Steps to dockerize your django vue application
+date: 2023-10-12 12:00:00
+tags: ["django", "vue", "docker", "docker-compose", "gunicorn", "vite"]
+---
+
 # Steps to dockerize your django vue application
 This is a step-wise guide to dockerize your django + vue application.
 
@@ -49,14 +55,11 @@ Here we assume following things for django:
 ```dockerfile
 FROM python:3.10
 
-RUN python -m venv venv
-RUN . venv/bin/activate
+WORKDIR /app
 
-COPY requirements.txt requirements.txt
+COPY requirements.txt /app/
+
 RUN pip install --no-cache-dir -r requirements.txt
-
-RUN mkdir -p /backend/logs
-WORKDIR /backend
 
 EXPOSE 8000
 
@@ -87,14 +90,15 @@ Note: `vite` command is used with `--host` flag to make it accessible from outsi
 ```dockerfile
 FROM node:20-alpine3.17
 
-RUN mkdir -p /frontend
-WORKDIR /frontend
-COPY package.json pnpm-lock.yaml /frontend/
+WORKDIR /app
 
+COPY package.json pnpm-lock.yaml /app/
 RUN npm install -g pnpm
 RUN pnpm install
 
+
 EXPOSE 3000
+
 CMD ["pnpm", "dev:docker"]
 ```
 
@@ -107,17 +111,17 @@ version: '3.8'
 
 services:
   postgres:
-    container_name: app-postgres
+    container_name: sachchai-postgres
     image: postgres:16.0-alpine
     restart: always
     environment:
-      POSTGRES_USER: einstein
-      POSTGRES_PASSWORD: relativity
-      POSTGRES_DB: physics
+      POSTGRES_USER: sachchai
+      POSTGRES_PASSWORD: sachchai
+      POSTGRES_DB: sachchai
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: [ "CMD", "pg_isready", "-U", "physics" ]
+      test: [ "CMD", "pg_isready", "-U", "sachchai" ]
       interval: 5s
       timeout: 5s
       retries: 5
@@ -125,12 +129,13 @@ services:
       - "5433:5432"
 
   backend:
-    container_name: app-backend
+    container_name: sachchai-backend
     build:
       context: ./backend
     volumes:
-      - ./backend:/backend
-      - .env.docker:/backend/.env
+      - ./backend/:/app
+      - ./backend/.env.docker:/app/.env
+      - ./backend/logs:/app/logs
     depends_on:
       postgres:
         condition: service_healthy
@@ -142,13 +147,13 @@ services:
       timeout: 5s
       retries: 5
 
-  web:
-    container_name: app-frontend
+  frontend:
+    container_name: sachchai-frontend
     build:
-      context: ./frontend
+      context: ./dove
     volumes:
-      - ./frontend:/frontend
-      - ../frontend/.env.docker:/frontend/.env
+      - ./dove:/app
+      - ./dove/.env.example:/app/.env
     depends_on:
       backend:
         condition: service_healthy
@@ -162,9 +167,9 @@ volumes:
 ```
 
 Now let's break it down:
-1. `depends_on` and `healthcheck` are used to make sure that the dependant services are up and running before starting the application. Here we are using `postgres` as a database for our django application. So we are making sure that the `postgres` service is up and running before starting the `backend` service. Similarly, we are making sure that the `backend` service is up and running before starting the `web` service.
-2. `volumes` are used to mount the files from the host machine to the container. Here we are mounting the `backend` and `frontend` folders to the respective containers. We are also mounting the `.env.docker` file to the respective containers. This file contains the environment variables for the application. You can also use `environment` to set the environment variables but I prefer to use `.env` file.
-3. `ports` are used to expose the ports from the container to the host machine. Here we are exposing `8000` and `3000` ports from `backend` and `web` containers respectively. Also I've mapped the `postgres` port to `5433` on the host machine so that it does not conflict with my host machine's postgres service. You can change it to your liking.
+1. `depends_on` and `healthcheck` are used to make sure that the dependent services are up and running before starting the application. Here we are using `postgres` as a database for our django application. So we are making sure that the `postgres` service is up and running before starting the `backend` service. Similarly, we are making sure that the `backend` service is up and running before starting the `web` service.
+2. `volumes` are used to mount the files from the host machine to the container. Here we are mounting the `backend` and `frontend` folders to the respective containers. We are also mounting the `.env.docker` file to the respective containers. This file contains the environment variables for the application. You can also use `environment` to set the environment variables, but I prefer to use `.env` file.
+3. `ports` are used to expose the ports from the container to the host machine. Here we are exposing `8000` and `3000` ports from `backend` and `web` containers respectively. Also, I've mapped the `postgres` port to `5433` on the host machine so that it does not conflict with my host machine's postgres service. You can change it to your liking.
 
 ## Running the application
 Now that we have everything in place, let's run the application.

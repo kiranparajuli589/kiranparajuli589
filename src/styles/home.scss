@@ -1,4 +1,6 @@
+@use "sass:meta";
 .home {
+	@include meta.load-css("highlight.js/styles/github.css");
 	padding: 4rem;
 
 	@media only screen and (max-width: 820px) {
@@ -225,8 +227,11 @@
 	}
 }
 
+
+
 body.dark {
 	.home {
+		@include meta.load-css("highlight.js/styles/github-dark.css");
 		&--content {
 			background-color: #121212;
 			color: white;
