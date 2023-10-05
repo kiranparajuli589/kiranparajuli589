@@ -1,23 +1,22 @@
 ---
-title: Steps to dockerize your django vue application
+title: "Dockerizing Your Django Vue Application: A Step-by-Step Guide"
 date: 2023-10-12 12:00:00
 tags: ["django", "vue", "docker", "docker-compose", "gunicorn", "vite"]
 ---
 
-# Steps to dockerize your django vue application
-This is a step-wise guide to dockerize your django + vue application.
+In this comprehensive guide, we will walk you through the process of dockerizing your Django and Vue applications.
 
 ## Prerequisites
-- Docker
-- Docker-compose
-- Django application
+- Docker (version 20.x.x or higher)
+- Docker-compose (version 2.x.x or higher)
+- Django application (Django + Gunicorn)
 - Vue application (Vue + Vite)
 
 ## Folder Structure
-This is an assumption of the folder structure of your project. You can change it to your liking but you will have to change the commands accordingly.
+To facilitate this guide, we assume the following folder structure for your project. You can customize it as needed, but remember to adjust the commands accordingly:
 ```
 .
-├── backend (django application)
+├── backend (Django application)
 │   ├── Dockerfile
 ├── frontend (vue application)
 │   ├── Dockerfile
@@ -25,13 +24,15 @@ This is an assumption of the folder structure of your project. You can change it
 ```
 
 ## Dockerfile for Django Application
-Here we assume following things for django:
+
+For the Django application, we'll make the following assumptions:
+
 1. Port to expose: `8000`
 2. Serve using: `gunicorn`
 3. Database: `postgres`
 
-### Gunicorn configuration
-```pycon
+### Gunicorn Configuration
+```python
 workers = 4
 max_requests = 1000
 timeout = 30
@@ -41,16 +42,15 @@ accesslog = "logs/gunicorn_access.log"
 errorlog = "logs/gunicorn_error.log"
 ```
 
-Note: We are using `0.0.0.0` to bind so that it can be accessed from outside the container.
+Note: We use `0.0.0.0` for binding to allow access from outside the container.
 
-### Backend dockerfile
-We just make the playground ready for the application. We will use `docker compose` to run the application.
+### Dockerfile for Backend
+In this section, we'll prepare the playground for your Django application. We will use Docker Compose to run the application. Here are the assumptions:
 
-Here we assume following things for django:
 1. Port to expose: `8000`
-2. Serve using: `gunicorn`
-3. Database: `postgres`
-4. Dependencies List in: `requirements.txt`
+2. Serve using: `Gunicorn`
+3. Database: `PostgreSQL`
+4. Dependencies Listed in: `requirements.txt`
 
 ```dockerfile
 FROM python:3.10
@@ -66,26 +66,24 @@ EXPOSE 8000
 CMD ["gunicorn", "backend.wsgi:application", "--config", "gunicorn.py"]
 ```
 
-Note: Here we do not copy all the files to the container. We will use `volumes` to mount the files to the container from `docker compose` so that the hot reloading feature keeps intact.
+Note: We won't copy all files to the container; instead, we'll use volumes to mount files from Docker Compose to preserve hot-reloading functionality.
 
-### Frontend Dockerfile
-Again, we just make the playground ready for the application. We will use `docker compose` to run the application.
+### Dockerfile for Frontend
+Similarly, we'll prepare the playground for your Vue application. We will use Docker Compose to run the application. For Vue, we'll assume:
 
-Here we assume following things for vue:
 1. Port to expose: `3000`
-2. Serve using: `vite`
+2. Serve using: `Vite`
 
-Add following to `package.json` to make it work with docker.
+To make it work with Docker, add the following to your `package.json`:
 ```json
 {
 	"scripts": {
-		"dev": "vite",
 		"dev:docker": "vite --host"
 	}
 }
 ```
 
-Note: `vite` command is used with `--host` flag to make it accessible from outside the container.
+Note: We use `vite` with the `--host` flag to make it accessible from outside the container.
 
 ```dockerfile
 FROM node:20-alpine3.17
@@ -102,26 +100,28 @@ EXPOSE 3000
 CMD ["pnpm", "dev:docker"]
 ```
 
-Note: Here too, we do not copy all the files to the container. We will use `volumes` to mount the files to the container from `docker compose` so that the hot reloading feature keeps intact.
+Just like with the Django application, we won't copy all files to the container, relying on Docker Compose volumes for file mounting to maintain hot-reloading.
 
 ## Docker compose
-Finally, we are now at the driver seat. We will use `docker compose` to run the application.
+Now, let's dive into Docker Compose to run your application.
+
+
 ```yaml
 version: '3.8'
 
 services:
   postgres:
-    container_name: sachchai-postgres
+    container_name: db
     image: postgres:16.0-alpine
     restart: always
     environment:
-      POSTGRES_USER: sachchai
-      POSTGRES_PASSWORD: sachchai
-      POSTGRES_DB: sachchai
+      POSTGRES_USER: einstein
+      POSTGRES_PASSWORD: relativity
+      POSTGRES_DB: einstein
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: [ "CMD", "pg_isready", "-U", "sachchai" ]
+      test: [ "CMD", "pg_isready", "-U", "einstein" ]
       interval: 5s
       timeout: 5s
       retries: 5
@@ -129,7 +129,7 @@ services:
       - "5433:5432"
 
   backend:
-    container_name: sachchai-backend
+    container_name: backend
     build:
       context: ./backend
     volumes:
@@ -148,12 +148,12 @@ services:
       retries: 5
 
   frontend:
-    container_name: sachchai-frontend
+    container_name: web
     build:
-      context: ./dove
+      context: ./frontend
     volumes:
-      - ./dove:/app
-      - ./dove/.env.example:/app/.env
+      - ./frontend:/app
+      - ./frontend/.env.example:/app/.env
     depends_on:
       backend:
         condition: service_healthy
@@ -166,36 +166,42 @@ volumes:
   static:
 ```
 
-Now let's break it down:
-1. `depends_on` and `healthcheck` are used to make sure that the dependent services are up and running before starting the application. Here we are using `postgres` as a database for our django application. So we are making sure that the `postgres` service is up and running before starting the `backend` service. Similarly, we are making sure that the `backend` service is up and running before starting the `web` service.
-2. `volumes` are used to mount the files from the host machine to the container. Here we are mounting the `backend` and `frontend` folders to the respective containers. We are also mounting the `.env.docker` file to the respective containers. This file contains the environment variables for the application. You can also use `environment` to set the environment variables, but I prefer to use `.env` file.
-3. `ports` are used to expose the ports from the container to the host machine. Here we are exposing `8000` and `3000` ports from `backend` and `web` containers respectively. Also, I've mapped the `postgres` port to `5433` on the host machine so that it does not conflict with my host machine's postgres service. You can change it to your liking.
+### To break it down:
+
+1. We use `depends_on` and `healthcheck` to ensure dependent services are up and running before starting. PostgreSQL is used as the database for the Django application, so we ensure that the `postgres` service is operational before launching the `backend` service. A similar approach is used for the `frontend` service.
+2. Volumes are employed to mount files from the host machine to the container. We mount backend and frontend folders to their respective containers and include the `.env.docker` file containing environment variables.
+3. Ports are exposed to make container ports accessible from the host machine. In this configuration, we've mapped `8000` and `3000` from the backend and frontend containers, respectively. Additionally, PostgreSQL's port is mapped to 5433 on the host to avoid conflicts.
 
 ## Running the application
-Now that we have everything in place, let's run the application.
+
+With everything set up, it's time to run your application:
+
 ```bash
-docker-compose up
+docker compose up
 ```
 
-This should spin up postgres with the given database and user. It should also spin up the backend and frontend services. You can access the application at `http://localhost:3000`. But wait, we haven't run the migrations yet. Let's do that now.
+This command will spin up PostgreSQL with the specified database and user. It will also start the backend and frontend services. Access your application at `http://localhost:3000`.
+
+To run migrations, execute the following command:
 
 ```bash
-docker-compose exec backend python manage.py migrate
+docker compose exec backend python manage.py migrate
 ```
+The choice to run migrations after the application is up allows for easy updates to models without manual migration execution.
 
-### Now you may think, Why waiting this late for migrations?
-Well, the migrations is not a one time thing. You will have to run it every time you make changes to the models. So, I prefer to run it after the application is up and running. This way, I don't have to worry about running the migrations every time I make changes to the models.
+To create a superuser, run:
 
-Also, do not put the command to create superuser in the `Dockerfile`. You can do it manually by running the following command.
 ```bash
-docker-compose exec backend python manage.py createsuperuser
+docker compose exec backend python manage.py createsuperuser
 ```
-If you put it in the `Dockerfile`, it will run every time you spin up the application. This will cause an error if the superuser already exists.
+Avoid putting superuser creation in the Dockerfile to prevent errors if the superuser already exists.
 
-Static files missing? So, you will have to run the following command to collect the static files.
+To collect static files, use this command:
+
 ```bash
-docker-compose exec backend python manage.py collectstatic
+docker compose exec backend python manage.py collectstatic
 ```
 
 ## Conclusion
-That's it, you have successfully dockerized your django vue application. Now you can deploy it to any cloud provider of your choice.
+
+#### Congratulations, you've successfully dockerized your Django Vue application! Now, you can deploy it to your preferred cloud provider or use it for the development environment. Happy coding!

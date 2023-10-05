@@ -59,3 +59,12 @@ export type Work = {
 		website?: string,
 	}
 }
+
+export type FrontMatter = {
+	title: string
+	date: string
+	tags: string[]
+	contentLength: number
+	fileName: string
+	filePath: string
+}

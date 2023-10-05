@@ -22,10 +22,12 @@
 							{{blog.title}}
 						</h2>
 					</v-card-text>
-					<v-card-text class="blog--tags" v-if="blog.tags && Array.isArray(blog.tags)">
-						<div v-for="(tag, index) in blog.tags" :key="index">
-							{{tag}}
-						</div>
+					<v-card-text class="blog--tags" v-if="blog.tags">
+						<template v-if="Array.isArray(blog.tags)">
+							<div v-for="(tag, index) in blog.tags" :key="index">
+								{{tag}}
+							</div>
+						</template>
 					</v-card-text>
 					<v-card-text class="blog--info">
 						<div class="blog--date">{{new Date(blog.date).toDateString()}}</div>
@@ -37,18 +39,12 @@
 	</v-card>
 </template>
 <script setup lang="ts">
+import { FrontMatter } from "@/customTypes";
 import {readAssets, htmlMark} from "@/helper"
 import {onBeforeMount, reactive} from "vue"
 
 const mdp = htmlMark()
-interface FrontMatter {
-	title: string
-	date: string
-	tags: string[]
-	contentLength: number
-	fileName: string
-	filePath: string
-}
+
 const frontMatters = reactive<FrontMatter[]>([])
 
 onBeforeMount(async () => {
