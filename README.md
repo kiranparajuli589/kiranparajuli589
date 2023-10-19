@@ -25,13 +25,13 @@ enjoy playing guitar and listening to music to stay inspired.
 I'm always eager to collaborate with others and help bring their visions to life. Let's connect and explore how we can
 work together to achieve your goals.
 
-- 🔭 I’m currently working on a website for [Sachchai Kendra Nepal](https://sachchaikendranepal.org.np/)
-- 🌱 I’m currently learning [RabbitMQ](https://www.rabbitmq.com/) and [Apache Kafka](https://kafka.apache.org/)
+- 🔭 I’m currently studying
+- 🌱 I’m currently learning better problem-solving techniques
 - 👯 I’m looking to collaborate on [WordClub](https://github.com/word-club/)
 - 🤔 I’m looking for help with [Markdown Parser](https://github.com/kiranparajuli589/md-parser), a project i built to
-  parse markdown to html.
+  parse markdown to HTML.
 - 💬 Ask me about [VueJs](https://vuejs.org/) and [Django](https://www.djangoproject.com/)
 - 📫 How to reach me: [LinkedIn](https://www.linkedin.com/in/kiranparajuli589/)
 - 😄 Pronouns: He/His
-- ⚡ Fun fact: I spend almost 12 hours listening songs every day.
-- 📝 [Resume](https://drive.google.com/file/d/15GZHEjqzKEzD76dokH7witbfDLNBV1ZB/view?usp=sharing)
+- ⚡ Fun fact: I often wear headphones without listening to anything
+- 📝 [Resume](https://drive.google.com/file/d/1H74B0fUETfxuOhxeHEbEvFQrE2-nOAFM/view?usp=share_link)
