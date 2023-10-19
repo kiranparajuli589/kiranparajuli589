@@ -30,7 +30,7 @@ work together to achieve your goals.
 - 👯 I’m looking to collaborate on [WordClub](https://github.com/word-club/)
 - 🤔 I’m looking for help with [Markdown Parser](https://github.com/kiranparajuli589/md-parser), a project i built to
   parse markdown to HTML.
-- 💬 Ask me about [VueJs](https://vuejs.org/) and [Django](https://www.djangoproject.com/)
+- 💬 Ask me about SQA, [VueJs](https://vuejs.org/) and [Django](https://www.djangoproject.com/)
 - 📫 How to reach me: [LinkedIn](https://www.linkedin.com/in/kiranparajuli589/)
 - 😄 Pronouns: He/His
 - ⚡ Fun fact: I often wear headphones without listening to anything
