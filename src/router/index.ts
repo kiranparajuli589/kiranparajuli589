@@ -32,7 +32,7 @@ const routes = [
 		component: () => import(/* webpackChunkName: "resumePdf" */ "@/views/ResumePdf.vue"),
 	},
 	{
-		path: "/vue-resume-pdf",
+		path: "/resume-pdf-play",
 		name: "VueResumePdf",
 		component: () => import(/* webpackChunkName: "vueResumePdf" */ "@/views/VueResumePdf.vue"),
 	},

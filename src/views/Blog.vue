@@ -43,14 +43,15 @@ import { FrontMatter } from "@/customTypes";
 import {readAssets, htmlMark} from "@/helper"
 import {onBeforeMount, reactive} from "vue"
 
-const mdp = htmlMark()
+// const mdp = htmlMark()
 
 const frontMatters = reactive<FrontMatter[]>([])
 
 onBeforeMount(async () => {
 	const blogMarkdowns = await readAssets()
 	blogMarkdowns.forEach(blog => {
-		const frontMatter = mdp.getFrontMatter(blog.content)
+		// const frontMatter = mdp.getFrontMatter(blog.content)
+		let frontMatter
 		if(!frontMatter) return
 		frontMatters.push({...frontMatter, contentLength: blog.content.length, fileName: blog.fileName, filePath: blog.path })
 	})

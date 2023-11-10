@@ -11,9 +11,6 @@ dependencies:
   highlight.js:
     specifier: ^11.8.0
     version: 11.8.0
-  htmlmark:
-    specifier: link:/home/kiran/dev/htmlmark
-    version: link:../htmlmark
   pinia:
     specifier: ^2.1.6
     version: 2.1.6(typescript@5.2.2)(vue@3.3.4)

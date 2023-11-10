@@ -36,33 +36,8 @@
 			<h2 class="pt-4">Summary</h2>
 			<divider class="mb-2" height="2" />
 			<p>
-				{{ personalInfo.summary }}
+				{{ personalInfo.summaryQa }}
 			</p>
-
-			<h2 class="pt-4">Works</h2>
-			<divider class="mb-2" height="2" />
-
-			<div v-for="(work, index) in works" :key="work.title" class="mb-6">
-				<h3>{{index + 1}}. {{ work.title }}</h3>
-				<divider class="mb-2" />
-				<p class="mb-2">
-					{{ work.description }}
-				</p>
-				<div class="list mb-2">
-					<strong>Links:</strong>
-					<template v-for="[key, value] in Object.entries(work.links)" :key="key">
-						<a :href="value" target="_blank" class="text-capitalize">
-							{{ key }}
-							<v-icon size="small">mdi-open-in-new</v-icon>
-						</a>
-					</template>
-				</div>
-				<ul class="mb-3">
-					<h3>Technologies:</h3>
-					<v-divider />
-					<ItemList :items="work.technologies" />
-				</ul>
-			</div>
 
 			<h2 class="pt-4">Experience</h2>
 			<divider class="mb-2" height="2" />
@@ -102,10 +77,30 @@
 
 				<ItemList :items="experience.technologies" />
 			</div>
-		</div>
 
-		<v-divider/>
-		<v-footer class="d-flex justify-space-between">
+			<h2 class="pt-4">Works</h2>
+			<divider class="mb-2" height="2" />
+
+			<div v-for="(work, index) in works" :key="work.title" class="mb-6">
+				<h3>{{index + 1}}. {{ work.title }}</h3>
+				<divider class="mb-2" />
+				<p class="mb-2">
+					{{ work.description }}
+				</p>
+				<div class="list mb-2">
+					<strong>Links:</strong>
+					<template v-for="[key, value] in Object.entries(work.links)" :key="key">
+						<a :href="value" target="_blank" class="text-capitalize">
+							{{ key }}
+							<v-icon size="small">mdi-open-in-new</v-icon>
+						</a>
+					</template>
+				</div>
+			</div>
+		</div>
+		<div class="py-6" />
+		<hr >
+		<v-footer class="d-flex justify-space-between px-1">
 			<div>
 				kiranparajuli.com.np
 			</div>
@@ -129,7 +124,7 @@ const technologies = Resume.technologies
 onMounted(() => {
 	setTimeout(() => {
 		window.print()
-	}, 1000)
+	}, 5000)
 })
 </script>
 <style lang="scss">

@@ -1,12 +1,14 @@
 import {Experience, Service, Technology, Work} from "./customTypes"
 
 interface ResumeInterface {
-	personalInfo: {[key: string]: string},
+	personalInfo: {	[key: string]: string},
 	experiences: Experience[],
 	works: Work[],
 	services: Service[],
 	technologies: Technology[]
 }
+
+
 
 const Resume:ResumeInterface = {
 	personalInfo: {
@@ -27,7 +29,15 @@ const Resume:ResumeInterface = {
 			" I'm skilled in VueJs, SaSS and Javascript for creating sophisticated web designs." +
 			" I take great pride in my attention to detail and commitment to delivering high-quality results." +
 			" When I'm not coding, I enjoy playing guitar and listening to music to stay inspired." +
-			" I'm always eager to collaborate with others and help bring their visions to life."
+			" I'm always eager to collaborate with others and help bring their visions to life.",
+		summaryQa: "I am a Computer Engineering student pursuing a Bachelor's degree with four years" +
+		 "of experience in Software Development and Quality Assurance. My expertise lies in implementing" +
+		 " and optimizing testing strategies, particularly with a strong focus on Behavior-Driven Development " +
+		 "(BDD) and Test-Driven Development (TDD) methodologies. I have a proven track record in crafting," +
+		 " developing, and executing thorough test plans to guarantee the delivery of top-notch software." +
+		 " Additionally I'm good in collaborating with cross-functional teams, identifying and resolving potential issues" +
+		 " early in the development lifecycle, thereby contributing to the efficiency and effectiveness of" +
+		 " software releases."
 	},
 	experiences: [
 		{

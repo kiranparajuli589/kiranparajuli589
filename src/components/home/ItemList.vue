@@ -17,7 +17,7 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
 	noSplit: false,
-	maxItemsInAColumn: 4
+	maxItemsInAColumn: 3
 })
 
 const dividedItems = computed(() => {

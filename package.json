@@ -10,7 +10,6 @@
 	"dependencies": {
 		"@mdi/font": "7.2.96",
 		"highlight.js": "^11.8.0",
-		"htmlmark": "link:/home/kiran/dev/htmlmark",
 		"pinia": "^2.1.6",
 		"vue": "^3.3.4",
 		"vue-router": "^4.2.5",
