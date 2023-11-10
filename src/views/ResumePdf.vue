@@ -39,6 +39,34 @@
 				{{ personalInfo.summary }}
 			</p>
 
+
+			<h2 class="pt-4">Education</h2>
+			<divider class="mb-2" height="2" />
+
+			<div class="mb-4" v-for="edu in education" :key="edu.name">
+				<h3>
+					{{ edu.degree }} in {{ edu.name }}
+				</h3>
+				<h4>{{ edu.major }}</h4>
+				<p>
+					{{ edu.startDate }} - {{ edu.endDate }}
+				</p>
+			</div>
+
+			<h2 class="pt-4">Tools and Technologies</h2>
+			<divider class="mb-2" height="2" />
+
+			<div v-for="tech in technologies" :key="tech.name">
+				<h4>{{ tech.name }}</h4>
+				<div>
+					<template v-for="(tool, index) in tech.tools">
+						{{ tool.tooltip }}<template v-if="index !== tech.tools.length - 1">,&nbsp;&nbsp;</template>
+					</template>
+				</div>
+			</div>
+			<div class="ma-4" />
+
+
 			<h2 class="pt-4">Experience</h2>
 			<divider class="mb-2" height="2" />
 			<div v-for="(experience, index) in experiences" :key="experience.company" class="mb-4">
@@ -71,11 +99,6 @@
 						<li v-for="task in project.job" :key="task" v-html="task"/>
 					</ul>
 				</div>
-
-				<h3 class="pt-2">Tools and Technologies</h3>
-				<v-divider class="pb-2" />
-
-				<ItemList :items="experience.technologies" />
 			</div>
 
 			<h2 class="pt-4">Works</h2>
@@ -96,13 +119,7 @@
 						</a>
 					</template>
 				</div>
-				<ul class="mb-3">
-					<h3>Technologies:</h3>
-					<v-divider />
-					<ItemList :items="work.technologies" />
-				</ul>
 			</div>
-
 		</div>
 		<v-divider/>
 		<v-footer class="d-flex justify-space-between">
@@ -125,6 +142,8 @@ const personalInfo = Resume.personalInfo
 const experiences = Resume.experiences
 const works = Resume.works
 const technologies = Resume.technologies
+const education = Resume.education
+
 
 onMounted(() => {
 	setTimeout(() => {

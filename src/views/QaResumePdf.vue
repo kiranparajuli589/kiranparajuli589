@@ -28,7 +28,7 @@
 					{{ personalInfo.website.replace("https://", "") }}
 				</a>
 				<a :href="personalInfo.devto" target="_blank" class="dev-to-link">
-					<v-img src="@/assets/devto.png" width="25"/>
+					<v-img src="@/assets/devto.png" width="25" />
 					{{ personalInfo.devto.replace("https://", "") }}
 				</a>
 			</div>
@@ -39,50 +39,72 @@
 				{{ personalInfo.summaryQa }}
 			</p>
 
+			<h2 class="pt-4">Education</h2>
+			<divider class="mb-2" height="2" />
+
+			<div class="mb-4" v-for="edu in education" :key="edu.name">
+				<h3>
+					{{ edu.degree }} in {{ edu.name }}
+				</h3>
+				<h4>{{ edu.major }}</h4>
+				<p>
+					{{ edu.startDate }} - {{ edu.endDate }}
+				</p>
+			</div>
+
+			<h2 class="pt-4">Tools and Technologies</h2>
+			<divider class="mb-2" height="2" />
+
+			<div v-for="tech in technologies" :key="tech.name">
+				<h4>{{ tech.name }}</h4>
+				<div>
+					<template v-for="(tool, index) in tech.tools">
+						{{ tool.tooltip }}<template v-if="index !== tech.tools.length - 1">,&nbsp;&nbsp;</template>
+					</template>
+				</div>
+			</div>
+			<div class="ma-4" />
+
 			<h2 class="pt-4">Experience</h2>
 			<divider class="mb-2" height="2" />
 			<div v-for="(experience, index) in experiences" :key="experience.company" class="mb-4">
 				<h3>
-					{{index + 1}}. {{ experience.company }}
+					{{ index + 1 }}. {{ experience.company }}
 					<a :href="experience.companyUrl" target="_blank" :title="experience.company">
 						<v-icon size="x-small">mdi-open-in-new</v-icon>
 					</a>
 				</h3>
 				<divider />
 				<div class="mb-2">
-					<div title="Role" class="role">{{ experience.roles.join(", ") }} ({{ experience.startDate }} - {{ experience.endDate }})</div>
+					<div title="Role" class="role">{{ experience.roles.join(", ") }} ({{ experience.startDate }} - {{
+						experience.endDate }})</div>
 				</div>
 				<h3>Achievements</h3>
 				<v-divider class="mb-2" />
 				<ul>
-					<li v-for="task in experience.achievements" :key="task" v-html="task"/>
+					<li v-for="task in experience.achievements" :key="task" v-html="task" />
 				</ul>
 				<h3 class="pt-2">Projects</h3>
 				<v-divider class="pb-2" />
 				<div v-for="(project, index) in experience.projects" :key="index">
 					<h4>
-						{{index + 1}}. {{ project.name }}
+						{{ index + 1 }}. {{ project.name }}
 					</h4>
 					<p>{{ project.description }}</p>
 					<h4 class="py-2">
 						{{ experience.company === 'JankariTech Pvt. Ltd.' ? 'Jobs' : 'Main Features' }}:
 					</h4>
 					<ul class="mb-3">
-						<li v-for="task in project.job" :key="task" v-html="task"/>
+						<li v-for="task in project.job" :key="task" v-html="task" />
 					</ul>
 				</div>
-
-				<h3 class="pt-2">Tools and Technologies</h3>
-				<v-divider class="pb-2" />
-
-				<ItemList :items="experience.technologies" />
 			</div>
 
 			<h2 class="pt-4">Works</h2>
 			<divider class="mb-2" height="2" />
 
 			<div v-for="(work, index) in works" :key="work.title" class="mb-6">
-				<h3>{{index + 1}}. {{ work.title }}</h3>
+				<h3>{{ index + 1 }}. {{ work.title }}</h3>
 				<divider class="mb-2" />
 				<p class="mb-2">
 					{{ work.description }}
@@ -98,8 +120,9 @@
 				</div>
 			</div>
 		</div>
+
 		<div class="py-6" />
-		<hr >
+		<hr>
 		<v-footer class="d-flex justify-space-between px-1">
 			<div>
 				kiranparajuli.com.np
@@ -112,14 +135,14 @@
 </template>
 <script setup lang="ts">
 import Resume from "@/resume"
-import {onMounted} from "vue"
+import { onMounted } from "vue"
 import Divider from "@/components/Divider.vue"
-import ItemList from "@/components/home/ItemList.vue"
 
 const personalInfo = Resume.personalInfo
-const experiences = Resume.experiences
+const experiences = Resume.experiences.splice(0, 1)
 const works = Resume.works
 const technologies = Resume.technologies
+const education = Resume.education
 
 onMounted(() => {
 	setTimeout(() => {
@@ -133,12 +156,16 @@ onMounted(() => {
 	font-size: .875rem;
 	max-width: 1000px;
 	margin: 0 auto;
+
 	.dev-to-link {
-		display: flex; gap: .3rem;
+		display: flex;
+		gap: .3rem;
 	}
+
 	.role {
 		font-weight: 600;
 	}
+
 	.p-list {
 		display: flex;
 		gap: .5rem;
@@ -150,7 +177,7 @@ onMounted(() => {
 		}
 	}
 
-	ul > li {
+	ul>li {
 		margin-left: 1rem;
 	}
 }

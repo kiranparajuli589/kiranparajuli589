@@ -68,3 +68,11 @@ export type FrontMatter = {
 	fileName: string
 	filePath: string
 }
+
+export type Education = {
+	name: string
+	degree: string,
+	major: string,
+	startDate: string
+	endDate: string
+}

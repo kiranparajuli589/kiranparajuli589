@@ -1,16 +1,15 @@
-import {Experience, Service, Technology, Work} from "./customTypes"
+import { Experience, Service, Technology, Work, Education } from "./customTypes"
 
 interface ResumeInterface {
-	personalInfo: {	[key: string]: string},
+	personalInfo: { [key: string]: string },
 	experiences: Experience[],
 	works: Work[],
 	services: Service[],
 	technologies: Technology[]
+	education: Education[]
 }
 
-
-
-const Resume:ResumeInterface = {
+const Resume: ResumeInterface = {
 	personalInfo: {
 		name: "Kiran Parajuli",
 		role: "Software Engineer",
@@ -30,14 +29,7 @@ const Resume:ResumeInterface = {
 			" I take great pride in my attention to detail and commitment to delivering high-quality results." +
 			" When I'm not coding, I enjoy playing guitar and listening to music to stay inspired." +
 			" I'm always eager to collaborate with others and help bring their visions to life.",
-		summaryQa: "I am a Computer Engineering student pursuing a Bachelor's degree with four years" +
-		 "of experience in Software Development and Quality Assurance. My expertise lies in implementing" +
-		 " and optimizing testing strategies, particularly with a strong focus on Behavior-Driven Development " +
-		 "(BDD) and Test-Driven Development (TDD) methodologies. I have a proven track record in crafting," +
-		 " developing, and executing thorough test plans to guarantee the delivery of top-notch software." +
-		 " Additionally I'm good in collaborating with cross-functional teams, identifying and resolving potential issues" +
-		 " early in the development lifecycle, thereby contributing to the efficiency and effectiveness of" +
-		 " software releases."
+		summaryQa: "Highly motivated and results-oriented Quality Assurance Engineer with over 4 years of experience in diverse software test automation paradigms, including WebUI, API, CLI, Unit, E2E, and Performance testing. Proficient in planning, writing, and maintaining test cases across multiple projects. Adept at mentoring team members for continuous improvement. Outside of work, I find inspiration in playing the guitar and listening to music."
 	},
 	experiences: [
 		{
@@ -73,6 +65,7 @@ const Resume:ResumeInterface = {
 			],
 			achievements: [
 				"Write webUI, API, CLI, e2e and unit tests for various projects.",
+				"Write and maintain various test documentations",
 				"Build and maintain CI/CD pipelines for the daily running builds or tests.",
 				"Help peoples from Programiz team to write unit and e2e tests for their website.",
 				"Organize a workshop on Automation Testing using Playwright.",
@@ -361,55 +354,76 @@ const Resume:ResumeInterface = {
 	],
 	technologies: [
 		{
+			name: "Quality Assurance",
+			tools: [
+				{ tooltip: "Behat", image: "behat.png" },
+				{ tooltip: "CypressJs", image: "cypress.png" },
+				{ tooltip: "NightwatchJs", image: "nightwatchjs.png" },
+				{ class: "devicon-jest-plain", tooltip: "Jest" },
+				{ tooltip: "PHPUnit", image: "phpunit.png" },
+				{ tooltip: "Playwright", image: "playwright.png" },
+				{ tooltip: "Postman", image: "postman.svg" },
+				{ class: "devicon-vuejs-plain-wordmark", tooltip: "Vue Unit Tests" },
+				{ tooltip: "Locust", image: "locust.jpeg" },
+				{ class: "devicon-gitlab-original-wordmark", tooltip: "GitLab CI" },
+				{ class: "devicon-github-original-wordmark", tooltip: "GitHub CI" },
+				{ tooltip: "Drone CI", image: "droneci.png" },
+				{ tooltip: "Selenium", class: "devicon-selenium-original" },
+				{ tooltip: "Regex", image: "regex.svg"}
+			]
+		},
+		{
 			name: "Frontend Development",
 			tools: [
-				{class: "devicon-html5-plain-wordmark", tooltip: "HTML5"},
-				{class: "devicon-css3-plain-wordmark", tooltip: "CSS3"},
-				{class: "devicon-javascript-plain", tooltip: "JavaScript"},
-				{class: "devicon-vuejs-plain-wordmark", tooltip: "VueJS"},
-				{class: "devicon-vuetify-line", tooltip: "Vuetify"},
-				{class: "devicon-figma-plain-wordmark", tooltip: "Figma"},
+				{ class: "devicon-html5-plain-wordmark", tooltip: "HTML5" },
+				{ class: "devicon-css3-plain-wordmark", tooltip: "CSS3" },
+				{ image: "sass.png", tooltip: "SASS/SCSS"},
+				{ class: "devicon-javascript-plain", tooltip: "JavaScript" },
+				{ class: "devicon-vuejs-plain-wordmark", tooltip: "VueJS" },
+				{ class: "devicon-vuetify-line", tooltip: "Vuetify" },
+				{ class: "devicon-figma-plain-wordmark", tooltip: "Figma" },
+				{ class: "devicon-bootstrap-plain-wordmark", tooltip: "Bootstrap" },
 			],
 		},
 		{
 			name: "Backend Development",
 			tools: [
-				{ class: "devicon-python-plain", tooltip: "Python"},
-				{ class: "devicon-django-plain", tooltip: "Django"},
-				{ class: "devicon-nodejs-plain", tooltip: "NodeJS"},
-				{ class: "devicon-postgresql-plain-wordmark", tooltip: "PostgreSQL"},
-				{ class: "devicon-mysql-plain-wordmark", tooltip: "MySQL"},
-				{ class: "devicon-redis-plain-wordmark", tooltip: "Redis"},
-				{ tooltip: "Websockets", image: "websockets.png"},
-				{ tooltip: "Djangorestframework", image: "drf.png"},
+				{ class: "devicon-python-plain", tooltip: "Python" },
+				{ class: "devicon-django-plain", tooltip: "Django" },
+				{ class: "devicon-nodejs-plain", tooltip: "NodeJS" },
+				{ class: "devicon-postgresql-plain-wordmark", tooltip: "PostgreSQL" },
+				{ class: "devicon-mysql-plain-wordmark", tooltip: "MySQL" },
+				{ class: "devicon-redis-plain-wordmark", tooltip: "Redis" },
+				{ tooltip: "Websockets", image: "websockets.png" },
+				{ tooltip: "Djangorestframework", image: "drf.png" },
 			],
-		},
-		{
-			name: "Quality Assurance",
-			tools: [
-				{tooltip: "Behat", image: "behat.png"},
-				{tooltip: "CypressJs", image: "cypress.png"},
-				{tooltip: "NightwatchJs", image: "nightwatchjs.png"},
-				{class: "devicon-jest-plain",tooltip: "Jest"},
-				{tooltip: "PHPUnit", image: "phpunit.png"},
-				{tooltip: "Playwright", image: "playwright.png"},
-				{tooltip: "Postman", image: "postman.svg"},
-				{class: "devicon-vuejs-plain-wordmark", tooltip: "Vue Unit Tests"},
-				{tooltip: "Locust", image: "locust.jpeg"},
-				{class: "devicon-gitlab-original-wordmark", tooltip: "GitLab CI"},
-				{class: "devicon-github-original-wordmark", tooltip: "GitHub CI"},
-				{tooltip: "Drone CI", image: "droneci.png"},
-			]
 		},
 		{
 			name: "DevOps",
 			tools: [
-				{class: "devicon-docker-plain-wordmark", tooltip: "Docker"},
-				{image: "CPanel.png", tooltip: "Cpanel"},
-				{image: "vps.png", tooltip: "VPS"},
-				{class: "devicon-nginx-plain-wordmark", tooltip: "Nginx"},
-				{class: "devicon-apache-plain-wordmark", tooltip: "Apache"},
+				{ class: "devicon-docker-plain-wordmark", tooltip: "Docker" },
+				{ image: "CPanel.png", tooltip: "Cpanel" },
+				{ image: "vps.png", tooltip: "VPS" },
+				{ class: "devicon-nginx-plain-wordmark", tooltip: "Nginx" },
+				{ class: "devicon-apache-plain-wordmark", tooltip: "Apache" },
+				{ class: "devicon-linux-plain", tooltip: "Linux" }
 			],
+		}
+	],
+	education: [
+		{
+			name: "Paschimanchal Engineering Campus",
+			degree: "Bachelor's Degree",
+			startDate: "2017",
+			endDate: "2021",
+			major: "Computer Engineering",
+		},
+		{
+			name: "Nist Banepa",
+			degree: "High School",
+			startDate: "2015",
+			endDate: "2017",
+			major: "Science (Maths)",
 		}
 	]
 }

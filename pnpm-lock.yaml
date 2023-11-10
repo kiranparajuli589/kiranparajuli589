@@ -11,6 +11,9 @@ dependencies:
   highlight.js:
     specifier: ^11.8.0
     version: 11.8.0
+  htmlmark:
+    specifier: ^0.1.3
+    version: 0.1.3
   pinia:
     specifier: ^2.1.6
     version: 2.1.6(typescript@5.2.2)(vue@3.3.4)
@@ -1170,6 +1173,12 @@ packages:
   /highlight.js@11.8.0:
     resolution: {integrity: sha512-MedQhoqVdr0U6SSnWPzfiadUcDHfN/Wzq25AkXiQv9oiOO/sG0S7XkvpFIqWBl9Yq1UYyYOOVORs5UW2XlPyzg==}
     engines: {node: '>=12.0.0'}
+    dev: false
+
+  /htmlmark@0.1.3:
+    resolution: {integrity: sha512-XpKqi07inAQC5C69pzzHQsGN6ZZrUc/8deKMMvaJhkQCQA8kfGwzoEQaKKs9cvvW4d03X08MqaGSxZiM+CIqfQ==}
+    engines: {node: '>=16.0.0', pnpm: '>=7.0.0'}
+    hasBin: true
     dev: false
 
   /ignore@5.2.4:

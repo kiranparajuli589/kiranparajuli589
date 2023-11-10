@@ -66,5 +66,8 @@ const {isDarkTheme} = storeToRefs(AppStore)
 		.v-card-subtitle.list {
 			gap: .3rem;
 		}
+		.v-card-subtitle {
+			opacity: 1;
+		}
 	}
 </style>

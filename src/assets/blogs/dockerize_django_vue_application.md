@@ -1,5 +1,5 @@
 ---
-title: "Dockerizing Your Django Vue Application: A Step-by-Step Guide"
+title: Dockerizing Your Django Vue Application: A Step-by-Step Guide
 date: 2023-10-12 12:00:00
 tags: ["django", "vue", "docker", "docker-compose", "gunicorn", "vite"]
 ---
@@ -204,4 +204,4 @@ docker compose exec backend python manage.py collectstatic
 
 ## Conclusion
 
-#### Congratulations, you've successfully dockerized your Django Vue application! Now, you can deploy it to your preferred cloud provider or use it for the development environment. Happy coding!
+Congratulations, you've successfully dockerized your Django Vue application! Now, you can deploy it to your preferred cloud provider or use it for the development environment. **Happy coding!**

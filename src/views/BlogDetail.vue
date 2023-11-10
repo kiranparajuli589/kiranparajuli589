@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="full-width">
 		<div class="blog-detail">
 			<h1>{{ frontMatter.title }}</h1>
 			<p>{{ new Date(frontMatter.date).toDateString() }}</p>
@@ -15,7 +15,7 @@
 import {htmlMark} from "@/helper"
 import {useRoute} from "vue-router"
 import {onBeforeMount, ref} from "vue"
-import { FrontMatter } from "..";
+import { FrontMatter } from ".."
 
 const mdp = htmlMark()
 const route = useRoute()
@@ -90,7 +90,7 @@ body.dark {
 	}
 	pre {
 		padding: 1rem;
-		background-color: #f5f5f5;
+		background-color: #eaeaea;
 		border-radius: .5rem;
 		border: 1px solid grey;
 		max-height: 50vh;
