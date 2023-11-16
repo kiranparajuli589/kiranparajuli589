@@ -29,7 +29,7 @@ const Resume: ResumeInterface = {
 			" I take great pride in my attention to detail and commitment to delivering high-quality results." +
 			" When I'm not coding, I enjoy playing guitar and listening to music to stay inspired." +
 			" I'm always eager to collaborate with others and help bring their visions to life.",
-		summaryQa: "Highly motivated and results-oriented Quality Assurance Engineer with over 4 years of experience in diverse software test automation paradigms, including WebUI, API, CLI, Unit, E2E, and Performance testing. Proficient in planning, writing, and maintaining test cases across multiple projects. Adept at mentoring team members for continuous improvement. Outside of work, I find inspiration in playing the guitar and listening to music."
+		summaryQa: "Highly motivated and results-oriented Quality Assurance Engineer with experience in WebUI, APIs, CLIs, Units, and E2E. Proficient at planning, writing, and maintaining test cases across multiple projects. Adept at mentoring team members for continuous improvement. Listen to music and play the guitar to find inspiration."
 	},
 	experiences: [
 		{
@@ -65,10 +65,10 @@ const Resume: ResumeInterface = {
 			],
 			achievements: [
 				"Write webUI, API, CLI, e2e and unit tests for various projects.",
-				"Write and maintain various test documentations",
+				"Write and maintain various test documentations.",
 				"Build and maintain CI/CD pipelines for the daily running builds or tests.",
-				"Help peoples from Programiz team to write unit and e2e tests for their website.",
-				"Organize a workshop on Automation Testing using Playwright.",
+				"Help peoples from the Programiz team to write unit and e2e tests for their website.",
+				"Help organize a workshop on Automation Testing using Playwright.",
 				"Run weekly trainings about different technologies like Cypress, Websockets, VueJS, Playwright, etc.",
 				"Colab with the fellow programmers to get more quality test infrastructures.",
 				"Remote work with the team and manage the time to complete the tasks.",
@@ -95,7 +95,7 @@ const Resume: ResumeInterface = {
 				},
 				{
 					name: "Integration app for OpenProject and Nextcloud",
-					description: "An integration app for OpenProject and Nextcloud to sync the files and folders from Nextcloud to the work-packages in the OpenProject application..",
+					description: "An integration app for OpenProject and Nextcloud to sync the files and folders from Nextcloud to the work-packages in the OpenProject application.",
 					job: [
 						"Implement the designs for the features in the Nextcloud integration app.",
 						"Write backend for the nextcloud integration app to implement searches, database actions and OAuth.",
@@ -369,7 +369,7 @@ const Resume: ResumeInterface = {
 				{ class: "devicon-github-original-wordmark", tooltip: "GitHub CI" },
 				{ tooltip: "Drone CI", image: "droneci.png" },
 				{ tooltip: "Selenium", class: "devicon-selenium-original" },
-				{ tooltip: "Regex", image: "regex.svg"}
+				{ tooltip: "Regex", image: "regex.svg"},
 			]
 		},
 		{
@@ -383,6 +383,7 @@ const Resume: ResumeInterface = {
 				{ class: "devicon-vuetify-line", tooltip: "Vuetify" },
 				{ class: "devicon-figma-plain-wordmark", tooltip: "Figma" },
 				{ class: "devicon-bootstrap-plain-wordmark", tooltip: "Bootstrap" },
+				{ tooltip: "Axios", image: "axios.svg" },
 			],
 		},
 		{
