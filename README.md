@@ -28,10 +28,10 @@ work together to achieve your goals.
 - 🔭 I’m currently studying
 - 🌱 I’m currently learning better problem-solving techniques
 - 👯 I’m looking to collaborate on [WordClub](https://github.com/word-club/)
-- 🤔 I’m looking for help with [Markdown Parser](https://github.com/kiranparajuli589/md-parser), a project i built to
+- 🤔 I’m looking for help with [HtmlMark](https://github.com/kiranparajuli589/htmlmark), a project i built to
   parse markdown to HTML.
-- 💬 Ask me about SQA, [VueJs](https://vuejs.org/) and [Django](https://www.djangoproject.com/)
-- 📫 How to reach me: [LinkedIn](https://www.linkedin.com/in/kiranparajuli589/)
+- 💬 Ask me about Software QA Automation, [VueJs](https://vuejs.org/ "VueJS") and [Django](https://www.djangoproject.com/ "Django")
+- 📫 How to reach me: [LinkedIn](https://www.linkedin.com/in/kiranparajuli589/ "LinkedIn")
 - 😄 Pronouns: He/His
 - ⚡ Fun fact: I often wear headphones without listening to anything
-- 📝 [Resume](https://drive.google.com/file/d/1H74B0fUETfxuOhxeHEbEvFQrE2-nOAFM/view?usp=share_link)
+- 📝 [Resume](https://kiranparajuli.com.np/resume-pdf "Resume")
