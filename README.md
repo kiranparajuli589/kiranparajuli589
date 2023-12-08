@@ -27,9 +27,7 @@ work together to achieve your goals.
 
 - 🔭 I’m currently studying
 - 🌱 I’m currently learning better problem-solving techniques
-- 👯 I’m looking to collaborate on [WordClub](https://github.com/word-club/)
-- 🤔 I’m looking for help with [HtmlMark](https://github.com/kiranparajuli589/htmlmark), a project i built to
-  parse markdown to HTML.
+- 👯 I’m looking to collaborate on [RentAnythingNepal](https://github.com/rent-anything-nepal/backend)
 - 💬 Ask me about Software QA Automation, [VueJs](https://vuejs.org/ "VueJS") and [Django](https://www.djangoproject.com/ "Django")
 - 📫 How to reach me: [LinkedIn](https://www.linkedin.com/in/kiranparajuli589/ "LinkedIn")
 - 😄 Pronouns: He/His
