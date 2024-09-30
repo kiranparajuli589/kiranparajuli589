@@ -453,15 +453,17 @@ const Resume: ResumeInterface = {
 	education: [
 		{
 			name: "Paschimanchal Engineering Campus",
-			degree: "Bachelor's Degree in Computer Engineering",
+			degree: "Bachelor's Degree",
 			startDate: "2017",
-			endDate: "2021"
+			endDate: "2021",
+			major: "Computer Engineering",
 		},
 		{
 			name: "Nist Banepa",
-			degree: "High School in Science (Maths)",
+			degree: "High School",
 			startDate: "2015",
-			endDate: "2017"
+			endDate: "2017",
+			major: "Science (Maths)",
 		}
 	]
 }
