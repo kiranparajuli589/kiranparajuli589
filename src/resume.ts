@@ -1,4 +1,4 @@
-import { Experience, Service, Technology, Work, Education } from "./customTypes";
+import { Experience, Service, Technology, Work, Education } from "./customTypes"
 
 interface ResumeInterface {
 	personalInfo: { [key: string]: string },
@@ -170,7 +170,11 @@ const Resume: ResumeInterface = {
 						"Maintained CI/CD pipelines for consistent test coverage.",
 						"Enhanced testing infrastructure for better performance."
 					],
-					url: "https://owncloud.com"
+					url: "https://owncloud.com",
+					badge: {
+						dark: "/oc-badge-community-contributor-dark.png",
+						light: "/oc-badge-community-contributor-light.png"
+					}
 				},
 				{
 					name: "Integration app for OpenProject and Nextcloud",
@@ -190,6 +194,85 @@ const Resume: ResumeInterface = {
 						"Organized workshops to guide on best practices for UI tests."
 					],
 					url: "https://www.programiz.com/"
+				},
+				{
+					name: "E2E Tests for My Second Teacher Website",
+					description: "An online learning platform for students in Nepal.",
+					job: [
+						"Wrote E2E tests for different website features using Cypress.",
+						"Maintained CI/CD pipelines for continuous test execution."
+					],
+					url: "https://www.mysecondteacher.com/"
+				}
+			]
+		},
+		{
+			company: "Tech Himalaya",
+			description: "Nepal's leading IT company providing software, hardware, and cloud solutions.",
+			roles: ["Freelance Frontend Developer"],
+			startDate: "2019",
+			endDate: "2020",
+			technologies: [
+				"VueJs", "VuetifyJs", "Sass", "GitHub"
+			],
+			achievements: [
+				"Gained experience in remote teamwork and time management.",
+				"Enhanced website implementation strategies using Vue.js."
+			],
+			companyUrl: "https://techhimalaya.com/",
+			companyLogo: "tech-himalaya.png",
+			projects: [
+				{
+					name: "Leave Management Dashboard",
+					description: "A web dashboard for managing employee leaves within a company.",
+					job: [
+						"Developed the frontend using Vue.js and Vuetify."
+					]
+				},
+				{
+					name: "Bit Coins Survey",
+					description: "A survey website displaying results in graphs and charts.",
+					job: [
+						"Built the frontend using Vue.js and Vuetify."
+					]
+				}
+			]
+		},
+		{
+			company: "Nipuna Prabidhik Sewa",
+			description: "Technology service provider specializing in Web Cloud, Professional, and Managed Services.",
+			roles: ["Software Developer Intern"],
+			startDate: "2018",
+			endDate: "2019",
+			technologies: [
+				"Python", "Django", "HTML", "CSS", "JavaScript", "Ajax", "jQuery",
+				"Bootstrap", "MySQL", "Git"
+			],
+			achievements: [
+				"Gained first exposure to real-world programming and Python OOP principles.",
+				"Built APIs and integrated them with frontend using Ajax.",
+				"Developed an inventory management system for a retail shop.",
+				"Implemented an attendance system using Raspberry Pi."
+			],
+			companyUrl: "https://www.nipunasewa.com/",
+			companyLogo: "nps.png",
+			projects: [
+				{
+					name: "Inventory Management System",
+					description: "A web application for managing a small retailer's inventory.",
+					job: [
+						"Implemented a cart system for customer purchases.",
+						"Developed an admin panel for managing products, customers, and orders.",
+						"Generated reports for sales and orders."
+					]
+				},
+				{
+					name: "Attendance System",
+					description: "An employee attendance management system using Raspberry Pi and fingerprint module.",
+					job: [
+						"Collected daily attendance using a fingerprint module.",
+						"Generated reports for employee attendance."
+					]
 				}
 			]
 		}
@@ -204,24 +287,91 @@ const Resume: ResumeInterface = {
 				github: "https://github.com/rent-share",
 				demo: "https://irental.netlify.app/"
 			}
+		},
+		{
+			title: "VueYtframe",
+			description: "A Vue library to embed YouTube videos in your Vue app.",
+			thumbnail: "vue-ytframe.png",
+			technologies: ["VueJs", "YouTube Iframe API"],
+			links: {
+				github: "https://github.com/kiranparajuli589/vue3-ytframe",
+				demo: "https://kiranparajuli589.github.io/vue3-ytframe/#/docs/ref=getting-started",
+				playground: "https://kiranparajuli589.github.io/vue3-ytframe/#/playground"
+			}
+		},
+		{
+			title: "Markdown Parser",
+			description: "A simple yet powerful markdown parser for Node.js or JavaScript.",
+			thumbnail: "markdown-parser.png",
+			technologies: ["NodeJS", "JavaScript", "Modular Programming", "Recursion"],
+			links: {
+				github: "https://github.com/kiranparajuli589/md-parser",
+				demo: "https://kiranparajuli589.github.io/md-parser/"
+			}
+		},
+		{
+			title: "Sachchai Kendra Nepal",
+			description: "A website for Sachchai Kendra Nepal, offering social media features like posting, commenting, and management for organizational branches.",
+			thumbnail: "sachchai-kendra-nepal.png",
+			technologies: ["Vue3", "Vuetify", "Djangorestframework", "MySQL"],
+			links: {
+				demo: "https://sachchaikendranepal.org.np/"
+			}
+		},
+		{
+			title: "FoodSwipe",
+			description: "A food delivery e-commerce website with order and transaction management.",
+			thumbnail: "foodswipe.png",
+			technologies: ["Vue2", "Vuetify", "Djangorestframework", "MySQL"],
+			links: {
+				demo: "https://foodswipe.com.np/",
+				github: "https://github.com/foodswipe"
+			}
+		},
+		{
+			title: "WordClub",
+			description: "A social media website for writers and readers with live notifications.",
+			thumbnail: "wordclub.png",
+			technologies: ["Vue2", "Vuetify", "Djangorestframework", "MySQL"],
+			links: {
+				github: "https://github.com/word-club",
+				demo: "https://wordclub.kiranparajuli.com.np/"
+			}
+		},
+		{
+			title: "Bagmati Nepal Sports Website",
+			description: "A website for Bagmati Nepal Sports Government, providing news on current sports events.",
+			thumbnail: "bagmati-nepal-sports.png",
+			technologies: ["Vue2", "Vuetify", "Laravel", "MySQL"],
+			links: {
+				website: "http://sports.bagamati.gov.np/"
+			}
 		}
 	],
 	services: [
 		{
 			name: "Frontend Development",
-			description: "Build responsive, interactive frontends for sophisticated web applications.",
+			description: "I can build a responsive and interactive frontend for your web application." +
+				" It is true that I am not the best designer you can hire, but I can implement complex" +
+				" designs on your website.",
 			icon: "web-box", iconColor: "primary",
 			experience: new Date().getFullYear() - 2018,
 		},
 		{
 			name: "Backend Development",
-			description: "Develop scalable, secure backend solutions, including REST APIs and Websockets.",
+			description: "I have been working with different technologies to build a scalable and" +
+				" secure backend. You can hire me to build REST APIs or Websockets for your application." +
+				" I also have some experience with microservices architecture. The advanced part of my" +
+				" work entails more engineering work relating to Data Structure operations, Query Optimization, and more.",
 			icon: "server", iconColor: "indigo",
 			experience: new Date().getFullYear() - 2018,
 		},
 		{
 			name: "QA Automation",
-			description: "Implement comprehensive automated testing to ensure high product quality.",
+			description: "I can write <b>automated tests</b> for your application." +
+				" We can work together to increase test coverage of your application," +
+				" reduce flakiness inside existing test cases and implement, maintain" +
+				" and optimize the CI/CD pipelines.",
 			icon: "lightbulb-auto", iconColor: "green",
 			types: [
 				"Smoke Testing", "Regression Testing", "API Testing", "UI Testing",
@@ -232,7 +382,9 @@ const Resume: ResumeInterface = {
 		},
 		{
 			name: "DevOps",
-			description: "Deploy web applications to the cloud and maintain efficient CI/CD pipelines.",
+			description: "I have few years of experience in DevOps, I can deploy your web application to the" +
+				" cloud and organize load balancing for clients or servers." +
+				" I can also create and maintain CI/CD pipelines for your application.",
 			icon: "cloud", iconColor: "grey",
 			experience: new Date().getFullYear() - 2020,
 		}
@@ -247,8 +399,55 @@ const Resume: ResumeInterface = {
 				{ class: "devicon-jest-plain", tooltip: "Jest" },
 				{ tooltip: "PHPUnit", image: "phpunit.png" },
 				{ tooltip: "Playwright", image: "playwright.png" },
-				{ tooltip: "Postman", image: "postman.svg" }
+				{ tooltip: "Postman", image: "postman.svg" },
+				{ class: "devicon-vuejs-plain-wordmark", tooltip: "Vue Unit Tests" },
+				{ tooltip: "Locust", image: "locust.jpeg" },
+				{ class: "devicon-gitlab-original-wordmark", tooltip: "GitLab CI" },
+				{ class: "devicon-github-original-wordmark", tooltip: "GitHub CI" },
+				{ tooltip: "Drone CI", image: "droneci.png" },
+				{ tooltip: "Selenium", class: "devicon-selenium-original" },
+				{ tooltip: "Regex", image: "regex.svg" },
 			]
+		},
+		{
+			name: "Frontend Development",
+			tools: [
+				{ class: "devicon-html5-plain-wordmark", tooltip: "HTML5" },
+				{ class: "devicon-css3-plain-wordmark", tooltip: "CSS3" },
+				{ image: "sass.png", tooltip: "SASS/SCSS" },
+				{ class: "devicon-javascript-plain", tooltip: "JavaScript" },
+				{ class: "devicon-vuejs-plain-wordmark", tooltip: "VueJS" },
+				{ class: "devicon-vuetify-line", tooltip: "Vuetify" },
+				{ class: "devicon-react-original-wordmark", tooltip: "ReactJS" },
+				{ class: "devicon-nextjs-original-wordmark", tooltip: "NextJS" },
+				{ class: "devicon-figma-plain-wordmark", tooltip: "Figma" },
+				{ class: "devicon-bootstrap-plain-wordmark", tooltip: "Bootstrap" },
+				{ tooltip: "Axios", image: "axios.svg" },
+			],
+		},
+		{
+			name: "Backend Development",
+			tools: [
+				{ class: "devicon-python-plain", tooltip: "Python" },
+				{ class: "devicon-django-plain", tooltip: "Django" },
+				{ class: "devicon-nodejs-plain", tooltip: "NodeJS" },
+				{ class: "devicon-postgresql-plain-wordmark", tooltip: "PostgreSQL" },
+				{ class: "devicon-mysql-plain-wordmark", tooltip: "MySQL" },
+				{ class: "devicon-redis-plain-wordmark", tooltip: "Redis" },
+				{ tooltip: "Websockets", image: "websockets.png" },
+				{ tooltip: "Djangorestframework", image: "drf.png" },
+			],
+		},
+		{
+			name: "DevOps",
+			tools: [
+				{ class: "devicon-docker-plain-wordmark", tooltip: "Docker" },
+				{ image: "CPanel.png", tooltip: "Cpanel" },
+				{ image: "vps.png", tooltip: "VPS" },
+				{ class: "devicon-nginx-plain-wordmark", tooltip: "Nginx" },
+				{ class: "devicon-apache-plain-wordmark", tooltip: "Apache" },
+				{ class: "devicon-linux-plain", tooltip: "Linux" }
+			],
 		}
 	],
 	education: [
@@ -265,6 +464,6 @@ const Resume: ResumeInterface = {
 			endDate: "2017"
 		}
 	]
-};
+}
 
-export default Resume;
+export default Resume
