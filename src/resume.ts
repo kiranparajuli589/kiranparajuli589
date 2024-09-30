@@ -25,13 +25,145 @@ const Resume: ResumeInterface = {
 		bio: "Full Stack Developer, QA Automation Engineer, and a Tech Enthusiast",
 		summary: "I'm a software developer and quality assurance engineer." +
 			" My specialties include Python, PHP, and NodeJS for backend work and database management." +
-			" I'm skilled in VueJs, SaSS and Javascript for creating sophisticated web designs." +
+			" I'm skilled in ReactJs VueJs, SaSS and Javascript for creating sophisticated web designs." +
 			" I take great pride in my attention to detail and commitment to delivering high-quality results." +
 			" When I'm not coding, I enjoy playing guitar and listening to music to stay inspired." +
 			" I'm always eager to collaborate with others and help bring their visions to life.",
 		summaryQa: "Highly motivated and results-oriented Quality Assurance Engineer with experience in WebUI, APIs, CLIs, Units, and E2E. Proficient at planning, writing, and maintaining test cases across multiple projects. Adept at mentoring team members for continuous improvement. Listen to music and play the guitar to find inspiration."
 	},
 	experiences: [
+		{
+			company: "ourBuddy.ai",
+			description: "A cutting-edge SaaS platform designed for insurance brokerages.",
+			roles: [
+				"Senior Frontend Engineer",
+			],
+			startDate: "2024",
+			endDate: "Present",
+			technologies: [
+				"React.js",
+				"Next.js",
+				"JavaScript",
+				"Docker",
+				"Docker Compose",
+				"Playwright",
+				"Postman",
+				"Figma",
+				"ClickUp",
+			],
+			achievements: [
+				"Led a team of 5 developers to deliver high-quality software solutions, driving project success.",
+				"Streamlined team task management and sprint planning using ClickUp for optimal project delivery.",
+				"Developed a seamless browser-based recording system enabling audio, video, and screen capture.",
+				"Modernized a legacy system using technologies like React, Next.js, and Docker, enhancing performance and user experience.",
+				"Played an active role in the platform's release process, ensuring smooth deployments.",
+				"Built a robust testing framework to elevate product quality and reliability.",
+				"Implemented CI/CD pipelines, optimizing build and test automation processes."
+			],
+			companyUrl: "https://www.ourbuddy.ai",
+			companyLogo: "ourBuddy.png",
+			projects: [
+				{
+					name: "Browser-Based Recording System",
+					description: "Developed a versatile recording system for audio, video, and screen captures.",
+					job: [
+						"Engineered the frontend using React and Next.js for a seamless user experience.",
+						"Implemented the recording functionalities using Playwright for reliability.",
+						"Maintained CI/CD pipelines to support continuous builds and testing."
+					],
+				},
+				{
+					name: "ourBuddy.ai Platform",
+					description: "SaaS platform tailored for the insurance brokerage industry.",
+					job: [
+						"Built and maintained the platform's frontend with React and Next.js.",
+						"Enhanced CI/CD pipelines, improving deployment efficiency.",
+						"Revamped an outdated system using modern tech stack, boosting platform usability.",
+						"Authored comprehensive documentation to facilitate knowledge sharing and onboarding."
+					],
+				},
+				{
+					name: "Astral Nexus",
+					description: "A comprehensive client management system featuring profiles, activity logs, and site blogs.",
+					job: [
+						"Developed a responsive frontend using React and Next.js.",
+						"Implemented the backend with Python (FastAPI) for efficient data handling."
+					],
+				},
+				{
+					name: "Quality Assurance",
+					description: "Enhanced the platform's integrity through a meticulous testing process.",
+					job: [
+						"Built and maintained a robust testing framework to ensure platform reliability.",
+						"Optimized CI/CD pipelines to streamline automated testing.",
+						"Conducted skill-enhancement workshops for QA team members.",
+						"Created detailed test documentation to support consistent testing practices."
+					]
+				}
+			]
+		},
+		{
+			company: "12iD",
+			description: "A leading multi-authentication solution for digital identity issuance and unique end-user identification.",
+			roles: [
+				"Senior Quality Assurance Engineer"
+			],
+			startDate: "2023",
+			endDate: "2024",
+			technologies: [
+				"Jest",
+				"Cucumber.js",
+				"Playwright",
+				"Express.js",
+				"Node.js",
+				"React.js",
+				"Hyperledger",
+				"Python",
+				"GitHub",
+				"Notion"
+			],
+			achievements: [
+				"Developed and maintained a robust testing framework for the 12iD identification system.",
+				"Implemented and optimized CI/CD pipelines, improving build and test automation.",
+				"Designed a load-testing framework to ensure system performance under varying conditions.",
+				"Authored comprehensive test documentation for seamless knowledge transfer.",
+				"Collaborated closely with developers and architects to enhance system quality and reliability.",
+				"Conducted a workshop on Automation Testing with Playwright, empowering the team with UI testing skills.",
+				"Presented system demos to stakeholders and potential clients, highlighting key functionalities.",
+				"Managed tasks efficiently in a hybrid work environment to meet project deadlines."
+			],
+			companyUrl: "https://www.12id.com",
+			companyLogo: "12iD.png",
+			projects: [
+				{
+					name: "Unit Testing of Microservices",
+					description: "Ensured the integrity of 12iD's microservices through comprehensive unit testing.",
+					job: [
+						"Developed unit tests to validate microservice functionalities.",
+						"Maintained CI/CD pipelines for consistent build and test execution.",
+						"Automated product release processes to streamline deployments."
+					],
+				},
+				{
+					name: "Load Testing of the 12iD System",
+					description: "Validated the system's performance under various load conditions.",
+					job: [
+						"Created and executed load tests to evaluate system performance.",
+						"Maintained CI/CD pipelines to ensure regular performance assessments.",
+						"Enhanced product release processes for optimal load management."
+					],
+				},
+				{
+					name: "E2E Testing of the 12iD System",
+					description: "Verified end-to-end functionalities to ensure seamless user experiences.",
+					job: [
+						"Developed E2E tests to validate system functionalities across components.",
+						"Ensured continuous integration with CI/CD pipelines for consistent E2E testing.",
+						"Automated release processes for efficient and reliable system deployment."
+					],
+				}
+			]
+		},
 		{
 			company: "JankariTech Pvt. Ltd.",
 			description: "An IT company situated at Pokhara, Nepal and specializes in helping customers set up test automation.",
@@ -212,6 +344,21 @@ const Resume: ResumeInterface = {
 		}
 	],
 	works: [
+		{
+			title: "RentShare",
+			description: "A platform to give and take rent from the people and also share the rent with the roommates.",
+			thumbnail: "rentShare.png",
+			technologies: [
+				"VueJs",
+				"Vuetify",
+				"Djangorestframework",
+				"MySQL"
+			],
+			links: {
+				github: "https://github.com/rent-share",
+				demo: "https://irental.netlify.app/",
+			}
+		},
 		{
 			title: "VueYtframe",
 			description: "A Vue library to embed YouTube videos in your Vue app.",
