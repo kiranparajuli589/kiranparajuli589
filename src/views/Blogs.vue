@@ -8,44 +8,55 @@
 			I write blogs occasionally. I mostly write about things I learn, things I find interesting, and things I want to share.
 		</v-card-subtitle>
 		<v-card-text>
-			<template v-for="(blog, index) in frontMatters" :key="index">
-				<v-card v-if="blog && blog.title" class="blog--item"
-					:to="{
+			<template v-if="loading">
+        <div class="d-flex flex-column ga-4">
+					<v-skeleton-loader type="card" />
+					<v-skeleton-loader type="card" />
+					<v-skeleton-loader type="card" />
+				</div>
+      </template>
+      <template v-else>
+        <template v-for="(blog, index) in frontMatters" :key="index">
+          <v-card v-if="blog && blog.title" class="blog--item"
+                  :to="{
 						name: 'BlogDetail',
 						params: {
 							name: blog.fileName.replace('.md', '')
 						}
 					}"
-				>
-					<v-card-text>
-						<h2 class="blog--title">
-							{{blog.title}}
-						</h2>
-					</v-card-text>
-					<v-card-text class="blog--tags" v-if="blog.tags">
-						<template v-if="Array.isArray(blog.tags)">
-							<div v-for="(tag, index) in blog.tags" :key="index">
-								{{tag}}
-							</div>
-						</template>
-					</v-card-text>
-					<v-card-text class="blog--info">
-						<div class="blog--date">{{new Date(blog.date).toDateString()}}</div>
-						<div class="blog--time-to-read">{{ Math.ceil(blog.contentLength / 1000) }} minutes read</div>
-					</v-card-text>
-				</v-card>
-			</template>
+          >
+            <v-card-text>
+              <h2 class="blog--title">
+                {{blog.title}}
+              </h2>
+            </v-card-text>
+            <v-card-text class="blog--tags" v-if="blog.tags">
+              <template v-if="Array.isArray(blog.tags)">
+                <div v-for="(tag, index) in blog.tags" :key="index">
+                  {{tag}}
+                </div>
+              </template>
+            </v-card-text>
+            <v-card-text class="blog--info">
+              <div class="blog--date">{{new Date(blog.date).toDateString()}}</div>
+              <div class="blog--time-to-read">{{ Math.ceil(blog.contentLength / 1000) }} minutes read</div>
+            </v-card-text>
+          </v-card>
+        </template>
+      </template>
 		</v-card-text>
 	</v-card>
 </template>
 <script setup lang="ts">
 import { FrontMatter } from "@/customTypes"
 import {readAssets, htmlMark} from "@/helper"
-import {onBeforeMount, reactive} from "vue"
+import {onBeforeMount, reactive, ref} from "vue"
 
 const mdp = htmlMark()
 
 const frontMatters = reactive<FrontMatter[]>([])
+
+const loading = ref<boolean>(true)
 
 onBeforeMount(async () => {
 	const blogMarkdowns = await readAssets()
@@ -55,6 +66,8 @@ onBeforeMount(async () => {
 		if(!frontMatter) return
 		frontMatters.push({...frontMatter, contentLength: blog.content.length, fileName: blog.fileName, filePath: blog.path })
 	})
+
+	loading.value = false
 })
 </script>
 <style lang="scss" scoped>

@@ -1,14 +1,22 @@
 <template>
 	<div class="full-width">
-		<div class="blog-detail">
-			<h1>{{ frontMatter.title }}</h1>
-			<p>{{ new Date(frontMatter.date).toDateString() }}</p>
-			<div class="blog-tags">
-				<span v-for="(tag, index) in frontMatter.tags" :key="index">{{tag}}</span>
-			</div>
-			<br><br>
-			<div class="blog-content" v-html="blogContent"></div>
-		</div>
+		<template v-if="loading">
+      <div>
+        <v-skeleton-loader type="card" />
+        <v-skeleton-loader type="card" />
+        <v-skeleton-loader type="card" />
+        <v-skeleton-loader type="card" />
+      </div>
+    </template>
+    <div class="blog-detail" v-else>
+      <h1>{{ frontMatter.title }}</h1>
+      <p>{{ new Date(frontMatter.date).toDateString() }}</p>
+      <div class="blog-tags">
+        <span v-for="(tag, index) in frontMatter.tags" :key="index">{{tag}}</span>
+      </div>
+      <br><br>
+      <div class="blog-content" v-html="blogContent"></div>
+    </div>
 	</div>
 </template>
 <script setup lang="ts">
@@ -36,11 +44,14 @@ const blogPath = `/blogBase/${route.params.name}.md`
 
 const fileURL = new URL(blogPath, import.meta.url).href
 
+
+const loading = ref<boolean>(true)
 onBeforeMount(async () => {
 	const response = await fetch(fileURL)
 	const text = await response.text()
 	frontMatter.value = mdp.getFrontMatter(text)
 	blogContent.value = mdp.parse(text)
+	loading.value = false
 })
 </script>
 <style lang="scss">
