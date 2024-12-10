@@ -17,18 +17,26 @@ export function isDarkThemeSelected(): boolean {
 interface Asset { path: string, content: string, fileName: string }
 
 export const readAssets = async () => {
-	const assets = import.meta.glob(
-		"/src/assets/blogs/**/**.md",
-		{ as: "raw" }
-	)
-	return await Promise.all(
-		Object.entries(assets).map(async ([path, file]) => {
-			const content = await file()
-			return {
-				path, content, fileName: path.split("/").pop()
+	try {
+		const response = await fetch("/blogs.json")
+		if (!response.ok) {
+			return []
+		}
+		const files = await response.json()
+		const assets: Asset[] = []
+		for (const file of files) {
+			const response = await fetch(`/blogBase/${file}`)
+			if (!response.ok) {
+				continue
 			}
-		})
-	)
+			const content = await response.text()
+			assets.push({ path: `/blogBase/${file}`, content, fileName: file })
+		}
+		return assets
+	} catch (error) {
+		console.error("Error fetching markdown content:", error)
+		return []
+	}
 }
 
 export const htmlMark = () => {

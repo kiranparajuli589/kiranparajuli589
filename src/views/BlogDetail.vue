@@ -32,7 +32,7 @@ const emptyFrontMatter: FrontMatter = {
 const frontMatter = ref<FrontMatter>(emptyFrontMatter)
 
 const blogContent = ref("")
-const blogPath = `/src/assets/blogs/${route.params.name}.md`
+const blogPath = `/blogBase/${route.params.name}.md`
 
 const fileURL = new URL(blogPath, import.meta.url).href
 
