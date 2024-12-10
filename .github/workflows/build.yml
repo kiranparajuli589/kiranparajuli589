@@ -25,5 +25,5 @@ jobs:
           run_install: |
             - recursive: true
               args: [-- --frozen-lockfile]
-      - name: Publish
-        run: bash -x build.sh
+      - name: Build
+        run: pnpm build
