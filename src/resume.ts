@@ -89,6 +89,36 @@ const Resume: ResumeInterface = {
 			]
 		},
 		{
+			company: "Dimitra",
+			description: "Dimitra Incorporated is a global Agtech company with a mission to help smallholder farmers across the world.",
+			roles: ["QA Engineer"],
+			startDate: "2024",
+			endDate: "2024",
+			technologies: [
+				"Jest", "Cypress", "Postman", "GitHub", "JIRA", "JMeter"
+			],
+			achievements: [
+				"Optimized test case preparation and execution processes.",
+				"Developed and maintained a comprehensive testing framework.",
+				"Enhanced CI/CD pipelines for automated testing.",
+				"Loaded and analyzed test data for performance assessments.",
+			],
+			companyUrl: "https://dimitra.io/about-us/",
+			companyLogo: "dimitra.ico",
+			projects: [
+				{
+					name: "Contract Based Testing Optimizations",
+					description: "Optimized test case preparation and execution processes.",
+					job: [
+						"Developed and maintained a comprehensive testing framework.",
+						"Enhanced CI/CD pipelines for automated testing.",
+						"Loaded and analyzed test data for performance assessments.",
+						"Collaborated with cross-functional teams to enhance product quality."
+					],
+				}
+			]
+		},
+		{
 			company: "12iD",
 			description: "Leading multi-authentication solution for digital identity and user identification.",
 			roles: ["Senior Quality Assurance Engineer"],
@@ -123,7 +153,8 @@ const Resume: ResumeInterface = {
 					name: "Load Testing of the 12iD System",
 					description: "Validated system performance under various load conditions.",
 					job: [
-						"Created and executed load tests.",
+						"Created load testing CUSTOM infrastructure based on the system requirements.",
+						"Helped visualization and analysis of load testing results.",
 						"Maintained CI/CD pipelines for performance assessments.",
 						"Optimized release processes for better load management."
 					],

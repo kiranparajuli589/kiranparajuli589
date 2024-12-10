@@ -93,7 +93,7 @@
 					</h4>
 					<p>{{ project.description }}</p>
 					<h4 class="py-2">
-						{{ experience.company === 'JankariTech Pvt. Ltd.' ? 'Jobs' : 'Main Features' }}:
+						{{ experience.company === 'JankariTech Pvt. Ltd.' ? 'Jobs' : 'Highlights' }}:
 					</h4>
 					<ul class="mb-3">
 						<li v-for="task in project.job" :key="task" v-html="task"/>

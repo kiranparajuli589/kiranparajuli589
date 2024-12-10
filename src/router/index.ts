@@ -31,11 +31,6 @@ const routes = [
 		name: "ResumePdf",
 		component: () => import(/* webpackChunkName: "resumePdf" */ "@/views/ResumePdf.vue"),
 	},
-	{
-		path: "/qa-resume-pdf",
-		name: "VueResumePdf",
-		component: () => import(/* webpackChunkName: "vueResumePdf" */ "@/views/QaResumePdf.vue"),
-	},
 ]
 
 const router = createRouter({
