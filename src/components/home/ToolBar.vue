@@ -10,9 +10,9 @@
 				<v-icon>mdi-account-tie</v-icon>
 				Resume
 			</button>
-			<button class="btn" v-ripple @click="router.push({ name: 'Blog' })">
+			<button class="btn" v-ripple @click="router.push({ name: 'Blogs' })">
 				<v-icon>mdi-post</v-icon>
-				Blog
+				Blogs
 			</button>
 			<v-btn size="small" icon title="Change Theme" @click="changeTheme()">
 				<v-icon size="24">
