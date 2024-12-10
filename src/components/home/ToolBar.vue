@@ -2,18 +2,18 @@
 	<v-toolbar class="home--toolbar" density="compact" :extended="width < 820">
 		<div class="main" @click="onMainClick()">Kiran</div>
 		<div v-if="width >= 820" class="btn-grp">
-			<div class="btn" v-ripple @click="scrollTo.works()">
+			<button class="btn" v-ripple @click="scrollTo.works()">
 				<v-icon>mdi-file</v-icon>
 				Works
-			</div>
-			<div class="btn" v-ripple @click="router.push({ name: 'Resume' })">
+			</button>
+			<button class="btn" v-ripple @click="router.push({ name: 'Resume' })">
 				<v-icon>mdi-account-tie</v-icon>
 				Resume
-			</div>
-			<div class="btn" v-ripple @click="router.push({ name: 'Blog' })">
+			</button>
+			<button class="btn" v-ripple @click="router.push({ name: 'Blog' })">
 				<v-icon>mdi-post</v-icon>
 				Blog
-			</div>
+			</button>
 			<v-btn size="small" icon title="Change Theme" @click="changeTheme()">
 				<v-icon size="24">
 					{{ isDarkTheme ? "mdi-weather-sunny" : "mdi-weather-night" }}

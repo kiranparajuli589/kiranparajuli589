@@ -48,6 +48,10 @@
 			justify-content: center;
 			padding: .3rem .5rem;
 			border-radius: 4px;
+
+			&:hover {
+				background-color: #d4d4d4;
+			}
 		}
 	}
 
