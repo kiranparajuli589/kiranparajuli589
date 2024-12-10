@@ -12,7 +12,7 @@ interface ResumeInterface {
 const Resume: ResumeInterface = {
 	personalInfo: {
 		name: "Kiran Parajuli",
-		role: "Software Engineer",
+		role: "Software Engineer, QA Automation Engineer",
 		municipality: "Panchkhal, Kavre",
 		country: "Nepal",
 		postalCode: "45200",
@@ -23,7 +23,7 @@ const Resume: ResumeInterface = {
 		github: "https://github.com/kiranparajuli589",
 		website: "https://kiranparajuli.com.np",
 		bio: "Full Stack Developer, QA Automation Engineer, and Tech Enthusiast",
-		summary: "Experienced software engineer specializing in full stack development and quality assurance. Proficient in Python, PHP, and Node.js for backend services, and skilled in modern frontend technologies including React.js and Vue.js. Adept at creating sophisticated web designs and implementing comprehensive testing frameworks. Strong focus on delivering high-quality results through attention to detail. Enthusiastic about collaboration and innovation.",
+		summary: "Detail-oriented software engineer with extensive experience in Quality Assurance and full-stack development. Proficient in designing and implementing robust testing frameworks, ensuring optimal functionality and performance across complex systems. Skilled in backend development using Python, PHP, and Node.js, complemented by expertise in frontend technologies like React.js and Vue.js. Demonstrates a strong commitment to delivering high-quality, error-free solutions through meticulous testing and collaboration. Passionate about driving innovation and maintaining the highest standards in software quality assurance.",
 		summaryQa: "Results-driven Quality Assurance Engineer with expertise in WebUI, API, CLI, Unit, and E2E testing. Skilled in planning, writing, and maintaining test cases. Passionate about mentoring and continuous improvement within teams. Utilizes music and creative outlets to stay inspired."
 	},
 	experiences: [
