@@ -48,8 +48,6 @@ const mdp = htmlMark()
 const frontMatters = reactive<FrontMatter[]>([])
 
 onBeforeMount(async () => {
-	console.log("here")
-
 	const blogMarkdowns = await readAssets()
 
 	blogMarkdowns.forEach(blog => {
