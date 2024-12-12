@@ -30,7 +30,7 @@ const Resume: ResumeInterface = {
 		{
 			company: "ourBuddy.ai",
 			description: "A cutting-edge SaaS platform tailored for insurance brokerages.",
-			roles: ["Senior Frontend Engineer"],
+			roles: ["Senior Frontend Engineer", "Lead Quality Assurance Engineer"],
 			startDate: "2024",
 			endDate: "Present",
 			technologies: [
