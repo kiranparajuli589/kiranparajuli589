@@ -30,7 +30,7 @@ const Resume: ResumeInterface = {
 		{
 			company: "ourBuddy.ai",
 			description: "A cutting-edge SaaS platform tailored for insurance brokerages.",
-			roles: ["Senior Frontend Engineer", "Lead Quality Assurance Engineer"],
+			roles: ["Senior Software Developer"],
 			startDate: "2024",
 			endDate: "Present",
 			technologies: [
@@ -309,6 +309,16 @@ const Resume: ResumeInterface = {
 		}
 	],
 	works: [
+		{
+			title: "Vue Spotify",
+			description: "A Spotify clone built using Vue.js and faker.js. The project is built to demonstrate the use of Vue.js with some improvements over the original Spotify.",
+			thumbnail: "vue-spotify.png",
+			technologies: ["VueJs", "Vuetify", "FakerJS"],
+			links: {
+				github: "https://github.com/kiranparajuli589/vue-spotify",
+				demo: "https://vuespotify589.netlify.app/"
+			}
+		},
 		{
 			title: "RentShare",
 			description: "A platform to facilitate rent payments and sharing among roommates.",
