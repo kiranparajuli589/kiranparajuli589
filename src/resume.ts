@@ -310,6 +310,16 @@ const Resume: ResumeInterface = {
 	],
 	works: [
 		{
+			title: "Vue Formik",
+			description: "A Vue library to use Formik with Vue.js. Formik is a popular form library for React.js.",
+			thumbnail: "vue-formik.png",
+			technologies: ["VueJs", "Formik", "Yup", "Typescript"],
+			links: {
+				github: "https://github.com/vue-formik/vue-formik",
+				demo: "https://vue-formik.netlify.app/"
+			}
+		},
+		{
 			title: "Vue Spotify",
 			description: "A Spotify clone built using Vue.js and faker.js. The project is built to demonstrate the use of Vue.js with some improvements over the original Spotify.",
 			thumbnail: "vue-spotify.png",
