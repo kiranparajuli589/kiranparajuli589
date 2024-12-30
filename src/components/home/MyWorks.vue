@@ -13,7 +13,9 @@
 				</v-card-title>
 				<v-card-text>
 					<v-card color="grey" elevation="6">
-						<v-img :src="getAssetUrl(work.thumbnail)" height="auto" width="100%" />
+						<v-img :src="getAssetUrl(work.thumbnail)" height="auto" width="100%"
+							style="max-height: 270px; object-fit: cover;"
+						/>
 					</v-card>
 				</v-card-text>
 				<v-card-text>
@@ -38,3 +40,8 @@ import {getAssetUrl} from "@/helper"
 
 const works = Resume.works
 </script>
+<style lang="scss">
+.home--works {
+
+}
+</style>
