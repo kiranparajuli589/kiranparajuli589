@@ -10,7 +10,12 @@
 				{{exp.startDate}} - {{exp.endDate}}
 			</v-card-title>
 			<v-card-subtitle class="list">
-				<v-avatar :image="getAssetUrl(exp.companyLogo)" size="20" />
+				<v-img
+					:src="getAssetUrl(exp.companyLogo)"
+					height="20"
+					width="auto"
+					max-width="30"
+				/>
 				<strong class="ellipses">{{exp.company}}</strong>
 				<a :href="exp.companyUrl" target="_blank" :title="exp.company">
 					<v-icon size="x-small">mdi-open-in-new</v-icon>
@@ -34,7 +39,7 @@
 							<v-img v-if="isDarkTheme" :src="proj.badge.dark || proj.badge.default" height="35" max-width="130" />
 							<v-img v-else :src="proj.badge.light || proj.badge.default" height="35" max-width="130" />
 						</template>
-						<a :href="proj.url" target="_blank" :title="proj.name">
+						<a v-if="proj.url" :href="proj.url" target="_blank" :title="proj.name">
 							<v-icon size="x-small">mdi-open-in-new</v-icon>
 						</a>
 					</v-card-title>

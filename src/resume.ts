@@ -12,7 +12,7 @@ interface ResumeInterface {
 const Resume: ResumeInterface = {
 	personalInfo: {
 		name: "Kiran Parajuli",
-		role: "Software Engineer, QA Automation Engineer",
+		role: "Software Engineer",
 		municipality: "Panchkhal, Kavre",
 		country: "Nepal",
 		postalCode: "45200",
@@ -28,11 +28,53 @@ const Resume: ResumeInterface = {
 	},
 	experiences: [
 		{
+			company: "Asians Group LLC",
+			description: "A vital internet intermediary, offering fast CDN services, custom nodes, DNS acceleration, and free SSL certification to improve content delivery and ensure optimal user experiences for businesses and individuals alike.",
+			roles: ["Senior Frontend Developer"],
+			startDate: "2025",
+			endDate: "Present",
+			technologies: [
+				"Vue.js", "CoreUI", "AntDesign", "Typescript", "JavaScript",
+				"Figma", "Github", "JIRA", "Postman", "NGINX",
+			],
+			achievements: [
+				"Led the development of a comprehensive lua condition expression builders.",
+				"Optimized frontend performance, achieving a 30% reduction in load times.",
+				"Collaborated with cross-functional teams to ensure seamless integration of services.",
+				"Conducted code reviews and provided mentorship to junior developers.",
+				"Streamlined deployment processes using CI/CD pipelines."
+			],
+			companyUrl: "https://asians.group",
+			companyLogo: "asians_group.png",
+			projects: [
+				{
+					name: "Lua Condition Expression Builder",
+					description: "Developed a user-friendly interface for building complex lua expressions.",
+					job: [
+						"Designed and implemented the frontend using Vue.js and CoreUI.",
+						"Collaborated with backend teams to ensure seamless integration.",
+						"Conducted user testing to gather feedback and improve usability."
+					],
+					url: "https://expr-builder.netlify.app/#/rule"
+				},
+				{
+					name: "Design System",
+					description: "Created a design system to ensure consistency across all products.",
+					job: [
+						"Developed reusable components using Vue.js and AntDesign.",
+						"Documented design guidelines and best practices for the team.",
+						"Conducted workshops to train team members on the new design system."
+					],
+				}
+			]
+
+		},
+		{
 			company: "ourBuddy.ai",
 			description: "A cutting-edge SaaS platform tailored for insurance brokerages.",
 			roles: ["Senior Software Developer"],
 			startDate: "2024",
-			endDate: "Present",
+			endDate: "2025",
 			technologies: [
 				"React.js", "Next.js", "JavaScript", "Docker", "Docker Compose",
 				"Playwright", "Postman", "Figma", "ClickUp"

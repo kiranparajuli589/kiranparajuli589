@@ -138,6 +138,11 @@
 			width: 4rem;
 			position: relative;
 			outline: 20px solid orange;
+			overflow: visible;
+
+			/* Add these properties for hover state handling */
+			cursor: pointer;
+			transition: transform 0.3s ease;
 
 			.lets,
 			.talk {
@@ -154,6 +159,34 @@
 				left: 1.5rem;
 			}
 
+			/* Position for the ripple elements */
+			&::before, &::after {
+				content: '';
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				width: 100%;
+				height: 100%;
+				border-radius: 50%;
+				background-color: rgba(255, 165, 0, 0.3); /* subtle orange */
+				transform: translate(-50%, -50%) scale(0);
+				opacity: 0;
+				z-index: -1;
+				pointer-events: none;
+			}
+
+			/* Hover state - start the animations */
+			&:hover {
+				transform: scale(1.05);
+
+				&::before {
+					animation: ripple 2s infinite ease-out;
+				}
+
+				&::after {
+					animation: ripple 2s infinite ease-out 1s; /* Delayed start for second ripple */
+				}
+			}
 		}
 
 		.right-panel,
@@ -240,5 +273,17 @@ body.dark {
 			background-color: #121212;
 			color: white;
 		}
+	}
+}
+
+/* Ripple animation */
+@keyframes ripple {
+	0% {
+		transform: translate(-50%, -50%) scale(0.8);
+		opacity: 0.7;
+	}
+	100% {
+		transform: translate(-50%, -50%) scale(2.5);
+		opacity: 0;
 	}
 }

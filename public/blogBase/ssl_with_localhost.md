@@ -64,7 +64,7 @@ services:
       test: ["CMD", "curl", "-f", "http://localhost"]
     networks:
       - my-network
-		
+
 	web:
 		build: ./frontend
 		working_dir: /app
@@ -77,7 +77,7 @@ services:
 			- nginx
 		networks:
 			- my-network
-	
+
 networks:
 	my-network:
 		driver: bridge
