@@ -35,9 +35,12 @@ const Resume: ResumeInterface = {
 			endDate: "Present",
 			technologies: [
 				"Vue.js", "CoreUI", "AntDesign", "Typescript", "JavaScript",
-				"Figma", "Github", "JIRA", "Postman", "NGINX",
+				"Figma", "Github", "JIRA", "Postman", "NGINX", "PrimeVue",
+				"Nuxt.js", "TailwindCSS", "Django", "Djangorestframework",
+				"Jenkins", "Docker", "Docker Compose", "GithubCI", "Unit Testing"
 			],
 			achievements: [
+				"Architected and implemented a full fledge public static website for the company.",
 				"Led the development of a comprehensive lua condition expression builders.",
 				"Optimized frontend performance, achieving a 30% reduction in load times.",
 				"Collaborated with cross-functional teams to ensure seamless integration of services.",
@@ -47,6 +50,18 @@ const Resume: ResumeInterface = {
 			companyUrl: "https://asians.group",
 			companyLogo: "asians_group.png",
 			projects: [
+				{
+					name: "Asians Group Public Website",
+					description: "Developed a comprehensive public website for Asians Group LLC.",
+					job: [
+						"Designed and implemented the frontend using PrimeVue, TailwindCSS & Vue.js and Nuxt.js.",
+						"Collaborated with designers to ensure a visually appealing layout.",
+						"Optimized website performance for faster load times.",
+						"Backend integration for dynamic content management.",
+						"Simple django and rest framework based backend for managing content easily."
+					],
+					url: "https://asians.group"
+				},
 				{
 					name: "Lua Condition Expression Builder",
 					description: "Developed a user-friendly interface for building complex lua expressions.",
