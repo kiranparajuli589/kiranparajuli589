@@ -11,38 +11,49 @@ export default defineNuxtConfig({
 				lang: "en",
 			},
 			title:
-				"Kiran Parajuli | React.js, Vue.js, Django, QA, Software Developer",
+				"Kiran Parajuli | Frontend Developer, Full Stack Developer, QA Automation Engineer",
 			meta: [
 				{
 					name: "description",
 					content:
-						"I am a software developer and quality assurance engineer from Nepal. My specialties include Python, PHP, and NodeJS for backend work and database management. I'm also skilled in VueJs for creating sophisticated web designs. I take great pride in my attention to detail and commitment to delivering high-quality results. When I'm not coding, I enjoy playing guitar and listening to music to stay inspired. I'm always eager to collaborate with others and help bring their visions to life.",
+						"Frontend Developer, Full Stack Developer, and QA Automation Engineer from Nepal specializing in Vue.js, React.js, Python, PHP, NodeJS, and modern web technologies.",
 				},
 				{
 					name: "keywords",
 					content:
-						"Kiran Parajuli, Kiran, Parajuli, Kiran Parajuli Nepal, Kiran Parajuli QA, Kiran Parajuli Software Developer, Kiran Parajuli Django, Kiran Parajuli Vue, Kiran Parajuli PHP, Kiran Parajuli Python, Kiran Parajuli NodeJS, Kiran Parajuli Nepal, Kiran Parajuli Kathmandu, Kiran Parajuli Lalitpur, Kiran Parajuli Bhaktapur, Kiran Parajuli Patan, Kiran Parajuli QA Engineer, Kiran Parajuli Software Engineer, Kiran Parajuli Software Developer Nepal, Kiran Parajuli Software Developer Kathmandu, Kiran Parajuli Software Developer Lalitpur, Kiran Parajuli Software Developer Bhaktapur, Kiran Parajuli Software Developer Patan, Kiran Parajuli QA Engineer Nepal, Kiran Parajuli QA Engineer Kathmandu, Kiran Parajuli QA Engineer Lalitpur, Kiran Parajuli QA Engineer Bhaktapur, Kiran Parajuli QA Engineer Patan, Kiran Parajuli Software Engineer Nepal, Kiran Parajuli Software Engineer Kathmandu, Kiran Parajuli Software Engineer Lalitpur, Kiran Parajuli Software Engineer Bhaktapur, Kiran Parajuli Software Engineer Patan",
+						"Kiran Parajuli, Frontend Developer, Full Stack Developer, QA Engineer, Python, Django, Vue.js, React.js, Node.js, PHP, Quality Assurance, Web Development, Nepal",
 				},
 				{ name: "author", content: "Kiran Parajuli" },
 				{ name: "robots", content: "index, follow" },
 				{ name: "googlebot", content: "index, follow" },
+				{ name: "viewport", content: "width=device-width, initial-scale=1.0" },
+				{ name: "format-detection", content: "telephone=no" },
+				{ name: "theme-color", content: "#0e62c0" },
 				{
 					property: "og:title",
-					content: "Kiran Parajuli | Django, Vue, QA, Software Developer",
+					content: "Kiran Parajuli | Frontend & Full Stack Developer & QA Engineer",
 				},
 				{
 					property: "og:description",
 					content:
-						"I am a software developer and quality assurance engineer from Nepal. My specialties include Python, PHP, and NodeJS for backend work and database management. I'm also skilled in VueJs for creating sophisticated web designs. I take great pride in my attention to detail and commitment to delivering high-quality results. When I'm not coding, I enjoy playing guitar and listening to music to stay inspired. I'm always eager to collaborate with others and help bring their visions to life.",
+						"Frontend Developer, Full Stack Developer, and QA Automation Engineer from Nepal specializing in Vue.js, React.js, Python, Django, and modern web technologies.",
 				},
 				{
 					property: "og:image",
 					content: "https://kiranparajuli.com.np/letter_k.png",
 				},
 				{ property: "og:url", content: "https://kiranparajuli.com.np/" },
+				{ property: "og:type", content: "website" },
+				{ property: "og:locale", content: "en_US" },
+				{ property: "og:site_name", content: "Kiran Parajuli" },
+				{ name: "twitter:card", content: "summary_large_image" },
+				{ name: "twitter:creator", content: "@kiranparajuli589" },
+				{ name: "twitter:site", content: "@kiranparajuli589" },
 			],
 			link: [
 				{ rel: "icon", href: "/letter_k.png" },
+				{ rel: "apple-touch-icon", href: "/letter_k.png" },
+				{ rel: "canonical", href: "https://kiranparajuli.com.np/" },
 				{
 					rel: "stylesheet",
 					href: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css",
@@ -64,9 +75,5 @@ export default defineNuxtConfig({
 			],
 		},
 		colorMode: false,
-		defaultVariants: {
-			color: "primary",
-			size: "md",
-		},
 	},
 });

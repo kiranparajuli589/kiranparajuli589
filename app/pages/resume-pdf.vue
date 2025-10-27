@@ -2,17 +2,47 @@
 import Resume from "~/utils/resume";
 import { onMounted } from "vue";
 import Divider from "~/components/Divider.vue";
+import { useSeo } from "~/composables/useSeo";
 
 definePageMeta({
 	name: "resume-pdf",
 	layout: "pdf-view",
 });
 
+const siteUrl = "https://kiranparajuli.com.np";
+const currentUrl = `${siteUrl}/resume-pdf`;
+const imageUrl = `${siteUrl}/letter_k.png`;
 const personalInfo = Resume.personalInfo;
 const experiences = Resume.experiences;
 const works = Resume.works;
 const technologies = Resume.technologies;
 const education = Resume.education;
+
+// Extract skills from technologies
+const skills = technologies.flatMap((tech) => tech.tools.map((t) => t.tooltip));
+
+// Page-specific SEO
+useSeo({
+	title: `${personalInfo.name} - Resume PDF`,
+	description: `Professional resume PDF of ${personalInfo.name}, ${personalInfo.role}. Download the complete resume and professional background.`,
+	keywords: `${personalInfo.name} Resume PDF, Curriculum Vitae, Frontend Developer Resume, Full Stack Developer Resume, QA Engineer Resume, Download Resume`,
+	image: imageUrl,
+	url: currentUrl,
+	type: "profile",
+	structuredData: {
+		"@type": "MediaObject",
+		name: `${personalInfo.name} Resume`,
+		description: `Professional resume PDF of ${personalInfo.name}`,
+		url: currentUrl,
+		author: {
+			"@type": "Person",
+			name: personalInfo.name,
+			email: personalInfo.email,
+			telephone: personalInfo.phone,
+			jobTitle: personalInfo.role,
+		},
+	},
+});
 
 onMounted(() => {
 	setTimeout(() => {
@@ -37,25 +67,25 @@ onMounted(() => {
 				{{ personalInfo.postalCode }}
 			</p>
 			<div class="p-list flex gap-4 flex-wrap items-center">
-				<a target="_blank" :href="personalInfo.linkedin">
+				<a target="_blank" :href="personalInfo.linkedin || '#'">
 					<UIcon name="i-mdi-linkedin" />
-					{{ personalInfo.linkedin.replace("https://", "") }}
+					{{ personalInfo.linkedin?.replace("https://", "") }}
 				</a>
-				<a target="_blank" :href="personalInfo.github">
+				<a target="_blank" :href="personalInfo.github || '#'">
 					<UIcon name="i-mdi-github" class="text-black" />
-					{{ personalInfo.github.replace("https://", "") }}
+					{{ personalInfo.github?.replace("https://", "") }}
 				</a>
-				<a target="_blank" :href="personalInfo.website">
+				<a target="_blank" :href="personalInfo.website || '#'">
 					<UIcon name="i-mdi-web" class="text-indigo-600" />
-					{{ personalInfo.website.replace("https://", "") }}
+					{{ personalInfo.website?.replace("https://", "") }}
 				</a>
 				<a
 					target="_blank"
 					class="flex gap-2 items-center"
-					:href="personalInfo.devto"
+					:href="personalInfo.devto || '#'"
 				>
 					<img src="/tech/devto.png" width="25" />
-					{{ personalInfo.devto.replace("https://", "") }}
+					{{ personalInfo.devto?.replace("https://", "") }}
 				</a>
 			</div>
 

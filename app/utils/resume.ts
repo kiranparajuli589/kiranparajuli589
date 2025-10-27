@@ -28,7 +28,7 @@ const Resume: ResumeInterface = {
 		linkedin: "https://linkedin.com/in/kiranparajuli589",
 		github: "https://github.com/kiranparajuli589",
 		website: "https://kiranparajuli.com.np",
-		bio: "Full Stack Developer, QA Automation Engineer, and Tech Enthusiast",
+		bio: "Frontend Developer, Full Stack Developer, QA Automation Engineer, and Tech Enthusiast",
 		summary:
 			"Detail-oriented software engineer with extensive experience in Quality Assurance and full-stack development. Proficient in designing and implementing robust testing frameworks, ensuring optimal functionality and performance across complex systems. Skilled in backend development using Python, PHP, and Node.js, complemented by expertise in frontend technologies like React.js and Vue.js. Demonstrates a strong commitment to delivering high-quality, error-free solutions through meticulous testing and collaboration. Passionate about driving innovation and maintaining the highest standards in software quality assurance.",
 		summaryQa:

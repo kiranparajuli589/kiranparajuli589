@@ -24,3 +24,78 @@ const personalInfo = Resume.personalInfo;
 		</div>
 	</UCard>
 </template>
+
+<style lang="scss" scoped>
+.lets-talk {
+	margin-top: 3rem;
+	margin-left: 2rem;
+	background-color: darkorange;
+	color: white;
+	border-radius: 50%;
+	height: 4rem;
+	width: 4rem;
+	position: relative;
+	outline: 20px solid orange;
+	overflow: visible;
+
+	animation: heartbeat 1.5s infinite;
+	@keyframes heartbeat {
+		0% {
+			transform: scale(1);
+		}
+		50% {
+			transform: scale(1.05);
+		}
+		100% {
+			transform: scale(1);
+		}
+	}
+	/* Add these properties for hover state handling */
+	cursor: pointer;
+	transition: transform 0.3s ease;
+
+	.lets,
+	.talk {
+		position: absolute;
+	}
+
+	.lets {
+		top: .6rem;
+		left: 1rem;
+	}
+
+	.talk {
+		top: 1.7rem;
+		left: 1.5rem;
+	}
+
+	/* Position for the ripple elements */
+	&::before, &::after {
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 100%;
+		height: 100%;
+		border-radius: 50%;
+		background-color: rgba(255, 165, 0, 0.3); /* subtle orange */
+		transform: translate(-50%, -50%) scale(0);
+		opacity: 0;
+		z-index: -1;
+		pointer-events: none;
+	}
+
+	/* Hover state - start the animations */
+	&:hover {
+		transform: scale(1.05);
+
+		&::before {
+			animation: ripple 2s infinite ease-out;
+		}
+
+		&::after {
+			animation: ripple 2s infinite ease-out 1s; /* Delayed start for second ripple */
+		}
+	}
+}
+</style>
