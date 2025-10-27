@@ -84,6 +84,7 @@ export default withNuxt(
 			],
 			"vue/component-name-in-template-casing": ["error", "PascalCase"],
 			"vue/no-v-html": "warn",
+			"vue/multi-word-component-names": "off",
 
 			// TypeScript specific rules
 			"@typescript-eslint/no-explicit-any": "warn",

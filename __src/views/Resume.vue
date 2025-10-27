@@ -1,9 +1,15 @@
+<script setup lang="ts">
+import ExperienceSection from "@/components/home/ExperienceSection.vue";
+import ToolsSection from "@/components/home/ToolsSection.vue";
+</script>
 <template>
 	<div class="resume">
 		<h1 class="mb-10 pt-12">
 			Resume
-			<v-chip color="primary" :to="{name: 'ResumePdf'}"
+			<v-chip
+				color="primary"
 				title="Download a copy of my resume"
+				:to="{ name: 'ResumePdf' }"
 			>
 				<v-icon>mdi-download</v-icon>
 
@@ -15,10 +21,6 @@
 		<ToolsSection />
 	</div>
 </template>
-<script setup lang="ts">
-import ExperienceSection from "@/components/home/ExperienceSection.vue"
-import ToolsSection from "@/components/home/ToolsSection.vue"
-</script>
 <style lang="scss">
 .tech-list {
 	display: flex;
@@ -37,14 +39,15 @@ import ToolsSection from "@/components/home/ToolsSection.vue"
 		filter: grayscale(0);
 	}
 }
-div[title='Behat'] {
+div[title="Behat"] {
 	img {
 		height: 3.8rem;
 		width: 3rem;
 	}
 }
 body.dark {
-	div[title='Behat'], div[title='VPS'] {
+	div[title="Behat"],
+	div[title="VPS"] {
 		filter: invert(1);
 	}
 }

@@ -1,3 +1,10 @@
+<script setup lang="ts">
+import useScrollTo from "@/composables/scrollTo";
+import { useRouter } from "vue-router";
+
+const scrollTo = useScrollTo();
+const router = useRouter();
+</script>
 <template>
 	<v-footer class="footer">
 		<v-card max-width="1000" class="mx-auto" variant="flat">
@@ -5,11 +12,15 @@
 				<div class="my-name">Kiran</div>
 				<div class="btn-grp">
 					<div v-ripple class="btn" @click="scrollTo.works()">Works</div>
-					<div v-ripple class="btn" @click="router.push({name: 'Resume'})">Resume</div>
-					<div v-ripple class="btn" @click="router.push({name: 'Blogs'})">Blog</div>
+					<div v-ripple class="btn" @click="router.push({ name: 'Resume' })">
+						Resume
+					</div>
+					<div v-ripple class="btn" @click="router.push({ name: 'Blogs' })">
+						Blog
+					</div>
 				</div>
 				<div class="copyright">
-					© {{new Date().getFullYear() }} Kiran. All rights reserved.
+					© {{ new Date().getFullYear() }} Kiran. All rights reserved.
 				</div>
 			</div>
 			<div class="second-row">
@@ -21,18 +32,11 @@
 		</v-card>
 	</v-footer>
 </template>
-<script setup lang="ts">
-import useScrollTo from "@/composables/scrollTo"
-import { useRouter } from "vue-router"
-
-const scrollTo = useScrollTo()
-const router = useRouter()
-</script>
 <style lang="scss">
 .footer {
 	width: 100%;
 	display: block !important;
-	font-size: .875rem;
+	font-size: 0.875rem;
 	.first-row {
 		display: flex;
 		align-items: center;
@@ -54,11 +58,17 @@ const router = useRouter()
 		}
 	}
 	.second-row {
-		.red {background-color: #f84c4c
+		.red {
+			background-color: #f84c4c;
 		}
-		.orange {background-color: orange}
-		.light-orange {background-color: lightcoral}
-		.indigo {background-color: #710bbc
+		.orange {
+			background-color: orange;
+		}
+		.light-orange {
+			background-color: lightcoral;
+		}
+		.indigo {
+			background-color: #710bbc;
 		}
 		display: flex;
 		height: 12px;
@@ -73,7 +83,6 @@ const router = useRouter()
 			border-top-right-radius: 4px;
 			border-bottom-right-radius: 4px;
 		}
-
 	}
 }
 </style>

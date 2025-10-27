@@ -1,5 +1,5 @@
 // Utilities
-import {defineStore} from "pinia"
+import { defineStore } from "pinia";
 
 export const useAppStore = defineStore("app", {
 	state: () => ({
@@ -7,8 +7,8 @@ export const useAppStore = defineStore("app", {
 	}),
 
 	actions: {
-		updateTheme(isDark:boolean) {
-			this.isDarkTheme = isDark
-		}
-	}
-})
+		updateTheme(isDark: boolean) {
+			this.isDarkTheme = isDark;
+		},
+	},
+});
