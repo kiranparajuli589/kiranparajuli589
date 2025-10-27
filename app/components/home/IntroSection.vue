@@ -19,7 +19,12 @@ const personalInfo = Resume.personalInfo;
 				</a>
 			</div>
 			<div class="right-panel flex justify-center items-center p-4">
-				<UAvatar size="300" src="/avatar.webp" alt="Kiran Parajuli" />
+				<UAvatar
+					size="160"
+					src="/avatar.webp"
+					alt="Kiran Parajuli - Frontend Developer"
+					loading="eager"
+				/>
 			</div>
 		</div>
 	</UCard>

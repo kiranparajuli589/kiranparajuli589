@@ -5,6 +5,15 @@ export default defineNuxtConfig({
 	modules: ["@nuxt/ui", "@nuxt/eslint", "@pinia/nuxt"],
 	css: ["~/assets/css/main.css", "~/assets/sass/base.scss"],
 
+	// Performance optimizations
+	nitro: {
+		compressPublicAssets: true,
+	},
+
+	experimental: {
+		payloadExtraction: false,
+	},
+
 	app: {
 		head: {
 			htmlAttrs: {
