@@ -27,3 +27,6 @@ pnpm-debug.log*
 
 # Nuxt
 .nuxt
+
+# Pnpm
+pnpm-workspace.yaml

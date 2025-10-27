@@ -27,7 +27,7 @@ A modern portfolio website built with Nuxt 4, Nuxt UI, and Tailwind CSS.
 
 ### Prerequisites
 
-- Node.js 20+
+- Node.js LTS (20+)
 - pnpm 8+
 
 ### Installation
@@ -88,3 +88,42 @@ pnpm generate
 ```
 
 This creates a `dist` folder ready for static deployment.
+
+## Docker Deployment
+
+This application is fully containerized and can be run using Docker.
+
+### Building and Running with Docker
+
+```bash
+# Build and run with Docker Compose
+docker-compose up -d
+
+# View logs
+docker-compose logs -f
+
+# Stop the container
+docker-compose down
+```
+
+### Building with Docker directly
+
+```bash
+# Build the image
+docker build -t kiranparajuli-app .
+
+# Run the container
+docker run -p 3000:3000 kiranparajuli-app
+```
+
+The application will be available at `http://localhost:3000`.
+
+### Development with Docker
+
+For development, you can still use the local environment:
+
+```bash
+pnpm dev
+```
+
+This will start the development server at `http://localhost:3000` with hot module replacement.
