@@ -1,32 +1,11 @@
-<template>
-	<div class="full-width">
-		<template v-if="loading">
-      <div>
-        <v-skeleton-loader type="card" />
-        <v-skeleton-loader type="card" />
-        <v-skeleton-loader type="card" />
-        <v-skeleton-loader type="card" />
-      </div>
-    </template>
-    <div class="blog-detail" v-else>
-      <h1>{{ frontMatter.title }}</h1>
-      <p>{{ new Date(frontMatter.date).toDateString() }}</p>
-      <div class="blog-tags">
-        <span v-for="(tag, index) in frontMatter.tags" :key="index">{{tag}}</span>
-      </div>
-      <br><br>
-      <div class="blog-content" v-html="blogContent"></div>
-    </div>
-	</div>
-</template>
 <script setup lang="ts">
-import {htmlMark} from "@/helper"
-import {useRoute} from "vue-router"
-import {onBeforeMount, ref} from "vue"
-import { FrontMatter } from ".."
+import { htmlMark } from "@/helper";
+import { useRoute } from "vue-router";
+import { onBeforeMount, ref } from "vue";
+import type { FrontMatter } from "..";
 
-const mdp = htmlMark()
-const route = useRoute()
+const mdp = htmlMark();
+const route = useRoute();
 
 const emptyFrontMatter: FrontMatter = {
 	title: "",
@@ -34,37 +13,59 @@ const emptyFrontMatter: FrontMatter = {
 	tags: [],
 	fileName: "",
 	filePath: "",
-	contentLength: 0
-}
+	contentLength: 0,
+};
 
-const frontMatter = ref<FrontMatter>(emptyFrontMatter)
+const frontMatter = ref<FrontMatter>(emptyFrontMatter);
 
-const blogContent = ref("")
-const blogPath = `/blogBase/${route.params.name}.md`
+const blogContent = ref("");
+const blogPath = `/blogBase/${route.params.name}.md`;
 
-const fileURL = new URL(blogPath, import.meta.url).href
+const fileURL = new URL(blogPath, import.meta.url).href;
 
-
-const loading = ref<boolean>(true)
+const loading = ref<boolean>(true);
 onBeforeMount(async () => {
-	const response = await fetch(fileURL)
-	const text = await response.text()
-	frontMatter.value = mdp.getFrontMatter(text)
-	blogContent.value = mdp.parse(text)
-	loading.value = false
-})
+	const response = await fetch(fileURL);
+	const text = await response.text();
+	frontMatter.value = mdp.getFrontMatter(text);
+	blogContent.value = mdp.parse(text);
+	loading.value = false;
+});
 </script>
+<template>
+	<div class="full-width">
+		<template v-if="loading">
+			<div>
+				<v-skeleton-loader type="card" />
+				<v-skeleton-loader type="card" />
+				<v-skeleton-loader type="card" />
+				<v-skeleton-loader type="card" />
+			</div>
+		</template>
+		<div v-else class="blog-detail">
+			<h1>{{ frontMatter.title }}</h1>
+			<p>{{ new Date(frontMatter.date).toDateString() }}</p>
+			<div class="blog-tags">
+				<span v-for="(tag, index) in frontMatter.tags" :key="index">{{
+					tag
+				}}</span>
+			</div>
+			<br /><br />
+			<div class="blog-content" v-html="blogContent"></div>
+		</div>
+	</div>
+</template>
 <style lang="scss">
 .blog-detail {
 	.blog-tags {
 		margin-top: 1rem;
 		display: flex;
 		flex-wrap: wrap;
-		gap: .2rem;
+		gap: 0.2rem;
 		span {
 			background-color: #f5f5f5;
-			padding: .2rem .5rem;
-			border-radius: .5rem;
+			padding: 0.2rem 0.5rem;
+			border-radius: 0.5rem;
 			border: 1px solid grey;
 		}
 	}
@@ -84,25 +85,35 @@ body.dark {
 
 .blog-content {
 	padding-left: 4rem;
-	transition: all .3s ease-in-out;
+	transition: all 0.3s ease-in-out;
 
 	@media only screen and (max-width: 600px) {
 		padding-left: 0;
 	}
 
-
 	width: 100%;
 
-	h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote, pre {
-		margin-bottom: .5rem;
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	p,
+	ul,
+	ol,
+	blockquote,
+	pre {
+		margin-bottom: 0.5rem;
 	}
-	ul, ol {
+	ul,
+	ol {
 		padding-left: 1.5rem;
 	}
 	pre {
 		padding: 1rem;
 		background-color: #eaeaea;
-		border-radius: .5rem;
+		border-radius: 0.5rem;
 		border: 1px solid grey;
 		max-height: 50vh;
 		overflow: auto;
@@ -115,9 +126,9 @@ body.dark {
 
 	code {
 		background-color: #f5f5f5;
-		border-radius: .25rem;
+		border-radius: 0.25rem;
 		border: 1px solid grey;
-		padding-inline: .2rem;
+		padding-inline: 0.2rem;
 	}
 }
 

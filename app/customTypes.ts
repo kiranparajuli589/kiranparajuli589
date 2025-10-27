@@ -3,10 +3,10 @@ export type Service = {
 	description: string;
 	icon: string;
 
-	types?: string[],
+	types?: string[];
 	experience: number;
 	iconColor: string;
-}
+};
 
 export type Project = {
 	name: string;
@@ -18,7 +18,7 @@ export type Project = {
 		light?: string;
 		default?: string;
 	};
-}
+};
 
 export type Experience = {
 	company: string;
@@ -34,45 +34,45 @@ export type Experience = {
 	achievementsPdf?: string[];
 
 	projects: Project[];
-}
+};
 
 export type Tool = {
 	image?: string;
 	class?: string;
 	tooltip: string;
-}
+};
 
 export type Technology = {
 	name: string;
-	tools: Tool[],
-}
+	tools: Tool[];
+};
 
 export type Work = {
-	title: string,
-	description: string,
-	thumbnail: string,
-	technologies: string[],
+	title: string;
+	description: string;
+	thumbnail: string;
+	technologies: string[];
 	links: {
-		github?: string,
-		demo?: string,
-		playground?: string,
-		website?: string,
-	}
-}
+		github?: string;
+		demo?: string;
+		playground?: string;
+		website?: string;
+	};
+};
 
 export type FrontMatter = {
-	title: string
-	date: string
-	tags: string[]
-	contentLength: number
-	fileName: string
-	filePath: string
-}
+	title: string;
+	date: string;
+	tags: string[];
+	contentLength: number;
+	fileName: string;
+	filePath: string;
+};
 
 export type Education = {
-	name: string
-	degree: string,
-	major: string,
-	startDate: string
-	endDate: string
-}
+	name: string;
+	degree: string;
+	major: string;
+	startDate: string;
+	endDate: string;
+};

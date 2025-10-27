@@ -1,12 +1,18 @@
+<script setup lang="ts">
+import Resume from "@/resume";
+
+const services = Resume.services;
+</script>
 <template>
 	<div class="home--services">
 		<h1 class="section-title">What can I do?</h1>
 		<div class="section-subtitle">Service Offers</div>
-		<div class="section-divider"/>
+		<div class="section-divider" />
 		<div class="service-card--wrapper">
 			<v-card
 				v-for="(service, index) in services"
-				:key="service.name" elevation="4"
+				:key="service.name"
+				elevation="4"
 				variant="elevated"
 				:class="'service-card service-' + index"
 			>
@@ -15,7 +21,9 @@
 					<h2 class="ellipses">{{ service.name }}</h2>
 				</v-card-title>
 				<v-card-text class="pt-0 experience">
-					<p class="mb-1">Experience: <span class="exp">{{ service.experience }}</span> years</p>
+					<p class="mb-1">
+						Experience: <span class="exp">{{ service.experience }}</span> years
+					</p>
 				</v-card-text>
 				<!-- eslint-disable-next-line -->
 				<v-card-text v-html="service.description"/>
@@ -30,11 +38,6 @@
 		</div>
 	</div>
 </template>
-<script setup lang="ts">
-import Resume from "@/resume"
-
-const services = Resume.services
-</script>
 <style lang="scss" scoped>
 .service-card {
 	--radiation-pos: -0.7rem;
@@ -59,9 +62,10 @@ const services = Resume.services
 		content: "";
 		background-color: var(--radiation-color-1);
 		border-radius: 50%;
-		box-shadow: 0 0 0 0.5rem var(--radiation-color-1),
-		0 0 0 2rem var(--radiation-color-2),
-		0 0 0 4rem var(--radiation-color-3);
+		box-shadow:
+			0 0 0 0.5rem var(--radiation-color-1),
+			0 0 0 2rem var(--radiation-color-2),
+			0 0 0 4rem var(--radiation-color-3);
 		transition: all 0.5s ease;
 		z-index: -1;
 	}
@@ -123,21 +127,24 @@ const services = Resume.services
 // Radiation animation keyframes
 @keyframes radiate {
 	0% {
-		box-shadow: 0 0 0 0.5rem var(--radiation-color-1),
-		0 0 0 2rem var(--radiation-color-2),
-		0 0 0 4rem var(--radiation-color-3);
+		box-shadow:
+			0 0 0 0.5rem var(--radiation-color-1),
+			0 0 0 2rem var(--radiation-color-2),
+			0 0 0 4rem var(--radiation-color-3);
 		opacity: 1;
 	}
 	50% {
-		box-shadow: 0 0 0 1rem var(--radiation-color-1),
-		0 0 0 3rem var(--radiation-color-2),
-		0 0 0 5rem var(--radiation-color-3);
+		box-shadow:
+			0 0 0 1rem var(--radiation-color-1),
+			0 0 0 3rem var(--radiation-color-2),
+			0 0 0 5rem var(--radiation-color-3);
 		opacity: 0.8;
 	}
 	100% {
-		box-shadow: 0 0 0 0.5rem var(--radiation-color-1),
-		0 0 0 2rem var(--radiation-color-2),
-		0 0 0 4rem var(--radiation-color-3);
+		box-shadow:
+			0 0 0 0.5rem var(--radiation-color-1),
+			0 0 0 2rem var(--radiation-color-2),
+			0 0 0 4rem var(--radiation-color-3);
 		opacity: 1;
 	}
 }

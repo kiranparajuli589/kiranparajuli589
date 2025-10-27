@@ -1,26 +1,25 @@
-<template>
-  <UApp>
-		<NuxtLayout>
-			<NuxtPage />
-		</NuxtLayout>
-  </UApp>
-</template>
-
 <script lang="ts" setup>
-import { useAppStore, isDarkThemeSelected } from '~/composables/useAppStore'
+import { useAppStore, isDarkThemeSelected } from "~/composables/useAppStore";
 
-const appStore = useAppStore()
+const appStore = useAppStore();
 
 onMounted(() => {
-  handleTheme()
-})
+	handleTheme();
+});
 
 function handleTheme() {
-  const isDark = isDarkThemeSelected()
-  appStore.updateTheme(isDark)
-  if (import.meta.client) {
-    document.body.classList.toggle('dark', isDark)
-  }
+	const isDark = isDarkThemeSelected();
+	appStore.updateTheme(isDark);
+	if (import.meta.client) {
+		document.body.classList.toggle("dark", isDark);
+	}
 }
 </script>
 
+<template>
+	<UApp>
+		<NuxtLayout>
+			<NuxtPage />
+		</NuxtLayout>
+	</UApp>
+</template>

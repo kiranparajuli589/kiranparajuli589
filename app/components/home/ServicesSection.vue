@@ -1,28 +1,45 @@
+<script setup lang="ts">
+import Resume from "~/utils/resume";
+
+const services = Resume.services;
+</script>
 <template>
 	<section class="py-12">
 		<h1 class="text-4xl font-bold">What can I do?</h1>
 		<div class="text-sm text-gray-500">Service Offers</div>
-		<div class="section-divider mb-12"/>
+		<div class="section-divider mb-12" />
 		<div class="flex flex-wrap gap-4">
 			<UCard
 				v-for="(service, index) in services"
 				:key="service.name"
 				variant="subtle"
-				:class="'service-card service-' + index"
 				class="grow w-full md:w-[calc(50%-0.5rem)] transition-all duration-200 hover:-translate-y-1"
+				:class="'service-card service-' + index"
 			>
 				<template #header>
 					<div class="flex items-center gap-2">
-						<UIcon :name="'i-mdi-' + service.icon" :class="'text-' + service.iconColor" class="text-3xl" />
-						<h2 class="overflow-hidden text-ellipsis whitespace-nowrap m-0">{{ service.name }}</h2>
+						<UIcon
+							class="text-3xl"
+							:name="'i-mdi-' + service.icon"
+							:class="'text-' + service.iconColor"
+						/>
+						<h2 class="overflow-hidden text-ellipsis whitespace-nowrap m-0">
+							{{ service.name }}
+						</h2>
 					</div>
 				</template>
 
 				<div class="pt-0 mb-4">
-					<p class="mb-1">Experience: <span :class="'font-bold text-' + service.iconColor">{{ service.experience }}</span> years</p>
+					<p class="mb-1">
+						Experience:
+						<span :class="'font-bold text-' + service.iconColor">{{
+							service.experience
+						}}</span>
+						years
+					</p>
 				</div>
 
-				<div v-html="service.description" class="mb-4" />
+				<div class="mb-4">{{ service.description }}</div>
 
 				<div v-if="service.types" class="mt-4">
 					<div class="flex items-center gap-2 mb-3">
@@ -35,11 +52,6 @@
 		</div>
 	</section>
 </template>
-<script setup lang="ts">
-import Resume from '~/utils/resume'
-
-const services = Resume.services
-</script>
 <style lang="scss" scoped>
 .service-card {
 	--radiation-pos: -0.7rem;
@@ -64,9 +76,10 @@ const services = Resume.services
 		content: "";
 		background-color: var(--radiation-color-1);
 		border-radius: 50%;
-		box-shadow: 0 0 0 0.5rem var(--radiation-color-1),
-		0 0 0 2rem var(--radiation-color-2),
-		0 0 0 4rem var(--radiation-color-3);
+		box-shadow:
+			0 0 0 0.5rem var(--radiation-color-1),
+			0 0 0 2rem var(--radiation-color-2),
+			0 0 0 4rem var(--radiation-color-3);
 		transition: all 0.5s ease;
 		z-index: -1;
 	}
@@ -128,21 +141,24 @@ const services = Resume.services
 // Radiation animation keyframes
 @keyframes radiate {
 	0% {
-		box-shadow: 0 0 0 0.5rem var(--radiation-color-1),
-		0 0 0 2rem var(--radiation-color-2),
-		0 0 0 4rem var(--radiation-color-3);
+		box-shadow:
+			0 0 0 0.5rem var(--radiation-color-1),
+			0 0 0 2rem var(--radiation-color-2),
+			0 0 0 4rem var(--radiation-color-3);
 		opacity: 1;
 	}
 	50% {
-		box-shadow: 0 0 0 1rem var(--radiation-color-1),
-		0 0 0 3rem var(--radiation-color-2),
-		0 0 0 5rem var(--radiation-color-3);
+		box-shadow:
+			0 0 0 1rem var(--radiation-color-1),
+			0 0 0 3rem var(--radiation-color-2),
+			0 0 0 5rem var(--radiation-color-3);
 		opacity: 0.8;
 	}
 	100% {
-		box-shadow: 0 0 0 0.5rem var(--radiation-color-1),
-		0 0 0 2rem var(--radiation-color-2),
-		0 0 0 4rem var(--radiation-color-3);
+		box-shadow:
+			0 0 0 0.5rem var(--radiation-color-1),
+			0 0 0 2rem var(--radiation-color-2),
+			0 0 0 4rem var(--radiation-color-3);
 		opacity: 1;
 	}
 }
