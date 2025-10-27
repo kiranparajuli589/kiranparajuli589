@@ -1,0 +1,32 @@
+@use "custom.scss";
+@use "scrollbar.scss";
+
+* {
+	box-sizing: border-box;
+
+	a {
+		text-decoration: none;
+	}
+}
+
+/* Custom styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-family: 'Century Gothic', system-ui, -apple-system, sans-serif;
+}
+
+/* Dark mode styles */
+.dark {
+  background-color: #1e1e1e;
+  color: #ffffff;
+}
+
+.light {
+  background-color: #ffffff;
+  color: #1e1e1e;
+}
+
