@@ -39,7 +39,7 @@ const changeTheme = () => {
 	const currentTheme = isDarkThemeSelected()
 	addThemeToStorage(!currentTheme)
 	appStore.updateTheme(!currentTheme)
-	if (process.client) {
+	if (import.meta.client) {
 		document.body.classList.toggle('dark')
 	}
 }

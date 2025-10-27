@@ -1,10 +1,12 @@
 <template>
 	<div class="resume">
-		<h1 class="mb-10 pt-12">
-			Resume
-			<UButton color="primary" :to="'/resume-pdf'"
+		<h1 class="pt-12">
+			<span class="text-xl uppercase font-bold mr-4">Resume</span>
+			<UButton
+				color="primary"
+				:to="'/resume-pdf'"
 				title="Download a copy of my resume"
-				variant="solid"
+				variant="subtle"
 			>
 				<UIcon name="i-heroicons-arrow-down-tray" />
 				<span class="px-1 font-bold">Download Pdf</span>

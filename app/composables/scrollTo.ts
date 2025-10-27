@@ -1,6 +1,6 @@
 export const useScrollTo = () => {
   const toWorks = () => {
-    if (process.client) {
+    if (import.meta.client) {
       const works = document.getElementById('works')
       if (works) {
         works.scrollIntoView({ behavior: 'smooth' })
@@ -19,7 +19,7 @@ export const useScrollTo = () => {
   }
 
   const top = () => {
-    if (process.client) {
+    if (import.meta.client) {
       window.scrollTo({ top: 0, behavior: 'smooth' })
     }
   }

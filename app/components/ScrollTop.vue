@@ -15,7 +15,7 @@ const scrollTo = useScrollTo()
 const showTop = ref(false)
 
 const handleScroll = () => {
-	if (process.client) {
+	if (import.meta.client) {
 		if (window.scrollY > 400) {
 			showTop.value = true
 		} else {
@@ -25,13 +25,13 @@ const handleScroll = () => {
 }
 
 onMounted(() => {
-	if (process.client) {
+	if (import.meta.client) {
 		document.addEventListener('scroll', handleScroll)
 	}
 })
 
 onUnmounted(() => {
-	if (process.client) {
+	if (import.meta.client) {
 		document.removeEventListener('scroll', handleScroll)
 	}
 })

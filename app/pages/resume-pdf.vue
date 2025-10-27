@@ -112,6 +112,10 @@ import Resume from '~/utils/resume'
 import { onMounted } from 'vue'
 import Divider from '~/components/Divider.vue'
 
+definePageMeta({
+  layout: 'pdf-view',
+})
+
 const personalInfo = Resume.personalInfo
 const experiences = Resume.experiences
 const works = Resume.works
@@ -120,7 +124,7 @@ const education = Resume.education
 
 onMounted(() => {
 	setTimeout(() => {
-		if (process.client) {
+		if (import.meta.client) {
 			window.print()
 		}
 	}, 1000)

@@ -12,7 +12,7 @@ export const useAppStore = () => {
 }
 
 export const isDarkThemeSelected = (): boolean => {
-  if (process.client) {
+  if (import.meta.client) {
     const stored = localStorage.getItem('isDark')
     if (stored !== null) return stored === 'true'
     return window.matchMedia('(prefers-color-scheme: dark)').matches
@@ -21,7 +21,7 @@ export const isDarkThemeSelected = (): boolean => {
 }
 
 export const addThemeToStorage = (isDark: boolean) => {
-  if (process.client) {
+  if (import.meta.client) {
     localStorage.setItem('isDark', isDark.toString())
   }
 }
