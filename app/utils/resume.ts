@@ -40,7 +40,7 @@ const Resume: ResumeInterface = {
 				"Jenkins", "Docker", "Docker Compose", "GithubCI", "Unit Testing"
 			],
 			achievements: [
-				"Architected and implemented a full fledge public static website for the company.",
+				"Architected and implemented a full-fledged public static website for the company.",
 				"Led the development of a comprehensive lua condition expression builders.",
 				"Optimized frontend performance, achieving a 30% reduction in load times.",
 				"Collaborated with cross-functional teams to ensure seamless integration of services.",
