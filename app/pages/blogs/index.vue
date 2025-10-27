@@ -1,10 +1,27 @@
 <script setup lang="ts">
 import { ref, reactive, onBeforeMount } from "vue";
 import { readAssets, htmlMark } from "~/utils";
+import {
+	useSeo,
+	createCollectionPageStructuredData,
+} from "~/composables/useSeo";
+
+interface BlogFrontMatter {
+	title: string;
+	date: string;
+	tags: string[];
+	fileName: string;
+	filePath: string;
+	contentLength: number;
+}
+
+const siteUrl = "https://kiranparajuli.com.np";
+const currentUrl = `${siteUrl}/blogs`;
+const imageUrl = `${siteUrl}/letter_k.png`;
 
 const mdp = htmlMark();
 
-const frontMatters = reactive<Array<Record<string, unknown>>>([]);
+const frontMatters = reactive<BlogFrontMatter[]>([]);
 const loading = ref<boolean>(true);
 
 onBeforeMount(async () => {
@@ -14,7 +31,9 @@ onBeforeMount(async () => {
 		const frontMatter = mdp.getFrontMatter(blog.content);
 		if (!frontMatter) return;
 		frontMatters.push({
-			...frontMatter,
+			title: String(frontMatter.title || ""),
+			date: String(frontMatter.date || ""),
+			tags: Array.isArray(frontMatter.tags) ? frontMatter.tags as string[] : [],
 			contentLength: blog.content.length,
 			fileName: blog.fileName,
 			filePath: blog.path,
@@ -23,9 +42,26 @@ onBeforeMount(async () => {
 
 	loading.value = false;
 });
+
+// Page-specific SEO
+useSeo({
+	title: "Blogs",
+	description:
+		"Read tech blogs, tutorials, and articles by Kiran Parajuli on software development, Python, Django, Vue.js, React.js, QA automation, and web development.",
+	keywords:
+		"Kiran Parajuli Blog, Tech Blog, Software Development Blog, Django Tutorial, Vue.js Tutorial, QA Automation Blog, Web Development Articles, Programming Tutorials",
+	image: imageUrl,
+	url: currentUrl,
+	type: "website",
+	structuredData: createCollectionPageStructuredData({
+		name: "Kiran Parajuli Blog",
+		description: "Tech blogs, tutorials, and articles on software development",
+		url: currentUrl,
+	}),
+});
 </script>
 <template>
-	<UCard variant="flat" color="transparent" class="blog">
+	<UCard variant="subtle" color="transparent" class="blog">
 		<div class="py-8" />
 		<template #header>
 			<h1>Blogs</h1>

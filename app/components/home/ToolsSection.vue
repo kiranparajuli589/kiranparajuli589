@@ -5,7 +5,7 @@ import { getAssetUrl } from "~/utils";
 const Techs = Resume.technologies;
 </script>
 <template>
-	<div class="home--tools">
+	<section>
 		<h2>Tools I Use</h2>
 		<div class="section-divider" />
 		<p class="mb-7">
@@ -16,32 +16,36 @@ const Techs = Resume.technologies;
 			v-for="tech in Techs"
 			:key="tech.name"
 			class="mb-4"
-			variant="outlined"
+			variant="soft"
 		>
 			<template #header>
 				{{ tech.name }}
 			</template>
 
-			<div class="border-t border-gray-200 dark:border-gray-700 my-4" />
-
-			<div class="tech-list flex items-center flex-wrap gap-4 mt-4">
-				<div
-					v-for="(tool, index) in tech.tools"
-					:key="index"
-					:title="tool.tooltip"
-				>
-					<i v-if="tool.class" class="text-6xl" :class="tool.class" />
-					<img
-						v-if="tool.image"
-						class="w-16 h-auto grayscale hover:grayscale-0 transition-all"
-						:src="getAssetUrl(tool.image, 'tech')"
-					/>
-				</div>
+		<div class="tech-list flex items-center flex-wrap gap-4 mt-4">
+			<div
+				v-for="(tool, index) in tech.tools"
+				:key="index"
+				:title="tool.tooltip"
+			>
+				<i v-if="tool.class" class="text-5xl" :class="tool.class" />
+				<img
+					v-if="tool.image"
+					width="64"
+					height="64"
+					class="w-16 h-16 object-contain transition-all"
+					loading="lazy"
+					decoding="async"
+					:alt="tool.tooltip || 'Technology icon'"
+					:src="getAssetUrl(tool.image, 'tech')"
+				/>
 			</div>
+		</div>
 		</UCard>
-	</div>
+	</section>
 </template>
 <style scoped>
+/* Special handling for specific tech logos that need custom sizing */
 div[title="Behat"] img {
 	height: 3.8rem;
 	width: 3rem;
@@ -52,5 +56,11 @@ div[title="Behat"] img {
 	div[title="VPS"] {
 		filter: invert(1);
 	}
+}
+
+/* Ensure all tech icons are properly contained */
+.tech-list img {
+	max-width: 64px;
+	max-height: 64px;
 }
 </style>

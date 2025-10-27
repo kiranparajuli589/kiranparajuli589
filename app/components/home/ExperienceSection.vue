@@ -27,20 +27,23 @@ const { isDarkTheme } = toRefs(appStore);
 				</div>
 			</template>
 
-			<div class="flex items-center gap-2 mb-4">
-				<img
-					height="20"
-					width="auto"
-					class="max-w-[30px]"
-					:src="getAssetUrl(exp.companyLogo, 'company')"
-				/>
-				<strong class="overflow-hidden text-ellipsis whitespace-nowrap">{{
-					exp.company
-				}}</strong>
-				<a target="_blank" :href="exp.companyUrl" :title="exp.company">
-					<UIcon name="i-heroicons-arrow-top-right-on-square" class="text-xs" />
-				</a>
-			</div>
+		<div class="flex items-center gap-2 mb-4">
+			<img
+				height="24"
+				width="24"
+				class="w-6 h-6 object-contain"
+				loading="lazy"
+				decoding="async"
+				:alt="`${exp.company} logo`"
+				:src="getAssetUrl(exp.companyLogo, 'company')"
+			/>
+			<strong class="overflow-hidden text-ellipsis whitespace-nowrap">{{
+				exp.company
+			}}</strong>
+			<a target="_blank" :href="exp.companyUrl" :title="exp.company">
+				<UIcon name="i-heroicons-arrow-top-right-on-square" class="text-xs" />
+			</a>
+		</div>
 
 			<div class="mb-4">
 				{{ exp.description }}
@@ -67,20 +70,28 @@ const { isDarkTheme } = toRefs(appStore);
 							>
 								{{ proj.name }}
 							</h4>
-							<template v-if="proj.badge">
-								<img
-									v-if="isDarkTheme"
-									height="35"
-									class="max-w-[130px]"
-									:src="proj.badge.dark || proj.badge.default"
-								/>
-								<img
-									v-else
-									height="35"
-									class="max-w-[130px]"
-									:src="proj.badge.light || proj.badge.default"
-								/>
-							</template>
+						<template v-if="proj.badge">
+							<img
+								v-if="isDarkTheme"
+								height="28"
+								width="auto"
+								class="max-w-[100px] h-7 object-contain"
+								loading="lazy"
+								decoding="async"
+								:alt="`${proj.name} badge`"
+								:src="proj.badge.dark || proj.badge.default"
+							/>
+							<img
+								v-else
+								height="28"
+								width="auto"
+								class="max-w-[100px] h-7 object-contain"
+								loading="lazy"
+								decoding="async"
+								:alt="`${proj.name} badge`"
+								:src="proj.badge.light || proj.badge.default"
+							/>
+						</template>
 							<a
 								v-if="proj.url"
 								target="_blank"
