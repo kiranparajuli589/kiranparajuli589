@@ -1,0 +1,57 @@
+# Dependencies
+node_modules
+npm-debug.log
+pnpm-debug.log
+yarn-error.log
+
+# Build outputs
+.output
+.nuxt
+dist
+
+# Development files
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Documentation
+*.md
+README.md
+
+# CI/CD
+.github
+.gitlab-ci.yml
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Testing
+coverage
+.nyc_output
+*.test.js
+*.spec.js
+
+# Misc
+.DS_Store
+Thumbs.db
+
+# Scripts (not needed in production)
+scripts
+
+# Old source directory (seems like migration from Vue)
+__src
+
