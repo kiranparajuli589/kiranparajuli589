@@ -144,10 +144,10 @@ const Resume: ResumeInterface = {
 				{
 					name: "Browser-Based Recording System",
 					description:
-						"Engineered a versatile recording system for audio, video, and screen capture.",
+						"Engineered a versatile recording system for audio, video, screen capture and video with screen captures.",
 					job: [
 						"Built a responsive frontend using React and Next.js.",
-						"Integrated recording functionalities using Playwright.",
+						"Integrated recording functionalities using core Browser APIs.",
 						"Maintained CI/CD pipelines for continuous testing and builds.",
 					],
 				},
