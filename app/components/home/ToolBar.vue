@@ -40,11 +40,20 @@ const links = [
 		icon: "i-heroicons-document-text",
 		action: () => navigateTo("/blogs"),
 	},
-	{ name: "", icon: "i-heroicons-sun", action: () => changeTheme() },
 ];
+const changeThemeButton = computed(() => {
+	return {
+		icon: "i-heroicons-sun",
+		action: () => changeTheme(),
+		isDark: isDarkThemeSelected(),
+		label: isDarkThemeSelected() ? "Light Mode" : "Dark Mode",
+	};
+});
 </script>
 <template>
-	<nav class="flex items-center justify-between gap-4 p-4 bg-gray-300">
+	<nav
+		class="flex items-center justify-between gap-4 p-4 bg-gray-300 dark:bg-gray-900"
+	>
 		<div
 			class="uppercase cursor-pointer font-semibold text-2xl"
 			@click="onMainClick()"
@@ -56,9 +65,18 @@ const links = [
 				v-for="link in links"
 				:key="link.name"
 				variant="ghost"
+				class="font-bold"
 				:icon="link.icon"
 				:label="link.name"
 				@click="link.action"
+			/>
+			<UButton
+				variant="ghost"
+				class="font-bold"
+				:icon="changeThemeButton.icon"
+				:color="changeThemeButton.isDark ? 'white' : 'black'"
+				:title="changeThemeButton.label"
+				@click="changeThemeButton.action"
 			/>
 		</div>
 		<a

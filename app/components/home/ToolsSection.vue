@@ -17,30 +17,33 @@ const Techs = Resume.technologies;
 			:key="tech.name"
 			class="mb-4"
 			variant="soft"
+			:ui="{
+				root: 'dark:!bg-gray-900',
+			}"
 		>
 			<template #header>
 				{{ tech.name }}
 			</template>
 
-		<div class="tech-list flex items-center flex-wrap gap-4 mt-4">
-			<div
-				v-for="(tool, index) in tech.tools"
-				:key="index"
-				:title="tool.tooltip"
-			>
-				<i v-if="tool.class" class="text-5xl" :class="tool.class" />
-				<img
-					v-if="tool.image"
-					width="64"
-					height="64"
-					class="w-16 h-16 object-contain transition-all"
-					loading="lazy"
-					decoding="async"
-					:alt="tool.tooltip || 'Technology icon'"
-					:src="getAssetUrl(tool.image, 'tech')"
-				/>
+			<div class="tech-list flex items-center flex-wrap gap-4 mt-4">
+				<div
+					v-for="(tool, index) in tech.tools"
+					:key="index"
+					:title="tool.tooltip"
+				>
+					<i v-if="tool.class" class="text-5xl" :class="tool.class" />
+					<img
+						v-if="tool.image"
+						width="64"
+						height="64"
+						class="w-16 h-16 object-contain transition-all"
+						loading="lazy"
+						decoding="async"
+						:alt="tool.tooltip || 'Technology icon'"
+						:src="getAssetUrl(tool.image, 'tech')"
+					/>
+				</div>
 			</div>
-		</div>
 		</UCard>
 	</section>
 </template>

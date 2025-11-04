@@ -6,7 +6,7 @@ const services = Resume.services;
 <template>
 	<section class="py-12">
 		<h1 class="text-4xl font-bold">What can I do?</h1>
-		<div class="text-sm text-gray-500">Service Offers</div>
+		<div class="text-sm text-gray-500 dark:text-gray-400">Service Offers</div>
 		<div class="section-divider mb-12" />
 		<div class="flex flex-wrap gap-4">
 			<UCard
@@ -15,6 +15,9 @@ const services = Resume.services;
 				variant="subtle"
 				class="grow w-full md:w-[calc(50%-0.5rem)] transition-all duration-200 hover:-translate-y-1"
 				:class="'service-card service-' + index"
+				:ui="{
+					root: 'dark:!bg-gray-900',
+				}"
 			>
 				<template #header>
 					<div class="flex items-center gap-2">

@@ -3,7 +3,12 @@ import Resume from "~/utils/resume";
 const personalInfo = Resume.personalInfo;
 </script>
 <template>
-	<UCard variant="subtle" :ui="{}">
+	<UCard
+		variant="subtle"
+		:ui="{
+			root: 'dark:!bg-gray-900',
+		}"
+	>
 		<div class="flex gap-16 flex-wrap items-center">
 			<div class="left-panel flex flex-col gap-2 basis-1/3">
 				<div class="full-name text-5xl font-black uppercase">
@@ -65,7 +70,7 @@ const personalInfo = Resume.personalInfo;
 	}
 
 	.lets {
-		top: .6rem;
+		top: 0.6rem;
 		left: 1rem;
 	}
 
@@ -75,8 +80,9 @@ const personalInfo = Resume.personalInfo;
 	}
 
 	/* Position for the ripple elements */
-	&::before, &::after {
-		content: '';
+	&::before,
+	&::after {
+		content: "";
 		position: absolute;
 		top: 50%;
 		left: 50%;

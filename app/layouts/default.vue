@@ -7,7 +7,7 @@ import SideBar from "~/components/home/SideBar.vue";
 <template>
 	<div class="md:px-12 md:py-16">
 		<div
-			class="max-w-7xl w-full mx-auto bg-gray-200 md:rounded-2xl overflow-hidden shadow-2xl"
+			class="max-w-7xl w-full mx-auto bg-gray-200 dark:bg-gray-800 md:rounded-2xl overflow-hidden shadow-2xl"
 		>
 			<ToolBar />
 			<div class="flex relative">
