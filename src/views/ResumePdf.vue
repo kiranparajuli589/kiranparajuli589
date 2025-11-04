@@ -56,12 +56,12 @@
 			<h2 class="pt-4">Tools and Technologies</h2>
 			<divider class="mb-2" height="2" />
 
-			<div v-for="tech in technologies" :key="tech.name">
+			<div v-for="tech in technologies" :key="tech.name" class="mb-2">
 				<h4>{{ tech.name }}</h4>
-				<div>
-					<template v-for="(tool, index) in tech.tools">
-						{{ tool.tooltip }}<template v-if="index !== tech.tools.length - 1">,&nbsp;&nbsp;</template>
-					</template>
+				<div class="d-flex flex-wrap align-center" style="gap: 0 0.5rem;">
+					<span v-for="(tool, index) in tech.tools" :key="index">
+						{{ tool.tooltip }}<span v-if="index !== tech.tools.length - 1">,</span>
+					</span>
 				</div>
 			</div>
 			<div class="ma-4" />
