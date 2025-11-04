@@ -24,3 +24,6 @@ pnpm-debug.log*
 
 # Vite
 .vite
+
+# Pnpm
+pnpm-workspace.yaml
