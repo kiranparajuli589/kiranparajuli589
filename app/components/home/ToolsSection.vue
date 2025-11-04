@@ -41,6 +41,7 @@ const Techs = Resume.technologies;
 						decoding="async"
 						:alt="tool.tooltip || 'Technology icon'"
 						:src="getAssetUrl(tool.image, 'tech')"
+						:class="tool.class"
 					/>
 				</div>
 			</div>

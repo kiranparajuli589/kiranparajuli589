@@ -1,16 +1,3 @@
-export const useAppStore = () => {
-	const isDarkTheme = useState("isDarkTheme", () => false);
-
-	const updateTheme = (isDark: boolean) => {
-		isDarkTheme.value = isDark;
-	};
-
-	return reactive({
-		isDarkTheme,
-		updateTheme,
-	});
-};
-
 export const isDarkThemeSelected = (): boolean => {
 	if (import.meta.client) {
 		const stored = localStorage.getItem("isDark");

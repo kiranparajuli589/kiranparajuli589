@@ -1,82 +1,71 @@
 <script setup lang="ts">
 import { useScrollTo } from "~/composables/scrollTo";
-import {
-	useAppStore,
-	addThemeToStorage,
-	isDarkThemeSelected,
-} from "~/composables/useAppStore";
+import { addThemeToStorage, isDarkThemeSelected } from "~/utils/theme";
+import { useAppStore } from "~/store/app.store";
+import { storeToRefs } from "pinia";
+import { NuxtLink } from "#components";
 
 const scrollTo = useScrollTo();
-const route = useRoute();
 
 const appStore = useAppStore();
-
-const onMainClick = () => {
-	if (route.name === "index") {
-		scrollTo.top();
-	} else {
-		navigateTo("/");
-	}
-};
+const { isDarkTheme } = storeToRefs(appStore);
 
 const changeTheme = () => {
 	const currentTheme = isDarkThemeSelected();
 	addThemeToStorage(!currentTheme);
-	appStore.updateTheme(!currentTheme);
+	isDarkTheme.value = !currentTheme;
 	if (import.meta.client) {
 		document.body.classList.toggle("dark");
 	}
 };
-
-const links = [
-	{ name: "Works", icon: "i-heroicons-folder-open", action: scrollTo.works },
-	{
-		name: "Resume",
-		icon: "i-heroicons-user-circle",
-		action: () => navigateTo("/resume"),
-	},
-	{
-		name: "Blogs",
-		icon: "i-heroicons-document-text",
-		action: () => navigateTo("/blogs"),
-	},
-];
-const changeThemeButton = computed(() => {
-	return {
-		icon: "i-heroicons-sun",
-		action: () => changeTheme(),
-		isDark: isDarkThemeSelected(),
-		label: isDarkThemeSelected() ? "Light Mode" : "Dark Mode",
-	};
+const links = computed(() => {
+	return [
+		{
+			name: "Resume",
+			icon: "i-heroicons-user-circle",
+			to: "/resume",
+		},
+		{
+			name: "Blogs",
+			icon: "i-heroicons-document-text",
+			to: "/blogs",
+		},
+	];
 });
 </script>
 <template>
 	<nav
 		class="flex items-center justify-between gap-4 p-4 bg-gray-300 dark:bg-gray-900"
 	>
-		<div
-			class="uppercase cursor-pointer font-semibold text-2xl"
-			@click="onMainClick()"
-		>
+		<NuxtLink to="/" class="uppercase font-semibold text-2xl font-brand">
 			Kiran
-		</div>
+		</NuxtLink>
 		<div class="flex gap-2">
+			<UButton
+				variant="ghost"
+				class="font-bold"
+				icon="i-heroicons-folder-open"
+				label="Works"
+				@click="scrollTo.works"
+			/>
 			<UButton
 				v-for="link in links"
 				:key="link.name"
 				variant="ghost"
-				class="font-bold"
+				as="NuxtLink"
+				:to="link.to"
 				:icon="link.icon"
 				:label="link.name"
-				@click="link.action"
+				:ui="{
+					label: 'font-bold',
+				}"
 			/>
 			<UButton
 				variant="ghost"
 				class="font-bold"
-				:icon="changeThemeButton.icon"
-				:color="changeThemeButton.isDark ? 'white' : 'black'"
-				:title="changeThemeButton.label"
-				@click="changeThemeButton.action"
+				:icon="isDarkTheme ? 'mdi-weather-night' : 'mdi-weather-sunny'"
+				:title="isDarkTheme ? 'Dark Mode' : 'Light Mode'"
+				@click="changeTheme"
 			/>
 		</div>
 		<a

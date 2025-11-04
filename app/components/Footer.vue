@@ -13,15 +13,15 @@ const scrollTo = useScrollTo();
 			<div class="first-row flex items-center justify-between pb-5 flex-wrap">
 				<div class="my-name text-xl uppercase font-bold">Kiran</div>
 				<div class="btn-grp flex flex-wrap gap-4 pl-16">
-					<button class="btn cursor-pointer" @click="scrollTo.works()">
+					<UButton variant="ghost" class="font-bold" @click="scrollTo.works()">
 						Works
-					</button>
-					<button class="btn cursor-pointer" @click="navigateTo('/resume')">
+					</UButton>
+					<UButton variant="ghost" class="font-bold" to="/resume">
 						Resume
-					</button>
-					<button class="btn cursor-pointer" @click="navigateTo('/blogs')">
+					</UButton>
+					<UButton variant="ghost" class="font-bold" to="/blogs">
 						Blog
-					</button>
+					</UButton>
 				</div>
 				<div class="copyright text-sm">
 					© {{ new Date().getFullYear() }} Kiran. All rights reserved.

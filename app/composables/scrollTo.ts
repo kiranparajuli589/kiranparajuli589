@@ -12,7 +12,11 @@ export const useScrollTo = () => {
 		const route = useRoute();
 		const currentPath = route.path;
 		if (currentPath !== "/") {
-			navigateTo("/").then(() => toWorks());
+			navigateTo("/").then(() => {
+				setTimeout(() => {
+					toWorks();
+				}, 100);
+			});
 		} else {
 			toWorks();
 		}

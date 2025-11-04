@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
 	compatibilityDate: "2025-10-27",
 	devtools: { enabled: true },
-	modules: ["@nuxt/ui", "@nuxt/eslint", "@pinia/nuxt"],
+	modules: ["@nuxt/ui", "@nuxt/eslint", "@pinia/nuxt", "@nuxt/fonts"],
 	css: ["~/assets/css/main.css", "~/assets/sass/base.scss"],
 
 	// Performance optimizations
@@ -40,7 +40,8 @@ export default defineNuxtConfig({
 				{ name: "theme-color", content: "#0e62c0" },
 				{
 					property: "og:title",
-					content: "Kiran Parajuli | Frontend & Full Stack Developer & QA Engineer",
+					content:
+						"Kiran Parajuli | Frontend & Full Stack Developer & QA Engineer",
 				},
 				{
 					property: "og:description",
@@ -84,5 +85,26 @@ export default defineNuxtConfig({
 			],
 		},
 		colorMode: false,
+	},
+
+	pinia: {
+		storeDirs: ["~/stores/**/*.store.ts"],
+	},
+
+	fonts: {
+		families: [
+			{
+				name: "Baumans",
+				provider: "google",
+				weights: [400],
+			},
+			{
+				name: "Audiowide",
+				provider: "google",
+				weights: [400],
+			},
+		],
+		prefetch: true,
+		preconnect: true,
 	},
 });

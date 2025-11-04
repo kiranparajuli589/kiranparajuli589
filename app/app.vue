@@ -1,15 +1,16 @@
 <script lang="ts" setup>
-import { useAppStore, isDarkThemeSelected } from "~/composables/useAppStore";
+import { isDarkThemeSelected } from "~/utils/theme";
+import { useAppStore } from "~/store/app.store";
 
 const appStore = useAppStore();
-
+const { isDarkTheme } = storeToRefs(appStore);
 onMounted(() => {
 	handleTheme();
 });
 
 function handleTheme() {
 	const isDark = isDarkThemeSelected();
-	appStore.updateTheme(isDark);
+	isDarkTheme.value = isDark;
 	if (import.meta.client) {
 		document.body.classList.toggle("dark", isDark);
 	}

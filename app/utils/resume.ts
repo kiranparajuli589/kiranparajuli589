@@ -30,7 +30,7 @@ const Resume: ResumeInterface = {
 		website: "https://kiranparajuli.com.np",
 		bio: "Frontend Developer, Full Stack Developer, QA Automation Engineer, and Tech Enthusiast",
 		summary:
-			"Detail-oriented software engineer with extensive experience in Quality Assurance and full-stack development. Proficient in designing and implementing robust testing frameworks, ensuring optimal functionality and performance across complex systems. Skilled in backend development using Python, PHP, and Node.js, complemented by expertise in frontend technologies like React.js and Vue.js. Demonstrates a strong commitment to delivering high-quality, error-free solutions through meticulous testing and collaboration. Passionate about driving innovation and maintaining the highest standards in software quality assurance.",
+			"Results-driven Frontend Engineer with a proven record of delivering elegant, high-performance web applications using modern frameworks such as React.js and Vue.js. Expert in translating complex requirements into intuitive user interfaces with clean architecture, optimized performance, and responsive design. Strengthened by a solid foundation in backend development with Python, PHP, and Node.js, enabling end-to-end product understanding and seamless integration across systems. Demonstrates deep expertise in Quality Assurance, implementing automated testing strategies and maintaining rigorous performance standards. Committed to crafting scalable, maintainable, and user-focused digital solutions that elevate product quality and drive organizational success.",
 		summaryQa:
 			"Results-driven Quality Assurance Engineer with expertise in WebUI, API, CLI, Unit, and E2E testing. Skilled in planning, writing, and maintaining test cases. Passionate about mentoring and continuous improvement within teams. Utilizes music and creative outlets to stay inspired.",
 	},
@@ -602,6 +602,28 @@ const Resume: ResumeInterface = {
 	],
 	technologies: [
 		{
+			name: "Frontend Development",
+			tools: [
+				{ class: "devicon-html5-plain-wordmark", tooltip: "HTML5" },
+				{ class: "devicon-css3-plain-wordmark", tooltip: "CSS3" },
+				{ image: "sass.png", tooltip: "SASS/SCSS" },
+				{ tooltip: "WebSockets", image: "websockets.png" },
+				{ class: "devicon-javascript-plain", tooltip: "JavaScript" },
+				{ class: "devicon-typescript-plain", tooltip: "TypeScript" },
+				{ class: "devicon-vuejs-plain-wordmark", tooltip: "VueJS" },
+				{ class: "devicon-vuetify-line", tooltip: "Vuetify" },
+				{ class: "devicon-nuxtjs-plain-wordmark", tooltip: "Nuxt" },
+				{ class: "devicon-react-original-wordmark", tooltip: "ReactJS" },
+				{ class: "devicon-nextjs-original-wordmark", tooltip: "NextJS" },
+				{ class: "devicon-tailwindcss-plain", tooltip: "TailwindCSS" },
+				{ class: "devicon-figma-plain-wordmark", tooltip: "Figma" },
+				{ class: "devicon-bootstrap-plain-wordmark", tooltip: "Bootstrap" },
+				{ tooltip: "RadixUI", image: "radixui.png", class: "dark:invert" },
+				{ tooltip: "Axios", image: "axios.svg" },
+				{ tooltip: "GSAP", image: "gsap.png" },
+			],
+		},
+		{
 			name: "Quality Assurance",
 			tools: [
 				{ tooltip: "Behat", image: "behat.png" },
@@ -617,23 +639,7 @@ const Resume: ResumeInterface = {
 				{ class: "devicon-github-original-wordmark", tooltip: "GitHub CI" },
 				{ tooltip: "Drone CI", image: "droneci.png" },
 				{ tooltip: "Selenium", class: "devicon-selenium-original" },
-				{ tooltip: "Regex", image: "regex.svg" },
-			],
-		},
-		{
-			name: "Frontend Development",
-			tools: [
-				{ class: "devicon-html5-plain-wordmark", tooltip: "HTML5" },
-				{ class: "devicon-css3-plain-wordmark", tooltip: "CSS3" },
-				{ image: "sass.png", tooltip: "SASS/SCSS" },
-				{ class: "devicon-javascript-plain", tooltip: "JavaScript" },
-				{ class: "devicon-vuejs-plain-wordmark", tooltip: "VueJS" },
-				{ class: "devicon-vuetify-line", tooltip: "Vuetify" },
-				{ class: "devicon-react-original-wordmark", tooltip: "ReactJS" },
-				{ class: "devicon-nextjs-original-wordmark", tooltip: "NextJS" },
-				{ class: "devicon-figma-plain-wordmark", tooltip: "Figma" },
-				{ class: "devicon-bootstrap-plain-wordmark", tooltip: "Bootstrap" },
-				{ tooltip: "Axios", image: "axios.svg" },
+				{ tooltip: "Regex", image: "regex.svg", class: "dark:invert" },
 			],
 		},
 		{

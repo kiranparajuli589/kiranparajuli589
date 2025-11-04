@@ -16,17 +16,21 @@ html {
 
 body {
   transition: background-color 0.3s ease, color 0.3s ease;
-  font-family: 'Century Gothic', system-ui, -apple-system, sans-serif;
+  font-family: 'Baumans', system-ui, -apple-system, sans-serif;
 }
 
 /* Dark mode styles */
 .dark {
   background-color: #1e1e1e;
-  color: #ffffff;
+  color: #c9c9c9;
 }
 
 .light {
   background-color: #ffffff;
   color: #1e1e1e;
+}
+
+button, a {
+	cursor: pointer;
 }
 
