@@ -499,6 +499,28 @@ const Resume: ResumeInterface = {
 	],
 	technologies: [
 		{
+			name: "Frontend Development",
+			tools: [
+				{ class: "devicon-html5-plain-wordmark", tooltip: "HTML5" },
+				{ class: "devicon-css3-plain-wordmark", tooltip: "CSS3" },
+				{ image: "sass.png", tooltip: "SASS/SCSS" },
+				{ tooltip: "WebSockets", image: "websockets.png" },
+				{ class: "devicon-javascript-plain", tooltip: "JavaScript" },
+				{ class: "devicon-typescript-plain", tooltip: "TypeScript" },
+				{ class: "devicon-vuejs-plain-wordmark", tooltip: "VueJS" },
+				{ class: "devicon-vuetify-line", tooltip: "Vuetify" },
+				{ class: "devicon-nuxtjs-plain-wordmark", tooltip: "Nuxt" },
+				{ class: "devicon-react-original-wordmark", tooltip: "ReactJS" },
+				{ class: "devicon-nextjs-original-wordmark", tooltip: "NextJS" },
+				{ class: "devicon-tailwindcss-plain", tooltip: "TailwindCSS" },
+				{ class: "devicon-figma-plain-wordmark", tooltip: "Figma" },
+				{ class: "devicon-bootstrap-plain-wordmark", tooltip: "Bootstrap" },
+				{ tooltip: "RadixUI", image: "radixui.png" },
+				{ tooltip: "Axios", image: "axios.svg" },
+				{ tooltip: "GSAP", image: "gsap.png" },
+			],
+		},
+		{
 			name: "Quality Assurance",
 			tools: [
 				{ tooltip: "Behat", image: "behat.png" },
@@ -516,22 +538,6 @@ const Resume: ResumeInterface = {
 				{ tooltip: "Selenium", class: "devicon-selenium-original" },
 				{ tooltip: "Regex", image: "regex.svg" },
 			]
-		},
-		{
-			name: "Frontend Development",
-			tools: [
-				{ class: "devicon-html5-plain-wordmark", tooltip: "HTML5" },
-				{ class: "devicon-css3-plain-wordmark", tooltip: "CSS3" },
-				{ image: "sass.png", tooltip: "SASS/SCSS" },
-				{ class: "devicon-javascript-plain", tooltip: "JavaScript" },
-				{ class: "devicon-vuejs-plain-wordmark", tooltip: "VueJS" },
-				{ class: "devicon-vuetify-line", tooltip: "Vuetify" },
-				{ class: "devicon-react-original-wordmark", tooltip: "ReactJS" },
-				{ class: "devicon-nextjs-original-wordmark", tooltip: "NextJS" },
-				{ class: "devicon-figma-plain-wordmark", tooltip: "Figma" },
-				{ class: "devicon-bootstrap-plain-wordmark", tooltip: "Bootstrap" },
-				{ tooltip: "Axios", image: "axios.svg" },
-			],
 		},
 		{
 			name: "Backend Development",
