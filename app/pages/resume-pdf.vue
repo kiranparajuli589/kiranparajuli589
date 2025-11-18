@@ -21,6 +21,26 @@ const leadershipHighlights = Resume.leadershipHighlights;
 const selectedProjects = Resume.selectedProjects;
 const extras = Resume.extras;
 
+// Social links array
+const socialLinks = [
+	{
+		label: "LinkedIn",
+		href: personalInfo.linkedin || "#",
+	},
+	{
+		label: "GitHub",
+		href: personalInfo.github || "#",
+	},
+	{
+		label: "Website",
+		href: personalInfo.website || "#",
+	},
+	{
+		label: "Dev.to",
+		href: personalInfo.devto || "#",
+	},
+].filter((link) => link.href !== "#");
+
 // Page-specific SEO
 useSeo({
 	title: `${personalInfo.name} - Resume PDF`,
@@ -63,40 +83,40 @@ onMounted(() => {
 <template>
 	<div class="resume-pdf">
 		<div class="pdf">
-			<h1 class="font-semibold text-lg">{{ personalInfo.name }}</h1>
-			<h4>{{ personalInfo.role }}</h4>
+			<h1 class="font-bold text-xl">{{ personalInfo.name }}</h1>
+			<h4 class="text-gray-700 font-semibold mb-2">{{ personalInfo.role }}</h4>
 			<p class="flex items-center gap-4 flex-wrap">
-				<a :href="`tel:${personalInfo.phone}`">
-					<span class="mr-1">📞</span>
+				<a class="flex items-center gap-2" :href="`tel:${personalInfo.phone}`">
+					<img src="/icons/phone.svg" alt="Phone" class="size-4 block" />
 					{{ personalInfo.phone }}
 				</a>
-				<a :href="`mailto:${personalInfo.email}`">
-					<span class="mr-1">✉️</span>
+				<a
+					class="flex items-center gap-2"
+					:href="`mailto:${personalInfo.email}`"
+				>
+					<img src="/icons/email.svg" alt="Email" class="size-4 block" />
 					{{ personalInfo.email }}
 				</a>
 				<a
+					class="flex items-center gap-2"
 					target="_blank"
 					title="Open in Google Maps"
 					:href="`https://maps.app.goo.gl/tjWvTf761EWywkCU9`"
 				>
-					<span class="mr-1">📍</span>
+					<img src="/icons/location.svg" alt="Location" class="size-4 block" />
 					{{ personalInfo.municipality }}, {{ personalInfo.country }}
 					{{ personalInfo.postalCode }}
 				</a>
 			</p>
 			<div class="p-list flex gap-2 flex-wrap items-center">
 				<span class="font-semibold">Links:</span>
-				<a target="_blank" :href="personalInfo.linkedin || '#'">
-					<span>LinkedIn</span>
-				</a>
-				<a target="_blank" :href="personalInfo.github || '#'">
-					<span>GitHub</span>
-				</a>
-				<a target="_blank" :href="personalInfo.website || '#'">
-					<span>Website</span>
-				</a>
-				<a target="_blank" :href="personalInfo.devto || '#'">
-					<span>Dev.to</span>
+				<a
+					v-for="link in socialLinks"
+					:key="link.label"
+					target="_blank"
+					:href="link.href"
+				>
+					<span>{{ link.label }}</span>
 				</a>
 			</div>
 
