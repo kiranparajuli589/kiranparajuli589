@@ -14,28 +14,28 @@
 		"format:check": "prettier --check ."
 	},
 	"dependencies": {
-		"@nuxt/eslint": "1.9.0",
-		"@nuxt/fonts": "^0.11.4",
+		"@nuxt/eslint": "^1.10.0",
+		"@nuxt/fonts": "^0.12.1",
 		"@nuxt/ui": "4.1.0",
 		"@pinia/nuxt": "^0.11.2",
-		"eslint": "^9.38.0",
+		"eslint": "^9.39.0",
 		"highlight.js": "^11.11.1",
 		"htmlmark": "^0.2.2",
 		"nuxt": "^4.2.0",
 		"pinia": "^3.0.3",
 		"typescript": "^5.9.3",
-		"vue": "^3.5.22",
+		"vue": "^3.5.24",
 		"vue-router": "^4.6.3"
 	},
-	"packageManager": "pnpm@10.18.2",
 	"devDependencies": {
-		"@typescript-eslint/eslint-plugin": "^8.46.2",
-		"@typescript-eslint/parser": "^8.46.2",
+		"@typescript-eslint/eslint-plugin": "^8.47.0",
+		"@typescript-eslint/parser": "^8.47.0",
 		"eslint-config-prettier": "^10.1.8",
 		"eslint-plugin-prettier": "^5.5.4",
 		"prettier": "^3.6.2",
-		"sass": "^1.93.2",
+		"sass": "^1.94.1",
 		"sass-loader": "^16.0.6",
 		"tailwindcss": "^4.1.16"
-	}
+	},
+	"packageManager": "pnpm@10.22.0"
 }
