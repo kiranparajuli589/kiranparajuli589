@@ -51,7 +51,3 @@ Thumbs.db
 
 # Scripts (not needed in production)
 scripts
-
-# Old source directory (seems like migration from Vue)
-__src
-

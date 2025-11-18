@@ -20,6 +20,25 @@ const accordionItems = computed<AccordionItem[]>(() => {
 const getExperienceByCompany = (company: string) => {
 	return experiences.find((e) => e.company === company);
 };
+
+const getProjectAccordionItems = (company: string) => {
+	const experience = getExperienceByCompany(company);
+	if (!experience?.projects) return [];
+	return experience.projects.map((proj, index) => ({
+		label: proj.name,
+		value: `${company}-project-${index}`,
+		icon: undefined,
+	}));
+};
+
+const getProjectByValue = (value: string | undefined) => {
+	if (!value) return undefined;
+	const [company, , indexStr] = value.split("-");
+	if (!company) return undefined;
+	const index = parseInt(indexStr || "0", 10);
+	const experience = getExperienceByCompany(company);
+	return experience?.projects?.[index];
+};
 </script>
 <template>
 	<section class="py-12">
@@ -33,57 +52,58 @@ const getExperienceByCompany = (company: string) => {
 			type="multiple"
 			:items="accordionItems"
 			:ui="{
-				root: 'bg-gray-100 dark:bg-gray-900! rounded-lg overflow-hidden shadow-md',
+				root: 'bg-gray-100 dark:bg-gray-900! rounded-lg overflow-hidden shadow-md main-accordion',
 				trigger:
 					'px-4 hover:bg-sky-100 dark:hover:bg-blue-800 transition-colors',
 				content: 'px-4',
 			}"
 		>
 			<template #leading="{ item }">
-				<img
-					v-if="item.value"
-					height="24px"
-					width="24px"
-					class="w-6 h-6 object-contain"
-					loading="lazy"
-					decoding="async"
-					:alt="`${getExperienceByCompany(item.value)?.company} logo`"
-					:src="
-						getAssetUrl(
-							getExperienceByCompany(item.value)?.companyLogo || '',
-							'company',
-						)
-					"
-				/>
+				<template v-if="item.value">
+					<img
+						height="24px"
+						width="24px"
+						class="w-6 h-6 object-contain"
+						loading="lazy"
+						decoding="async"
+						:alt="`${getExperienceByCompany(item.value)?.company} logo`"
+						:src="
+							getAssetUrl(
+								getExperienceByCompany(item.value)?.companyLogo || '',
+								'company',
+							)
+						"
+					/>
 
-				<div class="flex items-center gap-2 flex-wrap">
-					<span class="font-semibold">{{
-						getExperienceByCompany(item.value)?.company
-					}}</span>
-					<span class="mx-2 text-gray-400">|</span>
-					<span class="text-sm text-gray-600 dark:text-gray-400">
-						{{ getExperienceByCompany(item.value)?.roles.join(", ") }}
-					</span>
-					<span class="mx-2 text-gray-400">|</span>
-					<span class="text-sm text-gray-600 dark:text-gray-400">
-						{{
-							`${getExperienceByCompany(item.value)?.startDate} - ${getExperienceByCompany(item.value)?.endDate}`
-						}}
-					</span>
-					<a
-						v-if="getExperienceByCompany(item.value)?.companyUrl"
-						class="ml-auto"
-						target="_blank"
-						:href="getExperienceByCompany(item.value)?.companyUrl"
-						:title="getExperienceByCompany(item.value)?.company"
-						@click.stop
-					>
-						<UIcon
-							name="i-heroicons-arrow-top-right-on-square"
-							class="text-xs"
-						/>
-					</a>
-				</div>
+					<div class="flex items-center gap-2 flex-wrap">
+						<span class="font-semibold">{{
+							getExperienceByCompany(item.value)?.company
+						}}</span>
+						<span class="mx-2 text-gray-400">|</span>
+						<span class="text-sm text-gray-600 dark:text-gray-400">
+							{{ getExperienceByCompany(item.value)?.roles.join(", ") }}
+						</span>
+						<span class="mx-2 text-gray-400">|</span>
+						<span class="text-sm text-gray-600 dark:text-gray-400">
+							{{
+								`${getExperienceByCompany(item.value)?.startDate} - ${getExperienceByCompany(item.value)?.endDate}`
+							}}
+						</span>
+						<a
+							v-if="getExperienceByCompany(item.value)?.companyUrl"
+							class="ml-auto"
+							target="_blank"
+							:href="getExperienceByCompany(item.value)?.companyUrl || '#'"
+							:title="getExperienceByCompany(item.value)?.company || ''"
+							@click.stop
+						>
+							<UIcon
+								name="i-heroicons-arrow-top-right-on-square"
+								class="text-xs"
+							/>
+						</a>
+					</div>
+				</template>
 			</template>
 			<template #body="{ item }">
 				<div v-if="item.value" class="space-y-4">
@@ -100,70 +120,100 @@ const getExperienceByCompany = (company: string) => {
 					</div>
 
 					<div
-						v-if="getExperienceByCompany(item.value)?.projects"
+						v-if="item.value && getExperienceByCompany(item.value)?.projects"
 						class="space-y-4"
 					>
 						<h2 class="mb-4 font-bold">Projects:</h2>
-						<UCard
-							v-for="proj in getExperienceByCompany(item.value)?.projects"
-							:key="proj.name"
-							class="mb-6 pt-1 pb-2"
-							variant="subtle"
+						<UAccordion
+							class="w-full"
+							type="multiple"
+							:items="item.value ? getProjectAccordionItems(item.value) : []"
 							:ui="{
-								root: '!bg-gray-200 dark:bg-gray-800 shadow-md',
+								root: 'bg-gray-200 dark:bg-gray-800 rounded-lg overflow-hidden shadow-md',
+								trigger:
+									'px-4 hover:bg-sky-100 dark:hover:bg-blue-800 transition-colors',
+								content: 'px-4',
 							}"
 						>
-							<template #header>
-								<div class="flex items-center gap-2">
-									<h4
-										class="overflow-hidden text-ellipsis whitespace-nowrap font-semibold"
-										:title="proj.name"
-									>
-										{{ proj.name }}
-									</h4>
-									<template v-if="proj.badge">
-										<img
-											v-if="isDarkTheme"
-											height="28"
-											width="auto"
-											class="max-w-[100px] h-7 object-contain"
-											loading="lazy"
-											decoding="async"
-											:alt="`${proj.name} badge`"
-											:src="proj.badge.dark || proj.badge.default"
-										/>
-										<img
-											v-else
-											height="28"
-											width="auto"
-											class="max-w-[100px] h-7 object-contain"
-											loading="lazy"
-											decoding="async"
-											:alt="`${proj.name} badge`"
-											:src="proj.badge.light || proj.badge.default"
-										/>
-									</template>
-									<a
-										v-if="proj.url"
-										target="_blank"
-										:href="proj.url"
-										:title="proj.name"
-									>
-										<UIcon
-											name="i-heroicons-arrow-top-right-on-square"
-											class="text-xs"
-										/>
-									</a>
-								</div>
+							<template #leading="{ item: projectItem }">
+								<template v-if="projectItem.value">
+									<div class="flex items-center gap-2">
+										<h4
+											class="overflow-hidden text-ellipsis whitespace-nowrap font-semibold flex-1 text-start"
+											:title="getProjectByValue(projectItem.value)?.name"
+										>
+											{{ getProjectByValue(projectItem.value)?.name }}
+										</h4>
+										<template
+											v-if="getProjectByValue(projectItem.value)?.badge"
+										>
+											<img
+												v-if="isDarkTheme"
+												height="28"
+												width="auto"
+												class="max-w-[100px] h-7 object-contain"
+												loading="lazy"
+												decoding="async"
+												:alt="`${getProjectByValue(projectItem.value)?.name} badge`"
+												:src="
+													getProjectByValue(projectItem.value)?.badge?.dark ||
+													getProjectByValue(projectItem.value)?.badge?.default
+												"
+											/>
+											<img
+												v-else
+												height="28"
+												width="auto"
+												class="max-w-[100px] h-7 object-contain"
+												loading="lazy"
+												decoding="async"
+												:alt="`${getProjectByValue(projectItem.value)?.name} badge`"
+												:src="
+													getProjectByValue(projectItem.value)?.badge?.light ||
+													getProjectByValue(projectItem.value)?.badge?.default
+												"
+											/>
+										</template>
+										<a
+											v-if="getProjectByValue(projectItem.value)?.url"
+											target="_blank"
+											:href="getProjectByValue(projectItem.value)?.url"
+											:title="getProjectByValue(projectItem.value)?.name"
+											@click.stop
+										>
+											<UIcon
+												name="i-heroicons-arrow-top-right-on-square"
+												class="text-xs"
+											/>
+										</a>
+									</div>
+								</template>
 							</template>
+							<template #body="{ item: projectItem }">
+								<template v-if="projectItem.value">
+									<div class="space-y-4">
+										<div>
+											{{ getProjectByValue(projectItem.value)?.description }}
+										</div>
 
-							<div>{{ proj.description }}</div>
-
-							<div class="mt-4">
-								<h3 class="mb-3 font-semibold">Responsibilities:</h3>
-								<ItemList :items="proj.job" no-split />
-							</div>
-						</UCard>
+										<div
+											v-if="
+												getProjectByValue(projectItem.value)?.job &&
+												(getProjectByValue(projectItem.value)?.job?.length ||
+													0) > 0
+											"
+											class="mt-4"
+										>
+											<h3 class="mb-3 font-semibold">Responsibilities:</h3>
+											<ItemList
+												:items="getProjectByValue(projectItem.value)?.job || []"
+												no-split
+											/>
+										</div>
+									</div>
+								</template>
+							</template>
+						</UAccordion>
 					</div>
 				</div>
 			</template>
@@ -173,5 +223,15 @@ const getExperienceByCompany = (company: string) => {
 <style scoped>
 .home--experience .header {
 	gap: 0.3rem;
+}
+</style>
+<style lang="scss">
+.main-accordion {
+	.text-start.break-words {
+		display: none !important;
+	}
+	div[role="region"] {
+		padding-top: 0.5rem;
+	}
 }
 </style>

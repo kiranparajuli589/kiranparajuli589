@@ -36,8 +36,14 @@ const dividedItems = computed(() => {
 	</div>
 </template>
 <style scoped>
+.item-list ul {
+	list-style-type: disc;
+	padding-left: 1.5rem;
+}
+
 .item-list ul li {
-	margin-left: 1.5rem;
+	margin-left: 0;
+	margin-bottom: 0.25rem;
 	width: fit-content;
 }
 </style>

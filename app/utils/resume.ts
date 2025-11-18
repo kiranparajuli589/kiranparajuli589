@@ -6,6 +6,21 @@ import type {
 	Education,
 } from "~/customTypes";
 
+type SkillCategory = {
+	title: string;
+	items: string[];
+};
+
+type SelectedProject = {
+	title: string;
+	description: string;
+	impact: string;
+	stack: string[];
+	links?: {
+		[key: string]: string;
+	};
+};
+
 interface ResumeInterface {
 	personalInfo: { [key: string]: string };
 	experiences: Experience[];
@@ -13,12 +28,28 @@ interface ResumeInterface {
 	services: Service[];
 	technologies: Technology[];
 	education: Education[];
+	coreSkills: SkillCategory[];
+	additionalSkills: SkillCategory[];
+	leadershipHighlights: string[];
+	selectedProjects: SelectedProject[];
+	extras: string[];
 }
 
-const Resume: ResumeInterface = {
+// Helper function to calculate years of experience
+function calculateYearsOfExperience(experiences: Experience[]): number {
+	if (experiences.length === 0) return 0;
+	const earliestYear = Math.min(
+		...experiences.map((exp) => parseInt(exp.startDate, 10)),
+	);
+	const currentYear = new Date().getFullYear();
+	return currentYear - earliestYear;
+}
+
+// We'll create the base resume object first, then calculate and update summary
+const baseResume = {
 	personalInfo: {
 		name: "Kiran Parajuli",
-		role: "Software Engineer",
+		role: "Senior Frontend Engineer",
 		municipality: "Panchkhal, Kavre",
 		country: "Nepal",
 		postalCode: "45200",
@@ -28,49 +59,155 @@ const Resume: ResumeInterface = {
 		linkedin: "https://linkedin.com/in/kiranparajuli589",
 		github: "https://github.com/kiranparajuli589",
 		website: "https://kiranparajuli.com.np",
-		bio: "Frontend Developer, Full Stack Developer, QA Automation Engineer, and Tech Enthusiast",
-		summary:
-			"Results-driven Frontend Engineer with a proven record of delivering elegant, high-performance web applications using modern frameworks such as React.js and Vue.js. Expert in translating complex requirements into intuitive user interfaces with clean architecture, optimized performance, and responsive design. Strengthened by a solid foundation in backend development with Python, PHP, and Node.js, enabling end-to-end product understanding and seamless integration across systems. Demonstrates deep expertise in Quality Assurance, implementing automated testing strategies and maintaining rigorous performance standards. Committed to crafting scalable, maintainable, and user-focused digital solutions that elevate product quality and drive organizational success.",
+		bio: "Senior Frontend Engineer | React.js • Vue.js • TypeScript • QA Automation",
+		summary: "", // Will be set after experiences are defined
 		summaryQa:
 			"Results-driven Quality Assurance Engineer with expertise in WebUI, API, CLI, Unit, and E2E testing. Skilled in planning, writing, and maintaining test cases. Passionate about mentoring and continuous improvement within teams. Utilizes music and creative outlets to stay inspired.",
 	},
+	coreSkills: [
+		{
+			title: "Frontend Engineering",
+			items: [
+				"React.js, Next.js, Vue.js, Nuxt, TypeScript",
+				"State management (Redux, Zustand, Pinia, Vuex)",
+				"Component-driven architecture & design systems",
+				"Responsive UI, TailwindCSS, Radix UI, GSAP",
+				"Performance optimization, Core Web Vitals, accessibility",
+			],
+		},
+		{
+			title: "Backend & Platform Collaboration",
+			items: [
+				"Node.js, Express.js, Django, DRF",
+				"REST APIs, GraphQL, WebSocket servers",
+				"PostgreSQL, MySQL, Redis",
+				"Architecture reviews & cross-functional delivery leadership",
+				"CI/CD ownership with GitHub Actions, GitLab CI, Jenkins",
+			],
+		},
+	],
+	additionalSkills: [
+		{
+			title: "QA Automation",
+			items: [
+				"Playwright, Cypress, Jest, PHPUnit, Behat",
+				"Contract, regression, and load testing (Locust)",
+				"CI-based quality gates with reporting & triage rituals",
+			],
+		},
+		{
+			title: "DevOps & Platform",
+			items: [
+				"Docker, Docker Compose, Nginx, Apache",
+				"GitHub Actions, GitLab CI, Drone CI",
+				"Linux/VPS administration, monitoring, and logs",
+			],
+		},
+	],
+	leadershipHighlights: [
+		"Architect scalable UI platforms that balance performance, accessibility, and velocity.",
+		"Own the frontend roadmap—from modernization sequencing to design system rollout.",
+		"Mentor engineers through pairing, structured reviews, and onboarding playbooks.",
+		"Partner with design, product, and backend teams to ship cohesive user journeys.",
+		"Uphold engineering excellence via coding standards, testing strategy, and CI quality bars.",
+	],
+	selectedProjects: [
+		{
+			title: "Browser Recording System",
+			description:
+				"Full recording suite that captures camera, audio, and screen feeds without third-party SDKs.",
+			impact:
+				"Expanded ourBuddy.ai’s platform capabilities while cutting vendor costs and latency.",
+			stack: [
+				"React",
+				"Next.js",
+				"TypeScript",
+				"WebRTC",
+				"MediaRecorder API",
+				"Node.js",
+			],
+			links: {
+				website: "https://www.ourbuddy.ai",
+			},
+		},
+		{
+			title: "Lua Expression Builder",
+			description:
+				"Drag-and-drop interface that lets CDN operators compose complex Lua conditions safely.",
+			impact:
+				"Reduced policy configuration time by 60% and eliminated syntax errors before deployment.",
+			stack: ["Vue.js", "CoreUI", "TypeScript", "Node.js", "PrimeVue"],
+			links: {
+				demo: "https://expr-builder.netlify.app/#/rule",
+			},
+		},
+		{
+			title: "Vue Formik",
+			description:
+				"Open-source Vue.js library that brings Formik-style declarative form patterns to Vue 3.",
+			impact:
+				"Adopted by 1k+ developers, enabling consistent validation and DX improvements.",
+			stack: ["Vue.js", "TypeScript", "Formik", "Yup"],
+			links: {
+				github: "https://github.com/vue-formik/vue-formik",
+				demo: "https://vue-formik.netlify.app/",
+			},
+		},
+		{
+			title: "Asians Group Design System",
+			description:
+				"Token-driven component library powering marketing sites, dashboards, and internal tools.",
+			impact:
+				"Unified UI across 4 product squads and cut new feature build time by 35%.",
+			stack: ["Nuxt.js", "PrimeVue", "TailwindCSS", "Storybook"],
+		},
+		{
+			title: "Markdown Parser",
+			description:
+				"Modular Markdown parser for Node.js with plugin-based extensions and custom syntax.",
+			impact:
+				"Replaced brittle third-party dependency and reduced parsing time by 40% on large docs.",
+			stack: ["Node.js", "TypeScript", "Recursion", "AST"],
+			links: {
+				github: "https://github.com/kiranparajuli589/md-parser",
+				demo: "https://kiranparajuli589.github.io/md-parser/",
+			},
+		},
+	],
+	extras: [
+		"Mentor for Playwright, automation testing, and frontend best practices.",
+		"Active open-source contributor across Vue and Node.js ecosystems.",
+		"Strong documentation habits, code-quality discipline, and knowledge sharing.",
+	],
 	experiences: [
 		{
 			company: "Asians Group LLC",
 			description:
-				"A vital internet intermediary, offering fast CDN services, custom nodes, DNS acceleration, and free SSL certification to improve content delivery and ensure optimal user experiences for businesses and individuals alike.",
-			roles: ["Senior Frontend Developer"],
+				"A vital internet intermediary that powers CDN services, custom nodes, DNS acceleration, and SSL offerings for global customers.",
+			roles: ["Senior Frontend Engineer"],
 			startDate: "2025",
 			endDate: "Present",
 			technologies: [
-				"Vue.js",
-				"CoreUI",
-				"AntDesign",
-				"Typescript",
-				"JavaScript",
-				"Figma",
-				"Github",
-				"JIRA",
-				"Postman",
-				"NGINX",
-				"PrimeVue",
 				"Nuxt.js",
+				"Vue.js",
+				"TypeScript",
+				"PrimeVue",
 				"TailwindCSS",
-				"Django",
-				"Djangorestframework",
+				"Figma",
+				"CoreUI",
 				"Jenkins",
 				"Docker",
-				"Docker Compose",
-				"GithubCI",
-				"Unit Testing",
+				"Django",
+				"PostgreSQL",
+				"GitHub Actions",
 			],
 			achievements: [
-				"Architected and implemented a full-fledged public static website for the company.",
-				"Led the development of a comprehensive lua condition expression builders.",
-				"Optimized frontend performance, achieving a 30% reduction in load times.",
-				"Collaborated with cross-functional teams to ensure seamless integration of services.",
-				"Conducted code reviews and provided mentorship to junior developers.",
-				"Streamlined deployment processes using CI/CD pipelines.",
+				"Architected Nuxt.js SSR marketing site and internal portals, increasing qualified inbound leads by 25% within two quarters.",
+				"Migrated the legacy WordPress stack to Nuxt with structured data and prefetching, improving Core Web Vitals (FCP 2.8s → 1.2s) and boosting organic impressions by 40%.",
+				"Built a Lua condition expression builder with visual validation, cutting CDN policy configuration time by 60% and eliminating syntax defects pre-deploy.",
+				"Created a token-driven design system adopted by 4 squads, reducing UI defects by 45% and accelerating new feature delivery by 35%.",
+				"Shrank JavaScript bundles by 35% via route-level code-splitting, asset compression, and smarter caching, yielding a 30% drop in perceived load time.",
+				"Mentored backend/fullstack engineers, instituted review rubrics, and added automated accessibility/performance checks in Jenkins, reducing failed deployments by 30%.",
 			],
 			companyUrl: "https://asians.group",
 			companyLogo: "asians_group.png",
@@ -130,13 +267,12 @@ const Resume: ResumeInterface = {
 				"ClickUp",
 			],
 			achievements: [
-				"Led a team of 5 developers to deliver high-quality software solutions.",
-				"Implemented streamlined task management and sprint planning using ClickUp.",
-				"Engineered a browser-based recording system for seamless audio, video, and screen capture.",
-				"Modernized legacy systems with React, Next.js, and Docker, enhancing platform performance.",
-				"Oversaw release processes to ensure smooth product deployments.",
-				"Developed a robust testing framework to maintain product reliability.",
-				"Optimized CI/CD pipelines, automating build and test processes.",
+				"Led a squad of five engineers delivering multi-tenant features, backlog prioritization, and code-quality initiatives for the brokerage platform.",
+				"Engineered a browser-based recording suite (audio/video/screen) using WebRTC + MediaRecorder, expanding product capability without third-party SDK costs.",
+				"Modernized the legacy React codebase into a modular Next.js architecture with shared UI primitives, reducing build time by 40% and unlocking SSR caching.",
+				"Introduced performance budgets, lazy loading, and real-user monitoring, improving LCP from 3.1s → 1.7s across top customer workspaces.",
+				"Implemented comprehensive Playwright, API, and contract-test suites tied to CI, cutting production regressions by 35%.",
+				"Owned release cadences—sprint planning, QA sign-off, and phased rollouts—achieving 95% on-time delivery while keeping bug escape rate below 1%.",
 			],
 			companyUrl: "https://www.ourbuddy.ai",
 			companyLogo: "ourBuddy.png",
@@ -185,36 +321,6 @@ const Resume: ResumeInterface = {
 			],
 		},
 		{
-			company: "Dimitra",
-			description:
-				"Dimitra Incorporated is a global Agtech company with a mission to help smallholder farmers across the world.",
-			roles: ["QA Engineer"],
-			startDate: "2024",
-			endDate: "2024",
-			technologies: ["Jest", "Cypress", "Postman", "GitHub", "JIRA", "JMeter"],
-			achievements: [
-				"Optimized test case preparation and execution processes.",
-				"Developed and maintained a comprehensive testing framework.",
-				"Enhanced CI/CD pipelines for automated testing.",
-				"Loaded and analyzed test data for performance assessments.",
-			],
-			companyUrl: "https://dimitra.io/about-us/",
-			companyLogo: "dimitra.ico",
-			projects: [
-				{
-					name: "Contract Based Testing Optimizations",
-					description:
-						"Optimized test case preparation and execution processes.",
-					job: [
-						"Developed and maintained a comprehensive testing framework.",
-						"Enhanced CI/CD pipelines for automated testing.",
-						"Loaded and analyzed test data for performance assessments.",
-						"Collaborated with cross-functional teams to enhance product quality.",
-					],
-				},
-			],
-		},
-		{
 			company: "12iD",
 			description:
 				"Leading multi-authentication solution for digital identity and user identification.",
@@ -234,13 +340,11 @@ const Resume: ResumeInterface = {
 				"Notion",
 			],
 			achievements: [
-				"Developed and maintained a comprehensive testing framework.",
-				"Implemented CI/CD pipelines to streamline build and testing automation.",
-				"Designed a load-testing framework to ensure optimal system performance.",
-				"Collaborated with cross-functional teams to enhance product quality.",
-				"Led a workshop on Automation Testing with Playwright.",
-				"Delivered system demos to stakeholders and clients.",
-				"Effectively managed tasks in a hybrid work environment.",
+				"Designed the automation strategy across React frontends, Node microservices, and APIs—tripling automated coverage in two quarters.",
+				"Built a Locust-driven load-testing suite that validated 100k+ concurrent authentication flows prior to enterprise launches.",
+				"Integrated Playwright UI suites and contract tests into CI/CD, reducing regression escapes by 40%.",
+				"Partnered with security, product, and customer teams to run quality audits, deliver demos, and sign off on regulated releases.",
+				"Led Playwright enablement workshops and documentation that accelerated onboarding for new engineers.",
 			],
 			companyUrl: "https://www.12id.com",
 			companyLogo: "12iD.png",
@@ -278,11 +382,50 @@ const Resume: ResumeInterface = {
 			],
 		},
 		{
+			company: "Dimitra",
+			description:
+				"Global AgTech company delivering digital products that help smallholder farmers improve yields and supply-chain visibility.",
+			roles: ["Full-Stack Engineer"],
+			startDate: "2022",
+			endDate: "2023",
+			technologies: [
+				"React.js",
+				"Express.js",
+				"GraphQL",
+				"Python",
+				"Jest",
+				"Cypress",
+				"PostgreSQL",
+			],
+			achievements: [
+				"Delivered features for Connected Farmer and Connected Coffee platforms spanning frontend, backend, analytics, and QA pipelines.",
+				"Built interactive dashboards with modern charting libraries, giving agronomists real-time insight into field activity and performance KPIs.",
+				"Developed Express.js + GraphQL APIs with optimized resolvers and caching, reducing average response time by 25%.",
+				"Partnered with data/ops teams to ship workflows for field operations, supply-chain visibility, and stakeholder reporting.",
+				"Mentored QA engineers on Playwright/Cypress automation, doubling coverage and integrating suites into CI quality gates.",
+			],
+			companyUrl: "https://dimitra.io/about-us/",
+			companyLogo: "dimitra.ico",
+			projects: [
+				{
+					name: "Contract Based Testing Optimizations",
+					description:
+						"Optimized test case preparation and execution processes.",
+					job: [
+						"Developed and maintained a comprehensive testing framework.",
+						"Enhanced CI/CD pipelines for automated testing.",
+						"Loaded and analyzed test data for performance assessments.",
+						"Collaborated with cross-functional teams to enhance product quality.",
+					],
+				},
+			],
+		},
+		{
 			company: "JankariTech Pvt. Ltd.",
 			description: "An IT company specializing in test automation solutions.",
 			roles: ["Software Developer", "Junior Programmer"],
 			startDate: "2019",
-			endDate: "2023",
+			endDate: "2022",
 			technologies: [
 				"Playwright",
 				"Behat",
@@ -302,13 +445,11 @@ const Resume: ResumeInterface = {
 				"Bash",
 			],
 			achievements: [
-				"Developed web UI, API, CLI, E2E, and unit tests across various projects.",
-				"Authored and maintained comprehensive test documentation.",
-				"Built and maintained CI/CD pipelines for daily test executions.",
-				"Mentored team members on unit and E2E test writing.",
-				"Organized workshops on automation testing using Playwright.",
-				"Led weekly training sessions on technologies like Cypress, WebSockets, and VueJS.",
-				"Developed a blog website for internal knowledge sharing.",
+				"Developed production Vue.js features, REST APIs, CLI tools, and automation suites for enterprise clients in finance, education, and SaaS.",
+				"Implemented reusable UI patterns and accessibility fixes that reduced front-end bug counts by 20% across key accounts.",
+				"Built and maintained CI/CD pipelines (GitHub, GitLab, Drone, Travis) executing daily UI/API/E2E suites for 15+ repositories.",
+				"Authored playbooks for Cypress, Playwright, and WebSocket testing; led weekly enablement sessions for engineers and QA.",
+				"Created internal knowledge platforms (blog + workshops) to scale documentation and onboarding.",
 			],
 			companyUrl: "https://www.jankaritech.com",
 			companyLogo: "jankaritech.jpg",
@@ -683,6 +824,22 @@ const Resume: ResumeInterface = {
 			major: "Science (Maths)",
 		},
 	],
+} as Omit<ResumeInterface, "personalInfo"> & {
+	personalInfo: Omit<ResumeInterface["personalInfo"], "summary"> & {
+		summary: string;
+	};
+};
+
+// Calculate years of experience dynamically
+const yearsOfExperience = calculateYearsOfExperience(baseResume.experiences);
+
+// Create the final Resume object with dynamically calculated summary
+const Resume: ResumeInterface = {
+	...baseResume,
+	personalInfo: {
+		...baseResume.personalInfo,
+		summary: `Senior Frontend Engineer with ${yearsOfExperience}+ years of experience shipping high-performance web applications, modernizing platforms, and leading product-focused engineering teams. Specializes in React.js, Vue.js, TypeScript, and cross-browser architecture, backed by strong backend fundamentals in Node.js, Django, and PostgreSQL plus deep automation expertise. Known for building scalable UI systems, driving performance budgets, mentoring engineers, and owning features end-to-end—from architecture and development to testing, CI/CD, and deployment.`,
+	},
 };
 
 export default Resume;

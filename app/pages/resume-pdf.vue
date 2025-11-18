@@ -14,12 +14,12 @@ const currentUrl = `${siteUrl}/resume-pdf`;
 const imageUrl = `${siteUrl}/letter_k.png`;
 const personalInfo = Resume.personalInfo;
 const experiences = Resume.experiences;
-const works = Resume.works;
-const technologies = Resume.technologies;
 const education = Resume.education;
-
-// Extract skills from technologies
-const skills = technologies.flatMap((tech) => tech.tools.map((t) => t.tooltip));
+const coreSkills = Resume.coreSkills;
+const additionalSkills = Resume.additionalSkills;
+const leadershipHighlights = Resume.leadershipHighlights;
+const selectedProjects = Resume.selectedProjects;
+const extras = Resume.extras;
 
 // Page-specific SEO
 useSeo({
@@ -55,28 +55,28 @@ onMounted(() => {
 <template>
 	<div class="resume-pdf">
 		<div class="pdf">
-			<h1>{{ personalInfo.name }}</h1>
+			<h1 class="font-semibold text-lg">{{ personalInfo.name }}</h1>
 			<h4>{{ personalInfo.role }}</h4>
 			<p class="flex items-center gap-4 flex-wrap">
-				<UIcon name="i-mdi-phone" />
+				<span>📞</span>
 				{{ personalInfo.phone }}
-				<UIcon name="i-mdi-at" />
+				<span>✉️</span>
 				{{ personalInfo.email }}
-				<UIcon name="i-mdi-map-marker" />
+				<span>📍</span>
 				{{ personalInfo.municipality }}, {{ personalInfo.country }}
 				{{ personalInfo.postalCode }}
 			</p>
 			<div class="p-list flex gap-4 flex-wrap items-center">
 				<a target="_blank" :href="personalInfo.linkedin || '#'">
-					<UIcon name="i-mdi-linkedin" />
+					<span>LinkedIn:</span>
 					{{ personalInfo.linkedin?.replace("https://", "") }}
 				</a>
 				<a target="_blank" :href="personalInfo.github || '#'">
-					<UIcon name="i-mdi-github" class="text-black" />
+					<span>GitHub:</span>
 					{{ personalInfo.github?.replace("https://", "") }}
 				</a>
 				<a target="_blank" :href="personalInfo.website || '#'">
-					<UIcon name="i-mdi-web" class="text-indigo-600" />
+					<span>Website:</span>
 					{{ personalInfo.website?.replace("https://", "") }}
 				</a>
 				<a
@@ -84,110 +84,122 @@ onMounted(() => {
 					class="flex gap-2 items-center"
 					:href="personalInfo.devto || '#'"
 				>
-					<img src="/tech/devto.png" width="25" />
+					<span>Dev.to:</span>
 					{{ personalInfo.devto?.replace("https://", "") }}
 				</a>
 			</div>
 
 			<h2 class="pt-4">Summary</h2>
-			<Divider class="mb-2" height="2" />
+			<hr class="mb-2" />
 			<p>{{ personalInfo.summary }}</p>
 
-			<h2 class="pt-4">Education</h2>
-			<Divider class="mb-2" height="2" />
+			<h2 class="pt-4">Leadership Highlights</h2>
+			<hr class="mb-2" />
+			<ul>
+				<li v-for="highlight in leadershipHighlights" :key="highlight">
+					{{ highlight }}
+				</li>
+			</ul>
 
-			<div v-for="edu in education" :key="edu.name" class="mb-4">
-				<h3>{{ edu.degree }} in {{ edu.name }}</h3>
-				<h4>{{ edu.major }}</h4>
-				<p>{{ edu.startDate }} - {{ edu.endDate }}</p>
+			<h2 class="pt-4">Core Skills</h2>
+			<hr class="mb-2" />
+			<div v-for="skill in coreSkills" :key="skill.title" class="mb-4">
+				<h4 class="font-semibold">{{ skill.title }}</h4>
+				<ul>
+					<li v-for="item in skill.items" :key="item">{{ item }}</li>
+				</ul>
 			</div>
-
-			<h2 class="pt-4">Tools and Technologies</h2>
-			<Divider class="mb-2" height="2" />
-
-			<div v-for="tech in technologies" :key="tech.name" class="mb-4">
-				<h4>{{ tech.name }}</h4>
-				<div>
-					<template v-for="(tool, index) in tech.tools">
-						{{ tool.tooltip
-						}}<template v-if="index !== tech.tools.length - 1">, </template>
-					</template>
-				</div>
-			</div>
-			<div class="my-16" />
 
 			<h2 class="pt-4">Experience</h2>
-			<Divider class="mb-2" height="2" />
+			<hr class="mb-2 border-gray-500" />
 			<div
 				v-for="(experience, index) in experiences"
 				:key="experience.company"
 				class="mb-4"
 			>
-				<h3>
+				<h3 class="font-semibold">
 					{{ index + 1 }}. {{ experience.company }}
 					<a
 						target="_blank"
 						:href="experience.companyUrl"
 						:title="experience.company"
 					>
-						<UIcon
-							name="i-heroicons-arrow-top-right-on-square"
-							class="text-xs"
-						/>
+						↗
 					</a>
 				</h3>
-				<Divider />
-				<div class="mb-2">
-					<div title="Role" class="font-semibold">
+				<div class="mb-1">
+					<div title="Role" class="font-semibold text-gray-600 dark:text-gray-400">
 						{{ experience.roles.join(", ") }} ({{ experience.startDate }} -
 						{{ experience.endDate }})
 					</div>
 				</div>
+				<hr class="mb-2 border-gray-400" />
 				<h3>Achievements</h3>
-				<div class="border-t border-gray-200 dark:border-gray-700 my-4 mb-2" />
+				<hr class="mb-2 border-gray-300" />
 				<ul>
-					<li
-						v-for="task in experience.achievements"
-						:key="task"
-						v-html="task"
-					/>
+					<li v-for="task in experience.achievements" :key="task">
+						{{ task }}
+					</li>
 				</ul>
-				<h3 class="pt-2">Projects</h3>
-				<div class="border-t border-gray-200 dark:border-gray-700 my-4 pb-2" />
-				<div
-					v-for="(project, projectIndex) in experience.projects"
-					:key="projectIndex"
-				>
-					<h4>{{ index + 1 }}. {{ project.name }}</h4>
-					<p>{{ project.description }}</p>
-				</div>
 			</div>
 
-			<h2 class="pt-4">Works</h2>
+			<h2 class="pt-4">Selected Projects</h2>
 			<Divider class="mb-2" height="2" />
 
-			<div v-for="(work, index) in works" :key="work.title" class="mb-6">
-				<h3>{{ index + 1 }}. {{ work.title }}</h3>
-				<Divider class="mb-2" />
-				<p class="mb-2">{{ work.description }}</p>
-				<div class="flex gap-4 mb-2">
+			<div
+				v-for="(project, index) in selectedProjects"
+				:key="project.title"
+				class="mb-6"
+			>
+				<h3 class="font-semibold">{{ index + 1 }}. {{ project.title }}</h3>
+				<hr class="mb-2" />
+				<p class="mb-1">{{ project.description }}</p>
+				<p class="mb-2 text-sm italic">{{ project.impact }}</p>
+				<div class="mb-1 text-sm">
+					<strong>Stack:</strong> {{ project.stack.join(", ") }}
+				</div>
+				<div
+					v-if="project.links && Object.keys(project.links).length"
+					class="flex gap-4 mb-2"
+				>
 					<strong>Links:</strong>
 					<template
-						v-for="[key, value] in Object.entries(work.links)"
+						v-for="[key, value] in Object.entries(project.links)"
 						:key="key"
 					>
 						<a target="_blank" class="capitalize" :href="value">
-							{{ key }}
-							<UIcon
-								name="i-heroicons-arrow-top-right-on-square"
-								class="text-xs inline"
-							/>
+							{{ key }} ↗
 						</a>
 					</template>
 				</div>
 			</div>
+
+			<h2 class="pt-4">Education</h2>
+			<hr class="mb-2" />
+
+			<div v-for="edu in education" :key="edu.name" class="mb-4">
+				<h3 class="font-semibold">{{ edu.degree }} in {{ edu.name }}</h3>
+				<h4>{{ edu.major }}</h4>
+				<p>{{ edu.startDate }} - {{ edu.endDate }}</p>
+			</div>
+
+			<h2 class="pt-4">Additional Skills</h2>
+			<Divider class="mb-2" height="2" />
+
+			<div v-for="skill in additionalSkills" :key="skill.title" class="mb-4">
+				<h4 class="font-semibold">{{ skill.title }}</h4>
+				<ul>
+					<li v-for="item in skill.items" :key="item">{{ item }}</li>
+				</ul>
+			</div>
+
+			<h2 class="pt-4">Extras</h2>
+			<Divider class="mb-2" height="2" />
+			<ul>
+				<li v-for="extra in extras" :key="extra">{{ extra }}</li>
+			</ul>
 		</div>
-		<div class="border-t border-gray-200 dark:border-gray-700 my-4" />
+		<hr class="border-gray-200 dark:border-gray-700 my-4" />
 		<footer class="flex justify-between">
 			<div>kiranparajuli.com.np</div>
 			<div>All rights reserved &copy; {{ new Date().getFullYear() }}</div>
@@ -210,7 +222,13 @@ onMounted(() => {
 	color: #0e62c0;
 }
 
+.resume-pdf ul {
+	list-style-type: disc;
+	padding-left: 1.5rem;
+}
+
 .resume-pdf ul > li {
-	margin-left: 1rem;
+	margin-left: 0;
+	margin-bottom: 0.25rem;
 }
 </style>
