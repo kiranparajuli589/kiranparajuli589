@@ -154,14 +154,6 @@ const baseResume = {
 			},
 		},
 		{
-			title: "Asians Group Design System",
-			description:
-				"Token-driven component library powering marketing sites, dashboards, and internal tools.",
-			impact:
-				"Unified UI across 4 product squads and cut new feature build time by 35%.",
-			stack: ["Nuxt.js", "PrimeVue", "TailwindCSS", "Storybook"],
-		},
-		{
 			title: "Markdown Parser",
 			description:
 				"Modular Markdown parser for Node.js with plugin-based extensions and custom syntax.",
@@ -208,6 +200,7 @@ const baseResume = {
 				"Created a token-driven design system adopted by 4 squads, reducing UI defects by 45% and accelerating new feature delivery by 35%.",
 				"Shrank JavaScript bundles by 35% via route-level code-splitting, asset compression, and smarter caching, yielding a 30% drop in perceived load time.",
 				"Mentored backend/fullstack engineers, instituted review rubrics, and added automated accessibility/performance checks in Jenkins, reducing failed deployments by 30%.",
+				"Redesigned loading-state and socket handling to eliminate redundant calls, improving perceived responsiveness by 40% and reducing drop-offs during key user actions.",
 			],
 			companyUrl: "https://asians.group",
 			companyLogo: "asians_group.png",
@@ -344,7 +337,7 @@ const baseResume = {
 				"Built a Locust-driven load-testing suite that validated 100k+ concurrent authentication flows prior to enterprise launches.",
 				"Integrated Playwright UI suites and contract tests into CI/CD, reducing regression escapes by 40%.",
 				"Partnered with security, product, and customer teams to run quality audits, deliver demos, and sign off on regulated releases.",
-				"Led Playwright enablement workshops and documentation that accelerated onboarding for new engineers.",
+				"Ran Playwright training program used by 5+ engineers and reduced onboarding time of new hires by 30%.",
 			],
 			companyUrl: "https://www.12id.com",
 			companyLogo: "12iD.png",

@@ -46,9 +46,17 @@ useSeo({
 
 onMounted(() => {
 	setTimeout(() => {
-		if (import.meta.client) {
-			window.print();
-		}
+		// Set document title for PDF filename
+		const filename = `${personalInfo.name.replace(/\s+/g, "_")}_Resume.pdf`;
+		const originalTitle = document.title;
+		document.title = filename.replace(".pdf", "");
+
+		window.print();
+
+		// Restore original title after printing
+		setTimeout(() => {
+			document.title = originalTitle;
+		}, 1000);
 	}, 1000);
 });
 </script>
@@ -58,34 +66,37 @@ onMounted(() => {
 			<h1 class="font-semibold text-lg">{{ personalInfo.name }}</h1>
 			<h4>{{ personalInfo.role }}</h4>
 			<p class="flex items-center gap-4 flex-wrap">
-				<span>📞</span>
-				{{ personalInfo.phone }}
-				<span>✉️</span>
-				{{ personalInfo.email }}
-				<span>📍</span>
-				{{ personalInfo.municipality }}, {{ personalInfo.country }}
-				{{ personalInfo.postalCode }}
-			</p>
-			<div class="p-list flex gap-4 flex-wrap items-center">
-				<a target="_blank" :href="personalInfo.linkedin || '#'">
-					<span>LinkedIn:</span>
-					{{ personalInfo.linkedin?.replace("https://", "") }}
+				<a :href="`tel:${personalInfo.phone}`">
+					<span class="mr-1">📞</span>
+					{{ personalInfo.phone }}
 				</a>
-				<a target="_blank" :href="personalInfo.github || '#'">
-					<span>GitHub:</span>
-					{{ personalInfo.github?.replace("https://", "") }}
-				</a>
-				<a target="_blank" :href="personalInfo.website || '#'">
-					<span>Website:</span>
-					{{ personalInfo.website?.replace("https://", "") }}
+				<a :href="`mailto:${personalInfo.email}`">
+					<span class="mr-1">✉️</span>
+					{{ personalInfo.email }}
 				</a>
 				<a
 					target="_blank"
-					class="flex gap-2 items-center"
-					:href="personalInfo.devto || '#'"
+					title="Open in Google Maps"
+					:href="`https://maps.app.goo.gl/tjWvTf761EWywkCU9`"
 				>
-					<span>Dev.to:</span>
-					{{ personalInfo.devto?.replace("https://", "") }}
+					<span class="mr-1">📍</span>
+					{{ personalInfo.municipality }}, {{ personalInfo.country }}
+					{{ personalInfo.postalCode }}
+				</a>
+			</p>
+			<div class="p-list flex gap-2 flex-wrap items-center">
+				<span class="font-semibold">Links:</span>
+				<a target="_blank" :href="personalInfo.linkedin || '#'">
+					<span>LinkedIn</span>
+				</a>
+				<a target="_blank" :href="personalInfo.github || '#'">
+					<span>GitHub</span>
+				</a>
+				<a target="_blank" :href="personalInfo.website || '#'">
+					<span>Website</span>
+				</a>
+				<a target="_blank" :href="personalInfo.devto || '#'">
+					<span>Dev.to</span>
 				</a>
 			</div>
 
@@ -115,7 +126,7 @@ onMounted(() => {
 			<div
 				v-for="(experience, index) in experiences"
 				:key="experience.company"
-				class="mb-4"
+				class="mb-6"
 			>
 				<h3 class="font-semibold">
 					{{ index + 1 }}. {{ experience.company }}
@@ -128,7 +139,10 @@ onMounted(() => {
 					</a>
 				</h3>
 				<div class="mb-1">
-					<div title="Role" class="font-semibold text-gray-600 dark:text-gray-400">
+					<div
+						title="Role"
+						class="font-semibold text-gray-600 dark:text-gray-400"
+					>
 						{{ experience.roles.join(", ") }} ({{ experience.startDate }} -
 						{{ experience.endDate }})
 					</div>
@@ -156,7 +170,7 @@ onMounted(() => {
 				<p class="mb-1">{{ project.description }}</p>
 				<p class="mb-2 text-sm italic">{{ project.impact }}</p>
 				<div class="mb-1 text-sm">
-					<strong>Stack:</strong> {{ project.stack.join(", ") }}
+					<strong class="mr-3">Stack:</strong> {{ project.stack.join(", ") }}
 				</div>
 				<div
 					v-if="project.links && Object.keys(project.links).length"
@@ -184,7 +198,7 @@ onMounted(() => {
 			</div>
 
 			<h2 class="pt-4">Additional Skills</h2>
-			<Divider class="mb-2" height="2" />
+			<hr class="mb-2" />
 
 			<div v-for="skill in additionalSkills" :key="skill.title" class="mb-4">
 				<h4 class="font-semibold">{{ skill.title }}</h4>
@@ -194,7 +208,7 @@ onMounted(() => {
 			</div>
 
 			<h2 class="pt-4">Extras</h2>
-			<Divider class="mb-2" height="2" />
+			<hr class="mb-2" />
 			<ul>
 				<li v-for="extra in extras" :key="extra">{{ extra }}</li>
 			</ul>
