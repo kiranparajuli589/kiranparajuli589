@@ -1,10 +1,7 @@
 <script setup lang="ts">
 import { htmlMark } from "~/utils";
 import { ref, onBeforeMount } from "vue";
-import {
-	useSeo,
-	createArticleStructuredData,
-} from "~/composables/useSeo";
+import { useSeo, createArticleStructuredData } from "~/composables/useSeo";
 
 const mdp = htmlMark();
 const route = useRoute();

@@ -33,7 +33,9 @@ onBeforeMount(async () => {
 		frontMatters.push({
 			title: String(frontMatter.title || ""),
 			date: String(frontMatter.date || ""),
-			tags: Array.isArray(frontMatter.tags) ? frontMatter.tags as string[] : [],
+			tags: Array.isArray(frontMatter.tags)
+				? (frontMatter.tags as string[])
+				: [],
 			contentLength: blog.content.length,
 			fileName: blog.fileName,
 			filePath: blog.path,

@@ -26,7 +26,9 @@ const services = Resume.services;
 							:name="'i-mdi-' + service.icon"
 							:class="'text-' + service.iconColor"
 						/>
-						<h2 class="overflow-hidden text-ellipsis whitespace-nowrap m-0 text-xl">
+						<h2
+							class="overflow-hidden text-ellipsis whitespace-nowrap m-0 text-xl"
+						>
 							{{ service.name }}
 						</h2>
 					</div>

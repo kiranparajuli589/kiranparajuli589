@@ -7,13 +7,16 @@ tags: ["django", "vue", "docker", "docker-compose", "gunicorn", "vite"]
 In this comprehensive guide, we will walk you through the process of dockerizing your Django and Vue applications.
 
 ## Prerequisites
+
 - Docker (version 20.x.x or higher)
 - Docker-compose (version 2.x.x or higher)
 - Django application (Django + Gunicorn)
 - Vue application (Vue + Vite)
 
 ## Folder Structure
+
 To facilitate this guide, we assume the following folder structure for your project. You can customize it as needed, but remember to adjust the commands accordingly:
+
 ```
 .
 ├── backend (Django application)
@@ -32,6 +35,7 @@ For the Django application, we'll make the following assumptions:
 3. Database: `postgres`
 
 ### Gunicorn Configuration
+
 ```python
 workers = 4
 max_requests = 1000
@@ -45,6 +49,7 @@ errorlog = "logs/gunicorn_error.log"
 Note: We use `0.0.0.0` for binding to allow access from outside the container.
 
 ### Dockerfile for Backend
+
 In this section, we'll prepare the playground for your Django application. We will use Docker Compose to run the application. Here are the assumptions:
 
 1. Port to expose: `8000`
@@ -69,12 +74,14 @@ CMD ["gunicorn", "backend.wsgi:application", "--config", "gunicorn.py"]
 Note: We won't copy all files to the container; instead, we'll use volumes to mount files from Docker Compose to preserve hot-reloading functionality.
 
 ### Dockerfile for Frontend
+
 Similarly, we'll prepare the playground for your Vue application. We will use Docker Compose to run the application. For Vue, we'll assume:
 
 1. Port to expose: `3000`
 2. Serve using: `Vite`
 
 To make it work with Docker, add the following to your `package.json`:
+
 ```json
 {
 	"scripts": {
@@ -103,11 +110,11 @@ CMD ["pnpm", "dev:docker"]
 Just like with the Django application, we won't copy all files to the container, relying on Docker Compose volumes for file mounting to maintain hot-reloading.
 
 ## Docker compose
+
 Now, let's dive into Docker Compose to run your application.
 
-
 ```yaml
-version: '3.8'
+version: "3.8"
 
 services:
   postgres:
@@ -121,7 +128,7 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: [ "CMD", "pg_isready", "-U", "einstein" ]
+      test: ["CMD", "pg_isready", "-U", "einstein"]
       interval: 5s
       timeout: 5s
       retries: 5
@@ -142,7 +149,7 @@ services:
     ports:
       - "8000:8000"
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:8000/healthcheck" ]
+      test: ["CMD", "curl", "-f", "http://localhost:8000/healthcheck"]
       interval: 5s
       timeout: 5s
       retries: 5
@@ -187,6 +194,7 @@ To run migrations, execute the following command:
 ```bash
 docker compose exec backend python manage.py migrate
 ```
+
 The choice to run migrations after the application is up allows for easy updates to models without manual migration execution.
 
 To create a superuser, run:
@@ -194,6 +202,7 @@ To create a superuser, run:
 ```bash
 docker compose exec backend python manage.py createsuperuser
 ```
+
 Avoid putting superuser creation in the Dockerfile to prevent errors if the superuser already exists.
 
 To collect static files, use this command:

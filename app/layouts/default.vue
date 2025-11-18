@@ -12,7 +12,7 @@ import SideBar from "~/components/home/SideBar.vue";
 			<ToolBar />
 			<div class="flex relative">
 				<SideBar class="md:flex hidden" />
-				<div class="md:pl-28 pl-8 py-8 pr-8">
+				<div class="md:pl-28 pl-8 py-8 pr-8 w-full">
 					<NuxtPage />
 				</div>
 			</div>

@@ -3,7 +3,7 @@
 	font-size: 1rem;
 	flex-grow: 1;
 	text-align: center;
-	padding: .2rem .5rem;
+	padding: 0.2rem 0.5rem;
 	border: 1px solid grey;
 }
 
@@ -31,7 +31,7 @@
 	animation: cursorAnim 1s infinite alternate;
 
 	&::before {
-		content: '';
+		content: "";
 		position: absolute;
 		top: 50%;
 		left: 50%;
@@ -46,7 +46,7 @@
 @keyframes cursorAnim {
 	from {
 		transform: scale(1);
-		opacity: .6;
+		opacity: 0.6;
 	}
 
 	to {
@@ -63,7 +63,7 @@
 	background: #1867c0c2;
 	cursor: pointer;
 	color: white;
-	padding: .4rem;
+	padding: 0.4rem;
 	transform: rotate(270deg);
 	border-radius: 4px;
 }
@@ -81,7 +81,7 @@
 	width: 100%;
 	max-width: 120px;
 	height: 3px;
-	background-color: #1867C0;
+	background-color: #1867c0;
 	margin-block: 1rem 3rem;
 	border-radius: 24px;
 	position: relative;
@@ -97,10 +97,10 @@
 	}
 
 	&::before {
-		content: '';
+		content: "";
 		width: 14px;
 		aspect-ratio: 1;
-		background: #1867C0;
+		background: #1867c0;
 		border-radius: 50%;
 		position: absolute;
 		top: -5px;

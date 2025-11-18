@@ -7,6 +7,7 @@ tags: ["ssl", "localhost", "mkcert", "nginx", "docker"]
 In this comprehensive guide, we will walk you through the process of setting up SSL with localhost using mkcert and Nginx.
 
 ## Prerequisites
+
 - [mkcert](https://github.com/FiloSottile/mkcert "mkcert")
 - [Nginx](https://nginx.org/en/ "Nginx")
 - [Docker](https://www.docker.com/ "Docker")
@@ -14,7 +15,9 @@ In this comprehensive guide, we will walk you through the process of setting up 
 - [Vue Application](https://vuejs.org/ "Vue") (Optional: This could be any frontend application that you want to serve over HTTPS)
 
 ## Folder Structure
+
 To facilitate this guide, we assume the following folder structure for your project. You can customize it as needed, but remember to adjust the commands accordingly:
+
 ```
 .
 ├── frontend (Vue application)
@@ -43,7 +46,6 @@ mkcert -key-file key.pem -cert-file cert.pem example.com *.example.com
 ```
 
 This command will generate two files: `key.pem` and `cert.pem`. The `key.pem` file contains the private key, and the `cert.pem` file contains the certificate.
-
 
 ## Docker Compose
 

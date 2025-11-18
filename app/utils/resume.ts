@@ -28,8 +28,7 @@ interface ResumeInterface {
 	services: Service[];
 	technologies: Technology[];
 	education: Education[];
-	coreSkills: SkillCategory[];
-	additionalSkills: SkillCategory[];
+	skills: SkillCategory[];
 	leadershipHighlights: string[];
 	selectedProjects: SelectedProject[];
 	extras: string[];
@@ -64,7 +63,7 @@ const baseResume = {
 		summaryQa:
 			"Results-driven Quality Assurance Engineer with expertise in WebUI, API, CLI, Unit, and E2E testing. Skilled in planning, writing, and maintaining test cases. Passionate about mentoring and continuous improvement within teams. Utilizes music and creative outlets to stay inspired.",
 	},
-	coreSkills: [
+	skills: [
 		{
 			title: "Frontend Engineering",
 			items: [
@@ -85,8 +84,6 @@ const baseResume = {
 				"CI/CD ownership with GitHub Actions, GitLab CI, Jenkins",
 			],
 		},
-	],
-	additionalSkills: [
 		{
 			title: "QA Automation",
 			items: [
@@ -177,7 +174,7 @@ const baseResume = {
 			description:
 				"A vital internet intermediary that powers CDN services, custom nodes, DNS acceleration, and SSL offerings for global customers.",
 			roles: ["Senior Frontend Engineer"],
-			startDate: "2025",
+			startDate: "2024",
 			endDate: "Present",
 			technologies: [
 				"Nuxt.js",
@@ -831,7 +828,7 @@ const Resume: ResumeInterface = {
 	...baseResume,
 	personalInfo: {
 		...baseResume.personalInfo,
-		summary: `Senior Frontend Engineer with ${yearsOfExperience}+ years of experience shipping high-performance web applications, modernizing platforms, and leading product-focused engineering teams. Specializes in React.js, Vue.js, TypeScript, and cross-browser architecture, backed by strong backend fundamentals in Node.js, Django, and PostgreSQL plus deep automation expertise. Known for building scalable UI systems, driving performance budgets, mentoring engineers, and owning features end-to-end—from architecture and development to testing, CI/CD, and deployment.`,
+		summary: `Senior Frontend Engineer with ${yearsOfExperience}+ years building scalable web applications and leading engineering teams. Expert in React.js, Vue.js, and TypeScript with strong backend fundamentals (Node.js, Django) and automation expertise. Proven track record of modernizing platforms, improving performance by 40%+, and mentoring engineers.`,
 	},
 };
 

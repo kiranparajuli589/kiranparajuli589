@@ -63,6 +63,7 @@ pnpm lint
 ## VS Code Settings
 
 The project includes `.vscode/settings.json` with:
+
 - Auto-save enabled (1s delay)
 - ESLint auto-fix on save
 - Format on save

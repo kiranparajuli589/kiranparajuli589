@@ -20,15 +20,15 @@ const works = Resume.works;
 					<h2 class="work--card--title text-3xl">{{ work.title }}</h2>
 				</template>
 
-			<div class="bg-gray-200 rounded-lg overflow-hidden">
-				<img
-					class="w-full max-h-64 object-cover"
-					loading="lazy"
-					decoding="async"
-					:alt="`${work.title} project thumbnail`"
-					:src="getAssetUrl(work.thumbnail, 'projects')"
-				/>
-			</div>
+				<div class="bg-gray-200 rounded-lg overflow-hidden">
+					<img
+						class="w-full max-h-64 object-cover"
+						loading="lazy"
+						decoding="async"
+						:alt="`${work.title} project thumbnail`"
+						:src="getAssetUrl(work.thumbnail, 'projects')"
+					/>
+				</div>
 
 				<div class="mt-4">
 					{{ work.description }}

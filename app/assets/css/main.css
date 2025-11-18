@@ -2,17 +2,17 @@
 @import "@nuxt/ui";
 
 @theme static {
-  --ui-color-primary-50: #e3f2fd;
-  --ui-color-primary-100: #bbdefb;
-  --ui-color-primary-200: #90caf9;
-  --ui-color-primary-300: #64b5f6;
-  --ui-color-primary-400: #42a5f5;
-  --ui-color-primary-500: #2196f3;
-  --ui-color-primary-600: #1e88e5;
-  --ui-color-primary-700: #1976d2;
-  --ui-color-primary-800: #1565c0;
-  --ui-color-primary-900: #0d47a1;
+	--ui-color-primary-50: #e3f2fd;
+	--ui-color-primary-100: #bbdefb;
+	--ui-color-primary-200: #90caf9;
+	--ui-color-primary-300: #64b5f6;
+	--ui-color-primary-400: #42a5f5;
+	--ui-color-primary-500: #2196f3;
+	--ui-color-primary-600: #1e88e5;
+	--ui-color-primary-700: #1976d2;
+	--ui-color-primary-800: #1565c0;
+	--ui-color-primary-900: #0d47a1;
 
-  --font-sans: 'Baumans', system-ui, -apple-system, sans-serif;
-	--font-brand: 'Audiowide', system-ui, -apple-system, sans-serif;
+	--font-sans: "Baumans", system-ui, -apple-system, sans-serif;
+	--font-brand: "Audiowide", system-ui, -apple-system, sans-serif;
 }

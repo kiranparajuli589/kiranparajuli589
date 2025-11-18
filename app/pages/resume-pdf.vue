@@ -3,6 +3,7 @@ import Resume from "~/utils/resume";
 import { onMounted } from "vue";
 import Divider from "~/components/Divider.vue";
 import { useSeo } from "~/composables/useSeo";
+import { useAnalytics } from "~/composables/useAnalytics";
 
 definePageMeta({
 	name: "resume-pdf",
@@ -15,8 +16,7 @@ const imageUrl = `${siteUrl}/letter_k.png`;
 const personalInfo = Resume.personalInfo;
 const experiences = Resume.experiences;
 const education = Resume.education;
-const coreSkills = Resume.coreSkills;
-const additionalSkills = Resume.additionalSkills;
+const skills = Resume.skills;
 const leadershipHighlights = Resume.leadershipHighlights;
 const selectedProjects = Resume.selectedProjects;
 const extras = Resume.extras;
@@ -64,10 +64,13 @@ useSeo({
 	},
 });
 
+const { trackPdfDownload } = useAnalytics();
+
 onMounted(() => {
+	trackPdfDownload();
 	setTimeout(() => {
 		// Set document title for PDF filename
-		const filename = `${personalInfo.name.replace(/\s+/g, "_")}_Resume.pdf`;
+		const filename = `${personalInfo.name?.replace(/\s+/g, "_")}_Resume.pdf`;
 		const originalTitle = document.title;
 		document.title = filename.replace(".pdf", "");
 
@@ -85,39 +88,44 @@ onMounted(() => {
 		<div class="pdf">
 			<h1 class="font-bold text-xl">{{ personalInfo.name }}</h1>
 			<h4 class="text-gray-700 font-semibold mb-2">{{ personalInfo.role }}</h4>
-			<p class="flex items-center gap-4 flex-wrap">
-				<a class="flex items-center gap-2" :href="`tel:${personalInfo.phone}`">
-					<img src="/icons/phone.svg" alt="Phone" class="size-4 block" />
+			<p class="flex items-center gap-4 flex-wrap contact-info">
+				<span class="flex items-center gap-2">
+					<img
+						src="/icons/phone.svg"
+						alt="Phone"
+						class="size-4 block print-hide"
+					/>
 					{{ personalInfo.phone }}
-				</a>
-				<a
-					class="flex items-center gap-2"
-					:href="`mailto:${personalInfo.email}`"
-				>
-					<img src="/icons/email.svg" alt="Email" class="size-4 block" />
+				</span>
+				<span class="flex items-center gap-2">
+					<img
+						src="/icons/email.svg"
+						alt="Email"
+						class="size-4 block print-hide"
+					/>
 					{{ personalInfo.email }}
-				</a>
-				<a
-					class="flex items-center gap-2"
-					target="_blank"
-					title="Open in Google Maps"
-					:href="`https://maps.app.goo.gl/tjWvTf761EWywkCU9`"
-				>
-					<img src="/icons/location.svg" alt="Location" class="size-4 block" />
-					{{ personalInfo.municipality }}, {{ personalInfo.country }}
+				</span>
+				<span class="flex items-center gap-2">
+					<img
+						src="/icons/location.svg"
+						alt="Location"
+						class="size-4 block print-hide"
+					/>
+					{{ personalInfo.municipality }}, {{ personalInfo.country }},
 					{{ personalInfo.postalCode }}
-				</a>
+				</span>
 			</p>
 			<div class="p-list flex gap-2 flex-wrap items-center">
 				<span class="font-semibold">Links:</span>
-				<a
-					v-for="link in socialLinks"
+				<span
+					v-for="(link, index) in socialLinks"
 					:key="link.label"
-					target="_blank"
-					:href="link.href"
+					class="link-item"
 				>
 					<span>{{ link.label }}</span>
-				</a>
+					<span class="link-url">({{ link.href }})</span>
+					<span v-if="index < socialLinks.length - 1">, </span>
+				</span>
 			</div>
 
 			<h2 class="pt-4">Summary</h2>
@@ -132,37 +140,28 @@ onMounted(() => {
 				</li>
 			</ul>
 
-			<h2 class="pt-4">Core Skills</h2>
+			<h2 class="pt-4">Skills</h2>
 			<hr class="mb-2" />
-			<div v-for="skill in coreSkills" :key="skill.title" class="mb-4">
+			<div v-for="skill in skills" :key="skill.title" class="mb-4">
 				<h4 class="font-semibold">{{ skill.title }}</h4>
 				<ul>
 					<li v-for="item in skill.items" :key="item">{{ item }}</li>
 				</ul>
 			</div>
 
-			<h2 class="pt-4">Experience</h2>
+			<h2 class="pt-4 experience-section-start">Experience</h2>
 			<hr class="mb-2 border-gray-500" />
 			<div
-				v-for="(experience, index) in experiences"
+				v-for="experience in experiences"
 				:key="experience.company"
-				class="mb-6"
+				class="mb-6 experience-item"
 			>
-				<h3 class="font-semibold">
-					{{ index + 1 }}. {{ experience.company }}
-					<a
-						target="_blank"
-						:href="experience.companyUrl"
-						:title="experience.company"
-					>
-						↗
-					</a>
+				<h3 class="font-semibold experience-company">
+					{{ experience.company }}
+					<span class="company-url">({{ experience.companyUrl }})</span>
 				</h3>
 				<div class="mb-1">
-					<div
-						title="Role"
-						class="font-semibold text-gray-600 dark:text-gray-400"
-					>
+					<div title="Role" class="font-semibold text-gray-600 role-text">
 						{{ experience.roles.join(", ") }} ({{ experience.startDate }} -
 						{{ experience.endDate }})
 					</div>
@@ -181,11 +180,11 @@ onMounted(() => {
 			<Divider class="mb-2" height="2" />
 
 			<div
-				v-for="(project, index) in selectedProjects"
+				v-for="project in selectedProjects"
 				:key="project.title"
-				class="mb-6"
+				class="mb-6 project-item"
 			>
-				<h3 class="font-semibold">{{ index + 1 }}. {{ project.title }}</h3>
+				<h3 class="font-semibold">{{ project.title }}</h3>
 				<hr class="mb-2" />
 				<p class="mb-1">{{ project.description }}</p>
 				<p class="mb-2 text-sm italic">{{ project.impact }}</p>
@@ -194,16 +193,16 @@ onMounted(() => {
 				</div>
 				<div
 					v-if="project.links && Object.keys(project.links).length"
-					class="flex gap-4 mb-2"
+					class="flex gap-4 mb-2 flex-wrap project-links"
 				>
 					<strong>Links:</strong>
-					<template
-						v-for="[key, value] in Object.entries(project.links)"
-						:key="key"
-					>
-						<a target="_blank" class="capitalize" :href="value">
-							{{ key }} ↗
-						</a>
+					<template v-for="(value, key, idx) in project.links" :key="key">
+						<span class="capitalize">
+							{{ key }}: {{ value }}
+							<span v-if="idx < Object.keys(project.links).length - 1">
+								,
+							</span>
+						</span>
 					</template>
 				</div>
 			</div>
@@ -215,16 +214,6 @@ onMounted(() => {
 				<h3 class="font-semibold">{{ edu.degree }} in {{ edu.name }}</h3>
 				<h4>{{ edu.major }}</h4>
 				<p>{{ edu.startDate }} - {{ edu.endDate }}</p>
-			</div>
-
-			<h2 class="pt-4">Additional Skills</h2>
-			<hr class="mb-2" />
-
-			<div v-for="skill in additionalSkills" :key="skill.title" class="mb-4">
-				<h4 class="font-semibold">{{ skill.title }}</h4>
-				<ul>
-					<li v-for="item in skill.items" :key="item">{{ item }}</li>
-				</ul>
 			</div>
 
 			<h2 class="pt-4">Extras</h2>
@@ -243,17 +232,24 @@ onMounted(() => {
 <style scoped>
 .resume-pdf {
 	padding: 0.5rem;
-	font-size: 0.875rem;
+	font-size: 1rem;
 	max-width: 1000px;
 	margin: 0 auto;
+	line-height: 1.6;
 }
 
 .resume-pdf .role {
 	font-weight: 600;
 }
 
-.resume-pdf .p-list a {
+.resume-pdf .p-list .link-item {
 	color: #0e62c0;
+}
+
+.resume-pdf .p-list .link-url {
+	font-size: 0.85em;
+	color: #666;
+	font-weight: normal;
 }
 
 .resume-pdf ul {
@@ -263,6 +259,189 @@ onMounted(() => {
 
 .resume-pdf ul > li {
 	margin-left: 0;
+	margin-bottom: 0.5rem;
+}
+
+.resume-pdf h1 {
+	font-size: 1.75rem;
+	margin-bottom: 0.5rem;
+}
+
+.resume-pdf h2 {
+	font-size: 1.25rem;
+	margin-top: 1.5rem;
+	margin-bottom: 0.5rem;
+	page-break-after: avoid;
+}
+
+.resume-pdf h3 {
+	font-size: 1.1rem;
+	margin-top: 0.75rem;
 	margin-bottom: 0.25rem;
+}
+
+.resume-pdf h4 {
+	font-size: 1rem;
+	margin-top: 0.5rem;
+	margin-bottom: 0.25rem;
+}
+
+.resume-pdf .experience-item,
+.resume-pdf .project-item {
+	page-break-inside: avoid;
+}
+
+.resume-pdf .contact-info {
+	font-size: 0.95rem;
+}
+
+.resume-pdf .company-url {
+	font-size: 0.85em;
+	color: #666;
+	font-weight: normal;
+}
+
+.resume-pdf .role-text {
+	color: #4b5563;
+}
+
+.print-hide {
+	display: inline-block;
+}
+
+/* Print Styles */
+@media print {
+	@page {
+		size: letter;
+		margin: 0.75in;
+	}
+
+	.resume-pdf {
+		padding: 0;
+		font-size: 11pt;
+		max-width: 100%;
+		margin: 0;
+	}
+
+	.resume-pdf h1 {
+		font-size: 20pt;
+		margin-bottom: 0.25rem;
+	}
+
+	.resume-pdf h2 {
+		font-size: 14pt;
+		margin-top: 12pt;
+		margin-bottom: 6pt;
+		page-break-after: avoid;
+		border-bottom: 1pt solid #000;
+		padding-bottom: 3pt;
+	}
+
+	.resume-pdf .experience-section-start {
+		page-break-before: always;
+		margin-top: 0;
+	}
+
+	.resume-pdf h3 {
+		font-size: 12pt;
+		margin-top: 8pt;
+		margin-bottom: 4pt;
+		page-break-after: avoid;
+	}
+
+	.resume-pdf h4 {
+		font-size: 11pt;
+		margin-top: 6pt;
+		margin-bottom: 3pt;
+	}
+
+	.resume-pdf p {
+		margin-bottom: 6pt;
+		font-size: 11pt;
+	}
+
+	.resume-pdf ul {
+		margin-bottom: 8pt;
+	}
+
+	.resume-pdf ul > li {
+		margin-bottom: 4pt;
+		font-size: 11pt;
+	}
+
+	.resume-pdf hr {
+		border: none;
+		border-top: 1pt solid #ccc;
+		margin: 6pt 0;
+	}
+
+	/* Hide icons in print */
+	.print-hide {
+		display: none !important;
+	}
+
+	/* Remove colors and links */
+	.resume-pdf .p-list .link-item {
+		color: #000 !important;
+	}
+
+	.resume-pdf .p-list .link-url {
+		color: #666 !important;
+		font-size: 9pt;
+	}
+
+	.resume-pdf .company-url {
+		color: #666 !important;
+		font-size: 9pt;
+	}
+
+	.resume-pdf .role-text {
+		color: #4b5563 !important;
+	}
+
+	/* Page break controls */
+	.resume-pdf .experience-item,
+	.resume-pdf .project-item {
+		page-break-inside: avoid;
+		margin-bottom: 12pt;
+	}
+
+	/* Footer only on last page */
+	.resume-pdf footer {
+		page-break-inside: avoid;
+		margin-top: 20pt;
+		padding-top: 10pt;
+		border-top: 1pt solid #ccc;
+		font-size: 9pt;
+		color: #666;
+	}
+
+	/* Remove dark mode classes */
+	.resume-pdf * {
+		color: #000 !important;
+		background: transparent !important;
+	}
+
+	/* Ensure proper spacing */
+	.resume-pdf .mb-2 {
+		margin-bottom: 6pt;
+	}
+
+	.resume-pdf .mb-4 {
+		margin-bottom: 12pt;
+	}
+
+	.resume-pdf .mb-6 {
+		margin-bottom: 18pt;
+	}
+
+	.resume-pdf .pt-4 {
+		padding-top: 12pt;
+	}
+
+	/* Project links formatting */
+	.resume-pdf .project-links {
+		font-size: 10pt;
+	}
 }
 </style>

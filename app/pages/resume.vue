@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from "vue";
 import ExperienceSection from "~/components/home/ExperienceSection.vue";
 import ToolsSection from "~/components/home/ToolsSection.vue";
 import Resume from "~/utils/resume";
@@ -8,6 +7,8 @@ import {
 	createPersonStructuredData,
 	createCollectionPageStructuredData,
 } from "~/composables/useSeo";
+import { useResumeExport } from "~/composables/useResumeExport";
+import { useAnalytics } from "~/composables/useAnalytics";
 
 const siteUrl = "https://kiranparajuli.com.np";
 const currentUrl = `${siteUrl}/resume`;
@@ -72,73 +73,29 @@ useHead({
 	],
 });
 
-// Easter egg: Show buttons when pressing "k" three times
-const showButtons = ref(false);
-const keySequence = ref<string[]>([]);
-let resetSequenceTimeout: ReturnType<typeof setTimeout> | null = null;
-const expectedLetter = "k";
+const { downloadAsPlainText } = useResumeExport();
+const { trackPlainTextDownload } = useAnalytics();
 
-const handleKeyPress = (event: KeyboardEvent) => {
-	// Only listen for "k" key (case-insensitive)
-	if (event.key.toLowerCase() !== expectedLetter) {
-		return;
-	}
-
-	// Prevent default if not in an input field
-	if (
-		event.target instanceof HTMLInputElement ||
-		event.target instanceof HTMLTextAreaElement
-	) {
-		return;
-	}
-
-	// Clear previous timeout
-	if (resetSequenceTimeout) {
-		clearTimeout(resetSequenceTimeout);
-	}
-
-	// Add "k" to sequence
-	keySequence.value.push(expectedLetter);
-
-	// Reset sequence if more than 3 presses
-	if (keySequence.value.length > 3) {
-		keySequence.value = [expectedLetter];
-	}
-
-	// Check if we have three "k" presses
-	if (keySequence.value.length === 3) {
-		// Show buttons
-		showButtons.value = true;
-
-		// Hide buttons after 3 seconds
-		setTimeout(() => {
-			showButtons.value = false;
-		}, 3000);
-
-		// Reset sequence
-		keySequence.value = [];
-	} else {
-		// Reset sequence if no press within 1 second
-		resetSequenceTimeout = setTimeout(() => {
-			keySequence.value = [];
-		}, 1000);
-	}
+const handleDownloadPlainText = () => {
+	trackPlainTextDownload();
+	const filename = `${personalInfo.name?.replace(/\s+/g, "_") || "Resume"}_Resume.txt`;
+	downloadAsPlainText(filename);
 };
 
-onMounted(() => {
-	if (import.meta.client) {
-		window.addEventListener("keydown", handleKeyPress);
+const handleDownloadDocx = async () => {
+	try {
+		const { useDocxExport } = await import("~/composables/useDocxExport");
+		const { exportResumeAsDocx } = useDocxExport();
+		await exportResumeAsDocx();
+	} catch (error) {
+		console.error("Failed to export DOCX:", error);
+		const message =
+			error instanceof Error
+				? error.message
+				: "Failed to export DOCX. Please try again.";
+		alert(message);
 	}
-});
-
-onUnmounted(() => {
-	if (import.meta.client) {
-		window.removeEventListener("keydown", handleKeyPress);
-		if (resetSequenceTimeout) {
-			clearTimeout(resetSequenceTimeout);
-		}
-	}
-});
+};
 </script>
 <template>
 	<div class="resume">
@@ -146,7 +103,7 @@ onUnmounted(() => {
 			<span class="text-xl uppercase font-bold mr-4">Resume</span>
 			<UButton
 				color="primary"
-				title="Download a copy of my resume"
+				title="Download a copy of my resume as PDF"
 				variant="subtle"
 				class="mr-4"
 				:to="'/resume-pdf'"
@@ -154,16 +111,25 @@ onUnmounted(() => {
 				<UIcon name="i-heroicons-arrow-down-tray" />
 				<span class="px-1 font-bold">Download Pdf</span>
 			</UButton>
-			<!-- Generate Cover Letter -->
 			<UButton
-				v-if="showButtons"
 				color="primary"
-				title="Generate a cover letter"
+				title="Download resume as plain text (ATS-friendly)"
 				variant="subtle"
-				:to="'/cover-letter'"
+				class="mr-4"
+				@click="handleDownloadPlainText"
 			>
-				<UIcon name="i-heroicons-envelope" />
-				<span class="px-1 font-bold">Generate Cover Letter</span>
+				<UIcon name="i-heroicons-document-text" />
+				<span class="px-1 font-bold">Download TXT</span>
+			</UButton>
+			<UButton
+				color="primary"
+				title="Download resume as DOCX"
+				variant="subtle"
+				class="mr-4"
+				@click="handleDownloadDocx"
+			>
+				<UIcon name="i-heroicons-document-duplicate" />
+				<span class="px-1 font-bold">Download DOCX</span>
 			</UButton>
 		</h1>
 

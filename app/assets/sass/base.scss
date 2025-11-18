@@ -11,26 +11,32 @@
 
 /* Custom styles */
 html {
-  scroll-behavior: smooth;
+	scroll-behavior: smooth;
 }
 
 body {
-  transition: background-color 0.3s ease, color 0.3s ease;
-  font-family: 'Baumans', system-ui, -apple-system, sans-serif;
+	transition:
+		background-color 0.3s ease,
+		color 0.3s ease;
+	font-family:
+		"Baumans",
+		system-ui,
+		-apple-system,
+		sans-serif;
 }
 
 /* Dark mode styles */
 .dark {
-  background-color: #1e1e1e;
-  color: #c9c9c9;
+	background-color: #1e1e1e;
+	color: #c9c9c9;
 }
 
 .light {
-  background-color: #ffffff;
-  color: #1e1e1e;
+	background-color: #ffffff;
+	color: #1e1e1e;
 }
 
-button, a {
+button,
+a {
 	cursor: pointer;
 }
-
