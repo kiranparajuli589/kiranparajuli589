@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref, onMounted, onUnmounted } from "vue";
 import ExperienceSection from "~/components/home/ExperienceSection.vue";
 import ToolsSection from "~/components/home/ToolsSection.vue";
 import Resume from "~/utils/resume";
@@ -70,6 +71,74 @@ useHead({
 		},
 	],
 });
+
+// Easter egg: Show buttons when pressing "k" three times
+const showButtons = ref(false);
+const keySequence = ref<string[]>([]);
+let resetSequenceTimeout: ReturnType<typeof setTimeout> | null = null;
+const expectedLetter = "k";
+
+const handleKeyPress = (event: KeyboardEvent) => {
+	// Only listen for "k" key (case-insensitive)
+	if (event.key.toLowerCase() !== expectedLetter) {
+		return;
+	}
+
+	// Prevent default if not in an input field
+	if (
+		event.target instanceof HTMLInputElement ||
+		event.target instanceof HTMLTextAreaElement
+	) {
+		return;
+	}
+
+	// Clear previous timeout
+	if (resetSequenceTimeout) {
+		clearTimeout(resetSequenceTimeout);
+	}
+
+	// Add "k" to sequence
+	keySequence.value.push(expectedLetter);
+
+	// Reset sequence if more than 3 presses
+	if (keySequence.value.length > 3) {
+		keySequence.value = [expectedLetter];
+	}
+
+	// Check if we have three "k" presses
+	if (keySequence.value.length === 3) {
+		// Show buttons
+		showButtons.value = true;
+
+		// Hide buttons after 3 seconds
+		setTimeout(() => {
+			showButtons.value = false;
+		}, 3000);
+
+		// Reset sequence
+		keySequence.value = [];
+	} else {
+		// Reset sequence if no press within 1 second
+		resetSequenceTimeout = setTimeout(() => {
+			keySequence.value = [];
+		}, 1000);
+	}
+};
+
+onMounted(() => {
+	if (import.meta.client) {
+		window.addEventListener("keydown", handleKeyPress);
+	}
+});
+
+onUnmounted(() => {
+	if (import.meta.client) {
+		window.removeEventListener("keydown", handleKeyPress);
+		if (resetSequenceTimeout) {
+			clearTimeout(resetSequenceTimeout);
+		}
+	}
+});
 </script>
 <template>
 	<div class="resume">
@@ -79,10 +148,22 @@ useHead({
 				color="primary"
 				title="Download a copy of my resume"
 				variant="subtle"
+				class="mr-4"
 				:to="'/resume-pdf'"
 			>
 				<UIcon name="i-heroicons-arrow-down-tray" />
 				<span class="px-1 font-bold">Download Pdf</span>
+			</UButton>
+			<!-- Generate Cover Letter -->
+			<UButton
+				v-if="showButtons"
+				color="primary"
+				title="Generate a cover letter"
+				variant="subtle"
+				:to="'/cover-letter'"
+			>
+				<UIcon name="i-heroicons-envelope" />
+				<span class="px-1 font-bold">Generate Cover Letter</span>
 			</UButton>
 		</h1>
 
