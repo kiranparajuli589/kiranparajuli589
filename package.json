@@ -21,7 +21,7 @@
 		"docx": "^9.5.1",
 		"eslint": "^9.39.0",
 		"highlight.js": "^11.11.1",
-		"htmlmark": "^0.2.2",
+		"htmlmark": "^0.2.3",
 		"nuxt": "^4.2.0",
 		"pinia": "^3.0.3",
 		"typescript": "^5.9.3",

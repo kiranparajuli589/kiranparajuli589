@@ -13,7 +13,7 @@ const services = Resume.services;
 				v-for="(service, index) in services"
 				:key="service.name"
 				variant="subtle"
-				class="grow w-full md:w-[calc(50%-0.5rem)] transition-all duration-200 hover:-translate-y-1"
+				class="grow w-full md:w-[calc(50%-0.5rem)]"
 				:class="'service-card service-' + index"
 				:ui="{
 					root: 'dark:!bg-gray-900',
@@ -24,7 +24,7 @@ const services = Resume.services;
 						<UIcon
 							class="text-3xl"
 							:name="'i-mdi-' + service.icon"
-							:class="'text-' + service.iconColor"
+							:class="service.iconColor"
 						/>
 						<h2
 							class="overflow-hidden text-ellipsis whitespace-nowrap m-0 text-xl"
@@ -62,7 +62,7 @@ const services = Resume.services;
 	--radiation-pos: -0.7rem;
 	flex-grow: 1;
 	width: 100%;
-	transition: transform 0.2s ease;
+	transition: transform 1s ease;
 
 	@media only screen and (min-width: 768px) {
 		width: calc(50% - 1rem);
@@ -132,9 +132,9 @@ const services = Resume.services;
 	}
 
 	&.service-3 {
-		--radiation-color-1: rgba(138, 138, 141, 0.27);
-		--radiation-color-2: rgba(138, 138, 141, 0.4);
-		--radiation-color-3: rgba(138, 138, 141, 0.4);
+		--radiation-color-1: rgb(147, 51, 234);
+		--radiation-color-2: rgba(147, 51, 234, 0.6);
+		--radiation-color-3: rgba(147, 51, 234, 0.4);
 
 		&::before {
 			right: var(--radiation-pos);

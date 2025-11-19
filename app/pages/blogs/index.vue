@@ -90,7 +90,7 @@ useSeo({
 					@click="navigateTo(`/blog/${blog.fileName.replace('.md', '')}`)"
 				>
 					<template #header>
-						<h2 class="blog--title">
+						<h2 class="font-semibold text-xl">
 							{{ blog.title }}
 						</h2>
 					</template>

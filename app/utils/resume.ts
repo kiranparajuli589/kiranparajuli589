@@ -682,7 +682,7 @@ const baseResume = {
 				" It is true that I am not the best designer you can hire, but I can implement complex" +
 				" designs on your website.",
 			icon: "web-box",
-			iconColor: "primary",
+			iconColor: "text-primary",
 			experience: new Date().getFullYear() - 2018,
 		},
 		{
@@ -693,7 +693,7 @@ const baseResume = {
 				" I also have some experience with microservices architecture. The advanced part of my" +
 				" work entails more engineering work relating to Data Structure operations, Query Optimization, and more.",
 			icon: "server",
-			iconColor: "indigo",
+			iconColor: "text-indigo-500",
 			experience: new Date().getFullYear() - 2018,
 		},
 		{
@@ -704,7 +704,7 @@ const baseResume = {
 				" reduce flakiness inside existing test cases and implement, maintain" +
 				" and optimize the CI/CD pipelines.",
 			icon: "lightbulb-auto",
-			iconColor: "green",
+			iconColor: "text-green-500",
 			types: [
 				"Smoke Testing",
 				"Regression Testing",
@@ -727,7 +727,7 @@ const baseResume = {
 				" cloud and organize load balancing for clients or servers." +
 				" I can also create and maintain CI/CD pipelines for your application.",
 			icon: "cloud",
-			iconColor: "grey",
+			iconColor: "text-purple-500",
 			experience: new Date().getFullYear() - 2020,
 		},
 	],

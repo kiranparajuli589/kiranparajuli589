@@ -30,8 +30,8 @@ importers:
         specifier: ^11.11.1
         version: 11.11.1
       htmlmark:
-        specifier: ^0.2.2
-        version: 0.2.2
+        specifier: ^0.2.3
+        version: 0.2.3
       nuxt:
         specifier: ^4.2.0
         version: 4.2.1(@parcel/watcher@2.5.1)(@types/node@24.10.1)(@vue/compiler-sfc@3.5.24)(db0@0.3.4)(eslint@9.39.1(jiti@2.6.1))(ioredis@5.8.2)(lightningcss@1.30.2)(magicast@0.5.1)(ms@2.1.3)(optionator@0.9.4)(rollup@4.53.2)(sass@1.94.1)(terser@5.44.1)(typescript@5.9.3)(vite@7.2.2(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.94.1)(terser@5.44.1)(yaml@2.8.1))(yaml@2.8.1)
@@ -2848,8 +2848,8 @@ packages:
   html-entities@2.6.0:
     resolution: {integrity: sha512-kig+rMn/QOVRvr7c86gQ8lWXq+Hkv6CbAH1hLu+RG338StTpE8Z0b44SDVaqVu7HGKf27frdmUYEs9hTUX/cLQ==}
 
-  htmlmark@0.2.2:
-    resolution: {integrity: sha512-PWLewI2sDjFjR6xSbrqPeCIQK60vAoj9otItPwhzxDm08Yq3EddkBZSP3DJnSreg6SMPWSxa5mR2kZUrXzU93g==}
+  htmlmark@0.2.3:
+    resolution: {integrity: sha512-qqkef+3AcYNXgB2mMULpurrEPmR9qLvMYvhB4tvkW6U2LSkKm2qycIW6ajhUIrbTqo0CzuLTMbkdCx4BEs8VWg==}
     engines: {node: '>=16.0.0', pnpm: '>=7.0.0'}
     hasBin: true
 
@@ -7913,7 +7913,7 @@ snapshots:
 
   html-entities@2.6.0: {}
 
-  htmlmark@0.2.2: {}
+  htmlmark@0.2.3: {}
 
   http-errors@2.0.0:
     dependencies:
