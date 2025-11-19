@@ -54,7 +54,7 @@ const getProjectByValue = (value: string | undefined) => {
 			:ui="{
 				root: 'bg-gray-100 dark:bg-gray-900! rounded-lg overflow-hidden shadow-md main-accordion',
 				trigger:
-					'px-4 hover:bg-sky-100 dark:hover:bg-blue-800 transition-colors',
+					'px-4 hover:bg-sky-100 dark:hover:bg-blue-800 transition-colors gap-4 md:gap-2',
 				content: 'px-4',
 			}"
 		>

@@ -99,13 +99,12 @@ const handleDownloadDocx = async () => {
 </script>
 <template>
 	<div class="resume">
-		<h1 class="pt-12">
-			<span class="text-xl uppercase font-bold mr-4">Resume</span>
+		<div class="pt-12 flex flex-wrap gap-4 items-center">
+			<h1 class="text-xl uppercase font-bold">Resume</h1>
 			<UButton
 				color="primary"
 				title="Download a copy of my resume as PDF"
 				variant="subtle"
-				class="mr-4"
 				:to="'/resume-pdf'"
 			>
 				<UIcon name="i-heroicons-arrow-down-tray" />
@@ -115,7 +114,6 @@ const handleDownloadDocx = async () => {
 				color="primary"
 				title="Download resume as plain text (ATS-friendly)"
 				variant="subtle"
-				class="mr-4"
 				@click="handleDownloadPlainText"
 			>
 				<UIcon name="i-heroicons-document-text" />
@@ -125,13 +123,12 @@ const handleDownloadDocx = async () => {
 				color="primary"
 				title="Download resume as DOCX"
 				variant="subtle"
-				class="mr-4"
 				@click="handleDownloadDocx"
 			>
 				<UIcon name="i-heroicons-document-duplicate" />
 				<span class="px-1 font-bold">Download DOCX</span>
 			</UButton>
-		</h1>
+		</div>
 
 		<ExperienceSection />
 		<ToolsSection />

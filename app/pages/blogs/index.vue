@@ -63,8 +63,8 @@ useSeo({
 });
 </script>
 <template>
-	<UCard variant="subtle" color="transparent" class="blog">
-		<div class="py-8" />
+	<UCard variant="subtle" color="transparent" class="blog min-h-[70vh]">
+		<div class="py-2" />
 		<template #header>
 			<h1>Blogs</h1>
 		</template>

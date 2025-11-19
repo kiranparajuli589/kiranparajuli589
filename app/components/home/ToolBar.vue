@@ -35,12 +35,12 @@ const links = computed(() => {
 </script>
 <template>
 	<nav
-		class="flex items-center justify-between gap-4 p-4 bg-gray-300 dark:bg-gray-900"
+		class="flex items-center justify-between flex-wrap gap-4 p-4 bg-gray-300 dark:bg-gray-900"
 	>
 		<NuxtLink to="/" class="uppercase font-semibold text-2xl font-brand">
 			Kiran
 		</NuxtLink>
-		<div class="flex gap-2">
+		<div class="flex gap-2 flex-wrap">
 			<UButton
 				variant="ghost"
 				class="font-bold"
