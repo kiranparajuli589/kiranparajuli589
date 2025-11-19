@@ -375,6 +375,11 @@ onMounted(() => {
 		margin: 6pt 0;
 	}
 
+	/* Hide hr elements immediately following h2 to avoid double lines (h2 already has border-bottom) */
+	.resume-pdf h2 + hr {
+		display: none;
+	}
+
 	/* Hide icons in print */
 	.print-hide {
 		display: none !important;
