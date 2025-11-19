@@ -90,7 +90,7 @@ onBeforeMount(async () => {
 			</div>
 			<br />
 			<div
-				class="blog-content dark:bg-gray-900 pt-6 rounded-xl p-4"
+				class="blog-content bg-white dark:bg-gray-900 pt-6 rounded-xl p-4"
 				v-html="blogContent"
 			/>
 		</div>
