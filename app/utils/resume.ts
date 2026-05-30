@@ -96,7 +96,7 @@ const baseResume = {
 			title: "DevOps & Platform",
 			items: [
 				"Docker, Docker Compose, Nginx, Apache",
-				"GitHub Actions, GitLab CI, Drone CI",
+				"GitLab CI, Drone CI",
 				"Linux/VPS administration, monitoring, and logs",
 			],
 		},
@@ -150,18 +150,6 @@ const baseResume = {
 				demo: "https://vue-formik.netlify.app/",
 			},
 		},
-		{
-			title: "Markdown Parser",
-			description:
-				"Modular Markdown parser for Node.js with plugin-based extensions and custom syntax.",
-			impact:
-				"Replaced brittle third-party dependency and reduced parsing time by 40% on large docs.",
-			stack: ["Node.js", "TypeScript", "Recursion", "AST"],
-			links: {
-				github: "https://github.com/kiranparajuli589/md-parser",
-				demo: "https://kiranparajuli589.github.io/md-parser/",
-			},
-		},
 	],
 	extras: [
 		"Mentor for Playwright, automation testing, and frontend best practices.",
@@ -181,6 +169,7 @@ const baseResume = {
 				"Vue.js",
 				"TypeScript",
 				"PrimeVue",
+				"shadcn-vue",
 				"TailwindCSS",
 				"Figma",
 				"CoreUI",
@@ -189,6 +178,8 @@ const baseResume = {
 				"Django",
 				"PostgreSQL",
 				"GitHub Actions",
+				"Cucumber.js",
+				"Playwright",
 			],
 			achievements: [
 				"Architected Nuxt.js SSR marketing site and internal portals, increasing qualified inbound leads by 25% within two quarters.",
@@ -235,6 +226,27 @@ const baseResume = {
 						"Documented design guidelines and best practices for the team.",
 						"Conducted workshops to train team members on the new design system.",
 					],
+				},
+				{
+					name: "Key Account Management",
+					description:
+						"Led development of a key account management platform for strategic client relationships.",
+					job: [
+						"Led frontend development and worked closely with backend engineers to design and build APIs and services.",
+						"Delivered a premium UI with shadcn-vue, TailwindCSS, and Nuxt.js—rated beautifully by clients.",
+						"Implemented end-to-end test coverage using Gherkin, Cucumber.js, and Playwright.",
+					],
+				},
+				{
+					name: "Company Smart Assistance",
+					description:
+						"ChatGPT-like AI portal for querying employee calendars, daily work records from Drive, and other company data via conversational chat.",
+					job: [
+						"Built a premium AI chat UI with sleek transitions and performance-tuned API orchestration.",
+						"Streamed server HTTP responses with live thinking indicators and finalized answer delivery.",
+						"Implemented chat history propagation, translations, and theming with an extensive color palette.",
+					],
+					url: "https://aeri.uat.asians.group",
 				},
 			],
 		},

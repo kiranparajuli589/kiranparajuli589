@@ -197,8 +197,8 @@ onMounted(() => {
 				>
 					<strong>Links:</strong>
 					<template v-for="(value, key, idx) in project.links" :key="key">
-						<span class="capitalize">
-							{{ key }}: {{ value }}
+						<span>
+							<span class="capitalize">{{ key }}</span>: {{ value }}
 							<span v-if="idx < Object.keys(project.links).length - 1">
 								,
 							</span>
