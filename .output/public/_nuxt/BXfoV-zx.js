@@ -1,0 +1,1 @@
+import{e as o,c as t,v as s,o as a}from"./r8xQwHtY.js";import{_ as r}from"./DlAUqK2U.js";const _={class:"pdf-view"},c=o({__name:"pdf-view",setup(d){return(e,n)=>(a(),t("div",_,[s(e.$slots,"default",{},void 0,!0)]))}}),i=r(c,[["__scopeId","data-v-9d8141b8"]]);export{i as default};
