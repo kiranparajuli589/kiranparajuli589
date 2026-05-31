@@ -11,6 +11,7 @@ definePageMeta({
 });
 
 const siteUrl = "https://kiranparajuli.com.np";
+const fullResumeUrl = `${siteUrl}/resume`;
 const currentUrl = `${siteUrl}/resume-pdf`;
 const imageUrl = `${siteUrl}/letter_k.png`;
 const personalInfo = Resume.personalInfo;
@@ -117,15 +118,17 @@ onMounted(() => {
 			</p>
 			<div class="p-list flex gap-2 flex-wrap items-center">
 				<span class="font-semibold">Links:</span>
-				<span
-					v-for="(link, index) in socialLinks"
-					:key="link.label"
-					class="link-item"
-				>
-					<span>{{ link.label }}</span>
-					<span class="link-url">({{ link.href }})</span>
+				<template v-for="(link, index) in socialLinks" :key="link.label">
+					<a
+						class="resume-link link-item"
+						target="_blank"
+						rel="noopener noreferrer"
+						:href="link.href"
+					>
+						{{ link.label }} ({{ link.href }})
+					</a>
 					<span v-if="index < socialLinks.length - 1">, </span>
-				</span>
+				</template>
 			</div>
 
 			<h2 class="pt-4">Summary</h2>
@@ -158,7 +161,14 @@ onMounted(() => {
 			>
 				<h3 class="font-semibold experience-company">
 					{{ experience.company }}
-					<span class="company-url">({{ experience.companyUrl }})</span>
+					<a
+						class="resume-link company-url"
+						target="_blank"
+						rel="noopener noreferrer"
+						:href="experience.companyUrl"
+					>
+						({{ experience.companyUrl }})
+					</a>
 				</h3>
 				<div class="mb-1">
 					<div title="Role" class="font-semibold text-gray-600 role-text">
@@ -178,6 +188,17 @@ onMounted(() => {
 
 			<h2 class="pt-4">Selected Projects</h2>
 			<Divider class="mb-2" height="2" />
+			<p class="mb-4 text-sm full-project-list-link">
+				View the complete project list:
+				<a
+					class="resume-link link-url"
+					target="_blank"
+					rel="noopener noreferrer"
+					:href="fullResumeUrl"
+				>
+					({{ fullResumeUrl }})
+				</a>
+			</p>
 
 			<div
 				v-for="project in selectedProjects"
@@ -198,7 +219,15 @@ onMounted(() => {
 					<strong>Links:</strong>
 					<template v-for="(value, key, idx) in project.links" :key="key">
 						<span>
-							<span class="capitalize">{{ key }}</span>: {{ value }}
+							<span class="capitalize">{{ key }}: </span>
+							<a
+								class="resume-link"
+								target="_blank"
+								rel="noopener noreferrer"
+								:href="value"
+							>
+								{{ value }}
+							</a>
 							<span v-if="idx < Object.keys(project.links).length - 1">
 								,
 							</span>
@@ -246,10 +275,31 @@ onMounted(() => {
 	color: #0e62c0;
 }
 
-.resume-pdf .p-list .link-url {
-	font-size: 0.85em;
+.resume-pdf a.resume-link {
+	color: #0e62c0;
+	text-decoration: none;
+}
+
+.resume-pdf a.resume-link:hover {
+	text-decoration: underline;
+}
+
+.resume-pdf a.resume-link.company-url {
 	color: #666;
+}
+
+.resume-pdf .link-url,
+.resume-pdf .company-url {
+	font-size: 0.85em;
 	font-weight: normal;
+}
+
+.resume-pdf .full-project-list-link .link-url {
+	color: #0e62c0;
+}
+
+.resume-pdf .company-url {
+	color: #666;
 }
 
 .resume-pdf ul {
@@ -295,14 +345,12 @@ onMounted(() => {
 	font-size: 0.95rem;
 }
 
-.resume-pdf .company-url {
-	font-size: 0.85em;
-	color: #666;
-	font-weight: normal;
-}
-
 .resume-pdf .role-text {
 	color: #4b5563;
+}
+
+.resume-pdf .full-project-list-link {
+	color: #374151;
 }
 
 .print-hide {
@@ -385,23 +433,28 @@ onMounted(() => {
 		display: none !important;
 	}
 
-	/* Remove colors and links */
+	/* Neutralize link styling for print while keeping URLs visible */
 	.resume-pdf .p-list .link-item {
 		color: #000 !important;
 	}
 
-	.resume-pdf .p-list .link-url {
+	.resume-pdf a.resume-link {
 		color: #666 !important;
-		font-size: 9pt;
+		text-decoration: none !important;
 	}
 
+	.resume-pdf .link-url,
 	.resume-pdf .company-url {
-		color: #666 !important;
 		font-size: 9pt;
 	}
 
 	.resume-pdf .role-text {
 		color: #4b5563 !important;
+	}
+
+	.resume-pdf .full-project-list-link {
+		font-size: 10pt;
+		margin-bottom: 8pt;
 	}
 
 	/* Page break controls */

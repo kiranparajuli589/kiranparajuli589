@@ -68,10 +68,11 @@ const baseResume = {
 			title: "Frontend Engineering",
 			items: [
 				"React.js, Next.js, Vue.js, Nuxt, TypeScript",
+				"shadcn-vue, TailwindCSS, Radix UI, PrimeVue, CoreUI",
 				"State management (Redux, Zustand, Pinia, Vuex)",
 				"Component-driven architecture & design systems",
-				"Responsive UI, TailwindCSS, Radix UI, GSAP",
-				"Performance optimization, Core Web Vitals, accessibility",
+				"Premium UX, accessibility (WCAG), Core Web Vitals, GSAP",
+				"Performance optimization & responsive UI engineering",
 			],
 		},
 		{
@@ -87,7 +88,8 @@ const baseResume = {
 		{
 			title: "QA Automation",
 			items: [
-				"Playwright, Cypress, Jest, PHPUnit, Behat",
+				"Playwright, Cypress, Gherkin, Cucumber.js, Jest, PHPUnit, Behat",
+				"BDD end-to-end testing with Gherkin & Cucumber.js",
 				"Contract, regression, and load testing (Locust)",
 				"CI-based quality gates with reporting & triage rituals",
 			],
@@ -160,7 +162,7 @@ const baseResume = {
 		{
 			company: "Asians Group LLC",
 			description:
-				"A vital internet intermediary that powers CDN services, custom nodes, DNS acceleration, and SSL offerings for global customers.",
+				"A vital internet intermediary powering CDN services, custom nodes, DNS acceleration, and SSL for global customers, with internal business platforms and AI-powered employee tools.",
 			roles: ["Senior Frontend Engineer"],
 			startDate: "2024",
 			endDate: "Present",
@@ -178,21 +180,47 @@ const baseResume = {
 				"Django",
 				"PostgreSQL",
 				"GitHub Actions",
+				"Gherkin",
 				"Cucumber.js",
 				"Playwright",
 			],
 			achievements: [
-				"Architected Nuxt.js SSR marketing site and internal portals, increasing qualified inbound leads by 25% within two quarters.",
-				"Migrated the legacy WordPress stack to Nuxt with structured data and prefetching, improving Core Web Vitals (FCP 2.8s → 1.2s) and boosting organic impressions by 40%.",
-				"Built a Lua condition expression builder with visual validation, cutting CDN policy configuration time by 60% and eliminating syntax defects pre-deploy.",
-				"Created a token-driven design system adopted by 4 squads, reducing UI defects by 45% and accelerating new feature delivery by 35%.",
-				"Shrank JavaScript bundles by 35% via route-level code-splitting, asset compression, and smarter caching, yielding a 30% drop in perceived load time.",
+				"Led frontend delivery of the Key Account Management platform with shadcn-vue, TailwindCSS, and Nuxt—earning outstanding customer and PO reviews for accessibility, premium UX, and clean UI; co-designed backend APIs with engineering and established BDD E2E coverage with Gherkin, Cucumber.js, and Playwright.",
+				"Built Company Smart Assistance, a ChatGPT-like AI portal for employee calendars, Drive-sourced daily work records, and company data—delivered streamed HTTP chat with thinking-state UX, persistent history, translations, and theming; UI rated best-in-class by stakeholders.",
+				"Applied accessibility-first UI patterns across KAM and Smart Assistance, reducing UX-related defect reports by 40% and earning unanimous praise from customer and product owner teams.",
+				"Architected the Asians Group public website and internal portals on Nuxt.js SSR with PrimeVue and TailwindCSS, increasing qualified inbound leads by 25% within two quarters.",
+				"Migrated the legacy WordPress stack to Nuxt with Django/DRF content management, structured data, and prefetching—improving Core Web Vitals (FCP 2.8s → 1.2s) and boosting organic impressions by 40%.",
+				"Built a Lua condition expression builder with visual validation (Vue.js, CoreUI), cutting CDN policy configuration time by 60% and eliminating syntax defects pre-deploy.",
+				"Created a token-driven design system with reusable Vue/Ant Design components, documentation, and team workshops—adopted by 4 squads, reducing UI defects by 45% and accelerating delivery by 35%.",
+				"Refactored a 3,000+ line monolithic core feature component into reusable mixins, components, helpers, and constant dictionaries—DRY-ing the codebase, cutting maintainability overhead by 90%+, and making new feature work far easier to ship.",
 				"Mentored backend/fullstack engineers, instituted review rubrics, and added automated accessibility/performance checks in Jenkins, reducing failed deployments by 30%.",
 				"Redesigned loading-state and socket handling to eliminate redundant calls, improving perceived responsiveness by 40% and reducing drop-offs during key user actions.",
 			],
 			companyUrl: "https://asians.group",
 			companyLogo: "asians_group.png",
 			projects: [
+				{
+					name: "Key Account Management",
+					description:
+						"Led development of a key account management platform for strategic client relationships.",
+					job: [
+						"Led frontend development and worked closely with backend engineers to design and build APIs and services.",
+						"Delivered a premium, accessibility-first UI with shadcn-vue, TailwindCSS, and Nuxt.js—outstanding reviews from customers and the PO team.",
+						"Implemented end-to-end test coverage using Gherkin, Cucumber.js, and Playwright.",
+					],
+					url: "https://console-kam.uat.asians.group",
+				},
+				{
+					name: "Company Smart Assistance",
+					description:
+						"ChatGPT-like AI portal for querying employee calendars, daily work records from Drive, and other company data via conversational chat.",
+					job: [
+						"Built a premium AI chat UI with sleek transitions, WCAG-aligned patterns, and performance-tuned API orchestration.",
+						"Streamed server HTTP responses with live thinking indicators and finalized answer delivery.",
+						"Implemented chat history propagation, translations, and theming with an extensive color palette—praised for clean UX by customers and PO.",
+					],
+					url: "https://aeri.uat.asians.group",
+				},
 				{
 					name: "Asians Group Public Website",
 					description:
@@ -226,27 +254,6 @@ const baseResume = {
 						"Documented design guidelines and best practices for the team.",
 						"Conducted workshops to train team members on the new design system.",
 					],
-				},
-				{
-					name: "Key Account Management",
-					description:
-						"Led development of a key account management platform for strategic client relationships.",
-					job: [
-						"Led frontend development and worked closely with backend engineers to design and build APIs and services.",
-						"Delivered a premium UI with shadcn-vue, TailwindCSS, and Nuxt.js—rated beautifully by clients.",
-						"Implemented end-to-end test coverage using Gherkin, Cucumber.js, and Playwright.",
-					],
-				},
-				{
-					name: "Company Smart Assistance",
-					description:
-						"ChatGPT-like AI portal for querying employee calendars, daily work records from Drive, and other company data via conversational chat.",
-					job: [
-						"Built a premium AI chat UI with sleek transitions and performance-tuned API orchestration.",
-						"Streamed server HTTP responses with live thinking indicators and finalized answer delivery.",
-						"Implemented chat history propagation, translations, and theming with an extensive color palette.",
-					],
-					url: "https://aeri.uat.asians.group",
 				},
 			],
 		},
