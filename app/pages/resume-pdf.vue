@@ -20,6 +20,7 @@ const education = Resume.education;
 const skills = Resume.skills;
 const leadershipHighlights = Resume.leadershipHighlights;
 const selectedProjects = Resume.selectedProjects;
+const languages = Resume.languages;
 const extras = Resume.extras;
 
 // Social links array
@@ -245,6 +246,23 @@ onMounted(() => {
 				<p>{{ edu.startDate }} - {{ edu.endDate }}</p>
 			</div>
 
+			<h2 class="pt-4">Languages</h2>
+			<hr class="mb-2" />
+			<ul>
+				<li
+					v-for="language in languages"
+					:key="language.name"
+					class="language-item"
+				>
+					<UIcon
+						class="language-flag-icon size-5 shrink-0"
+						:name="language.icon"
+						:aria-label="`${language.name} flag`"
+					/>
+					<span>{{ language.name }} — {{ language.level }}</span>
+				</li>
+			</ul>
+
 			<h2 class="pt-4">Extras</h2>
 			<hr class="mb-2" />
 			<ul>
@@ -353,6 +371,16 @@ onMounted(() => {
 	color: #374151;
 }
 
+.resume-pdf .language-item {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.resume-pdf .language-flag-icon {
+	flex-shrink: 0;
+}
+
 .print-hide {
 	display: inline-block;
 }
@@ -455,6 +483,11 @@ onMounted(() => {
 	.resume-pdf .full-project-list-link {
 		font-size: 10pt;
 		margin-bottom: 8pt;
+	}
+
+	.resume-pdf .language-flag-icon {
+		print-color-adjust: exact;
+		-webkit-print-color-adjust: exact;
 	}
 
 	/* Page break controls */

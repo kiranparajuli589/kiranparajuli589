@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import ExperienceSection from "~/components/home/ExperienceSection.vue";
+import LanguagesSection from "~/components/home/LanguagesSection.vue";
 import ToolsSection from "~/components/home/ToolsSection.vue";
 import Resume from "~/utils/resume";
 import {
@@ -131,6 +132,7 @@ const handleDownloadDocx = async () => {
 		</div>
 
 		<ExperienceSection />
+		<LanguagesSection />
 		<ToolsSection />
 	</div>
 </template>

@@ -79,19 +79,19 @@ const getProjectByValue = (value: string | undefined) => {
 						<span class="font-semibold">{{
 							getExperienceByCompany(item.value)?.company
 						}}</span>
-						<span class="mx-2 text-gray-400">|</span>
-						<span class="text-sm text-gray-600 dark:text-gray-400">
+						<span class="mx-2 text-gray-400 hidden md:block">|</span>
+						<span class="text-sm text-gray-600 dark:text-gray-400 hidden md:block">
 							{{ getExperienceByCompany(item.value)?.roles.join(", ") }}
 						</span>
-						<span class="mx-2 text-gray-400">|</span>
-						<span class="text-sm text-gray-600 dark:text-gray-400">
+						<span class="mx-2 text-gray-400 hidden md:block">|</span>
+						<span class="text-sm text-gray-600 dark:text-gray-400 hidden md:block">
 							{{
 								`${getExperienceByCompany(item.value)?.startDate} - ${getExperienceByCompany(item.value)?.endDate}`
 							}}
 						</span>
 						<a
 							v-if="getExperienceByCompany(item.value)?.companyUrl"
-							class="ml-auto"
+							class="ml-auto hidden md:block"
 							target="_blank"
 							:href="getExperienceByCompany(item.value)?.companyUrl || '#'"
 							:title="getExperienceByCompany(item.value)?.company || ''"
@@ -107,6 +107,28 @@ const getProjectByValue = (value: string | undefined) => {
 			</template>
 			<template #body="{ item }">
 				<div v-if="item.value" class="space-y-4">
+					<div class="md:hidden">
+						<span class="text-sm text-gray-600 dark:text-gray-400">
+							{{ getExperienceByCompany(item.value)?.roles.join(", ") }}
+						</span>
+						<span class="mx-2 text-gray-400">|</span>
+						<span class="text-sm text-gray-600 dark:text-gray-400">
+							{{
+								`${getExperienceByCompany(item.value)?.startDate} - ${getExperienceByCompany(item.value)?.endDate}`
+							}}
+						</span>
+						<span class="mx-2 text-gray-400">|</span>
+						<a
+							v-if="getExperienceByCompany(item.value)?.companyUrl"
+							class="ml-auto"
+							target="_blank"
+							:href="getExperienceByCompany(item.value)?.companyUrl || '#'"
+							:title="getExperienceByCompany(item.value)?.company || ''"
+							@click.stop
+						>
+							<UIcon name="i-heroicons-arrow-top-right-on-square" class="text-xs" />
+						</a>
+					</div>
 					<div>
 						{{ getExperienceByCompany(item.value)?.description }}
 					</div>

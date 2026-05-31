@@ -76,3 +76,9 @@ export type Education = {
 	startDate: string;
 	endDate: string;
 };
+
+export type Language = {
+	name: string;
+	level: string;
+	icon: string;
+};

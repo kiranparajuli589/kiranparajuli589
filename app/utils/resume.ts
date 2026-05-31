@@ -4,6 +4,7 @@ import type {
 	Technology,
 	Work,
 	Education,
+	Language,
 } from "~/customTypes";
 
 type SkillCategory = {
@@ -31,6 +32,7 @@ interface ResumeInterface {
 	skills: SkillCategory[];
 	leadershipHighlights: string[];
 	selectedProjects: SelectedProject[];
+	languages: Language[];
 	extras: string[];
 }
 
@@ -152,6 +154,15 @@ const baseResume = {
 				demo: "https://vue-formik.netlify.app/",
 			},
 		},
+	],
+	languages: [
+		{
+			name: "English",
+			level: "Professional working proficiency",
+			icon: "twemoji:flag-united-states",
+		},
+		{ name: "Nepali", level: "Native", icon: "twemoji:flag-nepal" },
+		{ name: "Hindi", level: "Conversational", icon: "twemoji:flag-india" },
 	],
 	extras: [
 		"Mentor for Playwright, automation testing, and frontend best practices.",

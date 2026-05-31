@@ -8,6 +8,7 @@ export function useResumeExport() {
 		const skills = Resume.skills;
 		const leadershipHighlights = Resume.leadershipHighlights;
 		const selectedProjects = Resume.selectedProjects;
+		const languages = Resume.languages;
 		const extras = Resume.extras;
 
 		let text = "";
@@ -107,6 +108,16 @@ export function useResumeExport() {
 			text += `${edu.major}\n`;
 			text += `${edu.startDate} - ${edu.endDate}\n\n`;
 		});
+
+		// Languages
+		if (languages && languages.length > 0) {
+			text += "LANGUAGES\n";
+			text += `${"=".repeat(20)}\n`;
+			languages.forEach((language) => {
+				text += `• ${language.name}: ${language.level}\n`;
+			});
+			text += "\n";
+		}
 
 		// Extras
 		if (extras && extras.length > 0) {
