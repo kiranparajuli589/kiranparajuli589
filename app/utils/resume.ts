@@ -5,6 +5,7 @@ import type {
 	Work,
 	Education,
 	Language,
+	ResumePdfExport,
 } from "~/customTypes";
 
 type SkillCategory = {
@@ -34,6 +35,7 @@ interface ResumeInterface {
 	selectedProjects: SelectedProject[];
 	languages: Language[];
 	extras: string[];
+	resumePdf: ResumePdfExport;
 }
 
 // Helper function to calculate years of experience
@@ -550,6 +552,35 @@ const baseResume = {
 			],
 		},
 		{
+			company: "Sachchai Kendra Nepal",
+			description:
+				"A spiritual and community organization platform with social engagement and multi-branch management.",
+			roles: ["Freelance Full-Stack Developer"],
+			startDate: "2020",
+			endDate: "2021",
+			technologies: ["Vue.js", "Vuetify", "Django REST Framework", "MySQL"],
+			achievements: [
+				"Built and launched the production website for Sachchai Kendra Nepal with Vue 3, Vuetify, and Django REST Framework.",
+				"Delivered social features—posting, commenting, and feeds—for members and branch communities.",
+				"Implemented multi-branch administration so organizational chapters could manage content and engagement independently.",
+			],
+			companyUrl: "https://sachchaikendranepal.org.np/",
+			companyLogo: "sachchai-kendra-nepal.png",
+			projects: [
+				{
+					name: "Sachchai Kendra Nepal Platform",
+					description:
+						"A website offering social media features and branch management for Sachchai Kendra Nepal.",
+					job: [
+						"Developed the frontend with Vue 3 and Vuetify.",
+						"Built REST APIs with Django REST Framework and MySQL.",
+						"Deployed and maintained the live site at sachchaikendranepal.org.np.",
+					],
+					url: "https://sachchaikendranepal.org.np/",
+				},
+			],
+		},
+		{
 			company: "Nipuna Prabidhik Sewa",
 			description:
 				"Technology service provider specializing in Web Cloud, Professional, and Managed Services.",
@@ -844,7 +875,7 @@ const baseResume = {
 			major: "Science (Maths)",
 		},
 	],
-} as Omit<ResumeInterface, "personalInfo"> & {
+} as Omit<ResumeInterface, "personalInfo" | "resumePdf"> & {
 	personalInfo: Omit<ResumeInterface["personalInfo"], "summary"> & {
 		summary: string;
 	};
@@ -853,6 +884,155 @@ const baseResume = {
 // Calculate years of experience dynamically
 const yearsOfExperience = calculateYearsOfExperience(baseResume.experiences);
 
+function buildResumePdf(years: number): ResumePdfExport {
+	return {
+		summary: `Senior Frontend Engineer with ${years}+ years building scalable web applications and leading engineering teams. Expert in React.js, Vue.js, and TypeScript with strong UI systems, accessibility, and performance optimization. Partners with backend teams on API design (Node.js, Django) and ships cohesive product experiences. Established quality bars via test automation and CI as an engineering differentiator.`,
+		skills: [
+			{
+				title: "Frontend Engineering",
+				items: [
+					"React.js, Next.js, Vue.js, Nuxt, TypeScript",
+					"shadcn-vue, TailwindCSS, Radix UI, PrimeVue, CoreUI",
+					"State management (Redux, Zustand, Pinia, Vuex)",
+					"Component-driven architecture & design systems",
+					"Premium UX, accessibility (WCAG), Core Web Vitals, GSAP",
+					"Performance optimization & responsive UI engineering",
+				],
+			},
+			{
+				title: "Backend & Platform Collaboration",
+				items: [
+					"Node.js, Express.js, Django, DRF",
+					"REST APIs, GraphQL, WebSocket servers",
+					"PostgreSQL, MySQL, Redis",
+					"Architecture reviews & cross-functional delivery leadership",
+					"CI/CD ownership with GitHub Actions, GitLab CI, Jenkins",
+				],
+			},
+		],
+		frontendExperiences: [
+			{
+				company: "Asians Group LLC",
+				roles: ["Senior Frontend Engineer"],
+				startDate: "2024",
+				endDate: "Present",
+				companyUrl: "https://asians.group",
+				achievements: [
+					"Led frontend delivery of the Key Account Management platform (Nuxt, shadcn-vue, Tailwind)—outstanding customer and PO reviews for accessibility, premium UX, and clean UI; partnered with backend on API design and release sequencing.",
+					"Built Company Smart Assistance, a ChatGPT-like AI portal with streamed HTTP chat, thinking-state UX, persistent history, translations, and theming—UI rated best-in-class by stakeholders.",
+					"Applied accessibility-first UI patterns across KAM and Smart Assistance, reducing UX-related defect reports by 40%.",
+					"Architected the Asians Group public website and internal portals on Nuxt.js SSR with PrimeVue and TailwindCSS, increasing qualified inbound leads by 25% within two quarters.",
+					"Migrated the legacy WordPress stack to Nuxt with Django/DRF content management—improving Core Web Vitals (FCP 2.8s → 1.2s) and boosting organic impressions by 40%.",
+					"Built a Lua condition expression builder with visual validation (Vue.js, CoreUI), cutting CDN policy configuration time by 60%.",
+					"Created a token-driven design system with reusable Vue/Ant Design components—adopted by 4 squads, reducing UI defects by 45% and accelerating delivery by 35%.",
+					"Refactored a 3,000+ line monolithic core feature into reusable components and helpers, cutting maintainability overhead by 90%+.",
+					"Redesigned loading-state and socket handling, improving perceived responsiveness by 40% and reducing drop-offs during key user actions.",
+				],
+			},
+			{
+				company: "ourBuddy.ai",
+				roles: ["Senior Software Developer"],
+				startDate: "2024",
+				endDate: "2025",
+				companyUrl: "https://www.ourbuddy.ai",
+				achievements: [
+					"Led a squad of five engineers delivering multi-tenant features, backlog prioritization, and code-quality initiatives for the brokerage platform.",
+					"Engineered a browser-based recording suite (audio/video/screen) using WebRTC + MediaRecorder, expanding product capability without third-party SDK costs.",
+					"Modernized the legacy React codebase into a modular Next.js architecture with shared UI primitives, reducing build time by 40% and unlocking SSR caching.",
+					"Introduced performance budgets, lazy loading, and real-user monitoring, improving LCP from 3.1s → 1.7s across top customer workspaces.",
+					"Owned release cadences and phased rollouts, achieving 95% on-time delivery while keeping bug escape rate below 1%.",
+				],
+			},
+			{
+				company: "Dimitra",
+				roles: ["Full-Stack Engineer"],
+				startDate: "2022",
+				endDate: "2023",
+				companyUrl: "https://dimitra.io/about-us/",
+				achievements: [
+					"Delivered features for Connected Farmer and Connected Coffee platforms spanning interactive dashboards, backend APIs, and analytics.",
+					"Built interactive dashboards with modern charting libraries, giving agronomists real-time insight into field activity and performance KPIs.",
+					"Developed Express.js + GraphQL APIs with optimized resolvers and caching, reducing average response time by 25%.",
+					"Partnered with data/ops teams to ship workflows for field operations, supply-chain visibility, and stakeholder reporting.",
+				],
+			},
+			{
+				company: "JankariTech Pvt. Ltd.",
+				roles: ["Software Developer", "Junior Programmer"],
+				startDate: "2019",
+				endDate: "2022",
+				companyUrl: "https://www.jankaritech.com",
+				achievements: [
+					"Developed production Vue.js features, REST APIs, and CLI tools for enterprise clients in finance, education, and SaaS.",
+					"Implemented reusable UI patterns and accessibility fixes that reduced front-end bug counts by 20% across key accounts.",
+					"Built and maintained CI/CD pipelines (GitHub, GitLab, Drone, Travis) for daily builds across 15+ repositories.",
+					"Created internal knowledge platforms (blog + workshops) to scale documentation and onboarding.",
+				],
+			},
+			{
+				company: "Sachchai Kendra Nepal",
+				roles: ["Freelance Full-Stack Developer"],
+				startDate: "2019",
+				endDate: "Present",
+				companyUrl: "https://sachchaikendranepal.org.np/",
+				achievements: [
+					"Built and launched the production platform with Vue 3, Nuxt.js, Shadcn-vue, TailwindCSS, and Django REST Framework—live at sachchaikendranepal.org.np.",
+					"Delivered social features (posts, comments, feeds) and multi-branch administration for organizational chapters.",
+					"Proper media (images, videos, audios) handling and optimization for the website.",
+				],
+			},
+		],
+		qaHighlights: [
+			"Introduced BDD E2E suites (Gherkin, Cucumber.js, Playwright) in CI for KAM and internal portals at Asians Group.",
+			"Implemented comprehensive Playwright, API, and contract-test suites at ourBuddy.ai, cutting production regressions by 35%.",
+			"Mentored QA engineers on Playwright/Cypress automation at Dimitra, doubling coverage and integrating suites into CI quality gates.",
+		],
+		qaExperiences: [
+			{
+				company: "12iD",
+				roles: ["Senior Quality Assurance Engineer"],
+				startDate: "2023",
+				endDate: "2024",
+				companyUrl: "https://www.12id.com",
+				achievements: [
+					"Designed the automation strategy across React frontends, Node microservices, and APIs—tripling automated coverage in two quarters.",
+					"Built a Locust-driven load-testing suite that validated 100k+ concurrent authentication flows prior to enterprise launches.",
+					"Integrated Playwright UI suites and contract tests into CI/CD, reducing regression escapes by 40%.",
+					"Partnered with security, product, and customer teams to run quality audits, deliver demos, and sign off on regulated releases.",
+					"Ran Playwright training program used by 5+ engineers and reduced onboarding time of new hires by 30%.",
+				],
+			},
+			{
+				company: "JankariTech Pvt. Ltd.",
+				roles: ["Software Developer", "Junior Programmer"],
+				startDate: "2019",
+				endDate: "2022",
+				companyUrl: "https://www.jankaritech.com",
+				achievements: [
+					"Authored playbooks for Cypress, Playwright, and WebSocket testing; led weekly enablement sessions for engineers and QA.",
+					"QA with Owncloud: implemented web UI, API, E2E, and unit tests; maintained CI/CD pipelines for consistent test coverage.",
+					"E2E tests workshop with Programiz team and Cypress suites for My Second Teacher and enterprise clients.",
+				],
+			},
+		],
+		qaSkills: [
+			{
+				title: "Quality Engineering & Test Automation",
+				items: [
+					"Playwright, Cypress, Gherkin, Cucumber.js, Jest, PHPUnit, Behat",
+					"BDD end-to-end, contract, regression, and load testing (Locust)",
+					"CI-based quality gates with reporting & triage rituals",
+				],
+			},
+		],
+		extras: [
+			"Active open-source contributor across Vue and Node.js ecosystems (Vue Formik).",
+			"Strong documentation habits, code-quality discipline, and knowledge sharing.",
+			"Mentor for frontend best practices, Playwright, and automation testing.",
+		],
+	};
+}
+
 // Create the final Resume object with dynamically calculated summary
 const Resume: ResumeInterface = {
 	...baseResume,
@@ -860,6 +1040,7 @@ const Resume: ResumeInterface = {
 		...baseResume.personalInfo,
 		summary: `Senior Frontend Engineer with ${yearsOfExperience}+ years building scalable web applications and leading engineering teams. Expert in React.js, Vue.js, and TypeScript with strong backend fundamentals (Node.js, Django) and automation expertise. Proven track record of modernizing platforms, improving performance by 40%+, and mentoring engineers.`,
 	},
+	resumePdf: buildResumePdf(yearsOfExperience),
 };
 
 export default Resume;

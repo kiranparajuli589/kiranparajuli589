@@ -3,18 +3,26 @@ import Resume from "~/utils/resume";
 export function useResumeExport() {
 	const exportAsPlainText = () => {
 		const personalInfo = Resume.personalInfo;
-		const experiences = Resume.experiences;
+		const resumePdf = Resume.resumePdf;
 		const education = Resume.education;
-		const skills = Resume.skills;
 		const leadershipHighlights = Resume.leadershipHighlights;
 		const selectedProjects = Resume.selectedProjects;
 		const languages = Resume.languages;
-		const extras = Resume.extras;
+
+		const {
+			summary: pdfSummary,
+			skills: pdfSkills,
+			frontendExperiences,
+			qaHighlights,
+			qaExperiences,
+			qaSkills,
+			extras: pdfExtras,
+		} = resumePdf;
 
 		let text = "";
 
 		// Header
-		text += `${personalInfo.name.toUpperCase()}\n`;
+		text += `${(personalInfo.name ?? "Resume").toUpperCase()}\n`;
 		text += `${personalInfo.role}\n\n`;
 
 		// Contact Info
@@ -28,10 +36,10 @@ export function useResumeExport() {
 		text += `Location: ${personalInfo.municipality}, ${personalInfo.country}, ${personalInfo.postalCode}\n\n`;
 
 		// Summary
-		if (personalInfo.summary) {
+		if (pdfSummary) {
 			text += "SUMMARY\n";
 			text += `${"=".repeat(20)}\n`;
-			text += `${personalInfo.summary}\n\n`;
+			text += `${pdfSummary}\n\n`;
 		}
 
 		// Leadership Highlights
@@ -44,11 +52,11 @@ export function useResumeExport() {
 			text += "\n";
 		}
 
-		// Skills
-		if (skills && skills.length > 0) {
+		// Skills (frontend + backend collaboration)
+		if (pdfSkills && pdfSkills.length > 0) {
 			text += "SKILLS\n";
 			text += `${"=".repeat(20)}\n`;
-			skills.forEach((skill) => {
+			pdfSkills.forEach((skill) => {
 				text += `${skill.title}:\n`;
 				skill.items.forEach((item) => {
 					text += `  • ${item}\n`;
@@ -57,18 +65,14 @@ export function useResumeExport() {
 			text += "\n";
 		}
 
-		// Experience
-		text += "EXPERIENCE\n";
+		// Professional Experience (frontend track)
+		text += "PROFESSIONAL EXPERIENCE\n";
 		text += `${"=".repeat(20)}\n`;
-		experiences.forEach((exp) => {
+		frontendExperiences.forEach((exp) => {
 			text += `${exp.company}\n`;
 			if (exp.companyUrl) text += `Website: ${exp.companyUrl}\n`;
 			text += `${exp.roles.join(", ")} | ${exp.startDate} - ${exp.endDate}\n`;
-			if (exp.description) {
-				text += `${exp.description}\n`;
-			}
 			if (exp.achievements && exp.achievements.length > 0) {
-				text += "Achievements:\n";
 				exp.achievements.forEach((achievement) => {
 					text += `  • ${achievement}\n`;
 				});
@@ -119,11 +123,35 @@ export function useResumeExport() {
 			text += "\n";
 		}
 
+		// Quality Engineering & Test Automation
+		text += "QUALITY ENGINEERING & TEST AUTOMATION\n";
+		text += `${"=".repeat(20)}\n`;
+		qaSkills.forEach((skill) => {
+			text += `${skill.title}:\n`;
+			skill.items.forEach((item) => {
+				text += `  • ${item}\n`;
+			});
+		});
+		if (qaHighlights.length > 0) {
+			text += "\nHighlights:\n";
+			qaHighlights.forEach((highlight) => {
+				text += `  • ${highlight}\n`;
+			});
+		}
+		qaExperiences.forEach((exp) => {
+			text += `\n${exp.company}\n`;
+			text += `${exp.roles.join(", ")} | ${exp.startDate} - ${exp.endDate}\n`;
+			exp.achievements.forEach((achievement) => {
+				text += `  • ${achievement}\n`;
+			});
+		});
+		text += "\n";
+
 		// Extras
-		if (extras && extras.length > 0) {
-			text += "ADDITIONAL INFORMATION\n";
+		if (pdfExtras && pdfExtras.length > 0) {
+			text += "EXTRAS\n";
 			text += `${"=".repeat(20)}\n`;
-			extras.forEach((extra) => {
+			pdfExtras.forEach((extra) => {
 				text += `• ${extra}\n`;
 			});
 		}

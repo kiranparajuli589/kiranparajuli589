@@ -132,8 +132,8 @@ const handleDownloadDocx = async () => {
 		</div>
 
 		<ExperienceSection />
-		<LanguagesSection />
 		<ToolsSection />
+		<LanguagesSection />
 	</div>
 </template>
 <style scoped>

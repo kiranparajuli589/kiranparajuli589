@@ -82,3 +82,27 @@ export type Language = {
 	level: string;
 	icon: string;
 };
+
+export type ResumePdfExperience = {
+	company: string;
+	roles: string[];
+	startDate: string;
+	endDate: string;
+	companyUrl?: string;
+	achievements: string[];
+};
+
+export type ResumePdfSkillCategory = {
+	title: string;
+	items: string[];
+};
+
+export type ResumePdfExport = {
+	summary: string;
+	skills: ResumePdfSkillCategory[];
+	frontendExperiences: ResumePdfExperience[];
+	qaHighlights: string[];
+	qaExperiences: ResumePdfExperience[];
+	qaSkills: ResumePdfSkillCategory[];
+	extras: string[];
+};

@@ -15,13 +15,21 @@ const fullResumeUrl = `${siteUrl}/resume`;
 const currentUrl = `${siteUrl}/resume-pdf`;
 const imageUrl = `${siteUrl}/letter_k.png`;
 const personalInfo = Resume.personalInfo;
-const experiences = Resume.experiences;
+const resumePdf = Resume.resumePdf;
 const education = Resume.education;
-const skills = Resume.skills;
 const leadershipHighlights = Resume.leadershipHighlights;
 const selectedProjects = Resume.selectedProjects;
 const languages = Resume.languages;
-const extras = Resume.extras;
+
+const {
+	summary: pdfSummary,
+	skills: pdfSkills,
+	frontendExperiences,
+	qaHighlights,
+	qaExperiences,
+	qaSkills,
+	extras: pdfExtras,
+} = resumePdf;
 
 // Social links array
 const socialLinks = [
@@ -47,7 +55,7 @@ const socialLinks = [
 useSeo({
 	title: `${personalInfo.name} - Resume PDF`,
 	description: `Professional resume PDF of ${personalInfo.name}, ${personalInfo.role}. Download the complete resume and professional background.`,
-	keywords: `${personalInfo.name} Resume PDF, Curriculum Vitae, Frontend Developer Resume, Full Stack Developer Resume, QA Engineer Resume, Download Resume`,
+	keywords: `${personalInfo.name} Resume PDF, Curriculum Vitae, Senior Frontend Engineer Resume, React Vue TypeScript Resume, Lead Frontend Engineer, Download Resume`,
 	image: imageUrl,
 	url: currentUrl,
 	type: "profile",
@@ -126,7 +134,7 @@ onMounted(() => {
 						rel="noopener noreferrer"
 						:href="link.href"
 					>
-						{{ link.label }} ({{ link.href }})
+						{{ link.label }}
 					</a>
 					<span v-if="index < socialLinks.length - 1">, </span>
 				</template>
@@ -134,7 +142,7 @@ onMounted(() => {
 
 			<h2 class="pt-4">Summary</h2>
 			<hr class="mb-2" />
-			<p>{{ personalInfo.summary }}</p>
+			<p>{{ pdfSummary }}</p>
 
 			<h2 class="pt-4">Leadership Highlights</h2>
 			<hr class="mb-2" />
@@ -146,23 +154,24 @@ onMounted(() => {
 
 			<h2 class="pt-4">Skills</h2>
 			<hr class="mb-2" />
-			<div v-for="skill in skills" :key="skill.title" class="mb-4">
+			<div v-for="skill in pdfSkills" :key="skill.title" class="mb-4">
 				<h4 class="font-semibold">{{ skill.title }}</h4>
 				<ul>
 					<li v-for="item in skill.items" :key="item">{{ item }}</li>
 				</ul>
 			</div>
 
-			<h2 class="pt-4 experience-section-start">Experience</h2>
+			<h2 class="pt-4 experience-section-start">Professional Experience</h2>
 			<hr class="mb-2 border-gray-500" />
 			<div
-				v-for="experience in experiences"
-				:key="experience.company"
+				v-for="experience in frontendExperiences"
+				:key="`fe-${experience.company}-${experience.startDate}`"
 				class="mb-6 experience-item"
 			>
 				<h3 class="font-semibold experience-company">
 					{{ experience.company }}
 					<a
+						v-if="experience.companyUrl"
 						class="resume-link company-url"
 						target="_blank"
 						rel="noopener noreferrer"
@@ -177,11 +186,11 @@ onMounted(() => {
 						{{ experience.endDate }})
 					</div>
 				</div>
-				<hr class="mb-2 border-gray-400" />
-				<h3>Achievements</h3>
-				<hr class="mb-2 border-gray-300" />
 				<ul>
-					<li v-for="task in experience.achievements" :key="task">
+					<li
+						v-for="task in experience.achievements"
+						:key="task"
+					>
 						{{ task }}
 					</li>
 				</ul>
@@ -190,14 +199,13 @@ onMounted(() => {
 			<h2 class="pt-4">Selected Projects</h2>
 			<Divider class="mb-2" height="2" />
 			<p class="mb-4 text-sm full-project-list-link">
-				View the complete project list:
 				<a
 					class="resume-link link-url"
 					target="_blank"
 					rel="noopener noreferrer"
 					:href="fullResumeUrl"
 				>
-					({{ fullResumeUrl }})
+					View complete project list on portfolio
 				</a>
 			</p>
 
@@ -220,14 +228,13 @@ onMounted(() => {
 					<strong>Links:</strong>
 					<template v-for="(value, key, idx) in project.links" :key="key">
 						<span>
-							<span class="capitalize">{{ key }}: </span>
 							<a
 								class="resume-link"
 								target="_blank"
 								rel="noopener noreferrer"
 								:href="value"
 							>
-								{{ value }}
+								{{ key }}
 							</a>
 							<span v-if="idx < Object.keys(project.links).length - 1">
 								,
@@ -263,10 +270,49 @@ onMounted(() => {
 				</li>
 			</ul>
 
+			<h2 class="pt-4 qa-section-start">
+				Quality Engineering & Test Automation
+			</h2>
+			<hr class="mb-2" />
+			<div v-for="skill in qaSkills" :key="skill.title" class="mb-4">
+				<h4 class="font-semibold">{{ skill.title }}</h4>
+				<ul>
+					<li v-for="item in skill.items" :key="item">{{ item }}</li>
+				</ul>
+			</div>
+			<ul v-if="qaHighlights.length" class="mb-4">
+				<li v-for="highlight in qaHighlights" :key="highlight">
+					{{ highlight }}
+				</li>
+			</ul>
+			<div
+				v-for="experience in qaExperiences"
+				:key="`qa-${experience.company}-${experience.startDate}`"
+				class="mb-6 experience-item qa-experience-item"
+			>
+				<h3 class="font-semibold experience-company">
+					{{ experience.company }}
+				</h3>
+				<div class="mb-1">
+					<div title="Role" class="font-semibold text-gray-600 role-text">
+						{{ experience.roles.join(", ") }} ({{ experience.startDate }} -
+						{{ experience.endDate }})
+					</div>
+				</div>
+				<ul>
+					<li
+						v-for="task in experience.achievements"
+						:key="task"
+					>
+						{{ task }}
+					</li>
+				</ul>
+			</div>
+
 			<h2 class="pt-4">Extras</h2>
 			<hr class="mb-2" />
 			<ul>
-				<li v-for="extra in extras" :key="extra">{{ extra }}</li>
+				<li v-for="extra in pdfExtras" :key="extra">{{ extra }}</li>
 			</ul>
 		</div>
 		<hr class="border-gray-200 dark:border-gray-700 my-4" />
@@ -416,6 +462,11 @@ onMounted(() => {
 	.resume-pdf .experience-section-start {
 		page-break-before: always;
 		margin-top: 0;
+	}
+
+	.resume-pdf .qa-section-start {
+		page-break-before: auto;
+		margin-top: 12pt;
 	}
 
 	.resume-pdf h3 {
