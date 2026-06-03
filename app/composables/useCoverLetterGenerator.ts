@@ -1,4 +1,4 @@
-import Resume from "~/utils/resume";
+import Resume, { yearsOfExperience } from "~/utils/resume";
 
 const personalInfo = Resume.personalInfo;
 
@@ -40,7 +40,6 @@ export const useCoverLetterGenerator = () => {
 			day: "numeric",
 		});
 
-		const yearsOfExperience = new Date().getFullYear() - 2018;
 		const recentExperience = Resume.experiences[0];
 		const firstAchievement = recentExperience?.achievements[0] || "";
 		const secondAchievement = recentExperience?.achievements[1] || "";

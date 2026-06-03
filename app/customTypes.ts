@@ -20,12 +20,25 @@ export type Project = {
 	};
 };
 
+export type EmploymentType =
+	| "Full-time"
+	| "Contract"
+	| "Part-time Contract"
+	| "Part-time"
+	| "Freelance";
+
 export type Experience = {
 	company: string;
 	roles: string[];
 	startDate: string;
 	endDate: string;
 	description: string;
+	employmentType?: EmploymentType;
+	concurrent?: boolean;
+	includeInYearsCalc?: boolean;
+	includeInPdf?: boolean;
+	pdfMaxBullets?: number;
+	pdfPageBreakBefore?: boolean;
 
 	companyUrl: string;
 	companyLogo: string;
@@ -83,11 +96,19 @@ export type Language = {
 	icon: string;
 };
 
+export type ResumePdfSelectedProject = {
+	title: string;
+	line: string;
+};
+
 export type ResumePdfExperience = {
 	company: string;
 	roles: string[];
 	startDate: string;
 	endDate: string;
+	employmentType?: EmploymentType;
+	concurrent?: boolean;
+	pageBreakBefore?: boolean;
 	companyUrl?: string;
 	achievements: string[];
 };
@@ -100,9 +121,6 @@ export type ResumePdfSkillCategory = {
 export type ResumePdfExport = {
 	summary: string;
 	skills: ResumePdfSkillCategory[];
-	frontendExperiences: ResumePdfExperience[];
-	qaHighlights: string[];
-	qaExperiences: ResumePdfExperience[];
-	qaSkills: ResumePdfSkillCategory[];
-	extras: string[];
+	experiences: ResumePdfExperience[];
+	selectedProjects: ResumePdfSelectedProject[];
 };

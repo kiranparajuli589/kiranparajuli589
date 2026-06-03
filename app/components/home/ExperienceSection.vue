@@ -4,6 +4,7 @@ import { getAssetUrl } from "~/utils";
 import ItemList from "./ItemList.vue";
 import { useAppStore } from "~/store/app.store";
 import type { AccordionItem } from "@nuxt/ui";
+import type { Experience } from "~/customTypes";
 
 const experiences = Resume.experiences;
 const appStore = useAppStore();
@@ -20,6 +21,19 @@ const accordionItems = computed<AccordionItem[]>(() => {
 const getExperienceByCompany = (company: string) => {
 	return experiences.find((e) => e.company === company);
 };
+
+function formatEmploymentMeta(experience: Experience | undefined): string {
+	if (!experience) return "";
+	const parts: string[] = [];
+	if (experience.employmentType) {
+		parts.push(experience.employmentType);
+	}
+	if (experience.concurrent) {
+		parts.push("concurrent");
+	}
+	parts.push(`${experience.startDate} - ${experience.endDate}`);
+	return parts.join(" · ");
+}
 
 const getProjectAccordionItems = (company: string) => {
 	const experience = getExperienceByCompany(company);
@@ -80,14 +94,16 @@ const getProjectByValue = (value: string | undefined) => {
 							getExperienceByCompany(item.value)?.company
 						}}</span>
 						<span class="mx-2 text-gray-400 hidden md:block">|</span>
-						<span class="text-sm text-gray-600 dark:text-gray-400 hidden md:block">
+						<span
+							class="text-sm text-gray-600 dark:text-gray-400 hidden md:block"
+						>
 							{{ getExperienceByCompany(item.value)?.roles.join(", ") }}
 						</span>
 						<span class="mx-2 text-gray-400 hidden md:block">|</span>
-						<span class="text-sm text-gray-600 dark:text-gray-400 hidden md:block">
-							{{
-								`${getExperienceByCompany(item.value)?.startDate} - ${getExperienceByCompany(item.value)?.endDate}`
-							}}
+						<span
+							class="text-sm text-gray-600 dark:text-gray-400 hidden md:block"
+						>
+							{{ formatEmploymentMeta(getExperienceByCompany(item.value)) }}
 						</span>
 						<a
 							v-if="getExperienceByCompany(item.value)?.companyUrl"
@@ -113,9 +129,7 @@ const getProjectByValue = (value: string | undefined) => {
 						</span>
 						<span class="mx-2 text-gray-400">|</span>
 						<span class="text-sm text-gray-600 dark:text-gray-400">
-							{{
-								`${getExperienceByCompany(item.value)?.startDate} - ${getExperienceByCompany(item.value)?.endDate}`
-							}}
+							{{ formatEmploymentMeta(getExperienceByCompany(item.value)) }}
 						</span>
 						<span class="mx-2 text-gray-400">|</span>
 						<a
@@ -126,7 +140,10 @@ const getProjectByValue = (value: string | undefined) => {
 							:title="getExperienceByCompany(item.value)?.company || ''"
 							@click.stop
 						>
-							<UIcon name="i-heroicons-arrow-top-right-on-square" class="text-xs" />
+							<UIcon
+								name="i-heroicons-arrow-top-right-on-square"
+								class="text-xs"
+							/>
 						</a>
 					</div>
 					<div>

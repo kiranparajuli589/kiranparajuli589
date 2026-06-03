@@ -2,7 +2,7 @@
 import ExperienceSection from "~/components/home/ExperienceSection.vue";
 import LanguagesSection from "~/components/home/LanguagesSection.vue";
 import ToolsSection from "~/components/home/ToolsSection.vue";
-import Resume from "~/utils/resume";
+import Resume, { yearsOfExperience } from "~/utils/resume";
 import {
 	useSeo,
 	createPersonStructuredData,
@@ -15,7 +15,6 @@ const siteUrl = "https://kiranparajuli.com.np";
 const currentUrl = `${siteUrl}/resume`;
 const imageUrl = `${siteUrl}/letter_k.png`;
 const personalInfo = Resume.personalInfo;
-const experiences = Resume.experiences;
 const technologies = Resume.technologies;
 
 // Extract skills from technologies
@@ -23,7 +22,7 @@ const skills = technologies.flatMap((tech) => tech.tools.map((t) => t.tooltip));
 const skillsList = [...new Set(skills)].slice(0, 10).join(", ");
 
 // Create a summary for SEO
-const resumeSummary = `Professional resume of ${personalInfo.name}, a ${personalInfo.role} with ${experiences.length} years of experience in software development and quality assurance. Specialized in ${skillsList} and modern web technologies.`;
+const resumeSummary = `Professional resume of ${personalInfo.name}, a ${personalInfo.role} with ${yearsOfExperience}+ years of experience in software development and quality assurance. Specialized in ${skillsList} and modern web technologies.`;
 
 // Page-specific SEO
 useSeo({
@@ -111,6 +110,10 @@ const handleDownloadDocx = async () => {
 				<UIcon name="i-heroicons-arrow-down-tray" />
 				<span class="px-1 font-bold">Download Pdf</span>
 			</UButton>
+			<p class="w-full text-sm text-gray-600 dark:text-gray-400 print-tip">
+				When saving as PDF, disable <strong>Headers and footers</strong> in the
+				print dialog to remove date, title, URL, and page numbers.
+			</p>
 			<UButton
 				color="primary"
 				title="Download resume as plain text (ATS-friendly)"
