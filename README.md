@@ -1,130 +1,76 @@
-# Portfolio Website - Nuxt 4
+## Hi, I'm Kiran Parajuli 👋
 
-A modern portfolio website built with Nuxt 4, Nuxt UI, and Tailwind CSS.
+Senior Frontend Engineer focused on React, Next.js, Vue.js, Nuxt.js, TypeScript, performance, accessibility, and scalable UI systems.
 
-## Tech Stack
+<a href="https://www.linkedin.com/in/kiranparajuli589/" target="_blank" title="Connect on LinkedIn">
+  <img src="https://img.shields.io/badge/LinkedIn-Connect-blue?logo=linkedin" height="28">
+</a>
 
-- **Framework**: Nuxt 4
-- **UI Library**: Nuxt UI
-- **Styling**: Tailwind CSS v4
-- **Package Manager**: pnpm
-- **Linting**: ESLint with @nuxt/eslint
+<a href="https://kiranparajuli.com.np/" target="_blank" title="Portfolio">
+  <img src="https://img.shields.io/badge/Portfolio-Visit-blue" height="28">
+</a>
 
-## Project Structure
+<a href="https://github.com/kiranparajuli589" target="_blank" title="GitHub">
+  <img src="https://img.shields.io/badge/GitHub-kiranparajuli589-black?logo=github" height="28">
+</a>
 
-```
-/app
-  /components    # Vue components
-  /composables   # Composable functions
-  /layouts       # Layout components
-  /pages         # File-based routing
-  /assets        # Static assets
-  /styles        # SCSS styles
-  /utils         # Utility functions
-```
+<a href="https://dev.to/kiranparajuli589" target="_blank" title="Dev.to">
+  <img src="https://img.shields.io/badge/Dev.to-Blog-black?logo=dev.to" height="28">
+</a>
 
-## Getting Started
+---
 
-### Prerequisites
+### About me
 
-- Node.js LTS (20+)
-- pnpm 8+
+I'm a Senior Frontend Engineer from Nepal with 7+ years of experience building scalable web applications and polished product experiences.
 
-### Installation
+I work mainly with **React**, **Next.js**, **Vue.js**, **Nuxt.js**, and **TypeScript**, with strong focus on frontend architecture, performance optimization, accessibility, design systems, and test automation.
 
-```bash
-pnpm install
-```
+Recently, I have worked on:
 
-### Development
+- Modernizing legacy React applications into modular Next.js architectures
+- Building Nuxt.js SSR platforms with strong Core Web Vitals improvements
+- Creating AI assistance interfaces with streamed chat and persistent history
+- Building browser-based recording systems with WebRTC and MediaRecorder
+- Establishing Playwright, API, and contract testing in CI pipelines
+- Leading frontend delivery, mentoring engineers, and improving UI quality bars
 
-```bash
-pnpm dev
-```
+I care about interfaces that feel good to use and codebases that are easy for teams to maintain.
 
-### Build
+---
 
-```bash
-pnpm build
-```
+### Tech I work with
 
-### Preview
+**Frontend**
 
-```bash
-pnpm preview
-```
+React.js, Next.js, Vue.js, Nuxt.js, TypeScript, Tailwind CSS, shadcn/ui, shadcn-vue, Radix UI, PrimeVue, CoreUI
 
-### Linting
+**Architecture & Product**
 
-```bash
-pnpm lint
-```
+SSR/SSG, design systems, component-driven architecture, accessibility, WCAG, Core Web Vitals, performance optimization
 
-## VS Code Settings
+**Backend & Platform**
 
-The project includes `.vscode/settings.json` with:
+Node.js, Express.js, Django, DRF, Flask, REST APIs, GraphQL, PostgreSQL, Redis, Docker, GitHub Actions, GitLab CI
 
-- Auto-save enabled (1s delay)
-- ESLint auto-fix on save
-- Format on save
+**Quality Engineering**
 
-## Migration from Vue 3 + Vuetify
+Playwright, Cypress, Jest, Gherkin, Cucumber.js, BDD E2E testing, API testing, contract testing, CI quality gates
 
-This project has been migrated from Vue 3 with Vuetify to Nuxt 4 with Nuxt UI and Tailwind CSS. The migration includes:
+---
 
-- ✅ Nuxt 4 project structure with app directory
-- ✅ Nuxt UI replacing Vuetify components
-- ✅ Tailwind CSS v4 for styling
-- ✅ File-based routing
-- ✅ Composables for state management
-- ✅ Latest ESLint configuration
-- ✅ VS Code settings for auto-save
+### Current focus
 
-## Deployment
+- 🔭 Working as a Senior Frontend Engineer
+- 🌱 Deepening frontend architecture, performance, accessibility, and AI product interfaces
+- 👯 Open to collaborating on Vue, React, frontend tooling, and open-source projects
+- 💬 Ask me about React, Next.js, Vue.js, Nuxt.js, TypeScript, Playwright, frontend architecture, or Django
+- 📫 Reach me on [LinkedIn](https://www.linkedin.com/in/kiranparajuli589/)
+- 📝 View my [Resume](https://kiranparajuli.com.np/resume-pdf)
+- 🌐 Visit my [Portfolio](https://kiranparajuli.com.np/)
 
-The project can be deployed to any static hosting service that supports Nuxt:
+---
 
-```bash
-pnpm generate
-```
+### Fun fact
 
-This creates a `dist` folder ready for static deployment.
-
-## Docker Deployment
-
-This application is fully containerized and can be run using Docker.
-
-### Building and Running with Docker
-
-```bash
-# Build and run with Docker Compose
-docker-compose up -d
-
-# View logs
-docker-compose logs -f
-
-# Stop the container
-docker-compose down
-```
-
-### Building with Docker directly
-
-```bash
-# Build the image
-docker build -t kiranparajuli-app .
-
-# Run the container
-docker run -p 3000:3000 kiranparajuli-app
-```
-
-The application will be available at `http://localhost:3000`.
-
-### Development with Docker
-
-For development, you can still use the local environment:
-
-```bash
-pnpm dev
-```
-
-This will start the development server at `http://localhost:3000` with hot module replacement.
+I often wear headphones without listening to anything. It still helps me focus.
