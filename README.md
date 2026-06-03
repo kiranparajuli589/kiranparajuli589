@@ -3,19 +3,19 @@
 Senior Frontend Engineer focused on React, Next.js, Vue.js, Nuxt.js, TypeScript, performance, accessibility, and scalable UI systems.
 
 <a href="https://www.linkedin.com/in/kiranparajuli589/" target="_blank" title="Connect on LinkedIn">
-  <img src="https://img.shields.io/badge/LinkedIn-Connect-blue?logo=linkedin" height="28">
+  <img src="https://img.shields.io/badge/--linkedin?label=LinkedIn&logo=LinkedIn&style=social" height="28" width="100" >
 </a>
 
-<a href="https://kiranparajuli.com.np/" target="_blank" title="Portfolio">
-  <img src="https://img.shields.io/badge/Portfolio-Visit-blue" height="28">
-</a>
-
-<a href="https://github.com/kiranparajuli589" target="_blank" title="GitHub">
-  <img src="https://img.shields.io/badge/GitHub-kiranparajuli589-black?logo=github" height="28">
+<a href="https://kiranparajuli.com.np/" target="_blank" title="Website - know more">
+  <img src="https://img.shields.io/badge/Website-know%20more-blue" height="28" width="150" >
 </a>
 
 <a href="https://dev.to/kiranparajuli589" target="_blank" title="Dev.to">
   <img src="https://img.shields.io/badge/Dev.to-Blog-black?logo=dev.to" height="28">
+</a>
+
+<a href="https://owncloud.com" target="_blank" title="Owncloud">
+	<img src="./public/oc-badge-community-contributor-dark.png" height="28" width="100" >
 </a>
 
 ---
