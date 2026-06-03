@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 import Resume from "~/utils/resume";
+import type { ResumePdfVariant } from "~/customTypes";
 import { useSeo } from "~/composables/useSeo";
 import {
 	useCoverLetterStorage,
@@ -8,6 +9,7 @@ import {
 } from "~/composables/useCoverLetterStorage";
 import {
 	useCoverLetterGenerator,
+	getCoverLetterVariantLabel,
 	type CoverLetterTemplate,
 } from "~/composables/useCoverLetterGenerator";
 import { useCoverLetterActions } from "~/composables/useCoverLetterActions";
@@ -17,11 +19,30 @@ import CoverLetterForm from "~/components/cover-letter/CoverLetterForm.vue";
 import CoverLetterEditor from "~/components/cover-letter/CoverLetterEditor.vue";
 
 const siteUrl = "https://kiranparajuli.com.np";
-const currentUrl = `${siteUrl}/cover-letter`;
 const imageUrl = `${siteUrl}/letter_k.png`;
 const personalInfo = Resume.personalInfo;
+const route = useRoute();
+const router = useRouter();
 
-// Form inputs
+function parseResumeVariant(value: unknown): ResumePdfVariant {
+	return value === "react" ? "react" : "vue";
+}
+
+const resumeVariant = ref<ResumePdfVariant>(
+	parseResumeVariant(route.query.variant),
+);
+
+watch(
+	() => route.query.variant,
+	(value) => {
+		resumeVariant.value = parseResumeVariant(value);
+	},
+);
+
+const currentUrl = computed(
+	() => `${siteUrl}/cover-letter?variant=${resumeVariant.value}`,
+);
+
 const companyName = ref("");
 const position = ref("");
 const jobDescription = ref("");
@@ -29,8 +50,8 @@ const coverLetterTemplate = ref<CoverLetterTemplate>("standard");
 const coverLetterGenerated = ref(false);
 const editableContent = ref("");
 const showRecentLetters = ref(false);
+const pendingVariantRegenerate = ref(false);
 
-// Composables
 const toast = useToast();
 const {
 	recentCoverLetters,
@@ -41,29 +62,42 @@ const {
 const { generateCoverLetterTemplate } = useCoverLetterGenerator();
 const { trackCoverLetterGeneration } = useAnalytics();
 
-// Page-specific SEO
+const variantLabel = computed(() =>
+	getCoverLetterVariantLabel(resumeVariant.value),
+);
+
 useSeo({
 	title: `Cover Letter Generator - ${personalInfo.name}`,
-	description: `Generate a personalized cover letter for your job application. ${personalInfo.name}, ${personalInfo.role}.`,
-	keywords: `${personalInfo.name} Cover Letter, Job Application, Cover Letter Generator, Resume Cover Letter`,
+	description: `Generate a personalized cover letter aligned with your resume variant. ${personalInfo.name}, ${personalInfo.role}.`,
+	keywords: `${personalInfo.name} Cover Letter, Job Application, Cover Letter Generator, Resume Cover Letter, Vue Nuxt, React Next.js`,
 	image: imageUrl,
-	url: currentUrl,
+	url: currentUrl.value,
 	type: "website",
 });
+
+useHead({
+	title: computed(
+		() =>
+			`Cover Letter Generator (${resumeVariant.value === "react" ? "React/Next.js" : "Vue/Nuxt"}) - ${personalInfo.name} | Kiran Parajuli`,
+	),
+});
+
+const buildCoverLetter = () =>
+	generateCoverLetterTemplate(
+		companyName.value,
+		position.value,
+		jobDescription.value,
+		coverLetterTemplate.value,
+		resumeVariant.value,
+	);
 
 const coverLetter = computed(() => {
 	if (coverLetterGenerated.value && editableContent.value) {
 		return editableContent.value;
 	}
-	return generateCoverLetterTemplate(
-		companyName.value,
-		position.value,
-		jobDescription.value,
-		coverLetterTemplate.value,
-	);
+	return buildCoverLetter();
 });
 
-// Show toast notification using Nuxt UI
 const showToastNotification = (
 	message: string,
 	type: "success" | "error" = "success",
@@ -77,16 +111,47 @@ const showToastNotification = (
 	});
 };
 
-// Actions composable
 const { copyToClipboard, downloadAsTxt, downloadAsPdf, downloadAsDocx } =
 	useCoverLetterActions(
 		coverLetter,
 		companyName,
 		position,
 		showToastNotification,
+		resumeVariant,
 	);
 
-// Load cover letter from storage
+const setResumeVariant = (variant: ResumePdfVariant) => {
+	if (resumeVariant.value === variant) return;
+
+	resumeVariant.value = variant;
+	router.replace({ query: { ...route.query, variant } });
+
+	if (coverLetterGenerated.value) {
+		pendingVariantRegenerate.value = true;
+	}
+};
+
+const regenerateForCurrentVariant = () => {
+	if (!companyName.value.trim() || !position.value.trim()) {
+		showToastNotification(
+			"Please fill in both company name and position.",
+			"error",
+		);
+		return;
+	}
+
+	editableContent.value = buildCoverLetter();
+	pendingVariantRegenerate.value = false;
+	saveCoverLetter(
+		companyName.value,
+		position.value,
+		jobDescription.value,
+		editableContent.value,
+		resumeVariant.value,
+	);
+	showToastNotification(`Cover letter regenerated for ${variantLabel.value}.`);
+};
+
 const loadCoverLetter = (letter: SavedCoverLetter) => {
 	companyName.value = letter.companyName;
 	position.value = letter.position;
@@ -94,10 +159,16 @@ const loadCoverLetter = (letter: SavedCoverLetter) => {
 	editableContent.value = letter.content;
 	coverLetterGenerated.value = true;
 	showRecentLetters.value = false;
+	pendingVariantRegenerate.value = false;
+
+	if (letter.variant) {
+		resumeVariant.value = letter.variant;
+		router.replace({ query: { ...route.query, variant: letter.variant } });
+	}
+
 	showToastNotification("Cover letter loaded successfully!");
 };
 
-// Handle delete with toast
 const handleDelete = (id: string) => {
 	const success = deleteCoverLetter(id);
 	if (success) {
@@ -107,7 +178,6 @@ const handleDelete = (id: string) => {
 	}
 };
 
-// Handle clear all with toast
 const handleClearAll = () => {
 	const success = clearAllRecent();
 	if (success) {
@@ -117,25 +187,19 @@ const handleClearAll = () => {
 	}
 };
 
-// Generate cover letter
 const generateCoverLetter = () => {
 	if (companyName.value.trim() && position.value.trim()) {
-		const template = generateCoverLetterTemplate(
-			companyName.value,
-			position.value,
-			jobDescription.value,
-			coverLetterTemplate.value,
-		);
-		editableContent.value = template;
+		editableContent.value = buildCoverLetter();
 		coverLetterGenerated.value = true;
+		pendingVariantRegenerate.value = false;
 		trackCoverLetterGeneration();
-		// Auto-save after a short delay to allow user to edit first
 		setTimeout(() => {
 			saveCoverLetter(
 				companyName.value,
 				position.value,
 				jobDescription.value,
 				editableContent.value,
+				resumeVariant.value,
 			);
 		}, 1000);
 		showToastNotification(
@@ -149,7 +213,6 @@ const generateCoverLetter = () => {
 	}
 };
 
-// Save cover letter when content changes (debounced)
 let saveTimeout: ReturnType<typeof setTimeout> | null = null;
 const handleContentChange = (value: string) => {
 	editableContent.value = value;
@@ -163,14 +226,15 @@ const handleContentChange = (value: string) => {
 				position.value,
 				jobDescription.value,
 				editableContent.value,
+				resumeVariant.value,
 			);
-		}, 2000); // Save 2 seconds after user stops typing
+		}, 2000);
 	}
 };
 
-// Reset form
 const resetForm = () => {
 	coverLetterGenerated.value = false;
+	pendingVariantRegenerate.value = false;
 	companyName.value = "";
 	position.value = "";
 	jobDescription.value = "";
@@ -195,7 +259,46 @@ const resetForm = () => {
 				</UButton>
 			</div>
 
-			<!-- Recent Cover Letters -->
+			<div
+				class="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"
+			>
+				<p class="text-sm text-gray-600 dark:text-gray-400">
+					Aligned with:
+					<strong>{{ variantLabel }}</strong>
+				</p>
+				<div class="flex flex-wrap gap-2">
+					<UButton
+						size="sm"
+						:color="resumeVariant === 'vue' ? 'primary' : 'neutral'"
+						:variant="resumeVariant === 'vue' ? 'subtle' : 'outline'"
+						@click="setResumeVariant('vue')"
+					>
+						Vue / Nuxt
+					</UButton>
+					<UButton
+						size="sm"
+						:color="resumeVariant === 'react' ? 'primary' : 'neutral'"
+						:variant="resumeVariant === 'react' ? 'subtle' : 'outline'"
+						@click="setResumeVariant('react')"
+					>
+						React / Next.js
+					</UButton>
+				</div>
+			</div>
+
+			<div
+				v-if="pendingVariantRegenerate"
+				class="mb-6 rounded-lg border border-amber-300 bg-amber-50 p-4 dark:border-amber-700 dark:bg-amber-900/20"
+			>
+				<p class="mb-3 text-sm">
+					You switched to the {{ variantLabel }}. Regenerate to replace the
+					current letter with content matched to that resume variant.
+				</p>
+				<UButton color="primary" size="sm" @click="regenerateForCurrentVariant">
+					Regenerate for {{ variantLabel }}
+				</UButton>
+			</div>
+
 			<RecentCoverLetters
 				:letters="recentCoverLetters"
 				:show="showRecentLetters"
@@ -204,17 +307,16 @@ const resetForm = () => {
 				@clear-all="handleClearAll"
 			/>
 
-			<!-- Input Form -->
 			<CoverLetterForm
 				v-model:company-name="companyName"
 				v-model:position="position"
 				v-model:job-description="jobDescription"
+				v-model:template="coverLetterTemplate"
 				:disabled="coverLetterGenerated"
 				@generate="generateCoverLetter"
 				@reset="resetForm"
 			/>
 
-			<!-- Generated Cover Letter -->
 			<CoverLetterEditor
 				v-if="coverLetterGenerated && coverLetter"
 				v-model:content="editableContent"
@@ -226,19 +328,22 @@ const resetForm = () => {
 				@download-docx="downloadAsDocx"
 			/>
 
-			<!-- Instructions -->
 			<div
 				v-if="!coverLetterGenerated"
 				class="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 mb-6"
 			>
 				<h3 class="font-semibold mb-2">Instructions:</h3>
 				<ul class="list-disc list-inside space-y-1 text-sm">
+					<li>
+						Choose Vue/Nuxt or React/Next.js to match the resume you are
+						submitting
+					</li>
 					<li>Enter the company name and position you're applying for</li>
 					<li>
 						Click "Generate Cover Letter" to create a personalized cover letter
 					</li>
 					<li>Review and customize the generated cover letter as needed</li>
-					<li>Copy to clipboard or download as TXT or PDF</li>
+					<li>Copy to clipboard or download as TXT, PDF, or DOCX</li>
 				</ul>
 			</div>
 		</div>

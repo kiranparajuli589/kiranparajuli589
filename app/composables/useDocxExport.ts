@@ -2,6 +2,8 @@
 // Note: This requires the 'docx' package to be installed
 // Run: pnpm add docx
 
+import type { ResumePdfVariant } from "~/customTypes";
+
 export function useDocxExport() {
 	const exportCoverLetterAsDocx = async (
 		content: string,
@@ -67,13 +69,15 @@ export function useDocxExport() {
 		}
 	};
 
-	const exportResumeAsDocx = async (): Promise<void> => {
+	const exportResumeAsDocx = async (
+		variant: ResumePdfVariant = "vue",
+	): Promise<void> => {
 		try {
 			const { Document, Packer, Paragraph, TextRun, HeadingLevel } =
 				await import("docx");
 			const { useResumeExport } = await import("./useResumeExport");
 
-			const { exportAsPlainText } = useResumeExport();
+			const { exportAsPlainText } = useResumeExport(variant);
 			const text = exportAsPlainText();
 
 			// Split into sections
@@ -106,7 +110,7 @@ export function useDocxExport() {
 											spacing: { after: 300, before: 200 },
 										}),
 									);
-								} else if (line.startsWith("•")) {
+								} else if (line.startsWith("-") || line.startsWith("  -")) {
 									// Bullet point
 									result.push(
 										new Paragraph({
@@ -146,7 +150,7 @@ export function useDocxExport() {
 			const url = URL.createObjectURL(blob);
 			const link = document.createElement("a");
 			link.href = url;
-			link.download = "Resume.docx";
+			link.download = `Resume_${variant === "react" ? "React" : "Vue"}.docx`;
 			document.body.appendChild(link);
 			link.click();
 			document.body.removeChild(link);

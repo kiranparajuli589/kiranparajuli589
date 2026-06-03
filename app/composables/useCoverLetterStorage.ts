@@ -1,4 +1,5 @@
 import { ref, onMounted } from "vue";
+import type { ResumePdfVariant } from "~/customTypes";
 
 export interface SavedCoverLetter {
 	id: string;
@@ -6,6 +7,7 @@ export interface SavedCoverLetter {
 	position: string;
 	jobDescription: string;
 	content: string;
+	variant?: ResumePdfVariant;
 	createdAt: string;
 	timestamp: number;
 }
@@ -35,6 +37,7 @@ export const useCoverLetterStorage = () => {
 		position: string,
 		jobDescription: string,
 		content: string,
+		variant?: ResumePdfVariant,
 	) => {
 		if (!content) return;
 
@@ -44,6 +47,7 @@ export const useCoverLetterStorage = () => {
 			position,
 			jobDescription,
 			content,
+			variant,
 			createdAt: new Date().toLocaleDateString("en-US", {
 				year: "numeric",
 				month: "short",

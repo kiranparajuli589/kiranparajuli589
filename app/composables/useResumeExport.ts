@@ -1,21 +1,10 @@
 import Resume, { formatResumeLink } from "~/utils/resume";
-import type { ResumePdfExperience } from "~/customTypes";
-
-function formatEmploymentLine(experience: ResumePdfExperience): string {
-	const parts = [experience.roles.join(", ")];
-	if (experience.employmentType) {
-		parts.push(experience.employmentType);
-	}
-	if (experience.concurrent) {
-		parts.push("concurrent");
-	}
-	parts.push(`${experience.startDate} - ${experience.endDate}`);
-	return parts.join(" · ");
-}
-
-function formatEducation(edu: (typeof Resume.education)[number]): string {
-	return `${edu.degree} in ${edu.major} — ${edu.name} (${edu.startDate}–${edu.endDate})`;
-}
+import type { ResumePdfVariant } from "~/customTypes";
+import {
+	formatEmploymentLine,
+	formatEducation,
+	getResumeDownloadFilename,
+} from "~/composables/useResumePdfDocument";
 
 function formatContactLinks(personalInfo: typeof Resume.personalInfo): string {
 	const links = [
@@ -29,10 +18,10 @@ function formatContactLinks(personalInfo: typeof Resume.personalInfo): string {
 	return links.join(" | ");
 }
 
-export function useResumeExport() {
+export function useResumeExport(variant: ResumePdfVariant = "vue") {
 	const exportAsPlainText = () => {
 		const personalInfo = Resume.personalInfo;
-		const resumePdf = Resume.resumePdf;
+		const resumePdf = Resume.resumePdfs[variant];
 		const education = Resume.education.filter(
 			(edu) => edu.degree !== "High School",
 		);
@@ -78,7 +67,7 @@ export function useResumeExport() {
 			text += `${exp.company}\n`;
 			text += `${formatEmploymentLine(exp)}\n`;
 			exp.achievements.forEach((achievement) => {
-				text += `  • ${achievement}\n`;
+				text += `  - ${achievement}\n`;
 			});
 			text += "\n";
 		});
@@ -87,7 +76,7 @@ export function useResumeExport() {
 			text += "SELECTED PROJECTS\n";
 			text += `${"=".repeat(20)}\n`;
 			selectedProjects.forEach((project) => {
-				text += `• ${project.title}: ${project.line}\n`;
+				text += `- ${project.title}: ${project.line}\n`;
 			});
 			text += "\n";
 		}
@@ -102,20 +91,21 @@ export function useResumeExport() {
 			text += "LANGUAGES\n";
 			text += `${"=".repeat(20)}\n`;
 			languages.forEach((language) => {
-				text += `• ${language.name} — ${language.level}\n`;
+				text += `- ${language.name}: ${language.level}\n`;
 			});
 		}
 
 		return text;
 	};
 
-	const downloadAsPlainText = (filename = "resume.txt") => {
+	const downloadAsPlainText = (filename?: string) => {
+		const defaultName = getResumeDownloadFilename(variant, "txt");
 		const text = exportAsPlainText();
 		const blob = new Blob([text], { type: "text/plain" });
 		const url = URL.createObjectURL(blob);
 		const link = document.createElement("a");
 		link.href = url;
-		link.download = filename;
+		link.download = filename ?? defaultName;
 		document.body.appendChild(link);
 		link.click();
 		document.body.removeChild(link);
@@ -125,5 +115,6 @@ export function useResumeExport() {
 	return {
 		exportAsPlainText,
 		downloadAsPlainText,
+		variant,
 	};
 }

@@ -6,6 +6,7 @@ import type {
 	Education,
 	Language,
 	ResumePdfExport,
+	ResumePdfVariant,
 } from "~/customTypes";
 
 type SkillCategory = {
@@ -35,6 +36,7 @@ interface ResumeInterface {
 	selectedProjects: SelectedProject[];
 	languages: Language[];
 	extras: string[];
+	resumePdfs: Record<ResumePdfVariant, ResumePdfExport>;
 	resumePdf: ResumePdfExport;
 }
 
@@ -53,9 +55,16 @@ function calculateYearsOfExperience(experiences: Experience[]): number {
 
 function mapExperienceToPdf(
 	exp: Experience,
+	variant: ResumePdfVariant,
 ): ResumePdfExport["experiences"][number] {
-	const source = exp.achievementsPdf ?? exp.achievements;
-	const maxBullets = exp.pdfMaxBullets ?? source.length;
+	const source =
+		variant === "react"
+			? (exp.achievementsPdfReact ?? exp.achievementsPdf ?? exp.achievements)
+			: (exp.achievementsPdf ?? exp.achievements);
+	const maxBullets =
+		variant === "react"
+			? (exp.pdfMaxBulletsReact ?? exp.pdfMaxBullets ?? source.length)
+			: (exp.pdfMaxBullets ?? source.length);
 	return {
 		company: exp.company,
 		roles: exp.roles,
@@ -69,21 +78,40 @@ function mapExperienceToPdf(
 	};
 }
 
+function sortExperiencesForPdf(
+	experiences: Experience[],
+	variant: ResumePdfVariant,
+): Experience[] {
+	return experiences
+		.filter((exp) => exp.includeInPdf !== false)
+		.sort((a, b) => {
+			const orderA = a.pdfSortOrder?.[variant] ?? 999;
+			const orderB = b.pdfSortOrder?.[variant] ?? 999;
+			if (orderA !== orderB) return orderA - orderB;
+			return parseInt(b.startDate, 10) - parseInt(a.startDate, 10);
+		});
+}
+
 export function formatResumeLink(url: string): string {
 	return url.replace(/^https?:\/\/(www\.)?/, "");
 }
 
-function buildResumePdf(
+function buildResumePdfVariant(
+	variant: ResumePdfVariant,
 	experiences: Experience[],
 	years: number,
 ): ResumePdfExport {
-	return {
-		summary: `Senior Frontend Engineer with ${years}+ years building React, Next.js, Vue.js, Nuxt.js, and TypeScript applications and leading engineering teams. Expert in scalable UI systems, accessibility, and performance optimization. Partners with backend teams on API design (Node.js, Django) and ships cohesive product experiences. Established quality bars via test automation and CI; active open-source contributor (Vue Formik).`,
-		skills: [
+	const summaries: Record<ResumePdfVariant, string> = {
+		vue: `Senior Frontend Engineer with ${years}+ years building Vue.js, Nuxt.js, React, Next.js, and TypeScript applications and leading engineering teams. Expert in scalable UI systems, accessibility, and performance optimization. Partners with backend teams on API design (Node.js, Django) and ships cohesive product experiences. Established quality bars via test automation and CI; active open-source contributor (Vue Formik).`,
+		react: `Senior Frontend Engineer with ${years}+ years building React, Next.js, Vue.js, Nuxt.js, and TypeScript applications and leading engineering teams. Strong in Next.js SSR, shadcn/ui, scalable UI systems, and performance optimization (Lighthouse 97+). Partners with backend teams on API design (Node.js, Django, Flask) and ships cohesive product experiences. Established quality bars via test automation and CI.`,
+	};
+
+	const skills: Record<ResumePdfVariant, ResumePdfExport["skills"]> = {
+		vue: [
 			{
 				title: "Frontend",
 				items: [
-					"React.js, Next.js, Vue.js, Nuxt.js, TypeScript, shadcn-vue, Tailwind CSS, Radix UI, PrimeVue, CoreUI, design systems, WCAG, Core Web Vitals",
+					"Vue.js, Nuxt.js, TypeScript, shadcn-vue, Tailwind CSS, PrimeVue, CoreUI, Radix UI, React.js, Next.js, design systems, WCAG, Core Web Vitals",
 				],
 			},
 			{
@@ -99,15 +127,48 @@ function buildResumePdf(
 				],
 			},
 		],
-		experiences: experiences
-			.filter((exp) => exp.includeInPdf !== false)
-			.map(mapExperienceToPdf),
-		selectedProjects: [
+		react: [
+			{
+				title: "Frontend",
+				items: [
+					"React.js, Next.js, TypeScript, shadcn/ui, Tailwind CSS, Radix UI, Zustand, Redux, SSR/SSG, design systems, WCAG, Core Web Vitals",
+				],
+			},
+			{
+				title: "Backend & Platform",
+				items: [
+					"Node.js, Express.js, Flask, Python, Django, DRF, REST, GraphQL, PostgreSQL, Redis, GitHub Actions, Docker",
+				],
+			},
+			{
+				title: "Quality Engineering",
+				items: [
+					"Playwright, Cypress, Jest, React component testing, BDD E2E, API/contract testing, CI quality gates",
+				],
+			},
+		],
+	};
+
+	const selectedProjects: Record<
+		ResumePdfVariant,
+		ResumePdfExport["selectedProjects"]
+	> = {
+		vue: [
 			{
 				title: "Vue Formik",
 				line: "Open-source Vue 3 form library adopted by 1k+ developers — github.com/vue-formik/vue-formik",
 			},
 		],
+		react: [],
+	};
+
+	return {
+		summary: summaries[variant],
+		skills: skills[variant],
+		experiences: sortExperiencesForPdf(experiences, variant).map((exp) =>
+			mapExperienceToPdf(exp, variant),
+		),
+		selectedProjects: selectedProjects[variant],
 	};
 }
 
@@ -182,16 +243,16 @@ const baseResume = {
 		{
 			title: "Browser Recording System",
 			description:
-				"Full recording suite that captures camera, audio, and screen feeds without third-party SDKs.",
+				"Flagship browser-native suite for audio, video, screen, and picture-in-picture screen+camera capture—rebuilt from a failing legacy integration.",
 			impact:
-				"Expanded ourBuddy.ai’s platform capabilities while cutting vendor costs and latency.",
+				"Became the platform's core product differentiator, eliminating third-party SDK costs and enabling broker training workflows at scale.",
 			stack: [
 				"React",
 				"Next.js",
 				"TypeScript",
 				"WebRTC",
 				"MediaRecorder API",
-				"Node.js",
+				"Canvas API",
 			],
 			links: {
 				website: "https://www.ourbuddy.ai",
@@ -245,6 +306,7 @@ const baseResume = {
 			startDate: "2024",
 			endDate: "Present",
 			pdfMaxBullets: 5,
+			pdfSortOrder: { vue: 1, react: 2 },
 			technologies: [
 				"Nuxt.js",
 				"Vue.js",
@@ -353,6 +415,8 @@ const baseResume = {
 			startDate: "2024",
 			endDate: "2025",
 			pdfMaxBullets: 4,
+			pdfMaxBulletsReact: 6,
+			pdfSortOrder: { vue: 2, react: 1 },
 			technologies: [
 				"React.js",
 				"Next.js",
@@ -366,17 +430,28 @@ const baseResume = {
 			],
 			achievements: [
 				"Led a squad of five engineers delivering multi-tenant features, backlog prioritization, and code-quality initiatives for the brokerage platform.",
-				"Engineered a browser-based recording suite (audio/video/screen) using WebRTC + MediaRecorder, expanding product capability without third-party SDK costs.",
+				"Owned ourBuddy's flagship browser recording suite—the product's core differentiator—rebuilding a broken legacy recorder (outdated library, unreliable blobs) into React, Next.js, WebRTC, and MediaRecorder with output tuned for Java backend ingestion.",
+				"Shipped recording UX end-to-end with product design and backend partners: device selection (camera/microphone), live audio visualization, duration limits, pre-roll countdowns, and a draggable camera overlay for screen+camera capture.",
 				"Modernized the legacy React codebase into a modular Next.js architecture with shared UI primitives, reducing build time by 40% and unlocking SSR caching.",
 				"Introduced performance budgets, lazy loading, and real-user monitoring, improving LCP from 3.1s → 1.7s across top customer workspaces.",
+				"Built document and media workflows for training and onboarding, including a searchable PDF viewer with native pagination/search APIs, streaming media players, and interactive quizzes.",
+				"Delivered a full-SSR help center with React/Next.js and Flask/Python, achieving a 97 Lighthouse score for performance and usability.",
 				"Implemented comprehensive Playwright, API, and contract-test suites tied to CI, cutting production regressions by 35%.",
 				"Owned release cadences—sprint planning, QA sign-off, and phased rollouts—achieving 95% on-time delivery while keeping bug escape rate below 1%.",
 			],
 			achievementsPdf: [
 				"Led a squad of five engineers delivering multi-tenant features, backlog prioritization, and code-quality initiatives for the brokerage platform.",
-				"Engineered a browser-based recording suite (audio/video/screen) using WebRTC + MediaRecorder, expanding product capability without third-party SDK costs.",
+				"Owned the flagship browser recording suite—rebuilt a failing legacy recorder on React, Next.js, WebRTC, and MediaRecorder with blob output optimized for the Java backend.",
 				"Modernized the legacy React codebase into a modular Next.js architecture with shared UI primitives, reducing build time by 40% and unlocking SSR caching.",
 				"Implemented comprehensive Playwright, API, and contract-test suites tied to CI, cutting production regressions by 35%.",
+			],
+			achievementsPdfReact: [
+				"Owned ourBuddy's flagship browser recording suite—the product's core differentiator—rebuilding a broken legacy recorder (outdated library, unreliable blobs) into React, Next.js, WebRTC, and MediaRecorder with output tuned for Java backend ingestion.",
+				"Shipped recording UX with product design and backend partners: device selection (camera/microphone), live audio visualization, duration limits, pre-roll countdowns, and a draggable camera overlay for screen+camera capture.",
+				"Modernized a legacy React codebase into a modular Next.js architecture with shared UI primitives, reducing build time by 40% and unlocking SSR caching.",
+				"Delivered a full-SSR help center with React/Next.js and Flask/Python, achieving a 97 Lighthouse score for performance and usability.",
+				"Built document and media workflows, including a searchable PDF viewer, improved media players, and interactive training quizzes.",
+				"Implemented Playwright, API, and contract-test suites tied to CI, cutting production regressions by 35%.",
 			],
 			companyUrl: "https://www.ourbuddy.ai",
 			companyLogo: "ourBuddy.png",
@@ -384,11 +459,12 @@ const baseResume = {
 				{
 					name: "Browser-Based Recording System",
 					description:
-						"Engineered a versatile recording system for audio, video, screen capture and video with screen captures.",
+						"Flagship browser-native recording suite for insurance brokerages—audio, video, screen, and picture-in-picture screen+camera capture without third-party SDKs.",
 					job: [
-						"Built a responsive frontend using React and Next.js.",
-						"Integrated recording functionalities using core Browser APIs.",
-						"Maintained CI/CD pipelines for continuous testing and builds.",
+						"Inherited a failing legacy recorder built on an outdated library with unreliable blob output; led a full rewrite using React, Next.js, WebRTC, and MediaRecorder APIs.",
+						"Delivered device selection (camera/microphone), live audio visualization, recording duration limits, pre-roll countdowns, and a draggable camera canvas for screen+camera recordings.",
+						"Refined UI/UX with the product designer and tuned MediaRecorder blob generation and chunk handling for reliable Java backend ingestion.",
+						"Maintained CI/CD and Playwright coverage for continuous validation of recording flows across browsers.",
 					],
 				},
 				{
@@ -434,6 +510,7 @@ const baseResume = {
 			endDate: "2024",
 			pdfMaxBullets: 3,
 			pdfPageBreakBefore: true,
+			pdfSortOrder: { vue: 3, react: 3 },
 			technologies: [
 				"Jest",
 				"Cucumber.js",
@@ -502,6 +579,7 @@ const baseResume = {
 			startDate: "2022",
 			endDate: "2023",
 			pdfMaxBullets: 3,
+			pdfSortOrder: { vue: 4, react: 4 },
 			technologies: [
 				"React.js",
 				"Express.js",
@@ -547,6 +625,7 @@ const baseResume = {
 			startDate: "2019",
 			endDate: "2022",
 			pdfMaxBullets: 3,
+			pdfSortOrder: { vue: 5, react: 5 },
 			technologies: [
 				"Playwright",
 				"Behat",
@@ -668,15 +747,25 @@ const baseResume = {
 			startDate: "2019",
 			endDate: "Present",
 			pdfMaxBullets: 2,
+			pdfMaxBulletsReact: 4,
+			pdfSortOrder: { vue: 6, react: 6 },
 			technologies: ["Vue.js", "Vuetify", "Django REST Framework", "MySQL"],
 			achievements: [
 				"Built and launched the production platform with Vue 3, Nuxt.js, Shadcn-vue, Tailwind CSS, and Django REST Framework—live at sachchaikendranepal.org.np.",
 				"Delivered social features (posts, comments, feeds) and multi-branch administration for organizational chapters.",
 				"Ongoing maintenance, media optimization, and feature updates for the live platform.",
+				"Rebuilt the next-generation frontend with React, Next.js, and shadcn/ui as part of a platform modernization initiative.",
+				"Upgraded platform infrastructure with Django REST APIs, CI/CD hardening, and observability-ready frontend tooling; implemented multi-placement ads management and consolidated administration into an enhanced Django admin.",
 			],
 			achievementsPdf: [
 				"Built and launched the production platform with Vue 3, Nuxt.js, Shadcn-vue, Tailwind CSS, and Django REST Framework—live at sachchaikendranepal.org.np.",
 				"Delivered social features and multi-branch administration; ongoing maintenance and media optimization.",
+			],
+			achievementsPdfReact: [
+				"Rebuilt the next-generation frontend with React, Next.js, and shadcn/ui, improving load performance and maintainability across member-facing flows.",
+				"Upgraded platform infrastructure with Django REST APIs, CI/CD hardening, and observability-ready frontend tooling.",
+				"Implemented multi-placement ads management with configurable targeting for branch and public content surfaces.",
+				"Consolidated administration into an enhanced Django admin, reducing operational overhead for chapter managers.",
 			],
 			companyUrl: "https://sachchaikendranepal.org.np/",
 			companyLogo: "sachchai-kendra-nepal.png",
@@ -991,7 +1080,7 @@ const baseResume = {
 			major: "Science (Maths)",
 		},
 	],
-} as Omit<ResumeInterface, "personalInfo" | "resumePdf"> & {
+} as Omit<ResumeInterface, "personalInfo" | "resumePdf" | "resumePdfs"> & {
 	personalInfo: Omit<ResumeInterface["personalInfo"], "summary"> & {
 		summary: string;
 	};
@@ -1000,15 +1089,31 @@ const baseResume = {
 // Calculate years of experience dynamically
 const yearsOfExperience = calculateYearsOfExperience(baseResume.experiences);
 
+const resumePdfs: Record<ResumePdfVariant, ResumePdfExport> = {
+	vue: buildResumePdfVariant("vue", baseResume.experiences, yearsOfExperience),
+	react: buildResumePdfVariant(
+		"react",
+		baseResume.experiences,
+		yearsOfExperience,
+	),
+};
+
 // Create the final Resume object with dynamically calculated summary
 const Resume: ResumeInterface = {
 	...baseResume,
 	personalInfo: {
 		...baseResume.personalInfo,
-		summary: `Senior Frontend Engineer with ${yearsOfExperience}+ years building React, Next.js, Vue.js, Nuxt.js, and TypeScript applications and leading engineering teams. Expert in scalable UI systems with strong backend fundamentals (Node.js, Django) and automation expertise. Proven track record of modernizing platforms, improving performance by 40%+, and mentoring engineers.`,
+		summary: `Senior Frontend Engineer with ${yearsOfExperience}+ years building Vue.js, Nuxt.js, React, Next.js, and TypeScript applications and leading engineering teams. Expert in scalable UI systems with strong backend fundamentals (Node.js, Django) and automation expertise. Proven track record of modernizing platforms, improving performance by 40%+, and mentoring engineers.`,
 	},
-	resumePdf: buildResumePdf(baseResume.experiences, yearsOfExperience),
+	resumePdfs,
+	resumePdf: resumePdfs.vue,
 };
 
 export default Resume;
 export { calculateYearsOfExperience, yearsOfExperience };
+
+export function getResumePdf(
+	variant: ResumePdfVariant = "vue",
+): ResumePdfExport {
+	return Resume.resumePdfs[variant];
+}

@@ -1,11 +1,14 @@
 import type { Ref } from "vue";
+import type { ResumePdfVariant } from "~/customTypes";
 
 export const useCoverLetterActions = (
 	coverLetter: Ref<string>,
 	companyName: Ref<string>,
 	position: Ref<string>,
 	showToast: (message: string, type?: "success" | "error") => void,
+	variant: Ref<ResumePdfVariant>,
 ) => {
+	const variantSlug = () => (variant.value === "react" ? "react" : "vue");
 	const copyToClipboard = async () => {
 		try {
 			await navigator.clipboard.writeText(coverLetter.value);
@@ -22,7 +25,7 @@ export const useCoverLetterActions = (
 			const url = URL.createObjectURL(blob);
 			const a = document.createElement("a");
 			a.href = url;
-			a.download = `cover-letter-${companyName.value.replace(/\s+/g, "-").toLowerCase()}-${position.value.replace(/\s+/g, "-").toLowerCase()}.txt`;
+			a.download = `cover-letter-${companyName.value.replace(/\s+/g, "-").toLowerCase()}-${position.value.replace(/\s+/g, "-").toLowerCase()}-${variantSlug()}.txt`;
 			document.body.appendChild(a);
 			a.click();
 			document.body.removeChild(a);
@@ -46,7 +49,7 @@ export const useCoverLetterActions = (
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Cover Letter - ${companyName.value}</title>
+	<title>Cover Letter - ${companyName.value} - ${variantSlug()}</title>
 	<style>
 		body {
 			font-family: Arial, sans-serif;

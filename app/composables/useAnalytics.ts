@@ -2,6 +2,8 @@ const ANALYTICS_KEY = "resume-analytics";
 
 export interface AnalyticsData {
 	pdfDownloads: number;
+	vuePdfDownloads?: number;
+	reactPdfDownloads?: number;
 	coverLetterGenerations: number;
 	plainTextDownloads: number;
 	lastPdfDownload?: string;
@@ -41,10 +43,15 @@ export function useAnalytics() {
 		}
 	};
 
-	const trackPdfDownload = () => {
+	const trackPdfDownload = (variant: "vue" | "react" = "vue") => {
 		const analytics = loadAnalytics();
 		analytics.pdfDownloads += 1;
 		analytics.lastPdfDownload = new Date().toISOString();
+		if (variant === "react") {
+			analytics.reactPdfDownloads = (analytics.reactPdfDownloads ?? 0) + 1;
+		} else {
+			analytics.vuePdfDownloads = (analytics.vuePdfDownloads ?? 0) + 1;
+		}
 		saveAnalytics(analytics);
 	};
 

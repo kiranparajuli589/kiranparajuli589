@@ -27,6 +27,8 @@ export type EmploymentType =
 	| "Part-time"
 	| "Freelance";
 
+export type ResumePdfVariant = "vue" | "react";
+
 export type Experience = {
 	company: string;
 	roles: string[];
@@ -38,13 +40,16 @@ export type Experience = {
 	includeInYearsCalc?: boolean;
 	includeInPdf?: boolean;
 	pdfMaxBullets?: number;
+	pdfMaxBulletsReact?: number;
 	pdfPageBreakBefore?: boolean;
+	pdfSortOrder?: Partial<Record<ResumePdfVariant, number>>;
 
 	companyUrl: string;
 	companyLogo: string;
 	technologies: string[];
 	achievements: string[];
 	achievementsPdf?: string[];
+	achievementsPdfReact?: string[];
 
 	projects: Project[];
 };

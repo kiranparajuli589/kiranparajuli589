@@ -3,6 +3,7 @@ import ExperienceSection from "~/components/home/ExperienceSection.vue";
 import LanguagesSection from "~/components/home/LanguagesSection.vue";
 import ToolsSection from "~/components/home/ToolsSection.vue";
 import Resume, { yearsOfExperience } from "~/utils/resume";
+import type { ResumePdfVariant } from "~/customTypes";
 import {
 	useSeo,
 	createPersonStructuredData,
@@ -17,14 +18,11 @@ const imageUrl = `${siteUrl}/letter_k.png`;
 const personalInfo = Resume.personalInfo;
 const technologies = Resume.technologies;
 
-// Extract skills from technologies
 const skills = technologies.flatMap((tech) => tech.tools.map((t) => t.tooltip));
 const skillsList = [...new Set(skills)].slice(0, 10).join(", ");
 
-// Create a summary for SEO
 const resumeSummary = `Professional resume of ${personalInfo.name}, a ${personalInfo.role} with ${yearsOfExperience}+ years of experience in software development and quality assurance. Specialized in ${skillsList} and modern web technologies.`;
 
-// Page-specific SEO
 useSeo({
 	title: `Resume - ${personalInfo.name}`,
 	description: resumeSummary,
@@ -56,7 +54,6 @@ useSeo({
 	}),
 });
 
-// Additional structured data for collection page
 useHead({
 	script: [
 		{
@@ -73,20 +70,19 @@ useHead({
 	],
 });
 
-const { downloadAsPlainText } = useResumeExport();
 const { trackPlainTextDownload } = useAnalytics();
 
-const handleDownloadPlainText = () => {
+const handleDownloadPlainText = (variant: ResumePdfVariant) => {
 	trackPlainTextDownload();
-	const filename = `${personalInfo.name?.replace(/\s+/g, "_") || "Resume"}_Resume.txt`;
-	downloadAsPlainText(filename);
+	const { downloadAsPlainText } = useResumeExport(variant);
+	downloadAsPlainText();
 };
 
-const handleDownloadDocx = async () => {
+const handleDownloadDocx = async (variant: ResumePdfVariant) => {
 	try {
 		const { useDocxExport } = await import("~/composables/useDocxExport");
 		const { exportResumeAsDocx } = useDocxExport();
-		await exportResumeAsDocx();
+		await exportResumeAsDocx(variant);
 	} catch (error) {
 		console.error("Failed to export DOCX:", error);
 		const message =
@@ -99,39 +95,108 @@ const handleDownloadDocx = async () => {
 </script>
 <template>
 	<div class="resume">
-		<div class="pt-12 flex flex-wrap gap-4 items-center">
+		<div class="pt-12 space-y-8">
 			<h1 class="text-xl uppercase font-bold">Resume</h1>
-			<UButton
-				color="primary"
-				title="Download a copy of my resume as PDF"
-				variant="subtle"
-				:to="'/resume-pdf'"
-			>
-				<UIcon name="i-heroicons-arrow-down-tray" />
-				<span class="px-1 font-bold">Download Pdf</span>
-			</UButton>
-			<p class="w-full text-sm text-gray-600 dark:text-gray-400 print-tip">
-				When saving as PDF, disable <strong>Headers and footers</strong> in the
-				print dialog to remove date, title, URL, and page numbers.
-			</p>
-			<UButton
-				color="primary"
-				title="Download resume as plain text (ATS-friendly)"
-				variant="subtle"
-				@click="handleDownloadPlainText"
-			>
-				<UIcon name="i-heroicons-document-text" />
-				<span class="px-1 font-bold">Download TXT</span>
-			</UButton>
-			<UButton
-				color="primary"
-				title="Download resume as DOCX"
-				variant="subtle"
-				@click="handleDownloadDocx"
-			>
-				<UIcon name="i-heroicons-document-duplicate" />
-				<span class="px-1 font-bold">Download DOCX</span>
-			</UButton>
+
+			<section class="space-y-3">
+				<h2
+					class="text-sm font-semibold uppercase tracking-wide text-gray-600 dark:text-gray-400"
+				>
+					Vue / Nuxt Resume
+				</h2>
+				<div class="flex flex-wrap gap-4 items-center">
+					<UButton
+						color="primary"
+						title="Download Vue/Nuxt resume as PDF"
+						variant="subtle"
+						to="/resume-pdf"
+					>
+						<UIcon name="i-heroicons-arrow-down-tray" />
+						<span class="px-1 font-bold">PDF</span>
+					</UButton>
+					<UButton
+						color="primary"
+						title="Download Vue/Nuxt resume as plain text"
+						variant="subtle"
+						@click="handleDownloadPlainText('vue')"
+					>
+						<UIcon name="i-heroicons-document-text" />
+						<span class="px-1 font-bold">TXT</span>
+					</UButton>
+					<UButton
+						color="primary"
+						title="Download Vue/Nuxt resume as DOCX"
+						variant="subtle"
+						@click="handleDownloadDocx('vue')"
+					>
+						<UIcon name="i-heroicons-document-duplicate" />
+						<span class="px-1 font-bold">DOCX</span>
+					</UButton>
+					<UButton
+						color="primary"
+						title="Generate cover letter aligned with Vue/Nuxt resume"
+						variant="subtle"
+						to="/cover-letter?variant=vue"
+					>
+						<UIcon name="i-heroicons-envelope" />
+						<span class="px-1 font-bold">Cover Letter</span>
+					</UButton>
+				</div>
+				<p class="text-sm text-gray-600 dark:text-gray-400 print-tip">
+					When saving as PDF, disable <strong>Headers and footers</strong> in
+					the print dialog to remove date, title, URL, and page numbers.
+				</p>
+			</section>
+
+			<section class="space-y-3">
+				<h2
+					class="text-sm font-semibold uppercase tracking-wide text-gray-600 dark:text-gray-400"
+				>
+					React / Next.js Resume
+				</h2>
+				<div class="flex flex-wrap gap-4 items-center">
+					<UButton
+						color="primary"
+						title="Download React/Next.js resume as PDF"
+						variant="subtle"
+						to="/resume-pdf/react"
+					>
+						<UIcon name="i-heroicons-arrow-down-tray" />
+						<span class="px-1 font-bold">PDF</span>
+					</UButton>
+					<UButton
+						color="primary"
+						title="Download React/Next.js resume as plain text"
+						variant="subtle"
+						@click="handleDownloadPlainText('react')"
+					>
+						<UIcon name="i-heroicons-document-text" />
+						<span class="px-1 font-bold">TXT</span>
+					</UButton>
+					<UButton
+						color="primary"
+						title="Download React/Next.js resume as DOCX"
+						variant="subtle"
+						@click="handleDownloadDocx('react')"
+					>
+						<UIcon name="i-heroicons-document-duplicate" />
+						<span class="px-1 font-bold">DOCX</span>
+					</UButton>
+					<UButton
+						color="primary"
+						title="Generate cover letter aligned with React/Next.js resume"
+						variant="subtle"
+						to="/cover-letter?variant=react"
+					>
+						<UIcon name="i-heroicons-envelope" />
+						<span class="px-1 font-bold">Cover Letter</span>
+					</UButton>
+				</div>
+				<p class="text-sm text-gray-600 dark:text-gray-400 print-tip">
+					When saving as PDF, disable <strong>Headers and footers</strong> in
+					the print dialog to remove date, title, URL, and page numbers.
+				</p>
+			</section>
 		</div>
 
 		<ExperienceSection />

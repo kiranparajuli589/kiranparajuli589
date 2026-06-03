@@ -1,85 +1,29 @@
 <script setup lang="ts">
 import Resume from "~/utils/resume";
-import { onMounted } from "vue";
-import { useSeo } from "~/composables/useSeo";
-import { useAnalytics } from "~/composables/useAnalytics";
-import type { ResumePdfExperience } from "~/customTypes";
+import type { ResumePdfExport } from "~/customTypes";
+import {
+	buildResumeSocialLinks,
+	formatEducation,
+	formatEmploymentLine,
+} from "~/composables/useResumePdfDocument";
 
-definePageMeta({
-	name: "resume-pdf",
-	layout: "pdf-view",
-});
+const props = defineProps<{
+	resumePdf: ResumePdfExport;
+}>();
 
-const siteUrl = "https://kiranparajuli.com.np";
-const currentUrl = `${siteUrl}/resume-pdf`;
-const imageUrl = `${siteUrl}/letter_k.png`;
 const personalInfo = Resume.personalInfo;
-const resumePdf = Resume.resumePdf;
 const education = Resume.education.filter(
 	(edu) => edu.degree !== "High School",
 );
 const languages = Resume.languages;
+const socialLinks = buildResumeSocialLinks(personalInfo);
 
 const {
 	summary: pdfSummary,
 	skills: pdfSkills,
 	experiences,
 	selectedProjects,
-} = resumePdf;
-
-const socialLinks = [
-	{ label: "LinkedIn", href: personalInfo.linkedin || "#" },
-	{ label: "GitHub", href: personalInfo.github || "#" },
-	{ label: "Portfolio", href: personalInfo.website || "#" },
-	{ label: "Dev.to", href: personalInfo.devto || "#" },
-].filter((link) => link.href !== "#");
-
-function formatEmploymentLine(experience: ResumePdfExperience): string {
-	const parts = [experience.roles.join(", ")];
-	if (experience.employmentType) {
-		parts.push(experience.employmentType);
-	}
-	if (experience.concurrent) {
-		parts.push("concurrent");
-	}
-	parts.push(`${experience.startDate} - ${experience.endDate}`);
-	return parts.join(" · ");
-}
-
-function formatEducation(edu: (typeof education)[number]): string {
-	return `${edu.degree} in ${edu.major} — ${edu.name} (${edu.startDate}–${edu.endDate})`;
-}
-
-useSeo({
-	title: `${personalInfo.name} - Resume PDF`,
-	description: `Professional resume PDF of ${personalInfo.name}, ${personalInfo.role}. Download the complete resume and professional background.`,
-	keywords: `${personalInfo.name} Resume PDF, Curriculum Vitae, Senior Frontend Engineer Resume, React Vue TypeScript Resume, Lead Frontend Engineer, Download Resume`,
-	image: imageUrl,
-	url: currentUrl,
-	type: "profile",
-	structuredData: {
-		"@type": "MediaObject",
-		name: `${personalInfo.name} Resume`,
-		description: `Professional resume PDF of ${personalInfo.name}`,
-		url: currentUrl,
-		author: {
-			"@type": "Person",
-			name: personalInfo.name,
-			email: personalInfo.email,
-			telephone: personalInfo.phone,
-			jobTitle: personalInfo.role,
-		},
-	},
-});
-
-const { trackPdfDownload } = useAnalytics();
-
-onMounted(() => {
-	trackPdfDownload();
-	setTimeout(() => {
-		window.print();
-	}, 1000);
-});
+} = props.resumePdf;
 </script>
 <template>
 	<div class="resume-pdf">
@@ -200,10 +144,6 @@ onMounted(() => {
 	line-height: 1.35;
 }
 
-.resume-pdf .role {
-	font-weight: 600;
-}
-
 .resume-pdf .p-list .link-item {
 	color: #0e62c0;
 }
@@ -288,7 +228,6 @@ onMounted(() => {
 	display: inline-block;
 }
 
-/* Print Styles */
 @media print {
 	@page {
 		size: letter;
