@@ -102,8 +102,8 @@ function buildResumePdfVariant(
 	years: number,
 ): ResumePdfExport {
 	const summaries: Record<ResumePdfVariant, string> = {
-		vue: `Senior Frontend Engineer with ${years}+ years building Vue.js, Nuxt.js, React, Next.js, and TypeScript applications and leading engineering teams. Strong in scalable UI systems, accessibility, and performance optimization. Partners with backend teams on API design (Node.js, Django) and ships cohesive product experiences. Established quality bars via test automation and CI; active open-source contributor (Vue3-Ytframe, Vue Formik).`,
-		react: `Senior Frontend Engineer with ${years}+ years building React, Next.js, Vue.js, Nuxt.js, and TypeScript applications and leading engineering teams. Strong in Next.js SSR, shadcn/ui, scalable UI systems, and performance optimization (Lighthouse 97+). Partners with backend teams on API design (Node.js, Django, Flask) and ships cohesive product experiences. Established quality bars via test automation and CI.`,
+		vue: `Senior Frontend Engineer with ${years}+ years building Vue.js, Nuxt.js, React, Next.js, and TypeScript applications and leading engineering teams. Strong in scalable UI systems, accessibility, and performance optimization. Partner with backend teams on API design (Node.js, Django) and ship cohesive product experiences. Established quality bars via test automation and CI; active open-source contributor (Vue3-Ytframe, Vue Formik).`,
+		react: `Senior Frontend Engineer with ${years}+ years building React, Next.js, Vue.js, Nuxt.js, and TypeScript applications and leading engineering teams. Strong in Next.js SSR, shadcn/ui, scalable UI systems, and performance optimization (Lighthouse 97+). Partner with backend teams on API design (Node.js, Django, Flask) and ship cohesive product experiences. Established quality bars via test automation and CI.`,
 	};
 
 	const skills: Record<ResumePdfVariant, ResumePdfExport["skills"]> = {
@@ -1125,7 +1125,7 @@ const Resume: ResumeInterface = {
 	...baseResume,
 	personalInfo: {
 		...baseResume.personalInfo,
-		summary: `Senior Frontend Engineer with ${yearsOfExperience}+ years building Vue.js, Nuxt.js, React, Next.js, and TypeScript applications and leading engineering teams. Expert in scalable UI systems with strong backend fundamentals (Node.js, Django) and automation expertise. Proven track record of modernizing platforms, improving performance by 40%+, and mentoring engineers.`,
+		summary: `Senior Frontend Engineer with ${yearsOfExperience}+ years building Vue.js, Nuxt.js, React, Next.js, and TypeScript applications and leading engineering teams. Strong in scalable UI systems, accessibility, and performance optimization. Partner with backend teams on API design (Node.js, Django) and ship cohesive product experiences. Established quality bars via test automation and CI; active open-source contributor (Vue3-Ytframe, Vue Formik). Proven track record of modernizing platforms, improving performance by 40%+, and mentoring engineers.`,
 	},
 	resumePdfs,
 	resumePdf: resumePdfs.vue,
