@@ -27,6 +27,17 @@ export type EmploymentType =
 	| "Part-time"
 	| "Freelance";
 
+export type Credential = {
+	label: string;
+	image?: string;
+	badge?: {
+		dark?: string;
+		light?: string;
+		default?: string;
+	};
+	href?: string;
+};
+
 export type ResumePdfVariant = "vue" | "react";
 
 export type Experience = {

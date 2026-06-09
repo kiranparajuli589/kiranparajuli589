@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import ExperienceSection from "~/components/home/ExperienceSection.vue";
+import CredentialsSection from "~/components/home/CredentialsSection.vue";
 import LanguagesSection from "~/components/home/LanguagesSection.vue";
 import ToolsSection from "~/components/home/ToolsSection.vue";
 import ResumeDownloadTools from "~/components/resume/ResumeDownloadTools.vue";
@@ -75,6 +76,7 @@ useHead({
 		</div>
 
 		<ExperienceSection />
+		<CredentialsSection />
 		<ToolsSection />
 		<LanguagesSection />
 	</div>

@@ -7,6 +7,7 @@ import type {
 	Language,
 	ResumePdfExport,
 	ResumePdfVariant,
+	Credential,
 } from "~/customTypes";
 
 type SkillCategory = {
@@ -36,6 +37,7 @@ interface ResumeInterface {
 	selectedProjects: SelectedProject[];
 	languages: Language[];
 	extras: string[];
+	credentials: Credential[];
 	resumePdfs: Record<ResumePdfVariant, ResumePdfExport>;
 	resumePdf: ResumePdfExport;
 }
@@ -317,6 +319,21 @@ const baseResume = {
 		"Active open-source contributor across Vue and Node.js ecosystems.",
 		"Strong documentation habits, code-quality discipline, and knowledge sharing.",
 	],
+	credentials: [
+		{
+			label: "ClickUp Power User",
+			image: "/verified-modal-graphic-power-user-GWGUOOQT.png",
+			href: "https://www.linkedin.com/posts/kiranparajuli589_im-now-verified-on-clickup-activity-7275173835375587336-k-Fs",
+		},
+		{
+			label: "ownCloud Community Contributor",
+			badge: {
+				dark: "/oc-badge-community-contributor-dark.png",
+				light: "/oc-badge-community-contributor-light.png",
+			},
+			href: "https://owncloud.com/",
+		},
+	],
 	experiences: [
 		{
 			company: "Asians Group LLC",
@@ -349,11 +366,9 @@ const baseResume = {
 			achievements: [
 				"Spearheaded frontend delivery of the Key Account Management platform with shadcn-vue, Tailwind CSS, and Nuxt.js; co-designed backend APIs and established BDD end-to-end coverage with Gherkin, Cucumber.js, and Playwright.",
 				"Delivered an AI assistance portal integrating employee calendars, Drive-sourced work records, and company data—featuring streamed HTTP chat, thinking-state UX, persistent history, translations, and theming.",
-				"Championed accessibility-first UI patterns across KAM and Smart Assistance, driving a 40% reduction in UX-related defect reports.",
 				"Architected the Asians Group public website and internal portals on Nuxt.js SSR with PrimeVue and Tailwind CSS, increasing qualified inbound leads by 25% within two quarters.",
 				"Migrated the legacy WordPress stack to Nuxt.js with Django/DRF content management, structured data, and prefetching—improving Core Web Vitals (FCP 2.8s → 1.2s) and boosting organic impressions by 40%.",
 				"Engineered a Lua condition expression builder with visual validation (Vue.js, CoreUI), cutting CDN policy configuration time by 60% and eliminating syntax defects before deployment.",
-				"Established a token-driven design system with reusable Vue/Ant Design components, documentation, and workshops—adopted by 4 squads, reducing UI defects by 45% and accelerating delivery by 35%.",
 				"Transformed a 3,000+ line monolithic core feature into reusable mixins, components, helpers, and constants—cutting maintainability overhead by 90%+ and accelerating new feature delivery.",
 				"Elevated engineering quality by mentoring backend/full-stack engineers, instituting review rubrics, and automating accessibility/performance checks in Jenkins, reducing failed deployments by 30%.",
 				"Optimized loading-state and socket handling to eliminate redundant calls, improving perceived responsiveness by 40% and reducing drop-offs during critical user actions.",
@@ -361,9 +376,9 @@ const baseResume = {
 			achievementsPdf: [
 				"Spearheaded frontend delivery of the Key Account Management platform (Nuxt.js, shadcn-vue, Tailwind CSS); co-designed backend APIs and established BDD end-to-end coverage with Gherkin, Cucumber.js, and Playwright.",
 				"Delivered an AI assistance portal with streamed HTTP chat, thinking-state UX, persistent history, translations, and theming.",
-				"Championed accessibility-first UI patterns across KAM and Smart Assistance, driving a 40% reduction in UX-related defect reports.",
-				"Architected the Asians Group public website on Nuxt.js SSR, increasing qualified inbound leads by 25% within two quarters.",
+				"Architected the Asians Group public website and internal portals on Nuxt.js SSR with PrimeVue and Tailwind CSS, increasing qualified inbound leads by 25% within two quarters.",
 				"Migrated legacy WordPress to Nuxt.js with Django/DRF—improving Core Web Vitals (FCP 2.8s → 1.2s) and boosting organic impressions by 40%.",
+				"Transformed a 3,000+ line monolithic core feature into reusable mixins, components, helpers, and constants—cutting maintainability overhead by 90%+ and accelerating new feature delivery.",
 			],
 			companyUrl: "https://asians.group",
 			companyLogo: "asians_group.png",
@@ -400,6 +415,7 @@ const baseResume = {
 						"Optimized website performance for faster load times.",
 						"Backend integration for dynamic content management.",
 						"Simple django and rest framework based backend for managing content easily.",
+						"Migrated the legacy WordPress stack to Nuxt.js with Django/DRF content management, structured data, and prefetching—improving Core Web Vitals (FCP 2.8s → 1.2s) and boosting organic impressions by 40%.",
 					],
 					url: "https://asians.group",
 				},
@@ -452,7 +468,6 @@ const baseResume = {
 			achievements: [
 				"Led a five-engineer squad delivering multi-tenant brokerage features, backlog prioritization, and code-quality initiatives across the platform.",
 				"Owned ourBuddy's flagship browser recording suite—the product's core differentiator—rebuilding a failing legacy recorder into React, Next.js, WebRTC, and MediaRecorder; enabled scalable broker training and onboarding workflows while eliminating third-party SDK costs and optimizing blob output for Java backend ingestion.",
-				"Delivered end-to-end recording UX with product design and backend partners: device selection (camera/microphone), live audio visualization, duration limits, pre-roll countdowns, and a draggable camera overlay for screen+camera capture.",
 				"Modernized a legacy React codebase into a modular Next.js architecture with shared UI primitives, achieving a 40% reduction in build time and unlocking SSR caching.",
 				"Drove performance optimization with budgets, lazy loading, and real-user monitoring, improving LCP from 3.1s to 1.7s across top customer workspaces.",
 				"Delivered document and media workflows for training and onboarding, including a searchable PDF viewer, streaming media players, and interactive quizzes.",
@@ -468,7 +483,6 @@ const baseResume = {
 			],
 			achievementsPdfReact: [
 				"Owned ourBuddy's flagship browser recording suite—the product's core differentiator—rebuilding a failing legacy recorder into React, Next.js, WebRTC, and MediaRecorder; enabled scalable broker training and onboarding workflows while eliminating third-party SDK costs and optimizing blob output for Java backend ingestion.",
-				"Delivered end-to-end recording UX with product design and backend partners: device selection (camera/microphone), live audio visualization, duration limits, pre-roll countdowns, and a draggable camera overlay for screen+camera capture.",
 				"Modernized a legacy React codebase into a modular Next.js architecture with shared UI primitives, achieving a 40% reduction in build time and unlocking SSR caching.",
 				"Delivered a full-SSR help center with React/Next.js and Flask/Python, achieving a Lighthouse score of 97 for performance and usability.",
 				"Shipped document and media workflows, including a searchable PDF viewer, improved media players, and interactive training quizzes.",
@@ -893,7 +907,8 @@ const baseResume = {
 		},
 		{
 			title: "VueYtframe",
-			description: "A fully typed YouTube Iframe API wrapper for Vue applications",
+			description:
+				"A fully typed YouTube Iframe API wrapper for Vue applications",
 			thumbnail: "vue-ytframe.png",
 			technologies: ["VueJs", "YouTube Iframe API"],
 			links: {

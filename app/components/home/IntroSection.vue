@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import Resume from "~/utils/resume";
+import CredentialsSection from "~/components/home/CredentialsSection.vue";
+
 const personalInfo = Resume.personalInfo;
 </script>
 <template>
@@ -18,6 +20,7 @@ const personalInfo = Resume.personalInfo;
 				<div class="subtitle">
 					{{ personalInfo.bio }}
 				</div>
+				<CredentialsSection compact />
 				<a class="lets-talk" :href="'mailto:' + personalInfo.email">
 					<span class="lets">let's</span>
 					<span class="talk">talk</span>
