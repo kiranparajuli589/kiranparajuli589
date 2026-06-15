@@ -113,7 +113,7 @@ function buildResumePdfVariant(
 			{
 				title: "Frontend",
 				items: [
-					"Vue.js, Nuxt.js, TypeScript, shadcn-vue, Tailwind CSS, PrimeVue, CoreUI, Radix UI, React.js, Next.js, design systems, WCAG, Core Web Vitals",
+					"Vue.js, Nuxt.js, TypeScript, shadcn-vue, Tailwind CSS, PrimeVue, CoreUI, Radix UI, React.js, Next.js, design systems, WCAG, Core Web Vitals, i18n",
 				],
 			},
 			{
@@ -133,7 +133,7 @@ function buildResumePdfVariant(
 			{
 				title: "Frontend",
 				items: [
-					"React.js, Next.js, TypeScript, shadcn/ui, Tailwind CSS, Radix UI, Zustand, Redux, Tanstack Query, SSR/SSG, design systems, WCAG, Core Web Vitals",
+					"React.js, Next.js, TypeScript, shadcn/ui, Tailwind CSS, Radix UI, Zustand, Redux, Tanstack Query, SSR/SSG, design systems, WCAG, Core Web Vitals, i18n",
 				],
 			},
 			{
