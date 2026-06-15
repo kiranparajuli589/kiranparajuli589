@@ -69,6 +69,7 @@ export type Tool = {
 	image?: string;
 	class?: string;
 	tooltip: string;
+	imgClass?: string;
 };
 
 export type Technology = {

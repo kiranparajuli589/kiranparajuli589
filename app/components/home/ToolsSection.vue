@@ -26,10 +26,10 @@ const Techs = Resume.technologies;
 			</template>
 
 			<div class="tech-list flex items-center flex-wrap gap-4 mt-4">
-				<div
-					v-for="(tool, index) in tech.tools"
-					:key="index"
-					:title="tool.tooltip"
+				<UTooltip
+					v-for="tool in tech.tools"
+					:key="tool.tooltip"
+					:text="tool.tooltip"
 				>
 					<i v-if="tool.class" class="text-5xl" :class="tool.class" />
 					<img
@@ -41,9 +41,9 @@ const Techs = Resume.technologies;
 						decoding="async"
 						:alt="tool.tooltip || 'Technology icon'"
 						:src="getAssetUrl(tool.image, 'tech')"
-						:class="tool.class"
+						:class="tool.imgClass"
 					/>
-				</div>
+				</UTooltip>
 			</div>
 		</UCard>
 	</section>

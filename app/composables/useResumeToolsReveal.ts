@@ -1,5 +1,5 @@
 const STORAGE_KEY = "resume-tools-unlocked";
-const HOLD_MS = 3000;
+const HOLD_MS = 800;
 
 export function useResumeToolsReveal() {
 	const toolsUnlocked = ref(false);

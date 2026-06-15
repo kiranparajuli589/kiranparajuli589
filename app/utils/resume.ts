@@ -133,7 +133,7 @@ function buildResumePdfVariant(
 			{
 				title: "Frontend",
 				items: [
-					"React.js, Next.js, TypeScript, shadcn/ui, Tailwind CSS, Radix UI, Zustand, Redux, SSR/SSG, design systems, WCAG, Core Web Vitals",
+					"React.js, Next.js, TypeScript, shadcn/ui, Tailwind CSS, Radix UI, Zustand, Redux, Tanstack Query, SSR/SSG, design systems, WCAG, Core Web Vitals",
 				],
 			},
 			{
@@ -164,11 +164,23 @@ function buildResumePdfVariant(
 				title: "Vue3-Ytframe",
 				line: "Open-source Vue 3 library for embedding YouTube videos via the IFrame API — kiranparajuli589.github.io/vue3-ytframe",
 			},
+			{
+				title: "Browser Recording System",
+				line: "Flagship WebRTC/MediaRecorder suite for insurance brokerages—replaced a legacy recorder and enabled scalable training/onboarding without third-party SDKs",
+			},
 		],
 		react: [
 			{
 				title: "Browser Recording System",
 				line: "Flagship WebRTC/MediaRecorder suite for insurance brokerages—replaced a legacy recorder and enabled scalable training/onboarding without third-party SDKs",
+			},
+			{
+				title: "Vue Formik",
+				line: "Open-source Vue 3 form library adopted by 1k+ developers — github.com/vue-formik/vue-formik",
+			},
+			{
+				title: "Vue3-Ytframe",
+				line: "Open-source Vue 3 library for embedding YouTube videos via the IFrame API — kiranparajuli589.github.io/vue3-ytframe",
 			},
 		],
 	};
@@ -1052,9 +1064,16 @@ const baseResume = {
 				{ class: "devicon-tailwindcss-plain", tooltip: "TailwindCSS" },
 				{ class: "devicon-figma-plain-wordmark", tooltip: "Figma" },
 				{ class: "devicon-bootstrap-plain-wordmark", tooltip: "Bootstrap" },
-				{ tooltip: "RadixUI", image: "radixui.png", class: "dark:invert" },
+				{ tooltip: "RadixUI", image: "radixui.png", imgClass: "dark:invert" },
 				{ tooltip: "Axios", image: "axios.svg" },
 				{ tooltip: "GSAP", image: "gsap.png" },
+				{ tooltip: "Tanstack Query", image: "tanstack-query.png" },
+				{ tooltip: "Zustand", image: "zustand.png" },
+				{ tooltip: "Pinia", image: "pinia.png" },
+				{ tooltip: "Redux Toolkit", image: "redux.png" },
+				{ tooltip: "Shadcn/UI", image: "shadcn-ui.png" },
+				{ tooltip: "Zod", image: "zod.png" },
+				{ tooltip: "Yup", image: "yup.png" },
 			],
 		},
 		{
