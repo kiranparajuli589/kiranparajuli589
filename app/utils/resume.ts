@@ -1074,6 +1074,7 @@ const baseResume = {
 				{ tooltip: "Shadcn/UI", image: "shadcn-ui.png" },
 				{ tooltip: "Zod", image: "zod.png" },
 				{ tooltip: "Yup", image: "yup.png" },
+				{ tooltip: "i18n", image: "i18n.png" },
 			],
 		},
 		{
