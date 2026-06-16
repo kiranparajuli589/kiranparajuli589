@@ -32,7 +32,7 @@ Recently, I have worked on:
 - Building Nuxt.js SSR platforms with strong Core Web Vitals improvements
 - Creating AI assistance interfaces with streamed chat and persistent history
 - Building browser-based recording systems with WebRTC and MediaRecorder
-- Establishing Playwright, API, and contract testing in CI pipelines
+- Establishing Playwright(E2E), API, integration, unit, and contract testing in CI pipelines
 - Leading frontend delivery, mentoring engineers, and improving UI quality bars
 
 I care about interfaces that feel good to use and codebases that are easy for teams to maintain.
