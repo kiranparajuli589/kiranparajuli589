@@ -43,7 +43,7 @@ I care about interfaces that feel good to use and codebases that are easy for te
 
 **Frontend**
 
-React.js, Next.js, Vue.js, Nuxt.js, TypeScript, Tailwind CSS, shadcn/ui, shadcn-vue, Radix UI, PrimeVue, CoreUI
+React.js, Next.js, Vue.js, Nuxt.js, TypeScript, Tailwind CSS, shadcn/ui, Radix UI, PrimeVue, CoreUI, ant-design, i18n, Redux, Redux Toolkit, Pinia, Vuex, Zustand, Zod, Yup
 
 **Architecture & Product**
 
