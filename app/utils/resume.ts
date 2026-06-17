@@ -8,6 +8,7 @@ import type {
 	ResumePdfExport,
 	ResumePdfVariant,
 	Credential,
+	AiEngineering,
 } from "~/customTypes";
 
 type SkillCategory = {
@@ -38,6 +39,7 @@ interface ResumeInterface {
 	languages: Language[];
 	extras: string[];
 	credentials: Credential[];
+	aiEngineering: AiEngineering;
 	resumePdfs: Record<ResumePdfVariant, ResumePdfExport>;
 	resumePdf: ResumePdfExport;
 }
@@ -98,14 +100,50 @@ export function formatResumeLink(url: string): string {
 	return url.replace(/^https?:\/\/(www\.)?/, "");
 }
 
+const aiEngineering: AiEngineering = {
+	title: "AI-Augmented Engineering",
+	subtitle:
+		"Daily workflow tools and practices for faster, higher-quality delivery.",
+	tools: [
+		{ tooltip: "Cursor", image: "cursor.png" },
+		{ tooltip: "Claude", image: "claude.png" },
+		{
+			tooltip: "Claude Code",
+			image: "claude-code.png",
+			imageDark: "claude-code-dark.png",
+		},
+		{ tooltip: "ChatGPT", image: "chatgpt.png" },
+		{ tooltip: "Codex", image: "codex.png", imageDark: "codex-dark.png" },
+	],
+	practices: [
+		"MCP server setup and context-aware tooling",
+		"Cursor rules, Agent Skills, and project conventions",
+		"Token-efficient prompts and model selection",
+		"AI-assisted code review, refactoring, and test generation",
+	],
+	pdfToolsLine: "Cursor, Claude, Claude Code, ChatGPT, Codex",
+	pdfPracticesLine:
+		"MCP servers, rules/skills, token-efficient prompts, AI code reviews",
+};
+
+const aiSummaryClause =
+	"Uses AI-augmented workflows (Cursor, Claude, MCP) to accelerate delivery while maintaining code quality.";
+
 function buildResumePdfVariant(
 	variant: ResumePdfVariant,
 	experiences: Experience[],
 	years: number,
 ): ResumePdfExport {
 	const summaries: Record<ResumePdfVariant, string> = {
-		vue: `Senior Frontend Engineer with ${years}+ years building Vue.js, Nuxt.js, React, Next.js, and TypeScript applications and leading engineering teams. Strong in scalable UI systems, accessibility, and performance optimization. Partner with backend teams on API design (Node.js, Django) and ship cohesive product experiences. Established quality bars via test automation and CI; active open-source contributor (Vue3-Ytframe, Vue Formik).`,
-		react: `Senior Frontend Engineer with ${years}+ years building React, Next.js, Vue.js, Nuxt.js, and TypeScript applications and leading engineering teams. Strong in Next.js SSR, shadcn/ui, scalable UI systems, and performance optimization (Lighthouse 97+). Partner with backend teams on API design (Node.js, Django, Flask) and ship cohesive product experiences. Established quality bars via test automation and CI.`,
+		vue: `Senior Frontend Engineer with ${years}+ years building Vue.js, Nuxt.js, React, Next.js, and TypeScript applications and leading engineering teams. Strong in scalable UI systems, accessibility, and performance optimization. Partner with backend teams on API design (Node.js, Django) and ship cohesive product experiences. Established quality bars via test automation and CI; active open-source contributor (Vue3-Ytframe, Vue Formik). ${aiSummaryClause}`,
+		react: `Senior Frontend Engineer with ${years}+ years building React, Next.js, Vue.js, Nuxt.js, and TypeScript applications and leading engineering teams. Strong in Next.js SSR, shadcn/ui, scalable UI systems, and performance optimization (Lighthouse 97+). Partner with backend teams on API design (Node.js, Django, Flask) and ship cohesive product experiences. Established quality bars via test automation and CI. ${aiSummaryClause}`,
+	};
+
+	const aiPdfSkill: ResumePdfExport["skills"][number] = {
+		title: aiEngineering.title,
+		items: [
+			`${aiEngineering.pdfToolsLine} — ${aiEngineering.pdfPracticesLine}`,
+		],
 	};
 
 	const skills: Record<ResumePdfVariant, ResumePdfExport["skills"]> = {
@@ -128,6 +166,7 @@ function buildResumePdfVariant(
 					"Playwright, Cypress, Gherkin, Cucumber.js, Jest, BDD E2E, contract/regression/load testing (Locust), CI quality gates",
 				],
 			},
+			aiPdfSkill,
 		],
 		react: [
 			{
@@ -148,6 +187,7 @@ function buildResumePdfVariant(
 					"Playwright, Cypress, Jest, React component testing, BDD E2E, API/contract testing, CI quality gates",
 				],
 			},
+			aiPdfSkill,
 		],
 	};
 
@@ -210,7 +250,7 @@ const baseResume = {
 		linkedin: "https://linkedin.com/in/kiranparajuli589",
 		github: "https://github.com/kiranparajuli589",
 		website: "https://kiranparajuli.com.np",
-		bio: "Senior Frontend Engineer | React.js • Vue.js • TypeScript • QA Automation",
+		bio: "Senior Frontend Engineer | React.js • Vue.js • TypeScript • QA Automation • AI-augmented engineering",
 		summary: "", // Will be set after experiences are defined
 		summaryQa:
 			"Results-driven Quality Assurance Engineer with expertise in WebUI, API, CLI, Unit, and E2E testing. Skilled in planning, writing, and maintaining test cases. Passionate about mentoring and continuous improvement within teams. Utilizes music and creative outlets to stay inspired.",
@@ -254,7 +294,15 @@ const baseResume = {
 				"Linux/VPS administration, monitoring, and logs",
 			],
 		},
+		{
+			title: "AI-Augmented Engineering",
+			items: [
+				`${aiEngineering.pdfToolsLine} — ${aiEngineering.pdfPracticesLine}`,
+				...aiEngineering.practices,
+			],
+		},
 	],
+	aiEngineering,
 	leadershipHighlights: [
 		"Architect scalable UI platforms that balance performance, accessibility, and velocity.",
 		"Own the frontend roadmap—from modernization sequencing to design system rollout.",
@@ -374,12 +422,14 @@ const baseResume = {
 				"Gherkin",
 				"Cucumber.js",
 				"Playwright",
+				"Google Tag Manager",
+				"Google Analytics 4",
 			],
 			achievements: [
 				"Spearheaded frontend delivery of the Key Account Management platform with shadcn-vue, Tailwind CSS, and Nuxt.js; co-designed backend APIs and established BDD end-to-end coverage with Gherkin, Cucumber.js, and Playwright.",
 				"Delivered an AI assistance portal integrating employee calendars, Drive-sourced work records, and company data—featuring streamed HTTP chat, thinking-state UX, persistent history, translations, and theming.",
-				"Architected the Asians Group public website and internal portals on Nuxt.js SSR with PrimeVue and Tailwind CSS, increasing qualified inbound leads by 25% within two quarters.",
-				"Migrated the legacy WordPress stack to Nuxt.js with Django/DRF content management, structured data, and prefetching—improving Core Web Vitals (FCP 2.8s → 1.2s) and boosting organic impressions by 40%.",
+				"Architected the Asians Group public website and internal portals on Nuxt.js SSR with PrimeVue and Tailwind CSS; implemented GTM/GA4 with careers-page and job-application custom events, site-wide public-site tracking, and ongoing analytics monitoring—increasing qualified inbound leads by 25% within two quarters.",
+				"Migrated the legacy WordPress stack to Nuxt.js with Django/DRF—improved sitemaps, canonical URLs, and reachable translated routes, plus structured data and prefetching; improved Core Web Vitals (FCP 2.8s → 1.2s) and boosted organic impressions by 40%.",
 				"Engineered a Lua condition expression builder with visual validation (Vue.js, CoreUI), cutting CDN policy configuration time by 60% and eliminating syntax defects before deployment.",
 				"Transformed a 3,000+ line monolithic core feature into reusable mixins, components, helpers, and constants—cutting maintainability overhead by 90%+ and accelerating new feature delivery.",
 				"Elevated engineering quality by mentoring backend/full-stack engineers, instituting review rubrics, and automating accessibility/performance checks in Jenkins, reducing failed deployments by 30%.",
@@ -388,8 +438,8 @@ const baseResume = {
 			achievementsPdf: [
 				"Spearheaded frontend delivery of the Key Account Management platform (Nuxt.js, shadcn-vue, Tailwind CSS); co-designed backend APIs and established BDD end-to-end coverage with Gherkin, Cucumber.js, and Playwright.",
 				"Delivered an AI assistance portal with streamed HTTP chat, thinking-state UX, persistent history, translations, and theming.",
-				"Architected the Asians Group public website and internal portals on Nuxt.js SSR with PrimeVue and Tailwind CSS, increasing qualified inbound leads by 25% within two quarters.",
-				"Migrated legacy WordPress to Nuxt.js with Django/DRF—improving Core Web Vitals (FCP 2.8s → 1.2s) and boosting organic impressions by 40%.",
+				"Architected the Asians Group public website and internal portals (Nuxt.js SSR); GTM/GA4 with careers/job-application custom events and site-wide tracking—25% more qualified leads in two quarters.",
+				"Migrated WordPress to Nuxt.js/Django—improved sitemaps, canonical and translated URLs, structured data; Core Web Vitals (FCP 2.8s → 1.2s) and organic impressions +40%.",
 				"Transformed a 3,000+ line monolithic core feature into reusable mixins, components, helpers, and constants—cutting maintainability overhead by 90%+ and accelerating new feature delivery.",
 			],
 			companyUrl: "https://asians.group",
@@ -423,6 +473,8 @@ const baseResume = {
 						"Developed a comprehensive public website for Asians Group LLC.",
 					job: [
 						"Designed and implemented the frontend using PrimeVue, TailwindCSS & Vue.js and Nuxt.js.",
+						"Implemented GTM/GA4 with custom careers and job-application events, site-wide public-site tracking, and ongoing analytics monitoring.",
+						"Improved sitemaps, canonical URLs, and i18n translation URL reachability for SEO and discoverability.",
 						"Collaborated with designers to ensure a visually appealing layout.",
 						"Optimized website performance for faster load times.",
 						"Backend integration for dynamic content management.",

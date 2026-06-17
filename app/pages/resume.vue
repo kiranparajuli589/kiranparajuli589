@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import ExperienceSection from "~/components/home/ExperienceSection.vue";
 import CredentialsSection from "~/components/home/CredentialsSection.vue";
+import AiEngineeringSection from "~/components/home/AiEngineeringSection.vue";
 import LanguagesSection from "~/components/home/LanguagesSection.vue";
 import ToolsSection from "~/components/home/ToolsSection.vue";
 import ResumeDownloadTools from "~/components/resume/ResumeDownloadTools.vue";
@@ -18,7 +19,8 @@ const personalInfo = Resume.personalInfo;
 const technologies = Resume.technologies;
 
 const skills = technologies.flatMap((tech) => tech.tools.map((t) => t.tooltip));
-const skillsList = [...new Set(skills)].slice(0, 10).join(", ");
+const aiToolNames = Resume.aiEngineering.tools.map((t) => t.tooltip);
+const skillsList = [...new Set([...skills, ...aiToolNames])].slice(0, 10).join(", ");
 
 const resumeSummary = `Professional resume of ${personalInfo.name}, a ${personalInfo.role} with ${yearsOfExperience}+ years of experience in software development and quality assurance. Specialized in ${skillsList} and modern web technologies.`;
 
@@ -49,7 +51,7 @@ useSeo({
 			personalInfo.github ? String(personalInfo.github) : undefined,
 			personalInfo.devto ? String(personalInfo.devto) : undefined,
 		].filter((item) => item !== undefined),
-		knowsAbout: [...new Set(skills)].slice(0, 20),
+		knowsAbout: [...new Set([...skills, ...aiToolNames])].slice(0, 20),
 	}),
 });
 
@@ -77,6 +79,7 @@ useHead({
 
 		<ExperienceSection />
 		<CredentialsSection />
+		<AiEngineeringSection />
 		<ToolsSection />
 		<LanguagesSection />
 	</div>

@@ -67,6 +67,7 @@ export type Experience = {
 
 export type Tool = {
 	image?: string;
+	imageDark?: string;
 	class?: string;
 	tooltip: string;
 	imgClass?: string;
@@ -75,6 +76,15 @@ export type Tool = {
 export type Technology = {
 	name: string;
 	tools: Tool[];
+};
+
+export type AiEngineering = {
+	title: string;
+	subtitle: string;
+	tools: Tool[];
+	practices: string[];
+	pdfToolsLine: string;
+	pdfPracticesLine: string;
 };
 
 export type Work = {
