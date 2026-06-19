@@ -255,7 +255,7 @@ const {
 		font-size: 10pt;
 		max-width: 100%;
 		margin: 0;
-		line-height: 1.24;
+		line-height: 1.32;
 	}
 
 	.resume-pdf h1 {
@@ -265,8 +265,8 @@ const {
 
 	.resume-pdf h2 {
 		font-size: 12pt;
-		margin-top: 6pt;
-		margin-bottom: 2pt;
+		margin-top: 9pt;
+		margin-bottom: 3pt;
 		page-break-after: avoid;
 		border-bottom: 1pt solid #000;
 		padding-bottom: 2pt;
@@ -274,13 +274,13 @@ const {
 
 	.resume-pdf .experience-section-start {
 		page-break-before: auto;
-		margin-top: 6pt;
+		margin-top: 9pt;
 	}
 
 	.resume-pdf h3 {
 		font-size: 11pt;
-		margin-top: 4pt;
-		margin-bottom: 2pt;
+		margin-top: 6pt;
+		margin-bottom: 3pt;
 		page-break-after: avoid;
 	}
 
@@ -289,26 +289,26 @@ const {
 	}
 
 	.resume-pdf p {
-		margin-bottom: 3pt;
+		margin-bottom: 4pt;
 		font-size: 10pt;
 	}
 
 	.resume-pdf ul {
 		margin-top: 0;
-		margin-bottom: 4pt;
+		margin-bottom: 6pt;
 		padding-left: 1.35rem;
 	}
 
 	.resume-pdf ul > li {
-		margin-bottom: 1.5pt;
+		margin-bottom: 3pt;
 		font-size: 10pt;
-		line-height: 1.22;
+		line-height: 1.3;
 	}
 
 	.resume-pdf hr {
 		border: none;
 		border-top: 1pt solid #ccc;
-		margin: 3pt 0;
+		margin: 4pt 0;
 	}
 
 	.resume-pdf h2 + hr {
@@ -341,18 +341,18 @@ const {
 
 	.resume-pdf .skill-row {
 		font-size: 9.5pt;
-		margin-bottom: 3pt;
+		margin-bottom: 4pt;
 	}
 
 	.resume-pdf .skill-items-line {
 		display: block;
 		margin-left: 0;
-		margin-top: 1pt;
+		margin-top: 2pt;
 	}
 
 	.resume-pdf .experience-item {
 		page-break-inside: avoid;
-		margin-bottom: 5pt;
+		margin-bottom: 8pt;
 	}
 
 	.resume-pdf .experience-page-break {
@@ -381,7 +381,7 @@ const {
 	}
 
 	.resume-pdf .selected-projects-list > li {
-		margin-bottom: 2pt;
+		margin-bottom: 3pt;
 	}
 }
 </style>

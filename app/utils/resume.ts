@@ -141,7 +141,7 @@ const figmaSummaryClause =
 	"Figma design-to-code from wireframes and prototypes through stakeholder review to production UI.";
 
 function buildWebSummary(years: number): string {
-	return `Senior Frontend Engineer with ${years}+ years in frontend and product UI delivery. Led CDN console modernization (Vue 2→3, shadcn-vue, Tailwind)—high-traffic tables, WebSocket batch queue, and complex forms. ${figmaSummaryClause}`;
+	return `Senior Frontend Engineer with ${years}+ years in frontend and product UI delivery. Led CDN console modernization (Vue 2 to Vue 3, shadcn-vue, Tailwind)—high-traffic tables, WebSocket batch queue, and complex forms. ${figmaSummaryClause}`;
 }
 
 function buildResumePdfVariant(
@@ -151,7 +151,7 @@ function buildResumePdfVariant(
 	_seniorYears: number,
 ): ResumePdfExport {
 	const summaries: Record<ResumePdfVariant, string> = {
-		vue: `Senior Frontend Engineer with ${years}+ years in frontend and product UI delivery. Led CDN console modernization (Vue 2→3, shadcn-vue, Tailwind)—high-traffic tables, WebSocket batch queue, and complex forms. ${figmaSummaryClause}`,
+		vue: `Senior Frontend Engineer with ${years}+ years in frontend and product UI delivery. Led CDN console modernization (Vue 2 to Vue 3, shadcn-vue, Tailwind)—high-traffic tables, WebSocket batch queue, and complex forms. ${figmaSummaryClause}`,
 		react: `Senior Frontend Engineer with ${years}+ years in frontend and product UI delivery. Rebuilt ourBuddy's flagship WebRTC recording suite on React/Next.js and delivered a Lighthouse 97 SSR help center. ${figmaSummaryClause}`,
 	};
 
@@ -181,7 +181,7 @@ function buildResumePdfVariant(
 			{
 				title: "Frontend",
 				items: [
-					"Primary: React.js, Next.js, TypeScript, shadcn/ui, Tailwind CSS, Zustand, Tanstack Query, Figma (wireframing, prototyping, design variables)",
+					"Primary: React.js, Next.js, TypeScript, custom hooks, shadcn/ui, Tailwind CSS, Zustand, Tanstack Query, Figma (wireframing, prototyping, design variables)",
 					"Also: Vue.js, Nuxt.js, SSR/SSG, Radix UI, Redux, design systems, WCAG, Core Web Vitals, i18n",
 				],
 			},
@@ -194,7 +194,7 @@ function buildResumePdfVariant(
 			{
 				title: "Quality Engineering",
 				items: [
-					"Playwright, Cypress, Jest, React component testing, BDD E2E, API/contract testing, CI quality gates",
+					"Playwright, Cypress, Jest, React Testing Library, BDD E2E, API/contract testing, CI quality gates",
 				],
 			},
 		],
@@ -207,7 +207,7 @@ function buildResumePdfVariant(
 		vue: [
 			{
 				title: "CDN Management Console",
-				line: "Vue 2→3 CDN console—60% faster tables (Chrome Performance, 5k+ rows), WebSocket batch queue 35%+ faster vs prior flow",
+				line: "Vue 2 to Vue 3 CDN console—60% faster tables (Chrome Performance, 5k+ rows), WebSocket batch queue 35%+ faster vs prior flow",
 			},
 			{
 				title: "Lua Expression Builder",
@@ -215,7 +215,7 @@ function buildResumePdfVariant(
 			},
 			{
 				title: "Key Account Management",
-				line: "Internal Figma-led side project—dashboards, forms, filters on Nuxt.js/shadcn-vue with BDD E2E (Playwright)",
+				line: "Internal Figma-led platform project—dashboards, forms, filters on Nuxt.js/shadcn-vue with BDD E2E (Playwright)",
 			},
 			{
 				title: "Vue Formik",
@@ -328,7 +328,7 @@ const baseResume = {
 		{
 			title: "CDN Management Console",
 			description:
-				"Core internal CDN management console—Vue 2→3 modernization with shadcn-vue, Tailwind, and WebSocket batch operations.",
+				"Core internal CDN management console—Vue 2 to Vue 3 modernization with shadcn-vue, Tailwind, and WebSocket batch operations.",
 			impact:
 				"60% faster table render and 35%+ faster batch operations via centralized WebSocket queue; fully mobile-responsive UX.",
 			stack: [
@@ -445,29 +445,29 @@ const baseResume = {
 				"Google Analytics 4",
 			],
 			achievements: [
-				"Primary frontend engineer on CDN console migration Vue 2→3 (shadcn-vue, Tailwind CSS); extended legacy CoreUI via documentation research and custom components.",
+				"Primary frontend engineer on CDN console migration Vue 2 to Vue 3 (shadcn-vue, Tailwind CSS); extended legacy CoreUI via documentation research and custom components.",
 				"Optimized data tables with thousands of rows—60% faster render (Chrome Performance on 5k+ row datasets vs legacy renderer); centralized WebSocket batch queue—35%+ faster batch ops vs prior sequential handling.",
 				"Delivered mobile-responsive console UX—scrollable large dialogs, sticky tabs on tabbed forms; refactored 3,000+ line monolithic modules into reusable mixins and components.",
 				"Built complex tabbed forms and co-designed REST APIs with backend teams; shipped via JIRA and Jenkins with cross-team i18n (product, CS, backend).",
 				"Redesigned in Figma and rebuilt the Asians Group public website and internal portals on Nuxt.js SSR (PrimeVue, Tailwind CSS), migrating off the legacy WordPress stack to Django/DRF—improved sitemaps, canonical URLs, reachable translated routes, structured data, and prefetching (Core Web Vitals FCP 2.8s → 1.2s, +40% organic impressions); implemented GTM/GA4 with careers-page and job-application custom events and site-wide tracking, measurably increasing qualified inbound leads (GA4-tracked, ~25% QoQ in internal analytics).",
 				"Built a Figma design system—source of truth in Figma with project themes and design variables; implemented reusable components in Vue.js for legacy Ant Design products with team workshops and documentation.",
 				"Engineered a Lua condition expression builder with visual validation (Vue.js, CoreUI)—replacing manual Lua editing and eliminating syntax defects before deployment.",
-				"Internal side project: Owned KAM end-to-end from wireframes and Figma (dashboards, tables, forms, filters) through product-owner review to production with shadcn-vue, Tailwind CSS, and Nuxt.js; co-designed backend APIs and established BDD end-to-end coverage with Gherkin, Cucumber.js, and Playwright.",
+				"Internal platform project: Owned KAM end-to-end from wireframes and Figma (dashboards, tables, forms, filters) through product-owner review to production with shadcn-vue, Tailwind CSS, and Nuxt.js; co-designed backend APIs and established BDD end-to-end coverage with Gherkin, Cucumber.js, and Playwright.",
 				"Delivered an AI assistance portal integrating employee calendars, Drive-sourced work records, and company data—featuring streamed HTTP chat, thinking-state UX, persistent history, translations, and theming.",
 				"Elevated engineering quality by mentoring backend/full-stack engineers, instituting review rubrics, and automating accessibility/performance checks in Jenkins, noticeably reducing failed deployments across two release cycles.",
 			],
 			achievementsPdf: [
-				"Primary frontend engineer on CDN console migration Vue 2→3 (shadcn-vue, Tailwind); extended CoreUI via documentation research and custom components; complex tabbed forms with API co-design; JIRA/Jenkins releases with cross-team i18n.",
+				"Primary frontend engineer on CDN console migration Vue 2 to Vue 3 (shadcn-vue, Tailwind); extended CoreUI via documentation research and custom components; complex tabbed forms with API co-design; JIRA/Jenkins releases with cross-team i18n.",
 				"Optimized tables with thousands of rows—60% faster render (Chrome Performance, 5k+ rows vs legacy); centralized WebSocket batch queue—35%+ faster batch ops vs prior sequential handling.",
 				"Shipped mobile-responsive console UX—scrollable dialogs, sticky tabbed forms; refactored 3,000+ line monolithic modules into mixins and reusable components.",
-				"Internal side project: Figma-led Key Account Management UI on Nuxt.js/shadcn-vue; co-designed APIs; BDD E2E with Playwright.",
+				"Internal platform project: Figma-led Key Account Management UI on Nuxt.js/shadcn-vue; co-designed APIs; BDD E2E with Playwright.",
 				"Redesigned Asians Group public website in Figma (Nuxt.js SSR); GTM/GA4 tracking showed measurably more qualified leads (~25% QoQ, internal analytics).",
 			],
 			achievementsPdfReact: [
 				"Primary frontend engineer on CDN console—complex operational UI, API co-design, and JIRA/Jenkins delivery with product and backend partners.",
 				"High-traffic tables—60% faster render (benchmarked on 5k+ rows) and centralized batch queue 35%+ faster ops vs prior flow.",
 				"Mobile-responsive UX with scrollable dialogs and sticky tabs; refactored 3,000+ line monolithic modules into reusable components.",
-				"Internal side project: Figma-led Key Account Management UI; BDD E2E with Playwright.",
+				"Internal platform project: Figma-led Key Account Management UI; BDD E2E with Playwright.",
 				"Public website redesign—GTM/GA4 tracking showed measurably more qualified leads (~25% QoQ, internal analytics).",
 			],
 			companyUrl: "https://asians.group",
@@ -491,7 +491,7 @@ const baseResume = {
 				{
 					name: "Key Account Management",
 					description:
-						"Internal side project: key account management platform for strategic client relationships.",
+						"Internal platform project: key account management platform for strategic client relationships.",
 					job: [
 						"Owned end-to-end UX from wireframes and Figma through product-owner review—designed dashboards, lists, forms, filters, and tables before implementation.",
 						"Co-designed APIs with backend engineers; delivered an accessibility-first UI with shadcn-vue, TailwindCSS, and Nuxt.js.",
@@ -549,7 +549,7 @@ const baseResume = {
 			description:
 				"A cutting-edge SaaS platform tailored for insurance brokerages.",
 			roles: ["Senior Frontend Engineer"],
-			employmentType: "Full-time",
+			employmentType: "Contract",
 			startDate: "2023",
 			endDate: "2025",
 			pdfMaxBullets: 4,
@@ -584,11 +584,11 @@ const baseResume = {
 				"Established Playwright, API, and contract-test suites in CI, reducing production regressions by 35%.",
 			],
 			achievementsPdfReact: [
+				"Led delivery across a five-engineer squad—backlog prioritization, release cadence, and code-quality initiatives across the platform.",
 				"Owned ourBuddy's flagship browser recording suite—the product's core differentiator—rebuilding a failing legacy recorder into React, Next.js, WebRTC, and MediaRecorder; enabled scalable broker training and onboarding workflows while eliminating third-party SDK costs and optimizing blob output for Java backend ingestion.",
 				"Partnered with UX design on Figma handoffs—React/Next.js implementation from specs across dashboards, lists, forms, and training workflows; modernized a legacy codebase into modular Next.js with shared UI primitives, cutting build time 40% and unlocking SSR caching.",
 				"Delivered a Lighthouse 97 SSR help center and document/media training workflows (searchable PDF viewer, streaming players, interactive quizzes) with React/Next.js and Flask/Python.",
 				"Established Playwright, API, and contract-test suites in CI, reducing production regressions by 35%.",
-				"Led delivery across a five-engineer squad—backlog prioritization, release cadence, and code-quality initiatives across the platform.",
 			],
 			companyUrl: "https://www.ourbuddy.ai",
 			companyLogo: "ourBuddy.png",
