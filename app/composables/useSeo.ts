@@ -1,3 +1,12 @@
+export const SITE_JOB_TITLE = "Senior Frontend Engineer";
+export const SITE_TAGLINE =
+	"Vue.js · React.js · TypeScript · Figma design-to-code · Product UI at scale";
+export const SITE_DESCRIPTION =
+	"Senior Frontend Engineer from Nepal — CDN console modernization, WebRTC product UI, design systems, and performance-focused delivery. Open to remote.";
+export const SITE_KEYWORDS =
+	"Kiran Parajuli, Senior Frontend Engineer, Vue.js, Nuxt.js, React.js, Next.js, TypeScript, Figma, WebRTC, CDN, Nepal, Remote";
+export const SITE_DEFAULT_TITLE = `Kiran Parajuli | ${SITE_JOB_TITLE}`;
+
 interface SeoOptions {
 	title: string;
 	description: string;
@@ -292,7 +301,7 @@ export const createCollectionPageStructuredData = (data: {
 		author: {
 			"@type": "Person",
 			name: "Kiran Parajuli",
-			jobTitle: "Frontend & Full Stack Developer & QA Engineer",
+			jobTitle: SITE_JOB_TITLE,
 		},
 	};
 };

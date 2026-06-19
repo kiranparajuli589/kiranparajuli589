@@ -1,31 +1,12 @@
 export const useScrollTo = () => {
-	const toWorks = () => {
-		if (import.meta.client) {
-			const works = document.getElementById("works");
-			if (works) {
-				works.scrollIntoView({ behavior: "smooth" });
-			}
-		}
-	};
-
-	const works = () => {
-		const route = useRoute();
-		const currentPath = route.path;
-		if (currentPath !== "/") {
-			navigateTo("/").then(() => {
-				setTimeout(() => {
-					toWorks();
-				}, 100);
-			});
-		} else {
-			toWorks();
-		}
-	};
-
 	const top = () => {
 		if (import.meta.client) {
 			window.scrollTo({ top: 0, behavior: "smooth" });
 		}
+	};
+
+	const works = () => {
+		return navigateTo("/works");
 	};
 
 	return { works, top };

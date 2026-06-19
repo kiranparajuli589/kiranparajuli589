@@ -43,6 +43,7 @@ export type ResumePdfVariant = "vue" | "react";
 export type Experience = {
 	company: string;
 	roles: string[];
+	pdfRoles?: string[];
 	startDate: string;
 	endDate: string;
 	description: string;

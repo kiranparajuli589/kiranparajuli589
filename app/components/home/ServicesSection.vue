@@ -6,7 +6,9 @@ const services = Resume.services;
 <template>
 	<section class="py-12">
 		<h1 class="text-4xl font-bold">What can I do?</h1>
-		<div class="text-sm text-gray-500 dark:text-gray-400">Service Offers</div>
+		<div class="text-sm text-gray-500 dark:text-gray-400">
+			Capability areas — secondary to full-time product work
+		</div>
 		<div class="section-divider mb-12" />
 		<div class="flex flex-wrap gap-4">
 			<UCard

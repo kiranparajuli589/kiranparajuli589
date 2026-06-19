@@ -57,6 +57,17 @@ function calculateYearsOfExperience(experiences: Experience[]): number {
 	return currentYear - earliestYear;
 }
 
+function calculateSeniorFrontendYears(experiences: Experience[]): number {
+	const seniorRoles = experiences.filter((exp) =>
+		exp.roles.some((role) => /senior frontend engineer/i.test(role)),
+	);
+	if (seniorRoles.length === 0) return 0;
+	const earliestYear = Math.min(
+		...seniorRoles.map((exp) => parseInt(exp.startDate, 10)),
+	);
+	return new Date().getFullYear() - earliestYear;
+}
+
 function mapExperienceToPdf(
 	exp: Experience,
 	variant: ResumePdfVariant,
@@ -71,7 +82,7 @@ function mapExperienceToPdf(
 			: (exp.pdfMaxBullets ?? source.length);
 	return {
 		company: exp.company,
-		roles: exp.roles,
+		roles: exp.pdfRoles ?? exp.roles,
 		startDate: exp.startDate,
 		endDate: exp.endDate,
 		employmentType: exp.employmentType,
@@ -129,24 +140,19 @@ const aiEngineering: AiEngineering = {
 const figmaSummaryClause =
 	"Figma design-to-code from wireframes and prototypes through stakeholder review to production UI.";
 
-const aiSummaryClause =
-	"Uses AI-augmented workflows (Cursor, Claude, MCP) to accelerate delivery while maintaining code quality.";
+function buildWebSummary(years: number): string {
+	return `Senior Frontend Engineer with ${years}+ years in frontend and product UI delivery. Led CDN console modernization (Vue 2→3, shadcn-vue, Tailwind)—high-traffic tables, WebSocket batch queue, and complex forms. ${figmaSummaryClause}`;
+}
 
 function buildResumePdfVariant(
 	variant: ResumePdfVariant,
 	experiences: Experience[],
 	years: number,
+	_seniorYears: number,
 ): ResumePdfExport {
 	const summaries: Record<ResumePdfVariant, string> = {
-		vue: `Senior Frontend Engineer with ${years}+ years building Vue.js, Nuxt.js, React, Next.js, and TypeScript applications and leading engineering teams. Strong in scalable UI systems, accessibility, and performance optimization. Partner with backend teams on API design (Node.js, Django) and ship cohesive product experiences. ${figmaSummaryClause} Established quality bars via test automation and CI; active open-source contributor (Vue3-Ytframe, Vue Formik). ${aiSummaryClause}`,
-		react: `Senior Frontend Engineer with ${years}+ years building React, Next.js, Vue.js, Nuxt.js, and TypeScript applications and leading engineering teams. Strong in Next.js SSR, shadcn/ui, scalable UI systems, and performance optimization (Lighthouse 97+). Partner with backend teams on API design (Node.js, Django, Flask) and ship cohesive product experiences. ${figmaSummaryClause} Established quality bars via test automation and CI. ${aiSummaryClause}`,
-	};
-
-	const aiPdfSkill: ResumePdfExport["skills"][number] = {
-		title: aiEngineering.title,
-		items: [
-			`${aiEngineering.pdfToolsLine} — ${aiEngineering.pdfPracticesLine}`,
-		],
+		vue: `Senior Frontend Engineer with ${years}+ years in frontend and product UI delivery. Led CDN console modernization (Vue 2→3, shadcn-vue, Tailwind)—high-traffic tables, WebSocket batch queue, and complex forms. ${figmaSummaryClause}`,
+		react: `Senior Frontend Engineer with ${years}+ years in frontend and product UI delivery. Rebuilt ourBuddy's flagship WebRTC recording suite on React/Next.js and delivered a Lighthouse 97 SSR help center. ${figmaSummaryClause}`,
 	};
 
 	const skills: Record<ResumePdfVariant, ResumePdfExport["skills"]> = {
@@ -154,7 +160,8 @@ function buildResumePdfVariant(
 			{
 				title: "Frontend",
 				items: [
-					"Vue.js, Nuxt.js, TypeScript, shadcn-vue, Tailwind CSS, PrimeVue, CoreUI, Radix UI, React.js, Next.js, design systems, WCAG, Core Web Vitals, i18n, Figma (wireframing, prototyping, design variables)",
+					"Primary: Vue.js, Nuxt.js, TypeScript, shadcn-vue, Tailwind CSS, Figma (wireframing, prototyping, design variables)",
+					"Also: React.js, Next.js, PrimeVue, Radix UI, design systems, WCAG, Core Web Vitals, i18n",
 				],
 			},
 			{
@@ -169,13 +176,13 @@ function buildResumePdfVariant(
 					"Playwright, Cypress, Gherkin, Cucumber.js, Jest, BDD E2E, contract/regression/load testing (Locust), CI quality gates",
 				],
 			},
-			aiPdfSkill,
 		],
 		react: [
 			{
 				title: "Frontend",
 				items: [
-					"React.js, Next.js, TypeScript, shadcn/ui, Tailwind CSS, Radix UI, Zustand, Redux, Tanstack Query, SSR/SSG, design systems, WCAG, Core Web Vitals, i18n, Figma (wireframing, prototyping, design variables)",
+					"Primary: React.js, Next.js, TypeScript, shadcn/ui, Tailwind CSS, Zustand, Tanstack Query, Figma (wireframing, prototyping, design variables)",
+					"Also: Vue.js, Nuxt.js, SSR/SSG, Radix UI, Redux, design systems, WCAG, Core Web Vitals, i18n",
 				],
 			},
 			{
@@ -190,7 +197,6 @@ function buildResumePdfVariant(
 					"Playwright, Cypress, Jest, React component testing, BDD E2E, API/contract testing, CI quality gates",
 				],
 			},
-			aiPdfSkill,
 		],
 	};
 
@@ -200,30 +206,34 @@ function buildResumePdfVariant(
 	> = {
 		vue: [
 			{
+				title: "CDN Management Console",
+				line: "Vue 2→3 CDN console—60% faster tables (Chrome Performance, 5k+ rows), WebSocket batch queue 35%+ faster vs prior flow",
+			},
+			{
+				title: "Lua Expression Builder",
+				line: "Drag-and-drop CDN policy builder—replaced manual Lua editing and eliminated syntax errors pre-deploy",
+			},
+			{
+				title: "Key Account Management",
+				line: "Internal Figma-led side project—dashboards, forms, filters on Nuxt.js/shadcn-vue with BDD E2E (Playwright)",
+			},
+			{
 				title: "Vue Formik",
-				line: "Open-source Vue 3 form library adopted by 1k+ developers — github.com/vue-formik/vue-formik",
-			},
-			{
-				title: "Vue3-Ytframe",
-				line: "Open-source Vue 3 library for embedding YouTube videos via the IFrame API — kiranparajuli589.github.io/vue3-ytframe",
-			},
-			{
-				title: "Browser Recording System",
-				line: "Flagship WebRTC/MediaRecorder suite for insurance brokerages—replaced a legacy recorder and enabled scalable training/onboarding without third-party SDKs",
+				line: "Open-source Vue 3 form library (maintainer) — github.com/vue-formik/vue-formik",
 			},
 		],
 		react: [
 			{
 				title: "Browser Recording System",
-				line: "Flagship WebRTC/MediaRecorder suite for insurance brokerages—replaced a legacy recorder and enabled scalable training/onboarding without third-party SDKs",
+				line: "WebRTC/MediaRecorder suite for insurance brokerages—replaced a legacy recorder; eliminated third-party SDK costs for broker training workflows",
+			},
+			{
+				title: "SSR Help Center",
+				line: "Lighthouse 97 help center—React/Next.js + Flask/Python SSR, searchable docs and training UX",
 			},
 			{
 				title: "Vue Formik",
-				line: "Open-source Vue 3 form library adopted by 1k+ developers — github.com/vue-formik/vue-formik",
-			},
-			{
-				title: "Vue3-Ytframe",
-				line: "Open-source Vue 3 library for embedding YouTube videos via the IFrame API — kiranparajuli589.github.io/vue3-ytframe",
+				line: "Open-source Vue 3 form library (maintainer) — github.com/vue-formik/vue-formik",
 			},
 		],
 	};
@@ -243,20 +253,20 @@ const baseResume = {
 	personalInfo: {
 		name: "Kiran Parajuli",
 		role: "Senior Frontend Engineer",
-		municipality: "Panchkhal, Kavre",
+		municipality: "Kathmandu",
 		country: "Nepal",
-		postalCode: "45200",
-		locationLine: "Panchkhal, Nepal | Open to remote | UTC+5:45",
+		postalCode: "44600",
+		locationLine: "Kathmandu, Nepal | Open to remote | UTC+5:45",
 		phone: "+977 984-3530425",
 		email: "kiranparajuli589@gmail.com",
 		devto: "https://dev.to/kiranparajuli589",
 		linkedin: "https://linkedin.com/in/kiranparajuli589",
 		github: "https://github.com/kiranparajuli589",
 		website: "https://kiranparajuli.com.np",
-		bio: "Senior Frontend Engineer | React.js • Vue.js • TypeScript • Figma design-to-code • QA Automation • AI-augmented engineering",
+		bio: "Senior Frontend Engineer | React.js • Vue.js • TypeScript • Figma design-to-code • performance and design systems",
+		heroTagline:
+			"Modernizing high-traffic product UIs—Vue/React, design systems, and performance at scale.",
 		summary: "", // Will be set after experiences are defined
-		summaryQa:
-			"Results-driven Quality Assurance Engineer with expertise in WebUI, API, CLI, Unit, and E2E testing. Skilled in planning, writing, and maintaining test cases. Passionate about mentoring and continuous improvement within teams. Utilizes music and creative outlets to stay inspired.",
 	},
 	skills: [
 		{
@@ -282,7 +292,7 @@ const baseResume = {
 			],
 		},
 		{
-			title: "QA Automation",
+			title: "Quality Engineering",
 			items: [
 				"Playwright, Cypress, Gherkin, Cucumber.js, Jest, PHPUnit, Behat",
 				"BDD end-to-end testing with Gherkin & Cucumber.js",
@@ -315,6 +325,21 @@ const baseResume = {
 		"Uphold engineering excellence via coding standards, testing strategy, and CI quality bars.",
 	],
 	selectedProjects: [
+		{
+			title: "CDN Management Console",
+			description:
+				"Core internal CDN management console—Vue 2→3 modernization with shadcn-vue, Tailwind, and WebSocket batch operations.",
+			impact:
+				"60% faster table render and 35%+ faster batch operations via centralized WebSocket queue; fully mobile-responsive UX.",
+			stack: [
+				"Vue 3",
+				"shadcn-vue",
+				"Tailwind CSS",
+				"WebSockets",
+				"CoreUI",
+				"TypeScript",
+			],
+		},
 		{
 			title: "Browser Recording System",
 			description:
@@ -349,23 +374,11 @@ const baseResume = {
 			description:
 				"Open-source Vue.js library that brings Formik-style declarative form patterns to Vue 3.",
 			impact:
-				"Adopted by 1k+ developers, enabling consistent validation and DX improvements.",
+				"Open-source maintainer—consistent validation patterns and improved developer experience for Vue 3 forms.",
 			stack: ["Vue.js", "TypeScript", "Formik", "Yup"],
 			links: {
 				github: "https://github.com/vue-formik/vue-formik",
 				demo: "https://vue-formik.netlify.app/",
-			},
-		},
-		{
-			title: "Vue3-Ytframe",
-			description:
-				"Open-source Vue 3 component library for embedding YouTube videos using the YouTube IFrame API.",
-			impact:
-				"Provides a simple, composable embed experience with docs and an interactive playground for Vue developers.",
-			stack: ["Vue.js", "TypeScript", "YouTube IFrame API"],
-			links: {
-				github: "https://github.com/kiranparajuli589/vue3-ytframe",
-				demo: "https://kiranparajuli589.github.io/vue3-ytframe/#/",
 			},
 		},
 	],
@@ -405,7 +418,7 @@ const baseResume = {
 				"A vital internet intermediary powering CDN services, custom nodes, DNS acceleration, and SSL for global customers, with internal business platforms and AI-powered employee tools.",
 			roles: ["Senior Frontend Engineer"],
 			employmentType: "Full-time",
-			startDate: "2024",
+			startDate: "2025",
 			endDate: "Present",
 			pdfMaxBullets: 5,
 			pdfSortOrder: { vue: 1, react: 2 },
@@ -418,6 +431,8 @@ const baseResume = {
 				"TailwindCSS",
 				"Figma",
 				"CoreUI",
+				"WebSockets",
+				"JIRA",
 				"Jenkins",
 				"Docker",
 				"Django",
@@ -430,48 +445,68 @@ const baseResume = {
 				"Google Analytics 4",
 			],
 			achievements: [
-				"Owned KAM end-to-end from wireframes and Figma (dashboards, tables, forms, filters) through product-owner review to production with shadcn-vue, Tailwind CSS, and Nuxt.js; co-designed backend APIs and established BDD end-to-end coverage with Gherkin, Cucumber.js, and Playwright.",
-				"Delivered an AI assistance portal integrating employee calendars, Drive-sourced work records, and company data—featuring streamed HTTP chat, thinking-state UX, persistent history, translations, and theming.",
-				"Redesigned in Figma and built the Asians Group public website and internal portals on Nuxt.js SSR with PrimeVue and Tailwind CSS; implemented GTM/GA4 with careers-page and job-application custom events, site-wide public-site tracking, and ongoing analytics monitoring—increasing qualified inbound leads by 25% within two quarters.",
+				"Primary frontend engineer on CDN console migration Vue 2→3 (shadcn-vue, Tailwind CSS); extended legacy CoreUI via documentation research and custom components.",
+				"Optimized data tables with thousands of rows—60% faster render (Chrome Performance on 5k+ row datasets vs legacy renderer); centralized WebSocket batch queue—35%+ faster batch ops vs prior sequential handling.",
+				"Delivered mobile-responsive console UX—scrollable large dialogs, sticky tabs on tabbed forms; refactored 3,000+ line monolithic modules into reusable mixins and components.",
+				"Built complex tabbed forms and co-designed REST APIs with backend teams; shipped via JIRA and Jenkins with cross-team i18n (product, CS, backend).",
+				"Redesigned in Figma and built the Asians Group public website and internal portals on Nuxt.js SSR with PrimeVue and Tailwind CSS; implemented GTM/GA4 with careers-page and job-application custom events, site-wide public-site tracking, and ongoing analytics monitoring—measurably increasing qualified inbound leads (GA4-tracked, ~25% QoQ in internal analytics).",
 				"Migrated the legacy WordPress stack to Nuxt.js with Django/DRF—improved sitemaps, canonical URLs, and reachable translated routes, plus structured data and prefetching; improved Core Web Vitals (FCP 2.8s → 1.2s) and boosted organic impressions by 40%.",
-				"Built a Figma design system with reusable components, project themes, and design variables for cross-product consistency; implemented in Vue.js and Ant Design with team workshops and documentation.",
-				"Engineered a Lua condition expression builder with visual validation (Vue.js, CoreUI), cutting CDN policy configuration time by 60% and eliminating syntax defects before deployment.",
-				"Transformed a 3,000+ line monolithic core feature into reusable mixins, components, helpers, and constants—cutting maintainability overhead by 90%+ and accelerating new feature delivery.",
-				"Elevated engineering quality by mentoring backend/full-stack engineers, instituting review rubrics, and automating accessibility/performance checks in Jenkins, reducing failed deployments by 30%.",
-				"Optimized loading-state and socket handling to eliminate redundant calls, improving perceived responsiveness by 40% and reducing drop-offs during critical user actions.",
+				"Built a Figma design system—source of truth in Figma with project themes and design variables; implemented reusable components in Vue.js for legacy Ant Design products with team workshops and documentation.",
+				"Engineered a Lua condition expression builder with visual validation (Vue.js, CoreUI)—replacing manual Lua editing and eliminating syntax defects before deployment.",
+				"Internal side project: Owned KAM end-to-end from wireframes and Figma (dashboards, tables, forms, filters) through product-owner review to production with shadcn-vue, Tailwind CSS, and Nuxt.js; co-designed backend APIs and established BDD end-to-end coverage with Gherkin, Cucumber.js, and Playwright.",
+				"Delivered an AI assistance portal integrating employee calendars, Drive-sourced work records, and company data—featuring streamed HTTP chat, thinking-state UX, persistent history, translations, and theming.",
+				"Elevated engineering quality by mentoring backend/full-stack engineers, instituting review rubrics, and automating accessibility/performance checks in Jenkins, noticeably reducing failed deployments across two release cycles.",
 			],
 			achievementsPdf: [
-				"Owned KAM end-to-end from wireframes and Figma (dashboards, tables, forms, filters) through product-owner review to production (Nuxt.js, shadcn-vue, Tailwind CSS); co-designed backend APIs and established BDD E2E coverage with Gherkin, Cucumber.js, and Playwright.",
-				"Delivered an AI assistance portal with streamed HTTP chat, thinking-state UX, persistent history, translations, and theming.",
-				"Redesigned in Figma and built the Asians Group public website and internal portals on Nuxt.js SSR; GTM/GA4 with careers/job-application custom events and site-wide tracking—25% more qualified leads in two quarters.",
-				"Migrated WordPress to Nuxt.js/Django—improved sitemaps, canonical and translated URLs, structured data; Core Web Vitals (FCP 2.8s → 1.2s) and organic impressions +40%.",
-				"Transformed a 3,000+ line monolithic core feature into reusable mixins, components, helpers, and constants—cutting maintainability overhead by 90%+ and accelerating new feature delivery.",
+				"Primary frontend engineer on CDN console migration Vue 2→3 (shadcn-vue, Tailwind); extended CoreUI via documentation research and custom components; complex tabbed forms with API co-design; JIRA/Jenkins releases with cross-team i18n.",
+				"Optimized tables with thousands of rows—60% faster render (Chrome Performance, 5k+ rows vs legacy); centralized WebSocket batch queue—35%+ faster batch ops vs prior sequential handling.",
+				"Shipped mobile-responsive console UX—scrollable dialogs, sticky tabbed forms; refactored 3,000+ line monolithic modules into mixins and reusable components.",
+				"Internal side project: Figma-led Key Account Management UI on Nuxt.js/shadcn-vue; co-designed APIs; BDD E2E with Playwright.",
+				"Redesigned Asians Group public website in Figma (Nuxt.js SSR); GTM/GA4 tracking showed measurably more qualified leads (~25% QoQ, internal analytics).",
+			],
+			achievementsPdfReact: [
+				"Primary frontend engineer on CDN console—complex operational UI, API co-design, and JIRA/Jenkins delivery with product and backend partners.",
+				"High-traffic tables—60% faster render (benchmarked on 5k+ rows) and centralized batch queue 35%+ faster ops vs prior flow.",
+				"Mobile-responsive UX with scrollable dialogs and sticky tabs; refactored 3,000+ line monolithic modules into reusable components.",
+				"Internal side project: Figma-led Key Account Management UI; BDD E2E with Playwright.",
+				"Public website redesign—GTM/GA4 tracking showed measurably more qualified leads (~25% QoQ, internal analytics).",
 			],
 			companyUrl: "https://asians.group",
 			companyLogo: "asians_group.png",
 			projects: [
 				{
+					name: "CDN Management Console",
+					description:
+						"Core internal CDN management console for customer and infrastructure operations.",
+					job: [
+						"Migrated legacy Vue 2 console to Vue 3 with shadcn-vue and Tailwind CSS.",
+						"Extended legacy CoreUI via documentation research and custom efficient components during migration.",
+						"Built complex tabbed forms and co-designed REST APIs with backend teams.",
+						"Optimized tables for thousands of rows with dynamic row rendering (60% faster render).",
+						"Implemented a centralized WebSocket batch queue tuned to backend/infra—35%+ faster batch operations with informative progress states and messages.",
+						"Delivered major UI/UX improvements: fully mobile-responsive layouts, scrollable large dialogs, sticky tabs on tabbed forms.",
+						"Shipped via JIRA-tracked releases and Jenkins CI/CD; coordinated i18n with product and CS teams.",
+						"Refactored 3,000+ line monolithic modules into reusable mixins and components.",
+					],
+				},
+				{
 					name: "Key Account Management",
 					description:
-						"Led development of a key account management platform for strategic client relationships.",
+						"Internal side project: key account management platform for strategic client relationships.",
 					job: [
 						"Owned end-to-end UX from wireframes and Figma through product-owner review—designed dashboards, lists, forms, filters, and tables before implementation.",
-						"Led frontend development and worked closely with backend engineers to design and build APIs and services.",
-						"Delivered an accessibility-first UI with shadcn-vue, TailwindCSS, and Nuxt.js.",
+						"Co-designed APIs with backend engineers; delivered an accessibility-first UI with shadcn-vue, TailwindCSS, and Nuxt.js.",
 						"Implemented end-to-end test coverage using Gherkin, Cucumber.js, and Playwright.",
 					],
-					url: "https://console-kam.uat.asians.group",
 				},
 				{
 					name: "Company Smart Assistance",
 					description:
 						"ChatGPT-like AI portal for querying employee calendars, daily work records from Drive, and other company data via conversational chat.",
 					job: [
-						"Engineered a premium AI chat UI with sleek transitions, WCAG-aligned patterns, and performance-tuned API orchestration.",
-						"Streamed server HTTP responses with live thinking indicators and finalized answer delivery.",
+						"Engineered an AI chat UI with WCAG-aligned patterns, streamed HTTP responses, live thinking indicators, and performance-tuned API orchestration.",
 						"Implemented chat history propagation, translations, and theming with an extensive color palette.",
 					],
-					url: "https://aeri.uat.asians.group",
 				},
 				{
 					name: "Asians Group Public Website",
@@ -481,9 +516,7 @@ const baseResume = {
 						"Redesigned the public site in Figma and implemented the frontend using PrimeVue, TailwindCSS, Vue.js, and Nuxt.js.",
 						"Implemented GTM/GA4 with custom careers and job-application events, site-wide public-site tracking, and ongoing analytics monitoring.",
 						"Improved sitemaps, canonical URLs, and i18n translation URL reachability for SEO and discoverability.",
-						"Optimized website performance for faster load times.",
-						"Backend integration for dynamic content management.",
-						"Simple django and rest framework based backend for managing content easily.",
+						"Integrated Django/DRF content APIs for dynamic CMS and careers workflows.",
 						"Migrated the legacy WordPress stack to Nuxt.js with Django/DRF content management, structured data, and prefetching—improving Core Web Vitals (FCP 2.8s → 1.2s) and boosting organic impressions by 40%.",
 					],
 					url: "https://asians.group",
@@ -494,8 +527,8 @@ const baseResume = {
 						"Developed a user-friendly interface for building complex lua expressions.",
 					job: [
 						"Designed and implemented the frontend using Vue.js and CoreUI.",
-						"Collaborated with backend teams to ensure seamless integration.",
-						"Conducted user testing to gather feedback and improve usability.",
+						"Architected a visual rule builder with inline validation, mapping complex Lua conditions to an accessible form UI.",
+						"Eliminated syntax errors before deployment by validating expressions client-side ahead of backend submission.",
 					],
 					url: "https://expr-builder.netlify.app/#/rule",
 				},
@@ -504,8 +537,8 @@ const baseResume = {
 					description:
 						"Created a design system to ensure consistency across all products.",
 					job: [
-						"Built a Figma component library with project themes, design variables, and prototyping for cross-product consistency.",
-						"Developed reusable Vue.js and Ant Design components from Figma specs.",
+						"Built a Figma component library with project themes, design variables, and prototyping as the cross-product source of truth.",
+						"Implemented reusable Vue.js and Ant Design components from Figma specs for legacy product surfaces.",
 						"Documented design guidelines and best practices for the team.",
 						"Conducted workshops to train team members on the new design system.",
 					],
@@ -517,12 +550,11 @@ const baseResume = {
 			description:
 				"A cutting-edge SaaS platform tailored for insurance brokerages.",
 			roles: ["Senior Frontend Engineer"],
-			employmentType: "Part-time Contract",
-			concurrent: true,
-			startDate: "2024",
+			employmentType: "Full-time",
+			startDate: "2023",
 			endDate: "2025",
 			pdfMaxBullets: 4,
-			pdfMaxBulletsReact: 6,
+			pdfMaxBulletsReact: 5,
 			pdfSortOrder: { vue: 2, react: 1 },
 			technologies: [
 				"React.js",
@@ -536,28 +568,28 @@ const baseResume = {
 				"ClickUp",
 			],
 			achievements: [
-				"Led a five-engineer squad delivering multi-tenant brokerage features, backlog prioritization, and code-quality initiatives across the platform.",
-				"Partnered with UX design on Figma handoffs—pixel-perfect React/Next.js implementation across dashboards, lists, forms, and training workflows.",
+				"Led delivery across a five-engineer squad—backlog prioritization, release cadence, and code-quality initiatives across the platform.",
+				"Partnered with UX design on Figma handoffs—React/Next.js implementation from specs across dashboards, lists, forms, and training workflows.",
 				"Owned ourBuddy's flagship browser recording suite—the product's core differentiator—rebuilding a failing legacy recorder into React, Next.js, WebRTC, and MediaRecorder; enabled scalable broker training and onboarding workflows while eliminating third-party SDK costs and optimizing blob output for Java backend ingestion.",
 				"Modernized a legacy React codebase into a modular Next.js architecture with shared UI primitives, achieving a 40% reduction in build time and unlocking SSR caching.",
 				"Drove performance optimization with budgets, lazy loading, and real-user monitoring, improving LCP from 3.1s to 1.7s across top customer workspaces.",
 				"Delivered document and media workflows for training and onboarding, including a searchable PDF viewer, streaming media players, and interactive quizzes.",
 				"Delivered a full-SSR help center with React/Next.js and Flask/Python, achieving a Lighthouse score of 97 for performance and usability.",
 				"Established Playwright, API, and contract-test suites in CI, reducing production regressions by 35%.",
-				"Owned release cadences—sprint planning, QA sign-off, and phased rollouts—achieving 95% on-time delivery with a sub-1% bug escape rate.",
+				"Owned release cadences—sprint planning, QA sign-off, and phased rollouts—with consistently high on-time delivery and a low bug-escape rate.",
 			],
 			achievementsPdf: [
-				"Led a five-engineer squad delivering multi-tenant brokerage features, backlog prioritization, and code-quality initiatives across the platform.",
+				"Led delivery across a five-engineer squad—backlog prioritization, release cadence, and code-quality initiatives across the platform.",
 				"Owned the flagship browser recording suite—rebuilt a failing legacy recorder on React, Next.js, WebRTC, and MediaRecorder; enabled scalable broker training and onboarding while eliminating third-party SDK costs.",
-				"Partnered with UX design on Figma handoffs—pixel-perfect React/Next.js implementation across dashboards, lists, forms, and training workflows; modernized a legacy codebase into modular Next.js with shared UI primitives, cutting build time 40% and unlocking SSR caching.",
+				"Partnered with UX design on Figma handoffs—React/Next.js implementation from specs across dashboards, lists, forms, and training workflows; modernized a legacy codebase into modular Next.js with shared UI primitives, cutting build time 40% and unlocking SSR caching.",
 				"Established Playwright, API, and contract-test suites in CI, reducing production regressions by 35%.",
 			],
 			achievementsPdfReact: [
 				"Owned ourBuddy's flagship browser recording suite—the product's core differentiator—rebuilding a failing legacy recorder into React, Next.js, WebRTC, and MediaRecorder; enabled scalable broker training and onboarding workflows while eliminating third-party SDK costs and optimizing blob output for Java backend ingestion.",
-				"Partnered with UX design on Figma handoffs—pixel-perfect React/Next.js implementation across dashboards, lists, forms, and training workflows; modernized a legacy codebase into modular Next.js with shared UI primitives, cutting build time 40% and unlocking SSR caching.",
-				"Delivered a full-SSR help center with React/Next.js and Flask/Python, achieving a Lighthouse score of 97 for performance and usability.",
-				"Shipped document and media workflows, including a searchable PDF viewer, improved media players, and interactive training quizzes.",
+				"Partnered with UX design on Figma handoffs—React/Next.js implementation from specs across dashboards, lists, forms, and training workflows; modernized a legacy codebase into modular Next.js with shared UI primitives, cutting build time 40% and unlocking SSR caching.",
+				"Delivered a Lighthouse 97 SSR help center and document/media training workflows (searchable PDF viewer, streaming players, interactive quizzes) with React/Next.js and Flask/Python.",
 				"Established Playwright, API, and contract-test suites in CI, reducing production regressions by 35%.",
+				"Led delivery across a five-engineer squad—backlog prioritization, release cadence, and code-quality initiatives across the platform.",
 			],
 			companyUrl: "https://www.ourbuddy.ai",
 			companyLogo: "ourBuddy.png",
@@ -569,7 +601,7 @@ const baseResume = {
 					job: [
 						"Inherited a failing legacy recorder built on an outdated library with unreliable blob output; led a full rewrite using React, Next.js, WebRTC, and MediaRecorder APIs.",
 						"Delivered device selection (camera/microphone), live audio visualization, recording duration limits, pre-roll countdowns, and a draggable camera canvas for screen+camera recordings.",
-						"Reviewed Figma designs with the product designer and delivered pixel-perfect UI; tuned MediaRecorder blob generation and chunk handling for reliable Java backend ingestion.",
+						"Reviewed Figma designs with the product designer and implemented UI from specs; tuned MediaRecorder blob generation and chunk handling for reliable Java backend ingestion.",
 						"Maintained CI/CD and Playwright coverage for continuous validation of recording flows across browsers.",
 					],
 				},
@@ -578,10 +610,10 @@ const baseResume = {
 					description:
 						"Designed a comprehensive SaaS platform for insurance brokerages.",
 					job: [
-						"Developed and maintained the frontend with React and Next.js.",
-						"Enhanced CI/CD pipelines for efficient deployments.",
-						"Revamped an outdated system with modern technologies.",
-						"Authored detailed documentation for knowledge sharing.",
+						"Modernized the brokerage platform frontend with React, Next.js, shared UI primitives, and SSR caching—40% build-time reduction.",
+						"Implemented Figma-spec UI across dashboards, lists, forms, and multi-tenant training workflows.",
+						"Maintained CI/CD pipelines with Playwright coverage for deployment confidence.",
+						"Authored technical documentation for component patterns and release workflows.",
 					],
 				},
 				{
@@ -589,8 +621,8 @@ const baseResume = {
 					description:
 						"A client management system with activity logs and site blogs.",
 					job: [
-						"Developed a dynamic frontend using React and Next.js.",
-						"Implemented the backend using Python (FastAPI) for data management.",
+						"Built a dynamic React/Next.js frontend for client records, activity logs, and blog content.",
+						"Implemented a FastAPI (Python) backend with structured data models for client and activity management.",
 					],
 				},
 				{
@@ -598,10 +630,9 @@ const baseResume = {
 					description:
 						"Established a meticulous QA process for the ourBuddy.ai platform.",
 					job: [
-						"Developed and maintained a robust testing framework.",
-						"Optimized CI/CD pipelines for automated testing.",
-						"Conducted QA workshops to enhance team skills.",
-						"Created detailed test documentation.",
+						"Built and maintained a Playwright-based E2E framework covering critical broker workflows.",
+						"Integrated automated suites into CI/CD for gated, deployment-ready releases.",
+						"Ran QA enablement sessions and authored test documentation to standardize coverage across the team.",
 					],
 				},
 			],
@@ -612,10 +643,11 @@ const baseResume = {
 				"Leading multi-authentication solution for digital identity and user identification.",
 			roles: ["Senior Quality Assurance Engineer"],
 			employmentType: "Full-time",
+			concurrent: true,
 			startDate: "2023",
 			endDate: "2024",
+			includeInPdf: false,
 			pdfMaxBullets: 3,
-			pdfPageBreakBefore: true,
 			pdfSortOrder: { vue: 3, react: 3 },
 			technologies: [
 				"Jest",
@@ -680,44 +712,49 @@ const baseResume = {
 			company: "Dimitra",
 			description:
 				"Global AgTech company delivering digital products that help smallholder farmers improve yields and supply-chain visibility.",
-			roles: ["Full-Stack Engineer"],
+			roles: ["Frontend Developer"],
 			employmentType: "Full-time",
 			startDate: "2022",
 			endDate: "2023",
 			pdfMaxBullets: 2,
-			pdfSortOrder: { vue: 4, react: 4 },
+			pdfSortOrder: { vue: 3, react: 3 },
 			technologies: [
-				"React.js",
-				"Express.js",
+				"Vue.js 3",
+				"Vuetify",
+				"JavaScript",
+				"TypeScript",
 				"GraphQL",
-				"Python",
+				"Express.js",
+				"Geo maps",
+				"JIRA",
+				"Git",
 				"Jest",
 				"Cypress",
 				"PostgreSQL",
 			],
 			achievements: [
-				"Shipped full-stack capabilities across Connected Farmer and Connected Coffee—spanning React frontends, backend APIs, analytics, and QA automation pipelines.",
-				"Engineered interactive dashboards with modern charting libraries, enabling agronomists to monitor field activity and performance KPIs in real time.",
-				"Architected Express.js and GraphQL APIs with optimized resolvers and caching, achieving a 25% reduction in average response time.",
-				"Collaborated with data and ops teams to deliver field-operations, supply-chain visibility, and stakeholder-reporting workflows.",
-				"Elevated the QA team's automation capabilities by mentoring on Playwright and Cypress, achieving a 100% increase in test coverage and seamless integration into CI quality gates.",
+				"Frontend developer on Connected Farmer and Connected Coffee—supporting backend teams while owning high-quality dashboards, geo maps, and KPI chart visualizations in Vue 3 and Vuetify.",
+				"Delivered complex filters, multi-step forms, and rigorous client-side validation with pixel-perfect design-to-code from Figma; tracked delivery in JIRA with Git-based workflows.",
+				"Supported Express.js and GraphQL API integration and resolver tuning with backend engineers—a meaningful GraphQL p95 latency reduction after caching optimizations.",
+				"Collaborated with data and ops teams on field-operations, supply-chain visibility, and stakeholder-reporting UI workflows.",
+				"Contributed Cypress and Jest coverage integrated into CI quality gates alongside the QA team.",
 			],
 			achievementsPdf: [
-				"Engineered interactive dashboards with modern charting libraries, enabling agronomists to monitor field activity and performance KPIs in real time.",
-				"Architected Express.js and GraphQL APIs with optimized resolvers and caching, achieving a 25% reduction in average response time.",
+				"Built agronomy dashboards in Vue 3 and Vuetify—geo maps, complex filters, KPI charts, and pixel-perfect design-to-code from Figma; rigorous form validation across Connected Farmer and Connected Coffee.",
+				"Supported backend integration on GraphQL/Express APIs while shipping via JIRA and Git; Cypress/Jest coverage in CI quality gates.",
 			],
 			companyUrl: "https://dimitra.io/about-us/",
 			companyLogo: "dimitra.ico",
 			projects: [
 				{
-					name: "Contract Based Testing Optimizations",
+					name: "Connected Farmer & Connected Coffee",
 					description:
-						"Optimized test case preparation and execution processes.",
+						"AgTech platforms for field operations, supply-chain visibility, and stakeholder reporting.",
 					job: [
-						"Developed and maintained a comprehensive testing framework.",
-						"Enhanced CI/CD pipelines for automated testing.",
-						"Loaded and analyzed test data for performance assessments.",
-						"Collaborated with cross-functional teams to enhance product quality.",
+						"Built interactive dashboards with geo maps and chart libraries for real-time field activity and performance KPIs.",
+						"Implemented complex filters, multi-step forms, and client-side validation with Vue 3 and Vuetify.",
+						"Translated Figma specs into pixel-perfect production UI; coordinated API contracts with backend teams on GraphQL and Express.js.",
+						"Delivered features through JIRA-tracked sprints with Git-based CI and automated Cypress/Jest tests.",
 					],
 				},
 			],
@@ -726,12 +763,12 @@ const baseResume = {
 			company: "JankariTech Pvt. Ltd.",
 			description: "An IT company specializing in test automation solutions.",
 			roles: ["Software Developer", "Junior Programmer"],
+			pdfRoles: ["Software Developer"],
 			employmentType: "Full-time",
 			startDate: "2019",
 			endDate: "2022",
-			includeInPdf: false,
-			pdfMaxBullets: 3,
-			pdfSortOrder: { vue: 5, react: 5 },
+			pdfMaxBullets: 2,
+			pdfSortOrder: { vue: 4, react: 4 },
 			technologies: [
 				"Playwright",
 				"Behat",
@@ -758,9 +795,8 @@ const baseResume = {
 				"Scaled documentation and onboarding through internal knowledge platforms, blogs, and workshops.",
 			],
 			achievementsPdf: [
-				"Delivered production Vue.js features, REST APIs, CLI tools, and automation suites for enterprise clients across finance, education, and SaaS.",
-				"Deployed and maintained CI/CD pipelines (GitHub, GitLab, Drone, Travis) running daily UI, API, and E2E suites across 15+ repositories.",
-				"Authored Cypress, Playwright, and WebSocket testing playbooks and led weekly enablement sessions for engineers and QA.",
+				"Delivered production Vue.js features and reusable UI patterns with accessibility fixes for enterprise clients across finance, education, and SaaS.",
+				"Contributed to ownCloud open-source web UI work; shipped features with CI-backed UI, API, and E2E validation across client repositories.",
 			],
 			companyUrl: "https://www.jankaritech.com",
 			companyLogo: "jankaritech.jpg",
@@ -821,7 +857,14 @@ const baseResume = {
 			includeInPdf: false,
 			startDate: "2019",
 			endDate: "2020",
-			technologies: ["VueJs", "VuetifyJs", "Sass", "GitHub", "Web3", "MetaMask"],
+			technologies: [
+				"VueJs",
+				"VuetifyJs",
+				"Sass",
+				"GitHub",
+				"Web3",
+				"MetaMask",
+			],
 			achievements: [
 				"Built a Bitcoin dashboard with MetaMask Web3 login, user-configurable currency preferences, and chart-based market visualization (Vue.js, Vuetify).",
 				"Delivered a leave-management dashboard and gained experience in remote freelance delivery and time management.",
@@ -854,12 +897,11 @@ const baseResume = {
 				"A spiritual and community organization platform with social engagement and multi-branch management.",
 			roles: ["Freelance Full-Stack Developer"],
 			employmentType: "Part-time",
-			concurrent: true,
 			startDate: "2019",
 			endDate: "Present",
-			pdfMaxBullets: 2,
-			pdfMaxBulletsReact: 4,
-			pdfSortOrder: { vue: 6, react: 6 },
+			pdfMaxBullets: 1,
+			pdfMaxBulletsReact: 1,
+			pdfSortOrder: { vue: 5, react: 5 },
 			technologies: [
 				"Vue.js",
 				"Nuxt.js",
@@ -873,21 +915,17 @@ const baseResume = {
 				"MySQL",
 			],
 			achievements: [
-				"Led a full platform redesign in Figma through stakeholder review; launched a beautiful Vue 3 / Nuxt.js / Shadcn-vue production site—live at sachchaikendranepal.org.np.",
+				"Led a full platform redesign in Figma through stakeholder review; launched a production Vue 3 / Nuxt.js / Shadcn-vue site—live at sachchaikendranepal.org.np.",
 				"Built a robust Django REST Framework backend with proper media management—structured uploads, storage, serving, and optimization for branch and public content.",
-				"Delivered a beautiful legacy Vue 3 production site; now redesigning in Figma and rebuilding with Next.js, React, and shadcn/ui as the next-generation member-facing frontend.",
+				"Rebuilt the next-generation member-facing frontend in Figma with Next.js, React, and shadcn/ui.",
 				"Delivered social features (posts, comments, feeds) and multi-branch administration for organizational chapters.",
 				"Ongoing maintenance, CI/CD hardening, multi-placement ads management, and enhanced Django admin for consolidated chapter administration.",
 			],
 			achievementsPdf: [
-				"Led a full platform redesign in Figma through stakeholder review; shipped a polished Vue 3 / Nuxt.js / Shadcn-vue site with a robust Django REST Framework backend and structured media management—live at sachchaikendranepal.org.np.",
-				"Delivered social features (posts, comments, feeds) and multi-branch administration; ongoing maintenance and media optimization.",
+				"Part-time freelance: Figma-led platform redesign; shipped Vue 3/Nuxt production site with Django REST backend—live at sachchaikendranepal.org.np.",
 			],
 			achievementsPdfReact: [
-				"Redesigned the legacy Vue 3 site in Figma with stakeholders, then rebuilt the next-generation frontend with Next.js, React, and shadcn/ui.",
-				"Built robust Django REST Framework APIs with proper media management (uploads, serving, optimization); CI/CD hardening and observability-ready tooling.",
-				"Implemented multi-placement ads management with configurable targeting across branch and public content surfaces.",
-				"Consolidated administration into an enhanced Django admin, reducing operational overhead for chapter managers by streamlining content workflows.",
+				"Part-time freelance: Figma-led redesign and Next.js/React/shadcn/ui rebuild with Django REST backend—live at sachchaikendranepal.org.np.",
 			],
 			companyUrl: "https://sachchaikendranepal.org.np/",
 			companyLogo: "sachchai-kendra-nepal.png",
@@ -898,7 +936,7 @@ const baseResume = {
 						"A website offering social media features and branch management for Sachchai Kendra Nepal.",
 					job: [
 						"Led a Figma-first platform redesign with stakeholder review before implementation.",
-						"Shipped a beautiful Vue 3 / Nuxt.js frontend with Shadcn-vue and Tailwind CSS.",
+						"Shipped a production Vue 3 / Nuxt.js frontend with Shadcn-vue and Tailwind CSS.",
 						"Built robust Django REST Framework APIs with proper media management (uploads, storage, serving, optimization).",
 						"Modernizing the legacy site with Next.js, React, and shadcn/ui.",
 						"Deployed and maintained the live site at sachchaikendranepal.org.np.",
@@ -1069,31 +1107,31 @@ const baseResume = {
 		{
 			name: "Frontend Development",
 			description:
-				"I can build a responsive and interactive frontend for your web application." +
-				" It is true that I am not the best designer you can hire, but I can implement complex" +
-				" designs on your website.",
+				"Product UI delivery from Figma wireframes and prototypes through stakeholder review to production—complex dashboards, forms, and high-traffic data surfaces with Vue.js, React.js, and TypeScript.",
 			icon: "web-box",
 			iconColor: "text-primary",
 			experience: new Date().getFullYear() - 2018,
 		},
 		{
-			name: "Backend Development",
+			name: "Backend Collaboration",
 			description:
-				"I have been working with different technologies to build a scalable and" +
-				" secure backend. You can hire me to build REST APIs or Websockets for your application." +
-				" I also have some experience with microservices architecture. The advanced part of my" +
-				" work entails more engineering work relating to Data Structure operations, Query Optimization, and more.",
+				"API design and integration supporting frontend features—REST and GraphQL contracts, data modeling, and performance tuning alongside backend teams.",
 			icon: "server",
 			iconColor: "text-indigo-500",
 			experience: new Date().getFullYear() - 2018,
 		},
 		{
-			name: "QA Automation",
+			name: "DevOps",
 			description:
-				"I can write <b>automated tests</b> for your application." +
-				" We can work together to increase test coverage of your application," +
-				" reduce flakiness inside existing test cases and implement, maintain" +
-				" and optimize the CI/CD pipelines.",
+				"CI/CD pipelines, deployment patterns, and release automation for web applications—Jenkins, GitHub Actions, and containerized delivery workflows.",
+			icon: "cloud",
+			iconColor: "text-purple-500",
+			experience: new Date().getFullYear() - 2020,
+		},
+		{
+			name: "Quality Engineering",
+			description:
+				"Quality bars I bring to frontend delivery—Playwright and BDD E2E coverage, CI quality gates, and test automation that protects release velocity without slowing product teams.",
 			icon: "lightbulb-auto",
 			iconColor: "text-green-500",
 			types: [
@@ -1110,16 +1148,6 @@ const baseResume = {
 				"Continuous Deployment",
 			],
 			experience: new Date().getFullYear() - 2019,
-		},
-		{
-			name: "DevOps",
-			description:
-				"I have few years of experience in DevOps, I can deploy your web application to the" +
-				" cloud and organize load balancing for clients or servers." +
-				" I can also create and maintain CI/CD pipelines for your application.",
-			icon: "cloud",
-			iconColor: "text-purple-500",
-			experience: new Date().getFullYear() - 2020,
 		},
 	],
 	technologies: [
@@ -1201,15 +1229,15 @@ const baseResume = {
 		{
 			name: "Paschimanchal Engineering Campus",
 			degree: "Bachelor of Engineering",
-			startDate: "2017",
-			endDate: "2021",
+			startDate: "2015",
+			endDate: "2019",
 			major: "Computer Engineering",
 		},
 		{
 			name: "Nist Banepa",
 			degree: "High School",
-			startDate: "2015",
-			endDate: "2017",
+			startDate: "2013",
+			endDate: "2015",
 			major: "Science (Maths)",
 		},
 	],
@@ -1221,13 +1249,22 @@ const baseResume = {
 
 // Calculate years of experience dynamically
 const yearsOfExperience = calculateYearsOfExperience(baseResume.experiences);
+const seniorFrontendYears = calculateSeniorFrontendYears(
+	baseResume.experiences,
+);
 
 const resumePdfs: Record<ResumePdfVariant, ResumePdfExport> = {
-	vue: buildResumePdfVariant("vue", baseResume.experiences, yearsOfExperience),
+	vue: buildResumePdfVariant(
+		"vue",
+		baseResume.experiences,
+		yearsOfExperience,
+		seniorFrontendYears,
+	),
 	react: buildResumePdfVariant(
 		"react",
 		baseResume.experiences,
 		yearsOfExperience,
+		seniorFrontendYears,
 	),
 };
 
@@ -1236,14 +1273,19 @@ const Resume: ResumeInterface = {
 	...baseResume,
 	personalInfo: {
 		...baseResume.personalInfo,
-		summary: `Senior Frontend Engineer with ${yearsOfExperience}+ years building Vue.js, Nuxt.js, React, Next.js, and TypeScript applications and leading engineering teams. Strong in scalable UI systems, accessibility, and performance optimization. ${figmaSummaryClause} Partner with backend teams on API design (Node.js, Django) and ship cohesive product experiences. Established quality bars via test automation and CI; active open-source contributor (Vue3-Ytframe, Vue Formik). Proven track record of modernizing platforms, improving performance by 40%+, and mentoring engineers.`,
+		summary: buildWebSummary(yearsOfExperience),
 	},
 	resumePdfs,
 	resumePdf: resumePdfs.vue,
 };
 
 export default Resume;
-export { calculateYearsOfExperience, yearsOfExperience };
+export {
+	calculateYearsOfExperience,
+	calculateSeniorFrontendYears,
+	yearsOfExperience,
+	seniorFrontendYears,
+};
 
 export function getResumePdf(
 	variant: ResumePdfVariant = "vue",

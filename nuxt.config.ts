@@ -1,4 +1,10 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import {
+	SITE_DEFAULT_TITLE,
+	SITE_DESCRIPTION,
+	SITE_KEYWORDS,
+} from "./app/composables/useSeo";
+
 export default defineNuxtConfig({
 	compatibilityDate: "2025-10-27",
 	devtools: { enabled: true },
@@ -19,18 +25,15 @@ export default defineNuxtConfig({
 			htmlAttrs: {
 				lang: "en",
 			},
-			title:
-				"Kiran Parajuli | Frontend Developer, Full Stack Developer, QA Automation Engineer",
+			title: SITE_DEFAULT_TITLE,
 			meta: [
 				{
 					name: "description",
-					content:
-						"Frontend Developer, Full Stack Developer, and QA Automation Engineer from Nepal specializing in Vue.js, React.js, Python, PHP, NodeJS, and modern web technologies.",
+					content: SITE_DESCRIPTION,
 				},
 				{
 					name: "keywords",
-					content:
-						"Kiran Parajuli, Frontend Developer, Full Stack Developer, QA Engineer, Python, Django, Vue.js, React.js, Node.js, PHP, Quality Assurance, Web Development, Nepal",
+					content: SITE_KEYWORDS,
 				},
 				{ name: "author", content: "Kiran Parajuli" },
 				{ name: "robots", content: "index, follow" },
@@ -40,13 +43,11 @@ export default defineNuxtConfig({
 				{ name: "theme-color", content: "#0e62c0" },
 				{
 					property: "og:title",
-					content:
-						"Kiran Parajuli | Frontend & Full Stack Developer & QA Engineer",
+					content: SITE_DEFAULT_TITLE,
 				},
 				{
 					property: "og:description",
-					content:
-						"Frontend Developer, Full Stack Developer, and QA Automation Engineer from Nepal specializing in Vue.js, React.js, Python, Django, and modern web technologies.",
+					content: SITE_DESCRIPTION,
 				},
 				{
 					property: "og:image",

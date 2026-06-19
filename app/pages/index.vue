@@ -1,11 +1,13 @@
 <script lang="ts" setup>
 import IntroSection from "~/components/home/IntroSection.vue";
-import ServicesSection from "~/components/home/ServicesSection.vue";
-import MyWorks from "~/components/home/MyWorks.vue";
+import FeaturedProjectsSection from "~/components/home/FeaturedProjectsSection.vue";
 import {
 	useSeo,
 	createPersonStructuredData,
 	createWebsiteStructuredData,
+	SITE_DESCRIPTION,
+	SITE_JOB_TITLE,
+	SITE_KEYWORDS,
 } from "~/composables/useSeo";
 
 const siteUrl = "https://kiranparajuli.com.np";
@@ -13,19 +15,16 @@ const imageUrl = `${siteUrl}/letter_k.png`;
 
 // Page-specific SEO
 useSeo({
-	title: "React.js, Vue.js, Django, Frontend Developer from Nepal",
-	description:
-		"Frontend Developer, Full Stack Developer, and QA Automation Engineer from Nepal specializing in Vue.js, React.js, Python, PHP, NodeJS, and modern web technologies.",
-	keywords:
-		"Kiran Parajuli, Frontend Developer, Full Stack Developer, QA Engineer, Python, Django, Vue.js, React.js, Node.js, PHP, Quality Assurance, Web Development, Nepal",
+	title: SITE_JOB_TITLE,
+	description: SITE_DESCRIPTION,
+	keywords: SITE_KEYWORDS,
 	image: imageUrl,
 	url: siteUrl,
 	type: "website",
 	structuredData: createPersonStructuredData({
 		name: "Kiran Parajuli",
-		jobTitle: "Frontend & Full Stack Developer & QA Engineer",
-		description:
-			"Frontend Developer, Full Stack Developer, and QA Automation Engineer from Nepal specializing in Vue.js, React.js, Python, PHP, NodeJS, and modern web technologies.",
+		jobTitle: SITE_JOB_TITLE,
+		description: SITE_DESCRIPTION,
 		image: imageUrl,
 		url: siteUrl,
 		sameAs: [
@@ -49,8 +48,7 @@ useHead({
 				"@context": "https://schema.org",
 				...createWebsiteStructuredData({
 					name: "Kiran Parajuli Portfolio",
-					description:
-						"Personal portfolio of Kiran Parajuli - Frontend & Full Stack Developer & QA Engineer",
+					description: `Personal portfolio of Kiran Parajuli — ${SITE_JOB_TITLE}`,
 					url: siteUrl,
 				}),
 			}),
@@ -62,7 +60,6 @@ useHead({
 <template>
 	<div>
 		<IntroSection />
-		<ServicesSection />
-		<MyWorks />
+		<FeaturedProjectsSection />
 	</div>
 </template>

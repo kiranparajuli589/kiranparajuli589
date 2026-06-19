@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { htmlMark } from "~/utils";
 import { ref, onBeforeMount } from "vue";
-import { useSeo, createArticleStructuredData } from "~/composables/useSeo";
+import { useSeo, createArticleStructuredData, SITE_JOB_TITLE } from "~/composables/useSeo";
 
 const mdp = htmlMark();
 const route = useRoute();
@@ -55,7 +55,7 @@ onBeforeMount(async () => {
 			dateModified: blogDate.toISOString(),
 			authorName: "Kiran Parajuli",
 			authorUrl: siteUrl,
-			authorJobTitle: "Frontend & Full Stack Developer & QA Engineer",
+			authorJobTitle: SITE_JOB_TITLE,
 			publisherName: "Kiran Parajuli",
 			publisherImage: imageUrl,
 			keywords: blogTags.join(", "),

@@ -5,6 +5,7 @@ import AiEngineeringSection from "~/components/home/AiEngineeringSection.vue";
 import LanguagesSection from "~/components/home/LanguagesSection.vue";
 import ToolsSection from "~/components/home/ToolsSection.vue";
 import ResumeDownloadTools from "~/components/resume/ResumeDownloadTools.vue";
+import ResumeSummarySection from "~/components/home/ResumeSummarySection.vue";
 import Resume, { yearsOfExperience } from "~/utils/resume";
 import {
 	useSeo,
@@ -20,14 +21,16 @@ const technologies = Resume.technologies;
 
 const skills = technologies.flatMap((tech) => tech.tools.map((t) => t.tooltip));
 const aiToolNames = Resume.aiEngineering.tools.map((t) => t.tooltip);
-const skillsList = [...new Set([...skills, ...aiToolNames])].slice(0, 10).join(", ");
+const skillsList = [...new Set([...skills, ...aiToolNames])]
+	.slice(0, 10)
+	.join(", ");
 
-const resumeSummary = `Professional resume of ${personalInfo.name}, a ${personalInfo.role} with ${yearsOfExperience}+ years of experience in software development and quality assurance. Specialized in ${skillsList} and modern web technologies.`;
+const resumeSummary = `Professional resume of ${personalInfo.name}, a ${personalInfo.role} with ${yearsOfExperience}+ years in frontend and product UI delivery. Specialized in ${skillsList} and modern frontend product delivery.`;
 
 useSeo({
 	title: `Resume - ${personalInfo.name}`,
 	description: resumeSummary,
-	keywords: `${personalInfo.name}, Resume, Curriculum Vitae, Frontend Developer Resume, Full Stack Developer Resume, QA Engineer Resume, Developer Portfolio`,
+	keywords: `${personalInfo.name}, Resume, Curriculum Vitae, Senior Frontend Engineer Resume, React Developer Resume, Vue Nuxt Developer Resume, Frontend Engineer Portfolio`,
 	image: imageUrl,
 	url: currentUrl,
 	type: "profile",
@@ -77,11 +80,12 @@ useHead({
 			<ResumeDownloadTools />
 		</div>
 
+		<ResumeSummarySection />
 		<ExperienceSection />
 		<CredentialsSection />
-		<AiEngineeringSection />
 		<ToolsSection />
 		<LanguagesSection />
+		<AiEngineeringSection />
 	</div>
 </template>
 <style scoped>

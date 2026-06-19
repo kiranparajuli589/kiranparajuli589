@@ -29,7 +29,7 @@ function formatEmploymentMeta(experience: Experience | undefined): string {
 		parts.push(experience.employmentType);
 	}
 	if (experience.concurrent) {
-		parts.push("concurrent");
+		parts.push("concurrent role");
 	}
 	parts.push(`${experience.startDate} - ${experience.endDate}`);
 	return parts.join(" · ");

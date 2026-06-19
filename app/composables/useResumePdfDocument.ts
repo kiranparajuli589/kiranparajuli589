@@ -34,7 +34,20 @@ export function printResumePdf(variant: ResumePdfVariant): void {
 export function formatEmploymentLine(experience: ResumePdfExperience): string {
 	const parts = [experience.roles.join(", ")];
 	if (experience.employmentType) {
-		parts.push(experience.employmentType);
+		if (
+			experience.company === "ourBuddy.ai" &&
+			experience.employmentType === "Full-time"
+		) {
+			parts.push("Full-time (promoted from part-time)");
+		} else {
+			parts.push(experience.employmentType);
+		}
+	}
+	if (
+		experience.company === "ourBuddy.ai" &&
+		experience.endDate === "2025"
+	) {
+		parts.push("contract completed 2025");
 	}
 	if (experience.concurrent) {
 		parts.push("concurrent");

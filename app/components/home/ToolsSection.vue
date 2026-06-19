@@ -6,7 +6,7 @@ const Techs = Resume.technologies;
 </script>
 <template>
 	<section>
-		<h2>Tools I Use</h2>
+		<h2 class="text-4xl font-bold">Tools I Use</h2>
 		<div class="section-divider" />
 		<p class="mb-7">
 			These are, but not limited to, the techs I use for different services.

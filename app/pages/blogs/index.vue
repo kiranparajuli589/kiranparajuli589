@@ -49,9 +49,9 @@ onBeforeMount(async () => {
 useSeo({
 	title: "Blogs",
 	description:
-		"Read tech blogs, tutorials, and articles by Kiran Parajuli on software development, Python, Django, Vue.js, React.js, QA automation, and web development.",
+		"Tech blogs and articles by Kiran Parajuli on frontend engineering, Vue.js, React.js, TypeScript, and web product delivery.",
 	keywords:
-		"Kiran Parajuli Blog, Tech Blog, Software Development Blog, Django Tutorial, Vue.js Tutorial, QA Automation Blog, Web Development Articles, Programming Tutorials",
+		"Kiran Parajuli Blog, Senior Frontend Engineer, Vue.js, React.js, TypeScript, Web Development, Frontend Engineering",
 	image: imageUrl,
 	url: currentUrl,
 	type: "website",

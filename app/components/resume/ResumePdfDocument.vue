@@ -80,7 +80,16 @@ const {
 			<hr class="mb-2" />
 			<div v-for="skill in pdfSkills" :key="skill.title" class="mb-2 skill-row">
 				<strong>{{ skill.title }}:</strong>
-				<span class="skill-items">{{ skill.items.join(" ") }}</span>
+				<template v-if="skill.items.length > 1">
+					<div
+						v-for="item in skill.items"
+						:key="item"
+						class="skill-items skill-items-line"
+					>
+						{{ item }}
+					</div>
+				</template>
+				<span v-else class="skill-items">{{ skill.items.join(" ") }}</span>
 			</div>
 
 			<h2 class="pt-4 experience-section-start">Professional Experience</h2>
@@ -202,6 +211,12 @@ const {
 	margin-left: 0.25rem;
 }
 
+.resume-pdf .skill-items-line {
+	display: block;
+	margin-left: 0;
+	margin-top: 1pt;
+}
+
 .resume-pdf .languages-list {
 	list-style: none;
 	padding-left: 0;
@@ -231,7 +246,7 @@ const {
 @media print {
 	@page {
 		size: letter;
-		margin: 0.4in 0.5in;
+		margin: 0.4in 0.48in;
 	}
 
 	.resume-pdf {
@@ -240,12 +255,12 @@ const {
 		font-size: 10pt;
 		max-width: 100%;
 		margin: 0;
-		line-height: 1.22;
+		line-height: 1.24;
 	}
 
 	.resume-pdf h1 {
 		font-size: 17pt;
-		margin-bottom: 2pt;
+		margin-bottom: 3pt;
 	}
 
 	.resume-pdf h2 {
@@ -254,7 +269,7 @@ const {
 		margin-bottom: 2pt;
 		page-break-after: avoid;
 		border-bottom: 1pt solid #000;
-		padding-bottom: 1pt;
+		padding-bottom: 2pt;
 	}
 
 	.resume-pdf .experience-section-start {
@@ -264,35 +279,36 @@ const {
 
 	.resume-pdf h3 {
 		font-size: 11pt;
-		margin-top: 3pt;
-		margin-bottom: 1pt;
+		margin-top: 4pt;
+		margin-bottom: 2pt;
 		page-break-after: avoid;
 	}
 
 	.resume-pdf h4 {
-		margin-bottom: 1pt !important;
+		margin-bottom: 2pt !important;
 	}
 
 	.resume-pdf p {
-		margin-bottom: 2pt;
+		margin-bottom: 3pt;
 		font-size: 10pt;
 	}
 
 	.resume-pdf ul {
 		margin-top: 0;
-		margin-bottom: 3pt;
-		padding-left: 1.25rem;
+		margin-bottom: 4pt;
+		padding-left: 1.35rem;
 	}
 
 	.resume-pdf ul > li {
-		margin-bottom: 1pt;
+		margin-bottom: 1.5pt;
 		font-size: 10pt;
+		line-height: 1.22;
 	}
 
 	.resume-pdf hr {
 		border: none;
 		border-top: 1pt solid #ccc;
-		margin: 2pt 0;
+		margin: 3pt 0;
 	}
 
 	.resume-pdf h2 + hr {
@@ -315,7 +331,7 @@ const {
 
 	.resume-pdf .contact-info,
 	.resume-pdf .contact-links {
-		margin-bottom: 2pt;
+		margin-bottom: 3pt;
 	}
 
 	.resume-pdf .role-text {
@@ -325,12 +341,18 @@ const {
 
 	.resume-pdf .skill-row {
 		font-size: 9.5pt;
-		margin-bottom: 2pt;
+		margin-bottom: 3pt;
+	}
+
+	.resume-pdf .skill-items-line {
+		display: block;
+		margin-left: 0;
+		margin-top: 1pt;
 	}
 
 	.resume-pdf .experience-item {
 		page-break-inside: avoid;
-		margin-bottom: 4pt;
+		margin-bottom: 5pt;
 	}
 
 	.resume-pdf .experience-page-break {
@@ -343,23 +365,23 @@ const {
 	}
 
 	.resume-pdf .mb-1 {
-		margin-bottom: 1pt !important;
-	}
-
-	.resume-pdf .mb-2 {
 		margin-bottom: 2pt !important;
 	}
 
+	.resume-pdf .mb-2 {
+		margin-bottom: 3pt !important;
+	}
+
 	.resume-pdf .mb-4 {
-		margin-bottom: 4pt !important;
+		margin-bottom: 6pt !important;
 	}
 
 	.resume-pdf .pt-4 {
-		padding-top: 0 !important;
+		padding-top: 2pt !important;
 	}
 
 	.resume-pdf .selected-projects-list > li {
-		margin-bottom: 1pt;
+		margin-bottom: 2pt;
 	}
 }
 </style>

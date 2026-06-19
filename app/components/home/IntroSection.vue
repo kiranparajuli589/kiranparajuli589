@@ -20,6 +20,9 @@ const personalInfo = Resume.personalInfo;
 				<div class="subtitle">
 					{{ personalInfo.bio }}
 				</div>
+				<p class="hero-summary mt-2 text-gray-600 dark:text-gray-300">
+					{{ personalInfo.heroTagline }}
+				</p>
 				<CredentialsSection compact />
 				<a class="lets-talk" :href="'mailto:' + personalInfo.email">
 					<span class="lets">let's</span>
@@ -30,7 +33,7 @@ const personalInfo = Resume.personalInfo;
 				<UAvatar
 					size="160"
 					src="/avatar.webp"
-					alt="Kiran Parajuli - Frontend Developer"
+					alt="Kiran Parajuli - Senior Frontend Engineer"
 					loading="eager"
 				/>
 			</div>

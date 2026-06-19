@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import { useScrollTo } from "~/composables/scrollTo";
-
-const scrollTo = useScrollTo();
 </script>
 <template>
 	<footer class="w-full">
@@ -13,7 +10,7 @@ const scrollTo = useScrollTo();
 			<div class="first-row flex items-center justify-between pb-5 flex-wrap">
 				<div class="my-name text-xl uppercase font-bold">Kiran</div>
 				<div class="btn-grp flex flex-wrap gap-4 pl-16">
-					<UButton variant="ghost" class="font-bold" @click="scrollTo.works()">
+					<UButton variant="ghost" class="font-bold" to="/works">
 						Works
 					</UButton>
 					<UButton variant="ghost" class="font-bold" to="/resume">

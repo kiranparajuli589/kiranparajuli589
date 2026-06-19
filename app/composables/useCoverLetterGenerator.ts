@@ -1,4 +1,7 @@
-import Resume, { getResumePdf, yearsOfExperience } from "~/utils/resume";
+import Resume, {
+	getResumePdf,
+	yearsOfExperience,
+} from "~/utils/resume";
 import type { ResumePdfVariant } from "~/customTypes";
 
 const personalInfo = Resume.personalInfo;
@@ -44,11 +47,21 @@ function detectJobThemes(jobDescription: string): JobThemes {
 	};
 }
 
+function formatTenurePhrase(): string {
+	return `${yearsOfExperience}+ years in frontend and product UI delivery`;
+}
+
 function extractTechnologiesFromPdfSkills(
 	skills: ReturnType<typeof getResumePdf>["skills"],
 	themes: JobThemes,
 ): string {
-	const frontend = skills.find((skill) => skill.title === "Frontend")?.items[0];
+	const frontendItems =
+		skills.find((skill) => skill.title === "Frontend")?.items ?? [];
+	const primaryLine =
+		frontendItems.find((item) => item.startsWith("Primary:")) ??
+		frontendItems[0] ??
+		"";
+	const frontend = primaryLine.replace(/^Primary:\s*/, "");
 	if (!frontend) return "";
 
 	const items = frontend.split(", ").filter(Boolean);
@@ -137,7 +150,7 @@ function pickExperienceAchievements(
 
 	if (themes.design) {
 		const designAchievement = achievements.find((achievement) =>
-			/figma|design-to-code|wireframe|redesign|pixel-perfect/i.test(achievement),
+			/figma|design-to-code|wireframe|redesign/i.test(achievement),
 		);
 		if (designAchievement && designAchievement !== first) {
 			second = first === designAchievement ? second : first;
@@ -154,7 +167,7 @@ function buildKeyQualifications(
 	template: CoverLetterTemplate,
 ): string[] {
 	const qualifications = [
-		`${yearsOfExperience}+ years of experience in frontend engineering, full-stack collaboration, and QA automation`,
+		`${formatTenurePhrase()} delivering production frontend systems with strong quality-engineering practices`,
 		`Proven track record delivering high-performance applications using ${technologies}`,
 		"Figma design-to-code—wireframing, prototyping, design variables, and stakeholder review through production UI",
 		`${Resume.aiEngineering.pdfToolsLine} for AI-augmented delivery (${Resume.aiEngineering.pdfPracticesLine})`,
@@ -238,9 +251,6 @@ export const useCoverLetterGenerator = () => {
 				? "React, Next.js, and TypeScript product engineering"
 				: "Vue.js, Nuxt.js, and TypeScript product engineering";
 
-		const designFocus =
-			"Figma-driven design-to-code, from wireframes through stakeholder review to production UI";
-
 		const getOpening = (): string => {
 			if (jobDescription && jobDescription.length > 50) {
 				const summaryExcerpt = getSummaryExcerpt(
@@ -248,33 +258,25 @@ export const useCoverLetterGenerator = () => {
 					themes,
 					true,
 				);
-				const focus =
-					themes.design && themes.ai
-						? `${variantFocus}, ${designFocus}, and AI-augmented engineering`
-						: themes.design
-							? `${variantFocus} and ${designFocus}`
-							: themes.ai
-								? `${variantFocus} and AI-augmented engineering`
-								: variantFocus;
-				return `I am excited to apply for the ${position} position at ${companyName}. After reviewing the job requirements, I am confident that my ${yearsOfExperience}+ years in ${focus} align well with what you're seeking. ${summaryExcerpt}`;
+				return `I am excited to apply for the ${position} position at ${companyName}. After reviewing the job requirements, I am confident that my ${formatTenurePhrase()} align well with what you're seeking. ${summaryExcerpt}`;
 			}
 
 			switch (template) {
 				case "technical":
-					return `I am writing to express my strong interest in the ${position} position at ${companyName}. As a ${personalInfo.role} with ${yearsOfExperience}+ years building scalable ${variant === "react" ? "React and Next.js" : "Vue and Nuxt"} applications and translating Figma designs into production UI, I am excited about the opportunity to contribute to your technical team.`;
+					return `I am writing to express my strong interest in the ${position} position at ${companyName}. As a ${personalInfo.role} with ${formatTenurePhrase()}, building scalable ${variant === "react" ? "React and Next.js" : "Vue and Nuxt"} applications and translating Figma designs into production UI, I am excited about the opportunity to contribute to your technical team.`;
 				case "leadership":
-					return `I am writing to express my strong interest in the ${position} position at ${companyName}. With ${yearsOfExperience}+ years leading engineering delivery—from Figma design-to-code workflows to design-system rollout—in ${variantFocus}, I am excited about the opportunity to help shape your organization's technical direction.`;
+					return `I am writing to express my strong interest in the ${position} position at ${companyName}. With ${formatTenurePhrase()} leading delivery—from Figma design-to-code workflows to design-system rollout—I am excited about the opportunity to help shape your organization's technical direction.`;
 				case "startup":
-					return `I am excited to apply for the ${position} position at ${companyName}. As someone who thrives in fast-paced environments and enjoys shipping high-impact frontend work—from wireframes to production—I am drawn to the opportunity to make a meaningful contribution at a growing company.`;
+					return `I am excited to apply for the ${position} position at ${companyName}. With ${formatTenurePhrase()}, I thrive in fast-paced environments shipping high-impact frontend work—from wireframes to production—and I am drawn to the opportunity to contribute at a growing company.`;
 				case "enterprise":
-					return `I am writing to express my strong interest in the ${position} position at ${companyName}. With ${yearsOfExperience}+ years delivering large-scale web platforms, design-system consistency, and cross-functional collaboration, I am excited about the opportunity to contribute to your organization's continued success.`;
+					return `I am writing to express my strong interest in the ${position} position at ${companyName}. With ${formatTenurePhrase()} delivering large-scale web platforms, design-system consistency, and cross-functional collaboration, I am excited about the opportunity to contribute to your organization's continued success.`;
 				default:
-					return `I am writing to express my strong interest in the ${position} position at ${companyName}. With ${yearsOfExperience}+ years in ${variantFocus}, Figma design-to-code, quality engineering, and team leadership, I am excited about the opportunity to contribute to your organization's success.`;
+					return `I am writing to express my strong interest in the ${position} position at ${companyName}. With ${formatTenurePhrase()} in ${variantFocus}, Figma design-to-code, and team leadership, I am excited about the opportunity to contribute to your organization's success.`;
 			}
 		};
 
 		const experienceParagraph = recentExperience
-			? `In my recent role as ${recentExperience.roles[0]} at ${recentExperience.company}, I ${formattedFirstAchievement || "have consistently delivered high-quality software solutions that drive business value"}. ${formattedSecondAchievement ? `I also ${formattedSecondAchievement}.` : ""} This work strengthened my expertise in ${technologies}${themes.design ? ", Figma design-to-code, and pixel-perfect UI implementation" : ""}, and I am confident these skills would be valuable in the ${position} role at ${companyName}.`
+			? `In my recent role as ${recentExperience.roles[0]} at ${recentExperience.company}, I ${formattedFirstAchievement || "have consistently delivered high-quality software solutions that drive business value"}. ${formattedSecondAchievement ? `I also ${formattedSecondAchievement}.` : ""} This work strengthened my expertise in ${technologies}${themes.design ? " and Figma design-to-code workflows" : ""}, and I am confident these skills would be valuable in the ${position} role at ${companyName}.`
 			: `As a ${personalInfo.role}, I have consistently delivered high-quality software solutions that drive business value. My expertise in ${technologies} would be valuable in the ${position} role at ${companyName}.`;
 
 		const getClosing = (): string => {
