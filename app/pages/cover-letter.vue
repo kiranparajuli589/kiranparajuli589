@@ -338,6 +338,10 @@ const resetForm = () => {
 						Choose Vue/Nuxt or React/Next.js to match the resume you are
 						submitting
 					</li>
+					<li>
+						Paste the job description when possible — the generator detects Figma,
+						AI, and QA keywords to tailor qualifications
+					</li>
 					<li>Enter the company name and position you're applying for</li>
 					<li>
 						Click "Generate Cover Letter" to create a personalized cover letter
