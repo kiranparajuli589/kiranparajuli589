@@ -13,4 +13,10 @@ definePageMeta({
 .pdf-view {
 	padding: 0.5rem;
 }
+
+@media print {
+	.pdf-view {
+		padding: 0;
+	}
+}
 </style>
