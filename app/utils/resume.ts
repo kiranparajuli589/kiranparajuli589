@@ -225,7 +225,7 @@ function buildResumePdfVariant(
 		react: [
 			{
 				title: "Browser Recording System",
-				line: "WebRTC/MediaRecorder suite for insurance brokerages—replaced a legacy recorder; eliminated third-party SDK costs for broker training workflows",
+				line: "WebRTC/MediaRecorder suite for insurance brokerages—replaced a legacy recorder; eliminated third-party SDK costs for broker training workflows — react-rtc.netlify.app/en",
 			},
 			{
 				title: "SSR Help Center",
@@ -356,6 +356,7 @@ const baseResume = {
 			],
 			links: {
 				website: "https://www.ourbuddy.ai",
+				demo: "https://react-rtc.netlify.app/en",
 			},
 		},
 		{
@@ -597,6 +598,7 @@ const baseResume = {
 					name: "Browser-Based Recording System",
 					description:
 						"Flagship browser-native recording suite for insurance brokerages—audio, video, screen, and picture-in-picture screen+camera capture without third-party SDKs.",
+					url: "https://react-rtc.netlify.app/en",
 					job: [
 						"Inherited a failing legacy recorder built on an outdated library with unreliable blob output; led a full rewrite using React, Next.js, WebRTC, and MediaRecorder APIs.",
 						"Delivered device selection (camera/microphone), live audio visualization, recording duration limits, pre-roll countdowns, and a draggable camera canvas for screen+camera recordings.",

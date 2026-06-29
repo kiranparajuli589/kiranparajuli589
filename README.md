@@ -31,7 +31,7 @@ Recently, I have worked on:
 - Modernizing legacy React applications into modular Next.js architectures
 - Building Nuxt.js SSR platforms with strong Core Web Vitals improvements
 - Creating AI assistance interfaces with streamed chat and persistent history
-- Building browser-based recording systems with WebRTC and MediaRecorder
+- Building [browser-based recording systems](https://react-rtc.netlify.app/en) with WebRTC and MediaRecorder
 - Establishing Playwright(E2E), API, integration, unit, and contract testing in CI pipelines
 - Leading frontend delivery, mentoring engineers, and improving UI quality bars
 

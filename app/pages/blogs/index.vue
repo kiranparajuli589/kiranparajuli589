@@ -27,21 +27,30 @@ const loading = ref<boolean>(true);
 onBeforeMount(async () => {
 	const blogMarkdowns = await readAssets();
 
-	blogMarkdowns.forEach((blog) => {
-		const frontMatter = mdp.getFrontMatter(blog.content);
-		if (!frontMatter) return;
-		frontMatters.push({
-			title: String(frontMatter.title || ""),
-			date: String(frontMatter.date || ""),
-			tags: Array.isArray(frontMatter.tags)
-				? (frontMatter.tags as string[])
-				: [],
-			contentLength: blog.content.length,
-			fileName: blog.fileName,
-			filePath: blog.path,
-		});
-	});
+	const blogs = blogMarkdowns
+		.map((blog) => {
+			const frontMatter = mdp.getFrontMatter(blog.content);
+			if (!frontMatter) return null;
+			return {
+				title: String(frontMatter.title || ""),
+				date: String(frontMatter.date || ""),
+				tags: Array.isArray(frontMatter.tags)
+					? (frontMatter.tags as string[])
+					: [],
+				contentLength: blog.content.length,
+				fileName: blog.fileName,
+				filePath: blog.path,
+			};
+		})
+		.filter(
+			(blog): blog is BlogFrontMatter =>
+				blog !== null && Boolean(blog.title),
+		)
+		.sort(
+			(a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+		);
 
+	frontMatters.push(...blogs);
 	loading.value = false;
 });
 
