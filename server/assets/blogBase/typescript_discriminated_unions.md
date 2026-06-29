@@ -1,5 +1,6 @@
 ---
 title: "The Day I Stopped Lying to TypeScript: Discriminated Unions"
+description: "How discriminated unions let you stop lying to TypeScript, modeling data-fetching states with exhaustive, type-safe handling."
 date: 2026-06-23 10:00:00
 tags: ["typescript", "discriminated-unions", "type-safety", "javascript", "frontend"]
 ---

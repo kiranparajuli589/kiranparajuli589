@@ -1,5 +1,6 @@
 ---
 title: Dockerizing Your Django Vue Application: A Step-by-Step Guide
+description: "A step-by-step guide to containerizing a Django + Vue app with Docker Compose, Gunicorn, and Vite for reproducible local and production builds."
 date: 2023-10-12 12:00:00
 tags: ["django", "vue", "docker", "docker-compose", "gunicorn", "vite"]
 ---

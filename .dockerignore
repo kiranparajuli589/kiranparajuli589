@@ -29,6 +29,8 @@ docker-compose.yml
 # Documentation
 *.md
 README.md
+# Keep blog markdown sources (bundled into the Nitro server build)
+!server/assets/blogBase/*.md
 
 # CI/CD
 .github
