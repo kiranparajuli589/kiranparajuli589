@@ -1,60 +1,78 @@
 <script setup lang="ts">
-import { ref, reactive, onBeforeMount } from "vue";
-import { readAssets, htmlMark } from "~/utils";
+import { computed, ref } from "vue";
 import {
 	useSeo,
 	createCollectionPageStructuredData,
 } from "~/composables/useSeo";
 
-interface BlogFrontMatter {
+interface BlogSummary {
+	slug: string;
 	title: string;
 	date: string;
 	tags: string[];
-	fileName: string;
-	filePath: string;
-	contentLength: number;
+	description: string;
+	readTime: number;
+	image: string;
 }
 
-const siteUrl = "https://kiranparajuli.com.np";
+const siteUrl = useRuntimeConfig().public.siteUrl;
 const currentUrl = `${siteUrl}/blogs`;
 const imageUrl = `${siteUrl}/letter_k.png`;
 
-const mdp = htmlMark();
+const { data: blogs } = await useAsyncData<BlogSummary[]>("blogs-list", () =>
+	$fetch("/api/blogs"),
+);
 
-const frontMatters = reactive<BlogFrontMatter[]>([]);
-const loading = ref<boolean>(true);
+const search = ref("");
+const activeTag = ref<string | null>(null);
 
-onBeforeMount(async () => {
-	const blogMarkdowns = await readAssets();
-
-	const blogs = blogMarkdowns
-		.map((blog) => {
-			const frontMatter = mdp.getFrontMatter(blog.content);
-			if (!frontMatter) return null;
-			return {
-				title: String(frontMatter.title || ""),
-				date: String(frontMatter.date || ""),
-				tags: Array.isArray(frontMatter.tags)
-					? (frontMatter.tags as string[])
-					: [],
-				contentLength: blog.content.length,
-				fileName: blog.fileName,
-				filePath: blog.path,
-			};
-		})
-		.filter(
-			(blog): blog is BlogFrontMatter =>
-				blog !== null && Boolean(blog.title),
-		)
-		.sort(
-			(a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
-		);
-
-	frontMatters.push(...blogs);
-	loading.value = false;
+const allTags = computed(() => {
+	const counts = new Map<string, number>();
+	for (const blog of blogs.value ?? []) {
+		for (const tag of blog.tags) {
+			counts.set(tag, (counts.get(tag) ?? 0) + 1);
+		}
+	}
+	return [...counts.entries()]
+		.sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+		.map(([name, count]) => ({ name, count }));
 });
 
-// Page-specific SEO
+const filteredBlogs = computed(() => {
+	const term = search.value.trim().toLowerCase();
+	return (blogs.value ?? []).filter((blog) => {
+		const matchesTag = !activeTag.value || blog.tags.includes(activeTag.value);
+		const matchesTerm =
+			!term ||
+			blog.title.toLowerCase().includes(term) ||
+			blog.description.toLowerCase().includes(term) ||
+			blog.tags.some((tag) => tag.toLowerCase().includes(term));
+		return matchesTag && matchesTerm;
+	});
+});
+
+const totalReadTime = computed(() =>
+	(blogs.value ?? []).reduce((sum, blog) => sum + blog.readTime, 0),
+);
+
+function toggleTag(tag: string) {
+	activeTag.value = activeTag.value === tag ? null : tag;
+}
+
+function clearFilters() {
+	search.value = "";
+	activeTag.value = null;
+}
+
+function formatDate(date: string) {
+	return new Date(date).toLocaleDateString("en-US", {
+		year: "numeric",
+		month: "short",
+		day: "numeric",
+	});
+}
+
+// Page-specific SEO (top-level, emitted during SSR).
 useSeo({
 	title: "Blogs",
 	description:
@@ -72,62 +90,127 @@ useSeo({
 });
 </script>
 <template>
-	<UCard variant="subtle" color="transparent" class="blog min-h-[70vh]">
-		<div class="py-2" />
-		<template #header>
-			<h1>Blogs</h1>
-		</template>
+	<div class="blog min-h-[70vh]">
+		<header class="blog__header mb-8">
+			<h1 class="text-4xl font-black tracking-tight">Blogs</h1>
+			<p class="mt-3 max-w-2xl text-gray-600 dark:text-gray-300">
+				I write occasionally about things I learn, find interesting, or want to
+				share — mostly frontend engineering, performance, and the web platform.
+			</p>
+			<div
+				class="mt-4 flex flex-wrap items-center gap-x-5 gap-y-1 text-sm text-gray-500 dark:text-gray-400"
+			>
+				<span class="inline-flex items-center gap-1.5">
+					<UIcon name="i-heroicons-document-text" />
+					{{ blogs?.length ?? 0 }} articles
+				</span>
+				<span class="inline-flex items-center gap-1.5">
+					<UIcon name="i-heroicons-clock" />
+					{{ totalReadTime }} min of reading
+				</span>
+			</div>
+		</header>
 
-		<div class="mb-4">
-			I write blogs occasionally. I mostly write about things I learn, things I
-			find interesting, and things I want to share.
+		<div class="blog__controls mb-6 flex flex-col gap-4">
+			<UInput
+				v-model="search"
+				icon="i-heroicons-magnifying-glass"
+				size="lg"
+				placeholder="Search articles by title, summary, or tag…"
+				:ui="{ root: 'w-full' }"
+			/>
+			<div v-if="allTags.length" class="flex flex-wrap gap-2">
+				<UButton
+					v-for="tag in allTags"
+					:key="tag.name"
+					size="xs"
+					class="rounded-full"
+					:color="activeTag === tag.name ? 'primary' : 'neutral'"
+					:variant="activeTag === tag.name ? 'solid' : 'subtle'"
+					@click="toggleTag(tag.name)"
+				>
+					{{ tag.name }}
+					<span class="opacity-60">{{ tag.count }}</span>
+				</UButton>
+			</div>
 		</div>
 
-		<template v-if="loading">
-			<div class="flex flex-col gap-4">
-				<USkeleton class="h-64" />
-				<USkeleton class="h-64" />
-				<USkeleton class="h-64" />
-			</div>
-		</template>
-
-		<template v-else>
-			<template v-for="(blog, blogIndex) in frontMatters" :key="blogIndex">
+		<div v-if="filteredBlogs.length" class="blog__list grid grid-cols-1 gap-5">
+			<NuxtLink
+				v-for="blog in filteredBlogs"
+				:key="blog.slug"
+				class="blog__card group block"
+				:to="`/blog/${blog.slug}`"
+			>
 				<UCard
-					v-if="blog && blog.title"
-					class="blog--item mb-4 hover:shadow-lg transition-shadow cursor-pointer"
-					@click="navigateTo(`/blog/${blog.fileName.replace('.md', '')}`)"
+					class="h-full transition-all duration-200 group-hover:-translate-y-1 group-hover:shadow-xl group-hover:ring-2 group-hover:ring-primary-500/40"
 				>
-					<template #header>
-						<h2 class="font-semibold text-xl">
+					<div class="flex items-start justify-between gap-4">
+						<h2
+							class="text-xl font-semibold leading-snug transition-colors group-hover:text-primary-600 dark:group-hover:text-primary-400"
+						>
 							{{ blog.title }}
 						</h2>
-					</template>
+						<UIcon
+							name="i-heroicons-arrow-up-right"
+							class="mt-1 shrink-0 text-gray-400 opacity-0 transition-opacity group-hover:opacity-100"
+						/>
+					</div>
 
-					<div v-if="blog.tags" class="blog--tags flex flex-wrap gap-2 mb-4">
-						<template v-if="Array.isArray(blog.tags)">
-							<div
-								v-for="(tag, index) in blog.tags"
-								:key="index"
-								class="bg-gray-200 px-2 py-1 rounded dark:bg-gray-800"
-							>
-								{{ tag }}
-							</div>
-						</template>
+					<p
+						v-if="blog.description"
+						class="mt-2 line-clamp-2 text-gray-600 dark:text-gray-300"
+					>
+						{{ blog.description }}
+					</p>
+
+					<div v-if="blog.tags.length" class="mt-4 flex flex-wrap gap-1.5">
+						<UBadge
+							v-for="tag in blog.tags"
+							:key="tag"
+							color="neutral"
+							variant="subtle"
+							size="sm"
+						>
+							{{ tag }}
+						</UBadge>
 					</div>
 
 					<div
-						class="blog--info flex justify-between text-sm text-gray-600 dark:text-gray-400"
+						class="mt-4 flex items-center gap-x-4 text-sm text-gray-500 dark:text-gray-400"
 					>
-						<div class="blog--date">
-							{{ new Date(blog.date).toDateString() }}
-						</div>
-						<div class="blog--time-to-read">
-							{{ Math.ceil(blog.contentLength / 1000) }} minutes read
-						</div>
+						<span class="inline-flex items-center gap-1.5">
+							<UIcon name="i-heroicons-calendar" />
+							{{ formatDate(blog.date) }}
+						</span>
+						<span class="inline-flex items-center gap-1.5">
+							<UIcon name="i-heroicons-clock" />
+							{{ blog.readTime }} min read
+						</span>
 					</div>
 				</UCard>
-			</template>
-		</template>
-	</UCard>
+			</NuxtLink>
+		</div>
+
+		<div
+			v-else
+			class="blog__empty flex flex-col items-center gap-3 rounded-xl border border-dashed border-gray-300 py-16 text-center dark:border-gray-700"
+		>
+			<UIcon
+				name="i-heroicons-magnifying-glass"
+				class="text-3xl text-gray-400"
+			/>
+			<p class="text-gray-600 dark:text-gray-300">
+				No articles match your search.
+			</p>
+			<UButton
+				color="primary"
+				variant="ghost"
+				icon="i-heroicons-arrow-path"
+				@click="clearFilters"
+			>
+				Clear filters
+			</UButton>
+		</div>
+	</div>
 </template>

@@ -1,5 +1,6 @@
 ---
 title: Setting Up SSL with Localhost Using mkcert & Nginx
+description: "Set up trusted HTTPS on localhost using mkcert and Nginx, so your local environment matches production TLS behavior."
 date: 2025-02-06 12:40:00
 tags: ["ssl", "localhost", "mkcert", "nginx", "docker"]
 ---

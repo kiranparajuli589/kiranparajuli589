@@ -1,102 +1,230 @@
 <script setup lang="ts">
-import { htmlMark } from "~/utils";
-import { ref, onBeforeMount } from "vue";
-import { useSeo, createArticleStructuredData, SITE_JOB_TITLE } from "~/composables/useSeo";
+import { computed, onBeforeUnmount, onMounted, ref } from "vue";
+import {
+	useSeo,
+	createArticleStructuredData,
+	SITE_JOB_TITLE,
+} from "~/composables/useSeo";
 
-const mdp = htmlMark();
+interface BlogSummary {
+	slug: string;
+	title: string;
+	date: string;
+	tags: string[];
+	description: string;
+	readTime: number;
+	image: string;
+}
+
 const route = useRoute();
-const siteUrl = "https://kiranparajuli.com.np";
-const imageUrl = `${siteUrl}/letter_k.png`;
+const name = route.params.name as string;
+const siteUrl = useRuntimeConfig().public.siteUrl;
 
-const emptyFrontMatter = {
-	title: "",
-	date: "",
-	tags: [] as string[],
-	fileName: "",
-	filePath: "",
-	contentLength: 0,
-};
+const { data: blog, error } = await useAsyncData(`blog-${name}`, () =>
+	$fetch(`/api/blogs/${name}`),
+);
 
-const frontMatter = ref(emptyFrontMatter);
-const blogContent = ref("");
-const blogPath = `/blogBase/${route.params.name}.md`;
-
-const loading = ref<boolean>(true);
-
-onBeforeMount(async () => {
-	const response = await fetch(blogPath);
-	const text = await response.text();
-	frontMatter.value = mdp.getFrontMatter(text);
-	blogContent.value = mdp.parse(text);
-
-	// Set up dynamic SEO based on blog content
-	const currentUrl = `${siteUrl}/blog/${route.params.name}`;
-	const blogTitle = frontMatter.value.title || "Blog Post";
-	const blogDescription = `${blogTitle} - Read this tech blog article by Kiran Parajuli`;
-	const blogTags = frontMatter.value.tags || [];
-	const blogDate = frontMatter.value.date
-		? new Date(frontMatter.value.date)
-		: new Date();
-
-	// Use the SEO composable
-	useSeo({
-		title: blogTitle,
-		description: blogDescription,
-		keywords: `${blogTags.join(", ")}, Kiran Parajuli, Tech Blog, Software Development`,
-		image: imageUrl,
-		url: currentUrl,
-		type: "article",
-		publishedTime: blogDate.toISOString(),
-		structuredData: createArticleStructuredData({
-			headline: blogTitle,
-			description: blogDescription,
-			image: imageUrl,
-			datePublished: blogDate.toISOString(),
-			dateModified: blogDate.toISOString(),
-			authorName: "Kiran Parajuli",
-			authorUrl: siteUrl,
-			authorJobTitle: SITE_JOB_TITLE,
-			publisherName: "Kiran Parajuli",
-			publisherImage: imageUrl,
-			keywords: blogTags.join(", "),
-			url: currentUrl,
-		}),
+if (error.value || !blog.value) {
+	throw createError({
+		statusCode: 404,
+		statusMessage: "Blog not found",
+		fatal: true,
 	});
+}
 
-	loading.value = false;
+const post = blog.value;
+
+// Sibling navigation (prev = newer, next = older) from the shared list.
+const { data: list } = await useAsyncData<BlogSummary[]>("blogs-list", () =>
+	$fetch("/api/blogs"),
+);
+
+const siblings = computed(() => {
+	const items = list.value ?? [];
+	const index = items.findIndex((item) => item.slug === post.slug);
+	if (index === -1) return { prev: null, next: null };
+	return {
+		prev: index > 0 ? items[index - 1] : null,
+		next: index < items.length - 1 ? items[index + 1] : null,
+	};
+});
+
+const currentUrl = `${siteUrl}/blog/${post.slug}`;
+const publishedTime = post.date
+	? new Date(post.date).toISOString()
+	: new Date().toISOString();
+
+function formatDate(date: string) {
+	return new Date(date).toLocaleDateString("en-US", {
+		year: "numeric",
+		month: "long",
+		day: "numeric",
+	});
+}
+
+// Reading progress bar (client-only behavior).
+const progress = ref(0);
+
+function updateProgress() {
+	const el = document.documentElement;
+	const scrollable = el.scrollHeight - el.clientHeight;
+	progress.value = scrollable > 0 ? (el.scrollTop / scrollable) * 100 : 0;
+}
+
+onMounted(() => {
+	updateProgress();
+	window.addEventListener("scroll", updateProgress, { passive: true });
+	window.addEventListener("resize", updateProgress, { passive: true });
+});
+
+onBeforeUnmount(() => {
+	window.removeEventListener("scroll", updateProgress);
+	window.removeEventListener("resize", updateProgress);
+});
+
+// SEO runs synchronously after the awaited data resolves, so it is emitted
+// into the SSR HTML (this is the fix for social scrapers seeing generic meta).
+useSeo({
+	title: post.title,
+	description: post.description,
+	keywords: `${post.tags.join(", ")}, Kiran Parajuli, Tech Blog, Software Development`,
+	image: post.image,
+	url: currentUrl,
+	type: "article",
+	publishedTime,
+	structuredData: createArticleStructuredData({
+		headline: post.title,
+		description: post.description,
+		image: post.image,
+		datePublished: publishedTime,
+		dateModified: publishedTime,
+		authorName: "Kiran Parajuli",
+		authorUrl: siteUrl,
+		authorJobTitle: SITE_JOB_TITLE,
+		publisherName: "Kiran Parajuli",
+		publisherImage: post.image,
+		keywords: post.tags.join(", "),
+		url: currentUrl,
+	}),
 });
 </script>
 <template>
-	<div class="w-full">
-		<template v-if="loading">
-			<div>
-				<USkeleton class="h-64 mb-4" />
-				<USkeleton class="h-64 mb-4" />
-				<USkeleton class="h-64 mb-4" />
-				<USkeleton class="h-64 mb-4" />
-			</div>
-		</template>
-		<div v-else>
-			<h1>{{ frontMatter.title }}</h1>
-			<p>{{ new Date(frontMatter.date).toDateString() }}</p>
-			<div class="blog-tags flex flex-wrap gap-2 mt-4">
-				<span
-					v-for="(tag, index) in frontMatter.tags"
-					:key="index"
-					class="bg-gray-100 px-3 py-1 rounded-lg dark:bg-gray-800 border border-gray-300 dark:border-gray-700"
-				>
-					{{ tag }}
+	<article class="blog-post w-full">
+		<div
+			class="reading-progress"
+			aria-hidden="true"
+			:style="{ width: `${progress}%` }"
+		/>
+
+		<UButton
+			to="/blogs"
+			color="neutral"
+			variant="link"
+			icon="i-heroicons-arrow-left"
+			class="-ml-2 mb-4"
+		>
+			All articles
+		</UButton>
+
+		<header class="blog-post__header">
+			<h1 class="text-3xl font-black leading-tight md:text-4xl">
+				{{ post.title }}
+			</h1>
+
+			<div
+				class="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-gray-500 dark:text-gray-400"
+			>
+				<span class="inline-flex items-center gap-1.5">
+					<UIcon name="i-heroicons-calendar" />
+					{{ formatDate(post.date) }}
+				</span>
+				<span class="inline-flex items-center gap-1.5">
+					<UIcon name="i-heroicons-clock" />
+					{{ post.readTime }} min read
 				</span>
 			</div>
-			<br />
-			<div
-				class="blog-content bg-white dark:bg-gray-900 pt-6 rounded-xl p-4"
-				v-html="blogContent"
-			/>
-		</div>
-	</div>
+
+			<div v-if="post.tags.length" class="mt-4 flex flex-wrap gap-1.5">
+				<UBadge
+					v-for="tag in post.tags"
+					:key="tag"
+					color="primary"
+					variant="subtle"
+					size="sm"
+				>
+					{{ tag }}
+				</UBadge>
+			</div>
+		</header>
+
+		<hr class="my-6 border-gray-200 dark:border-gray-700" />
+
+		<!-- eslint-disable vue/no-v-html -->
+		<div
+			class="blog-content bg-white dark:bg-gray-900 pt-6 rounded-xl p-4"
+			v-html="post.html"
+		/>
+		<!-- eslint-enable vue/no-v-html -->
+
+		<nav
+			v-if="siblings.prev || siblings.next"
+			class="blog-post__nav mt-12 grid grid-cols-1 gap-4 border-t border-gray-200 pt-8 dark:border-gray-700 sm:grid-cols-2"
+		>
+			<NuxtLink
+				v-if="siblings.prev"
+				class="group rounded-xl border border-gray-200 p-4 transition-colors hover:border-primary-400 dark:border-gray-700"
+				:to="`/blog/${siblings.prev.slug}`"
+			>
+				<span
+					class="flex items-center gap-1 text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400"
+				>
+					<UIcon name="i-heroicons-arrow-left" /> Newer
+				</span>
+				<span
+					class="mt-1 block font-medium group-hover:text-primary-600 dark:group-hover:text-primary-400"
+				>
+					{{ siblings.prev.title }}
+				</span>
+			</NuxtLink>
+			<span v-else class="hidden sm:block" />
+
+			<NuxtLink
+				v-if="siblings.next"
+				class="group rounded-xl border border-gray-200 p-4 text-right transition-colors hover:border-primary-400 dark:border-gray-700"
+				:to="`/blog/${siblings.next.slug}`"
+			>
+				<span
+					class="flex items-center justify-end gap-1 text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400"
+				>
+					Older <UIcon name="i-heroicons-arrow-right" />
+				</span>
+				<span
+					class="mt-1 block font-medium group-hover:text-primary-600 dark:group-hover:text-primary-400"
+				>
+					{{ siblings.next.title }}
+				</span>
+			</NuxtLink>
+		</nav>
+	</article>
 </template>
 <style scoped lang="scss">
+.blog-post {
+	position: relative;
+}
+
+.reading-progress {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 3px;
+	z-index: 50;
+	background: linear-gradient(
+		90deg,
+		var(--ui-color-primary-400),
+		var(--ui-color-primary-600)
+	);
+	transition: width 0.1s ease-out;
+}
 .blog-content {
 	padding-left: 4rem;
 	transition: all 0.3s ease-in-out;
@@ -295,7 +423,7 @@ onBeforeMount(async () => {
 		background-color: transparent !important;
 		padding: 0 !important;
 		border-radius: 0 !important;
-		font-size: inherit ;
+		font-size: inherit;
 		color: #e5e7eb !important;
 	}
 

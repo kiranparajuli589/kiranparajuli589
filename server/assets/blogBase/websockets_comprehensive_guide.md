@@ -1,5 +1,6 @@
 ---
 title: WebSockets: Real-Time Communication Beyond HTTP
+description: "A comprehensive guide to WebSockets for real-time communication beyond HTTP, with examples in JavaScript, Python/Django, and Node.js."
 date: 2025-01-15 10:00:00
 tags: ["websockets", "real-time", "networking", "javascript", "python", "django", "nodejs"]
 ---

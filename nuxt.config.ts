@@ -5,10 +5,18 @@ import {
 	SITE_KEYWORDS,
 } from "./app/composables/useSeo";
 
+const SITE_URL = "https://kiranparajuli.com.np";
+
 export default defineNuxtConfig({
 	compatibilityDate: "2025-10-27",
 	devtools: { enabled: true },
-	modules: ["@nuxt/ui", "@nuxt/eslint", "@pinia/nuxt", "@nuxt/fonts"],
+	modules: [
+		"@nuxt/ui",
+		"@nuxt/eslint",
+		"@pinia/nuxt",
+		"@nuxt/fonts",
+		"@nuxtjs/sitemap",
+	],
 	css: ["~/assets/css/main.css", "~/assets/sass/base.scss"],
 
 	// Performance optimizations
@@ -18,6 +26,23 @@ export default defineNuxtConfig({
 
 	experimental: {
 		payloadExtraction: false,
+	},
+
+	// Canonical site origin, shared by SEO modules and runtimeConfig.
+	site: {
+		url: SITE_URL,
+		name: "Kiran Parajuli",
+	},
+
+	runtimeConfig: {
+		public: {
+			siteUrl: SITE_URL,
+		},
+	},
+
+	// Dynamic blog routes are appended to the sitemap from an API source.
+	sitemap: {
+		sources: ["/api/__sitemap__/urls"],
 	},
 
 	app: {

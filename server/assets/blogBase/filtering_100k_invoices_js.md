@@ -1,5 +1,6 @@
 ---
 title: Filtering 100k Invoices Efficiently in JavaScript
+description: "Why Map is not magically faster than filter, and how to make filtering 100k invoices by year and month genuinely fast with indexing."
 date: 2026-06-29 12:05:00
 tags: ["JavaScript", "TypeScript", "React", "Performance", "Indexing", "Filtering"]
 ---
