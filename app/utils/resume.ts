@@ -75,11 +75,17 @@ function mapExperienceToPdf(
 	const source =
 		variant === "react"
 			? (exp.achievementsPdfReact ?? exp.achievementsPdf ?? exp.achievements)
-			: (exp.achievementsPdf ?? exp.achievements);
+			: variant === "fullstack"
+				? (exp.achievementsPdfFullstack ??
+					exp.achievementsPdf ??
+					exp.achievements)
+				: (exp.achievementsPdf ?? exp.achievements);
 	const maxBullets =
 		variant === "react"
 			? (exp.pdfMaxBulletsReact ?? exp.pdfMaxBullets ?? source.length)
-			: (exp.pdfMaxBullets ?? source.length);
+			: variant === "fullstack"
+				? (exp.pdfMaxBulletsFullstack ?? exp.pdfMaxBullets ?? source.length)
+				: (exp.pdfMaxBullets ?? source.length);
 	return {
 		company: exp.company,
 		roles: exp.pdfRoles ?? exp.roles,
@@ -153,6 +159,7 @@ function buildResumePdfVariant(
 	const summaries: Record<ResumePdfVariant, string> = {
 		vue: `Senior Frontend Engineer with ${years}+ years in frontend and product UI delivery. Led CDN console modernization (Vue 2 to Vue 3, shadcn-vue, Tailwind)—high-traffic tables, WebSocket batch queue, and complex forms. ${figmaSummaryClause}`,
 		react: `Senior Frontend Engineer with ${years}+ years in frontend and product UI delivery. Rebuilt ourBuddy's flagship WebRTC recording suite on React/Next.js and delivered a Lighthouse 97 SSR help center. ${figmaSummaryClause}`,
+		fullstack: `Full-Stack Engineer with ${years}+ years building production web platforms end-to-end—Python, Django, and Django REST Framework backends with PostgreSQL/MySQL, paired with Vue and React frontends in TypeScript. Designed REST APIs, media pipelines, and Dockerized deployments; shipped a full DRF backend for a community platform and Django/DRF content APIs for a high-traffic public site. Strong on performance, testing (Playwright/BDD), and CI/CD.`,
 	};
 
 	const skills: Record<ResumePdfVariant, ResumePdfExport["skills"]> = {
@@ -198,6 +205,33 @@ function buildResumePdfVariant(
 				],
 			},
 		],
+		fullstack: [
+			{
+				title: "Backend & APIs",
+				items: [
+					"Primary: Python, Django, Django REST Framework, REST API design, PostgreSQL, MySQL, Redis",
+					"Also: FastAPI, Flask, Node.js, Express.js, WebSockets/Django Channels, GraphQL",
+				],
+			},
+			{
+				title: "Frontend",
+				items: [
+					"Vue.js, Nuxt.js, React.js, Next.js, TypeScript, shadcn-vue/shadcn-ui, Tailwind CSS, Figma design-to-code, Core Web Vitals, i18n",
+				],
+			},
+			{
+				title: "DevOps & Platform",
+				items: [
+					"Docker, Docker Compose, Gunicorn, Nginx, CI/CD (GitHub Actions, GitLab CI, Jenkins), Linux/VPS administration",
+				],
+			},
+			{
+				title: "Quality Engineering",
+				items: [
+					"Playwright, Cypress, Gherkin, Cucumber.js, Jest, Locust load testing, contract/regression testing, CI quality gates",
+				],
+			},
+		],
 	};
 
 	const selectedProjects: Record<
@@ -236,10 +270,35 @@ function buildResumePdfVariant(
 				line: "Open-source Vue 3 form library (maintainer) — github.com/vue-formik/vue-formik",
 			},
 		],
+		fullstack: [
+			{
+				title: "Sachchai Kendra Nepal",
+				line: "Full Django REST Framework backend with media management (uploads, storage, serving, optimization) powering a Vue 3/Nuxt + Next.js social platform — sachchaikendranepal.org.np",
+			},
+			{
+				title: "Asians Group Website",
+				line: "Django/DRF content APIs + Nuxt SSR migration off WordPress—structured data, prefetching (Core Web Vitals FCP 2.8s → 1.2s)",
+			},
+			{
+				title: "WordClub / FoodSwipe / RentShare",
+				line: "Django REST Framework + MySQL backends behind Vue social, e-commerce, and rent-sharing apps (open source)",
+			},
+			{
+				title: "Astral Nexus",
+				line: "FastAPI (Python) backend with structured data models + a React/Next.js client-management frontend",
+			},
+		],
+	};
+
+	const roles: Record<ResumePdfVariant, string | undefined> = {
+		vue: undefined,
+		react: undefined,
+		fullstack: "Senior Full-Stack Engineer",
 	};
 
 	return {
 		summary: summaries[variant],
+		role: roles[variant],
 		skills: skills[variant],
 		experiences: sortExperiencesForPdf(experiences, variant).map((exp) =>
 			mapExperienceToPdf(exp, variant),
@@ -471,6 +530,14 @@ const baseResume = {
 				"Internal platform project: Figma-led Key Account Management UI; BDD E2E with Playwright.",
 				"Public website redesign—GTM/GA4 tracking showed measurably more qualified leads (~25% QoQ, internal analytics).",
 			],
+			pdfMaxBulletsFullstack: 5,
+			achievementsPdfFullstack: [
+				"Co-designed REST APIs with backend teams for the CDN console and migrated the public site off WordPress to Django/DRF content APIs with Nuxt SSR—structured data, canonical URLs, and prefetching (Core Web Vitals FCP 2.8s → 1.2s, +40% organic impressions).",
+				"Integrated a centralized WebSocket batch queue tuned to backend/infra—35%+ faster batch operations vs prior sequential handling over PostgreSQL-backed data flows.",
+				"Delivered an AI assistance portal with streamed HTTP chat, persistent history, and performance-tuned API orchestration over employee calendars and Drive-sourced records.",
+				"Shipped features end-to-end—Vue 3/Nuxt frontends plus Django/PostgreSQL content APIs—via JIRA-tracked, Jenkins CI/CD releases with Docker.",
+				"Optimized high-traffic data tables (60% faster render on 5k+ rows) and mentored backend/full-stack engineers on review rubrics and CI quality gates.",
+			],
 			companyUrl: "https://asians.group",
 			companyLogo: "asians_group.png",
 			projects: [
@@ -590,6 +657,14 @@ const baseResume = {
 				"Partnered with UX design on Figma handoffs—React/Next.js implementation from specs across dashboards, lists, forms, and training workflows; modernized a legacy codebase into modular Next.js with shared UI primitives, cutting build time 40% and unlocking SSR caching.",
 				"Delivered a Lighthouse 97 SSR help center and document/media training workflows (searchable PDF viewer, streaming players, interactive quizzes) with React/Next.js and Flask/Python.",
 				"Established Playwright, API, and contract-test suites in CI, reducing production regressions by 35%.",
+			],
+			pdfMaxBulletsFullstack: 5,
+			achievementsPdfFullstack: [
+				"Delivered a full-SSR help center on React/Next.js with a Flask/Python backend—Lighthouse 97 for performance and usability.",
+				"Built Astral Nexus on a FastAPI (Python) backend with structured data models for client and activity management, plus a React/Next.js client-management frontend.",
+				"Owned the flagship WebRTC/MediaRecorder recording suite—tuned blob generation and chunk handling for reliable Java backend ingestion across browsers.",
+				"Led a five-engineer squad and established Playwright, API, and contract-test suites in CI, reducing production regressions by 35%.",
+				"Modernized a legacy React codebase into modular Next.js with shared UI primitives—40% faster builds and SSR caching.",
 			],
 			companyUrl: "https://www.ourbuddy.ai",
 			companyLogo: "ourBuddy.png",
@@ -744,6 +819,11 @@ const baseResume = {
 				"Built agronomy dashboards in Vue 3 and Vuetify—geo maps, complex filters, KPI charts, and pixel-perfect design-to-code from Figma; rigorous form validation across Connected Farmer and Connected Coffee.",
 				"Supported backend integration on GraphQL/Express APIs while shipping via JIRA and Git; Cypress/Jest coverage in CI quality gates.",
 			],
+			pdfMaxBulletsFullstack: 2,
+			achievementsPdfFullstack: [
+				"Integrated GraphQL/Express APIs with backend engineers—resolver tuning and caching for a meaningful p95 latency reduction over PostgreSQL-backed data.",
+				"Built Vue 3 agronomy dashboards (geo maps, KPI charts) with rigorous client-side validation; Cypress/Jest coverage in CI quality gates.",
+			],
 			companyUrl: "https://dimitra.io/about-us/",
 			companyLogo: "dimitra.ico",
 			projects: [
@@ -798,6 +878,11 @@ const baseResume = {
 			achievementsPdf: [
 				"Delivered production Vue.js features and reusable UI patterns with accessibility fixes for enterprise clients across finance, education, and SaaS.",
 				"Contributed to ownCloud open-source web UI work; shipped features with CI-backed UI, API, and E2E validation across client repositories.",
+			],
+			pdfMaxBulletsFullstack: 2,
+			achievementsPdfFullstack: [
+				"Delivered production REST APIs, Vue.js features, CLI tools, and automation suites in Python and PHP for enterprise clients across finance, education, and SaaS.",
+				"Built and maintained CI/CD pipelines (GitHub, GitLab, Drone, Travis) across 15+ repositories and contributed to ownCloud open source (web UI, API, E2E, unit tests).",
 			],
 			companyUrl: "https://www.jankaritech.com",
 			companyLogo: "jankaritech.jpg",
@@ -927,6 +1012,10 @@ const baseResume = {
 			],
 			achievementsPdfReact: [
 				"Part-time freelance: Figma-led redesign and Next.js/React/shadcn/ui rebuild with Django REST backend—live at sachchaikendranepal.org.np.",
+			],
+			pdfMaxBulletsFullstack: 1,
+			achievementsPdfFullstack: [
+				"Part-time freelance: built a full Django REST Framework backend with media management (uploads, storage, serving, optimization) and shipped Vue 3/Nuxt and Next.js/React frontends—live at sachchaikendranepal.org.np.",
 			],
 			companyUrl: "https://sachchaikendranepal.org.np/",
 			companyLogo: "sachchai-kendra-nepal.png",
@@ -1263,6 +1352,12 @@ const resumePdfs: Record<ResumePdfVariant, ResumePdfExport> = {
 	),
 	react: buildResumePdfVariant(
 		"react",
+		baseResume.experiences,
+		yearsOfExperience,
+		seniorFrontendYears,
+	),
+	fullstack: buildResumePdfVariant(
+		"fullstack",
 		baseResume.experiences,
 		yearsOfExperience,
 		seniorFrontendYears,

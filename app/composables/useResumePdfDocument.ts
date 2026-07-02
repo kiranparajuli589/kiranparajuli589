@@ -10,7 +10,12 @@ export function getResumeDownloadFilename(
 	extension?: string,
 ): string {
 	const name = Resume.personalInfo.name?.replace(/\s+/g, "_") || "Resume";
-	const variantPart = variant === "react" ? "React" : "Vue";
+	const variantLabels: Record<ResumePdfVariant, string> = {
+		vue: "Vue",
+		react: "React",
+		fullstack: "FullStack",
+	};
+	const variantPart = variantLabels[variant];
 	const base = `${name}_Resume_${variantPart}`;
 	return extension ? `${base}.${extension}` : base;
 }

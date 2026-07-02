@@ -20,6 +20,7 @@ const socialLinks = buildResumeSocialLinks(personalInfo);
 
 const {
 	summary: pdfSummary,
+	role: pdfRole,
 	skills: pdfSkills,
 	experiences,
 	selectedProjects,
@@ -29,7 +30,9 @@ const {
 	<div class="resume-pdf">
 		<div class="pdf">
 			<h1 class="font-bold text-xl">{{ personalInfo.name }}</h1>
-			<h4 class="text-gray-700 font-semibold mb-2">{{ personalInfo.role }}</h4>
+			<h4 class="text-gray-700 font-semibold mb-2">
+				{{ pdfRole ?? personalInfo.role }}
+			</h4>
 			<p class="flex items-center gap-4 flex-wrap contact-info">
 				<span class="flex items-center gap-2">
 					<img

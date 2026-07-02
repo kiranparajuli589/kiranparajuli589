@@ -25,7 +25,9 @@ const route = useRoute();
 const router = useRouter();
 
 function parseResumeVariant(value: unknown): ResumePdfVariant {
-	return value === "react" ? "react" : "vue";
+	if (value === "react") return "react";
+	if (value === "fullstack") return "fullstack";
+	return "vue";
 }
 
 const resumeVariant = ref<ResumePdfVariant>(
@@ -283,6 +285,14 @@ const resetForm = () => {
 					>
 						React / Next.js
 					</UButton>
+					<UButton
+						size="sm"
+						:color="resumeVariant === 'fullstack' ? 'primary' : 'neutral'"
+						:variant="resumeVariant === 'fullstack' ? 'subtle' : 'outline'"
+						@click="setResumeVariant('fullstack')"
+					>
+						Full-Stack (Python / Django)
+					</UButton>
 				</div>
 			</div>
 
@@ -339,8 +349,8 @@ const resetForm = () => {
 						submitting
 					</li>
 					<li>
-						Paste the job description when possible — the generator detects Figma,
-						AI, and QA keywords to tailor qualifications
+						Paste the job description when possible — the generator detects
+						Figma, AI, and QA keywords to tailor qualifications
 					</li>
 					<li>Enter the company name and position you're applying for</li>
 					<li>

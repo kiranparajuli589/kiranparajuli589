@@ -1,7 +1,4 @@
-import Resume, {
-	getResumePdf,
-	yearsOfExperience,
-} from "~/utils/resume";
+import Resume, { getResumePdf, yearsOfExperience } from "~/utils/resume";
 import type { ResumePdfVariant } from "~/customTypes";
 
 const personalInfo = Resume.personalInfo;
@@ -47,8 +44,10 @@ function detectJobThemes(jobDescription: string): JobThemes {
 	};
 }
 
-function formatTenurePhrase(): string {
-	return `${yearsOfExperience}+ years in frontend and product UI delivery`;
+function formatTenurePhrase(variant: ResumePdfVariant = "vue"): string {
+	return variant === "fullstack"
+		? `${yearsOfExperience}+ years building full-stack web platforms`
+		: `${yearsOfExperience}+ years in frontend and product UI delivery`;
 }
 
 function extractTechnologiesFromPdfSkills(
@@ -82,7 +81,9 @@ function getStackFallback(
 	const base =
 		variant === "react"
 			? "React.js, Next.js, TypeScript, shadcn/ui, and Tailwind CSS"
-			: "Vue.js, Nuxt.js, TypeScript, shadcn-vue, and Tailwind CSS";
+			: variant === "fullstack"
+				? "Python, Django, Django REST Framework, PostgreSQL, and React/Vue with TypeScript"
+				: "Vue.js, Nuxt.js, TypeScript, shadcn-vue, and Tailwind CSS";
 	return themes.design ? `${base}, and Figma design-to-code` : base;
 }
 
@@ -165,9 +166,12 @@ function buildKeyQualifications(
 	technologies: string,
 	themes: JobThemes,
 	template: CoverLetterTemplate,
+	variant: ResumePdfVariant = "vue",
 ): string[] {
 	const qualifications = [
-		`${formatTenurePhrase()} delivering production frontend systems with strong quality-engineering practices`,
+		variant === "fullstack"
+			? `${formatTenurePhrase(variant)} delivering production full-stack systems—Python/Django/DRF backends with modern Vue/React frontends—and strong quality-engineering practices`
+			: `${formatTenurePhrase(variant)} delivering production frontend systems with strong quality-engineering practices`,
 		`Proven track record delivering high-performance applications using ${technologies}`,
 		"Figma design-to-code—wireframing, prototyping, design variables, and stakeholder review through production UI",
 		`${Resume.aiEngineering.pdfToolsLine} for AI-augmented delivery (${Resume.aiEngineering.pdfPracticesLine})`,
@@ -201,7 +205,9 @@ export type CoverLetterTemplate =
 	| "enterprise";
 
 export function getCoverLetterVariantLabel(variant: ResumePdfVariant): string {
-	return variant === "react" ? "React / Next.js resume" : "Vue / Nuxt resume";
+	if (variant === "react") return "React / Next.js resume";
+	if (variant === "fullstack") return "Full-Stack (Python/Django) resume";
+	return "Vue / Nuxt resume";
 }
 
 export const useCoverLetterGenerator = () => {
@@ -249,7 +255,9 @@ export const useCoverLetterGenerator = () => {
 		const variantFocus =
 			variant === "react"
 				? "React, Next.js, and TypeScript product engineering"
-				: "Vue.js, Nuxt.js, and TypeScript product engineering";
+				: variant === "fullstack"
+					? "full-stack Python/Django and TypeScript product engineering"
+					: "Vue.js, Nuxt.js, and TypeScript product engineering";
 
 		const getOpening = (): string => {
 			if (jobDescription && jobDescription.length > 50) {
@@ -258,20 +266,20 @@ export const useCoverLetterGenerator = () => {
 					themes,
 					true,
 				);
-				return `I am excited to apply for the ${position} position at ${companyName}. After reviewing the job requirements, I am confident that my ${formatTenurePhrase()} align well with what you're seeking. ${summaryExcerpt}`;
+				return `I am excited to apply for the ${position} position at ${companyName}. After reviewing the job requirements, I am confident that my ${formatTenurePhrase(variant)} align well with what you're seeking. ${summaryExcerpt}`;
 			}
 
 			switch (template) {
 				case "technical":
-					return `I am writing to express my strong interest in the ${position} position at ${companyName}. As a ${personalInfo.role} with ${formatTenurePhrase()}, building scalable ${variant === "react" ? "React and Next.js" : "Vue and Nuxt"} applications and translating Figma designs into production UI, I am excited about the opportunity to contribute to your technical team.`;
+					return `I am writing to express my strong interest in the ${position} position at ${companyName}. As a ${personalInfo.role} with ${formatTenurePhrase(variant)}, ${variant === "fullstack" ? "building Python/Django REST APIs and React/Vue applications end-to-end" : `building scalable ${variant === "react" ? "React and Next.js" : "Vue and Nuxt"} applications and translating Figma designs into production UI`}, I am excited about the opportunity to contribute to your technical team.`;
 				case "leadership":
-					return `I am writing to express my strong interest in the ${position} position at ${companyName}. With ${formatTenurePhrase()} leading delivery—from Figma design-to-code workflows to design-system rollout—I am excited about the opportunity to help shape your organization's technical direction.`;
+					return `I am writing to express my strong interest in the ${position} position at ${companyName}. With ${formatTenurePhrase(variant)} leading delivery—from Figma design-to-code workflows to design-system rollout—I am excited about the opportunity to help shape your organization's technical direction.`;
 				case "startup":
-					return `I am excited to apply for the ${position} position at ${companyName}. With ${formatTenurePhrase()}, I thrive in fast-paced environments shipping high-impact frontend work—from wireframes to production—and I am drawn to the opportunity to contribute at a growing company.`;
+					return `I am excited to apply for the ${position} position at ${companyName}. With ${formatTenurePhrase(variant)}, I thrive in fast-paced environments shipping high-impact frontend work—from wireframes to production—and I am drawn to the opportunity to contribute at a growing company.`;
 				case "enterprise":
-					return `I am writing to express my strong interest in the ${position} position at ${companyName}. With ${formatTenurePhrase()} delivering large-scale web platforms, design-system consistency, and cross-functional collaboration, I am excited about the opportunity to contribute to your organization's continued success.`;
+					return `I am writing to express my strong interest in the ${position} position at ${companyName}. With ${formatTenurePhrase(variant)} delivering large-scale web platforms, design-system consistency, and cross-functional collaboration, I am excited about the opportunity to contribute to your organization's continued success.`;
 				default:
-					return `I am writing to express my strong interest in the ${position} position at ${companyName}. With ${formatTenurePhrase()} in ${variantFocus}, Figma design-to-code, and team leadership, I am excited about the opportunity to contribute to your organization's success.`;
+					return `I am writing to express my strong interest in the ${position} position at ${companyName}. With ${formatTenurePhrase(variant)} in ${variantFocus}, Figma design-to-code, and team leadership, I am excited about the opportunity to contribute to your organization's success.`;
 			}
 		};
 
@@ -298,6 +306,7 @@ export const useCoverLetterGenerator = () => {
 			technologies,
 			themes,
 			template,
+			variant,
 		);
 
 		return `Dear Hiring Manager,

@@ -37,7 +37,7 @@ export function useResumeExport(variant: ResumePdfVariant = "vue") {
 		let text = "";
 
 		text += `${(personalInfo.name ?? "Resume").toUpperCase()}\n`;
-		text += `${personalInfo.role}\n\n`;
+		text += `${resumePdf.role ?? personalInfo.role}\n\n`;
 
 		text += "CONTACT INFORMATION\n";
 		text += `${"=".repeat(20)}\n`;

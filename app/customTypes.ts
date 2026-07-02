@@ -38,7 +38,7 @@ export type Credential = {
 	href?: string;
 };
 
-export type ResumePdfVariant = "vue" | "react";
+export type ResumePdfVariant = "vue" | "react" | "fullstack";
 
 export type Experience = {
 	company: string;
@@ -53,6 +53,7 @@ export type Experience = {
 	includeInPdf?: boolean;
 	pdfMaxBullets?: number;
 	pdfMaxBulletsReact?: number;
+	pdfMaxBulletsFullstack?: number;
 	pdfPageBreakBefore?: boolean;
 	pdfSortOrder?: Partial<Record<ResumePdfVariant, number>>;
 
@@ -62,6 +63,7 @@ export type Experience = {
 	achievements: string[];
 	achievementsPdf?: string[];
 	achievementsPdfReact?: string[];
+	achievementsPdfFullstack?: string[];
 
 	projects: Project[];
 };
@@ -148,6 +150,7 @@ export type ResumePdfSkillCategory = {
 
 export type ResumePdfExport = {
 	summary: string;
+	role?: string;
 	skills: ResumePdfSkillCategory[];
 	experiences: ResumePdfExperience[];
 	selectedProjects: ResumePdfSelectedProject[];

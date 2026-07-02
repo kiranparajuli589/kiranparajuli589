@@ -150,7 +150,12 @@ export function useDocxExport() {
 			const url = URL.createObjectURL(blob);
 			const link = document.createElement("a");
 			link.href = url;
-			link.download = `Resume_${variant === "react" ? "React" : "Vue"}.docx`;
+			const docxVariantLabels: Record<ResumePdfVariant, string> = {
+				vue: "Vue",
+				react: "React",
+				fullstack: "FullStack",
+			};
+			link.download = `Resume_${docxVariantLabels[variant]}.docx`;
 			document.body.appendChild(link);
 			link.click();
 			document.body.removeChild(link);

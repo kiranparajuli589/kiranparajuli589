@@ -137,5 +137,55 @@ const handleDownloadDocx = async (variant: ResumePdfVariant) => {
 				print dialog to remove date, title, URL, and page numbers.
 			</p>
 		</section>
+
+		<section class="space-y-3">
+			<h2
+				class="text-sm font-semibold uppercase tracking-wide text-gray-600 dark:text-gray-400"
+			>
+				Full-Stack (Python / Django) Resume
+			</h2>
+			<div class="flex flex-wrap gap-4 items-center">
+				<UButton
+					color="primary"
+					title="Download Full-Stack (Python/Django) resume as PDF"
+					variant="subtle"
+					to="/resume-pdf/fullstack"
+				>
+					<UIcon name="i-heroicons-arrow-down-tray" />
+					<span class="px-1 font-bold">PDF</span>
+				</UButton>
+				<UButton
+					color="primary"
+					title="Download Full-Stack (Python/Django) resume as plain text"
+					variant="subtle"
+					@click="handleDownloadPlainText('fullstack')"
+				>
+					<UIcon name="i-heroicons-document-text" />
+					<span class="px-1 font-bold">TXT</span>
+				</UButton>
+				<UButton
+					color="primary"
+					title="Download Full-Stack (Python/Django) resume as DOCX"
+					variant="subtle"
+					@click="handleDownloadDocx('fullstack')"
+				>
+					<UIcon name="i-heroicons-document-duplicate" />
+					<span class="px-1 font-bold">DOCX</span>
+				</UButton>
+				<UButton
+					color="primary"
+					title="Generate cover letter aligned with Full-Stack (Python/Django) resume"
+					variant="subtle"
+					to="/cover-letter?variant=fullstack"
+				>
+					<UIcon name="i-heroicons-envelope" />
+					<span class="px-1 font-bold">Cover Letter</span>
+				</UButton>
+			</div>
+			<p class="text-sm text-gray-600 dark:text-gray-400 print-tip">
+				When saving as PDF, disable <strong>Headers and footers</strong> in the
+				print dialog to remove date, title, URL, and page numbers.
+			</p>
+		</section>
 	</template>
 </template>

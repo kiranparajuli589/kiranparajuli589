@@ -8,7 +8,7 @@ export const useCoverLetterActions = (
 	showToast: (message: string, type?: "success" | "error") => void,
 	variant: Ref<ResumePdfVariant>,
 ) => {
-	const variantSlug = () => (variant.value === "react" ? "react" : "vue");
+	const variantSlug = () => variant.value;
 	const copyToClipboard = async () => {
 		try {
 			await navigator.clipboard.writeText(coverLetter.value);
