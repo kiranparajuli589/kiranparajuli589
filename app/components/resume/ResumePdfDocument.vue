@@ -24,6 +24,7 @@ const {
 	skills: pdfSkills,
 	experiences,
 	selectedProjects,
+	experienceNote,
 } = props.resumePdf;
 </script>
 <template>
@@ -97,6 +98,9 @@ const {
 
 			<h2 class="pt-4 experience-section-start">Professional Experience</h2>
 			<hr class="mb-2 border-gray-500" />
+			<p v-if="experienceNote" class="experience-note mb-2">
+				{{ experienceNote }}
+			</p>
 			<div
 				v-for="experience in experiences"
 				:key="`${experience.company}-${experience.startDate}`"
@@ -204,6 +208,12 @@ const {
 .resume-pdf .role-text {
 	color: #4b5563;
 	font-size: 0.95rem;
+}
+
+.resume-pdf .experience-note {
+	color: #6b7280;
+	font-size: 0.85rem;
+	font-style: italic;
 }
 
 .resume-pdf .skill-row {
@@ -340,6 +350,13 @@ const {
 	.resume-pdf .role-text {
 		color: #4b5563 !important;
 		font-size: 9.5pt;
+	}
+
+	.resume-pdf .experience-note {
+		color: #4b5563 !important;
+		font-size: 8.5pt;
+		font-style: italic;
+		margin-bottom: 4pt !important;
 	}
 
 	.resume-pdf .skill-row {

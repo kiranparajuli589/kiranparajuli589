@@ -32,6 +32,7 @@ export function useResumeExport(variant: ResumePdfVariant = "vue") {
 			skills: pdfSkills,
 			experiences,
 			selectedProjects,
+			experienceNote,
 		} = resumePdf;
 
 		let text = "";
@@ -63,6 +64,9 @@ export function useResumeExport(variant: ResumePdfVariant = "vue") {
 
 		text += "PROFESSIONAL EXPERIENCE\n";
 		text += `${"=".repeat(20)}\n`;
+		if (experienceNote) {
+			text += `${experienceNote}\n\n`;
+		}
 		experiences.forEach((exp) => {
 			text += `${exp.company}\n`;
 			text += `${formatEmploymentLine(exp)}\n`;

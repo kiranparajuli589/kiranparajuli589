@@ -158,7 +158,7 @@ function buildResumePdfVariant(
 ): ResumePdfExport {
 	const summaries: Record<ResumePdfVariant, string> = {
 		vue: `Senior Frontend Engineer with ${years}+ years in frontend and product UI delivery. Led CDN console modernization (Vue 2 to Vue 3, shadcn-vue, Tailwind)—high-traffic tables, WebSocket batch queue, and complex forms. ${figmaSummaryClause}`,
-		react: `Senior Frontend Engineer with ${years}+ years in frontend and product UI delivery. Rebuilt ourBuddy's flagship WebRTC recording suite on React/Next.js and delivered a Lighthouse 97 SSR help center. ${figmaSummaryClause}`,
+		react: `Senior Frontend Engineer with ${years}+ years building high-performance, interactive product UIs in React, Next.js, TypeScript, and Tailwind CSS. Rebuilt ourBuddy's flagship WebRTC recording suite (draggable camera canvas, live audio visualization, Framer Motion micro-interactions), delivered a Lighthouse 97 SSR help center, and shipped real-time WebSocket experiences. ${figmaSummaryClause}`,
 		fullstack: `Full-Stack Engineer with ${years}+ years building production web platforms end-to-end—Python, Django, and Django REST Framework backends with PostgreSQL/MySQL, paired with Vue and React frontends in TypeScript. Designed REST APIs, media pipelines, and Dockerized deployments; shipped a full DRF backend for a community platform and Django/DRF content APIs for a high-traffic public site. Strong on performance, testing (Playwright/BDD), and CI/CD.`,
 	};
 
@@ -188,8 +188,8 @@ function buildResumePdfVariant(
 			{
 				title: "Frontend",
 				items: [
-					"Primary: React.js, Next.js, TypeScript, custom hooks, shadcn/ui, Tailwind CSS, Zustand, Tanstack Query, Figma (wireframing, prototyping, design variables)",
-					"Also: Vue.js, Nuxt.js, SSR/SSG, Radix UI, Redux, design systems, WCAG, Core Web Vitals, i18n",
+					"Primary: React.js, Next.js, TypeScript, custom hooks, shadcn/ui, Tailwind CSS, Framer Motion, Zustand, Tanstack Query, Figma (wireframing, prototyping, design variables)",
+					"Also: Vue.js, Nuxt.js, SSR/SSG/edge rendering, WebSockets/real-time UI, Canvas API, Radix UI, Redux, design systems, WCAG, Core Web Vitals, i18n",
 				],
 			},
 			{
@@ -259,7 +259,11 @@ function buildResumePdfVariant(
 		react: [
 			{
 				title: "Browser Recording System",
-				line: "WebRTC/MediaRecorder suite for insurance brokerages—replaced a legacy recorder; eliminated third-party SDK costs for broker training workflows — react-rtc.netlify.app/en",
+				line: "Interactive WebRTC/MediaRecorder suite—draggable camera canvas, live audio visualization, and Framer Motion micro-interactions; replaced a legacy recorder and eliminated third-party SDK costs — react-rtc.netlify.app/en",
+			},
+			{
+				title: "Real-Time Ops Console",
+				line: "High-traffic console with a centralized WebSocket batch queue and live progress states—35%+ faster batch ops and 60% faster render on 5k+ row tables",
 			},
 			{
 				title: "SSR Help Center",
@@ -296,6 +300,13 @@ function buildResumePdfVariant(
 		fullstack: "Senior Full-Stack Engineer",
 	};
 
+	const experienceNotes: Record<ResumePdfVariant, string | undefined> = {
+		vue: undefined,
+		react:
+			"Note: Roles are ordered by relevance to React/Next.js work, not chronology.",
+		fullstack: undefined,
+	};
+
 	return {
 		summary: summaries[variant],
 		role: roles[variant],
@@ -304,6 +315,7 @@ function buildResumePdfVariant(
 			mapExperienceToPdf(exp, variant),
 		),
 		selectedProjects: selectedProjects[variant],
+		experienceNote: experienceNotes[variant],
 	};
 }
 
@@ -525,7 +537,7 @@ const baseResume = {
 			],
 			achievementsPdfReact: [
 				"Primary frontend engineer on CDN console—complex operational UI, API co-design, and JIRA/Jenkins delivery with product and backend partners.",
-				"High-traffic tables—60% faster render (benchmarked on 5k+ rows) and centralized batch queue 35%+ faster ops vs prior flow.",
+				"High-traffic tables—60% faster render (benchmarked on 5k+ rows) and a centralized WebSocket batch queue with real-time progress states—35%+ faster batch ops vs prior sequential flow.",
 				"Mobile-responsive UX with scrollable dialogs and sticky tabs; refactored 3,000+ line monolithic modules into reusable components.",
 				"Internal platform project: Figma-led Key Account Management UI; BDD E2E with Playwright.",
 				"Public website redesign—GTM/GA4 tracking showed measurably more qualified leads (~25% QoQ, internal analytics).",
@@ -653,8 +665,8 @@ const baseResume = {
 			],
 			achievementsPdfReact: [
 				"Led delivery across a five-engineer squad—backlog prioritization, release cadence, and code-quality initiatives across the platform.",
-				"Owned ourBuddy's flagship browser recording suite—the product's core differentiator—rebuilding a failing legacy recorder into React, Next.js, WebRTC, and MediaRecorder; enabled scalable broker training and onboarding workflows while eliminating third-party SDK costs and optimizing blob output for Java backend ingestion.",
-				"Partnered with UX design on Figma handoffs—React/Next.js implementation from specs across dashboards, lists, forms, and training workflows; modernized a legacy codebase into modular Next.js with shared UI primitives, cutting build time 40% and unlocking SSR caching.",
+				"Owned ourBuddy's flagship browser recording suite—the product's core differentiator—rebuilding a failing legacy recorder into React, Next.js, WebRTC, and MediaRecorder with an interactive draggable camera canvas and live audio visualization; enabled scalable broker training workflows while eliminating third-party SDK costs.",
+				"Partnered with UX design on Figma handoffs—React/Next.js implementation from specs across dashboards, lists, forms, and training workflows; built animated UI with Framer Motion (page transitions and micro-interactions) and modernized a legacy codebase into modular Next.js with shared UI primitives, cutting build time 40% and unlocking SSR caching.",
 				"Delivered a Lighthouse 97 SSR help center and document/media training workflows (searchable PDF viewer, streaming players, interactive quizzes) with React/Next.js and Flask/Python.",
 				"Established Playwright, API, and contract-test suites in CI, reducing production regressions by 35%.",
 			],

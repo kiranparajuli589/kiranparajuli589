@@ -154,4 +154,5 @@ export type ResumePdfExport = {
 	skills: ResumePdfSkillCategory[];
 	experiences: ResumePdfExperience[];
 	selectedProjects: ResumePdfSelectedProject[];
+	experienceNote?: string;
 };
