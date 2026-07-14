@@ -168,7 +168,7 @@ function buildResumePdfVariant(
 				title: "Frontend",
 				items: [
 					"Primary: Vue.js, Nuxt.js, TypeScript, shadcn-vue, Tailwind CSS, Figma (wireframing, prototyping, design variables)",
-					"Also: React.js, Next.js, PrimeVue, Radix UI, design systems, WCAG, Core Web Vitals, i18n",
+					"Also: React.js, Next.js, Redux, Redux Saga, Redux Tolkit, PrimeVue, Radix UI, design systems, WCAG, Core Web Vitals, i18n",
 				],
 			},
 			{
@@ -188,7 +188,7 @@ function buildResumePdfVariant(
 			{
 				title: "Frontend",
 				items: [
-					"Primary: React.js, Next.js, TypeScript, custom hooks, shadcn/ui, Tailwind CSS, Framer Motion, Zustand, Tanstack Query, Figma (wireframing, prototyping, design variables)",
+					"Primary: React.js, Next.js, TypeScript, Redux, Redux Toolkit, Redux Saga, custom hooks, shadcn/ui, Tailwind CSS, Framer Motion, Zustand, Tanstack Query, Figma (wireframing, prototyping, design variables)",
 					"Also: Vue.js, Nuxt.js, SSR/SSG/edge rendering, WebSockets/real-time UI, Canvas API, Radix UI, Redux, design systems, WCAG, Core Web Vitals, i18n",
 				],
 			},
@@ -639,6 +639,7 @@ const baseResume = {
 				"React.js",
 				"Next.js",
 				"JavaScript",
+				"Redux Saga",
 				"Docker",
 				"Docker Compose",
 				"Playwright",
