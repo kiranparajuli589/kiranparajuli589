@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Resume from "~/utils/resume";
 import { getAssetUrl } from "~/utils";
+import { formatMonthYear } from "~/composables/useResumePdfDocument";
 import ItemList from "./ItemList.vue";
 import { useAppStore } from "~/store/app.store";
 import type { AccordionItem } from "@nuxt/ui";
@@ -31,7 +32,9 @@ function formatEmploymentMeta(experience: Experience | undefined): string {
 	if (experience.concurrent) {
 		parts.push("concurrent role");
 	}
-	parts.push(`${experience.startDate}–${experience.endDate}`);
+	parts.push(
+		`${formatMonthYear(experience.startDate)}–${formatMonthYear(experience.endDate)}`,
+	);
 	return parts.join(" · ");
 }
 

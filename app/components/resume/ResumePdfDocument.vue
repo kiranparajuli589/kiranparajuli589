@@ -26,6 +26,26 @@ const {
 	selectedProjects,
 	experienceNote,
 } = props.resumePdf;
+
+function escapeHtml(text: string): string {
+	return text
+		.replace(/&/g, "&amp;")
+		.replace(/</g, "&lt;")
+		.replace(/>/g, "&gt;");
+}
+
+/**
+ * Wraps hyphenated compounds (e.g. "design-to-code", "real-time") in a
+ * no-wrap span so browser print-to-PDF never breaks a line at the hyphen —
+ * which otherwise corrupts the extracted text layer (ATS) into "design-tocode".
+ * Returns escaped HTML for use with v-html on trusted, authored content only.
+ */
+function protectCompounds(text: string): string {
+	return escapeHtml(text).replace(
+		/\S*[\p{L}\d]-[\p{L}\d]\S*/gu,
+		(match) => `<span class="nobreak">${match}</span>`,
+	);
+}
 </script>
 <template>
 	<div class="resume-pdf">
@@ -68,7 +88,7 @@ const {
 						rel="noopener noreferrer"
 						:href="link.href"
 					>
-						{{ link.label }}
+						{{ link.display }}
 					</a>
 					<span v-if="index < socialLinks.length - 1" class="link-separator">
 						|
@@ -78,22 +98,30 @@ const {
 
 			<h2 class="pt-4">Summary</h2>
 			<hr class="mb-2" />
-			<p>{{ pdfSummary }}</p>
+			<!-- eslint-disable-next-line vue/no-v-html -- authored, escaped content -->
+			<p v-html="protectCompounds(pdfSummary)"></p>
 
 			<h2 class="pt-4">Skills</h2>
 			<hr class="mb-2" />
 			<div v-for="skill in pdfSkills" :key="skill.title" class="mb-2 skill-row">
 				<strong>{{ skill.title }}:</strong>
 				<template v-if="skill.items.length > 1">
+					<!-- eslint-disable vue/no-v-html -- authored, escaped content -->
 					<div
 						v-for="item in skill.items"
 						:key="item"
 						class="skill-items skill-items-line"
-					>
-						{{ item }}
-					</div>
+						v-html="protectCompounds(item)"
+					></div>
+					<!-- eslint-enable vue/no-v-html -->
 				</template>
-				<span v-else class="skill-items">{{ skill.items.join(" ") }}</span>
+				<!-- eslint-disable vue/no-v-html -- authored, escaped content -->
+				<span
+					v-else
+					class="skill-items"
+					v-html="protectCompounds(skill.items.join(' '))"
+				></span>
+				<!-- eslint-enable vue/no-v-html -->
 			</div>
 
 			<h2 class="pt-4 experience-section-start">Professional Experience</h2>
@@ -111,14 +139,22 @@ const {
 					{{ experience.company }}
 				</h3>
 				<div class="mb-1">
-					<div title="Role" class="font-semibold text-gray-600 role-text">
-						{{ formatEmploymentLine(experience) }}
-					</div>
+					<!-- eslint-disable vue/no-v-html -- authored, escaped content -->
+					<div
+						title="Role"
+						class="font-semibold text-gray-600 role-text"
+						v-html="protectCompounds(formatEmploymentLine(experience))"
+					></div>
+					<!-- eslint-enable vue/no-v-html -->
 				</div>
 				<ul>
-					<li v-for="task in experience.achievements" :key="task">
-						{{ task }}
-					</li>
+					<!-- eslint-disable vue/no-v-html -- authored, escaped content -->
+					<li
+						v-for="task in experience.achievements"
+						:key="task"
+						v-html="protectCompounds(task)"
+					></li>
+					<!-- eslint-enable vue/no-v-html -->
 				</ul>
 			</div>
 
@@ -126,7 +162,9 @@ const {
 			<hr v-if="selectedProjects.length" class="mb-2" />
 			<ul v-if="selectedProjects.length" class="selected-projects-list">
 				<li v-for="project in selectedProjects" :key="project.title">
-					<strong>{{ project.title }}:</strong> {{ project.line }}
+					<strong>{{ project.title }}:</strong>
+					<!-- eslint-disable-next-line vue/no-v-html -- authored, escaped content -->
+					<span v-html="protectCompounds(project.line)"></span>
 				</li>
 			</ul>
 
@@ -158,6 +196,16 @@ const {
 	max-width: 1000px;
 	margin: 0 auto;
 	line-height: 1.35;
+	hyphens: none;
+	-webkit-hyphens: none;
+	text-align: left;
+}
+
+/* Keep hyphenated compounds on one line so print-to-PDF never breaks them at
+   the hyphen (which corrupts the extracted text layer). :deep is required
+   because these spans are injected via v-html and lack the scoped attribute. */
+.resume-pdf :deep(.nobreak) {
+	white-space: nowrap;
 }
 
 .resume-pdf .p-list .link-item {

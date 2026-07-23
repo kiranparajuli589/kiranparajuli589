@@ -154,11 +154,11 @@ function buildResumePdfVariant(
 	variant: ResumePdfVariant,
 	experiences: Experience[],
 	years: number,
-	_seniorYears: number,
+	seniorYears: number,
 ): ResumePdfExport {
 	const summaries: Record<ResumePdfVariant, string> = {
 		vue: `Senior Frontend Engineer with ${years}+ years in frontend and product UI delivery. Led CDN console modernization (Vue 2 to Vue 3, shadcn-vue, Tailwind)—high-traffic tables, WebSocket batch queue, and complex forms. ${figmaSummaryClause}`,
-		react: `Senior Frontend Engineer with ${years}+ years building high-performance, interactive product UIs in React, Next.js, TypeScript, and Tailwind CSS. Rebuilt ourBuddy's flagship WebRTC recording suite (draggable camera canvas, live audio visualization, Framer Motion micro-interactions), delivered a Lighthouse 97 SSR help center, and shipped real-time WebSocket experiences. ${figmaSummaryClause}`,
+		react: `Senior Frontend Engineer with ${years}+ years in frontend engineering and ${seniorYears}+ years building high-performance, interactive product UIs in React, Next.js, TypeScript, and Tailwind CSS. Rebuilt ourBuddy's flagship WebRTC recording suite (draggable camera canvas, live audio visualization, Framer Motion micro-interactions), delivered a Lighthouse 97 SSR help center, and shipped real-time WebSocket experiences. ${figmaSummaryClause}`,
 		fullstack: `Full-Stack Engineer with ${years}+ years building production web platforms end-to-end—Python, Django, and Django REST Framework backends with PostgreSQL/MySQL, paired with Vue and React frontends in TypeScript. Designed REST APIs, media pipelines, and Dockerized deployments; shipped a full DRF backend for a community platform and Django/DRF content APIs for a high-traffic public site. Strong on performance, testing (Playwright/BDD), and CI/CD.`,
 	};
 
@@ -168,7 +168,7 @@ function buildResumePdfVariant(
 				title: "Frontend",
 				items: [
 					"Primary: Vue.js, Nuxt.js, TypeScript, shadcn-vue, Tailwind CSS, Figma (wireframing, prototyping, design variables)",
-					"Also: React.js, Next.js, Redux, Redux Saga, Redux Tolkit, PrimeVue, Radix UI, design systems, WCAG, Core Web Vitals, i18n",
+					"Also: React.js, Next.js, Redux, Redux Saga, Redux Toolkit, PrimeVue, Radix UI, design systems, WCAG, Core Web Vitals, i18n",
 				],
 			},
 			{
@@ -188,14 +188,14 @@ function buildResumePdfVariant(
 			{
 				title: "Frontend",
 				items: [
-					"Primary: React.js, Next.js, TypeScript, Redux, Redux Toolkit, Redux Saga, custom hooks, shadcn/ui, Tailwind CSS, Framer Motion, Zustand, Tanstack Query, Figma (wireframing, prototyping, design variables)",
-					"Also: Vue.js, Nuxt.js, SSR/SSG/edge rendering, WebSockets/real-time UI, Canvas API, Radix UI, Redux, design systems, WCAG, Core Web Vitals, i18n",
+					"Primary: React.js, Next.js, TypeScript, Redux, Redux Toolkit, Redux Saga, custom hooks, shadcn/ui, Tailwind CSS, Framer Motion, Zustand, TanStack Query, Figma (wireframing, prototyping, design variables)",
+					"Also: Vue.js, Nuxt.js, SSR/SSG/edge rendering, WebSockets/real-time UI, Canvas API, Radix UI, design systems, WCAG, Core Web Vitals, i18n",
 				],
 			},
 			{
 				title: "Backend & Platform",
 				items: [
-					"Node.js, Express.js, Flask, Python, Django, DRF, REST, GraphQL, PostgreSQL, Redis, GitHub Actions, Docker",
+					"Node.js, Express.js, REST, GraphQL, WebSockets (integration); familiar with Python/Django/DRF, PostgreSQL, Redis, GitHub Actions, Docker",
 				],
 			},
 			{
@@ -258,20 +258,16 @@ function buildResumePdfVariant(
 		],
 		react: [
 			{
-				title: "Browser Recording System",
-				line: "Interactive WebRTC/MediaRecorder suite—draggable camera canvas, live audio visualization, and Framer Motion micro-interactions; replaced a legacy recorder and eliminated third-party SDK costs — react-rtc.netlify.app/en",
-			},
-			{
-				title: "Real-Time Ops Console",
-				line: "High-traffic console with a centralized WebSocket batch queue and live progress states—35%+ faster batch ops and 60% faster render on 5k+ row tables",
-			},
-			{
-				title: "SSR Help Center",
-				line: "Lighthouse 97 help center—React/Next.js + Flask/Python SSR, searchable docs and training UX",
-			},
-			{
 				title: "Vue Formik",
-				line: "Open-source Vue 3 form library (maintainer) — github.com/vue-formik/vue-formik",
+				line: "Open-source Vue 3 form library (maintainer)—Formik-style declarative validation for Vue 3 — github.com/vue-formik/vue-formik",
+			},
+			{
+				title: "VueYtframe",
+				line: "Open-source, fully typed YouTube IFrame API wrapper for Vue apps (author) — github.com/kiranparajuli589/vue3-ytframe",
+			},
+			{
+				title: "Markdown Parser",
+				line: "Open-source zero-dependency Markdown parser for Node.js/JavaScript (author) — github.com/kiranparajuli589/md-parser",
 			},
 		],
 		fullstack: [
@@ -302,8 +298,7 @@ function buildResumePdfVariant(
 
 	const experienceNotes: Record<ResumePdfVariant, string | undefined> = {
 		vue: undefined,
-		react:
-			"Note: Roles are ordered by relevance to React/Next.js work, not chronology.",
+		react: undefined,
 		fullstack: undefined,
 	};
 
@@ -490,10 +485,10 @@ const baseResume = {
 				"A vital internet intermediary powering CDN services, custom nodes, DNS acceleration, and SSL for global customers, with internal business platforms and AI-powered employee tools.",
 			roles: ["Senior Frontend Engineer"],
 			employmentType: "Full-time",
-			startDate: "2025",
-			endDate: "Present",
+			startDate: "2025-02",
+			endDate: "2026-07",
 			pdfMaxBullets: 5,
-			pdfSortOrder: { vue: 1, react: 2 },
+			pdfSortOrder: { vue: 1 },
 			technologies: [
 				"Nuxt.js",
 				"Vue.js",
@@ -536,11 +531,11 @@ const baseResume = {
 				"Redesigned Asians Group public website in Figma (Nuxt.js SSR); GTM/GA4 tracking showed measurably more qualified leads (~25% QoQ, internal analytics).",
 			],
 			achievementsPdfReact: [
-				"Primary frontend engineer on CDN console—complex operational UI, API co-design, and JIRA/Jenkins delivery with product and backend partners.",
-				"High-traffic tables—60% faster render (benchmarked on 5k+ rows) and a centralized WebSocket batch queue with real-time progress states—35%+ faster batch ops vs prior sequential flow.",
-				"Mobile-responsive UX with scrollable dialogs and sticky tabs; refactored 3,000+ line monolithic modules into reusable components.",
-				"Internal platform project: Figma-led Key Account Management UI; BDD E2E with Playwright.",
-				"Public website redesign—GTM/GA4 tracking showed measurably more qualified leads (~25% QoQ, internal analytics).",
+				"Cut large-table render time ~60% (Chrome Performance, benchmarked on 5k+ rows) on the CDN operations console by replacing the legacy renderer with dynamic row rendering.",
+				"Sped up bulk operations 35%+ with a centralized WebSocket batch queue and live progress states, replacing prior sequential handling.",
+				"Refactored 3,000+ line monolithic modules into reusable components and delivered mobile-responsive UX (scrollable dialogs, sticky tabbed forms).",
+				"Owned the Key Account Management UI end-to-end—from Figma wireframes through product review to production—with BDD end-to-end coverage (Playwright).",
+				"Grew qualified inbound leads ~25% QoQ (GA4, internal analytics) with a Figma-led public-site redesign and GTM/GA4 event tracking.",
 			],
 			pdfMaxBulletsFullstack: 5,
 			achievementsPdfFullstack: [
@@ -630,11 +625,11 @@ const baseResume = {
 				"A cutting-edge SaaS platform tailored for insurance brokerages.",
 			roles: ["Senior Frontend Engineer"],
 			employmentType: "Contract",
-			startDate: "2023",
-			endDate: "2025",
+			startDate: "2023-09",
+			endDate: "2025-02",
 			pdfMaxBullets: 4,
 			pdfMaxBulletsReact: 5,
-			pdfSortOrder: { vue: 2, react: 1 },
+			pdfSortOrder: { vue: 2 },
 			technologies: [
 				"React.js",
 				"Next.js",
@@ -648,7 +643,7 @@ const baseResume = {
 				"ClickUp",
 			],
 			achievements: [
-				"Led delivery across a five-engineer squad—backlog prioritization, release cadence, and code-quality initiatives across the platform.",
+				"Coordinated delivery across a five-engineer squad—backlog prioritization, release cadence, and code-quality initiatives across the platform.",
 				"Partnered with UX design on Figma handoffs—React/Next.js implementation from specs across dashboards, lists, forms, and training workflows.",
 				"Owned ourBuddy's flagship browser recording suite—the product's core differentiator—rebuilding a failing legacy recorder into React, Next.js, WebRTC, and MediaRecorder; enabled scalable broker training and onboarding workflows while eliminating third-party SDK costs and optimizing blob output for Java backend ingestion.",
 				"Modernized a legacy React codebase into a modular Next.js architecture with shared UI primitives, achieving a 40% reduction in build time and unlocking SSR caching.",
@@ -659,24 +654,24 @@ const baseResume = {
 				"Owned release cadences—sprint planning, QA sign-off, and phased rollouts—with consistently high on-time delivery and a low bug-escape rate.",
 			],
 			achievementsPdf: [
-				"Led delivery across a five-engineer squad—backlog prioritization, release cadence, and code-quality initiatives across the platform.",
+				"Coordinated delivery across a five-engineer squad—backlog prioritization, release cadence, and code-quality initiatives across the platform.",
 				"Owned the flagship browser recording suite—rebuilt a failing legacy recorder on React, Next.js, WebRTC, and MediaRecorder; enabled scalable broker training and onboarding while eliminating third-party SDK costs.",
 				"Partnered with UX design on Figma handoffs—React/Next.js implementation from specs across dashboards, lists, forms, and training workflows; modernized a legacy codebase into modular Next.js with shared UI primitives, cutting build time 40% and unlocking SSR caching.",
 				"Established Playwright, API, and contract-test suites in CI, reducing production regressions by 35%.",
 			],
 			achievementsPdfReact: [
-				"Led delivery across a five-engineer squad—backlog prioritization, release cadence, and code-quality initiatives across the platform.",
-				"Owned ourBuddy's flagship browser recording suite—the product's core differentiator—rebuilding a failing legacy recorder into React, Next.js, WebRTC, and MediaRecorder with an interactive draggable camera canvas and live audio visualization; enabled scalable broker training workflows while eliminating third-party SDK costs.",
-				"Partnered with UX design on Figma handoffs—React/Next.js implementation from specs across dashboards, lists, forms, and training workflows; built animated UI with Framer Motion (page transitions and micro-interactions) and modernized a legacy codebase into modular Next.js with shared UI primitives, cutting build time 40% and unlocking SSR caching.",
-				"Delivered a Lighthouse 97 SSR help center and document/media training workflows (searchable PDF viewer, streaming players, interactive quizzes) with React/Next.js and Flask/Python.",
-				"Established Playwright, API, and contract-test suites in CI, reducing production regressions by 35%.",
+				"Rebuilt ourBuddy's flagship browser recording suite—the broker-training platform's core differentiator—from a failing legacy recorder into React, Next.js, WebRTC, and MediaRecorder (draggable camera canvas, live audio visualization), eliminating third-party SDK costs.",
+				"Coordinated a five-engineer squad across backlog prioritization, release cadence, and code-quality initiatives.",
+				"Cut build time 40% and unlocked SSR caching by modernizing a legacy React codebase into modular Next.js with shared UI primitives.",
+				"Improved LCP from 3.1s to 1.7s across top customer workspaces with performance budgets, lazy loading, and real-user monitoring.",
+				"Cut production regressions 35% with Playwright, API, and contract-test suites in CI.",
 			],
 			pdfMaxBulletsFullstack: 5,
 			achievementsPdfFullstack: [
 				"Delivered a full-SSR help center on React/Next.js with a Flask/Python backend—Lighthouse 97 for performance and usability.",
 				"Built Astral Nexus on a FastAPI (Python) backend with structured data models for client and activity management, plus a React/Next.js client-management frontend.",
 				"Owned the flagship WebRTC/MediaRecorder recording suite—tuned blob generation and chunk handling for reliable Java backend ingestion across browsers.",
-				"Led a five-engineer squad and established Playwright, API, and contract-test suites in CI, reducing production regressions by 35%.",
+				"Coordinated a five-engineer squad and established Playwright, API, and contract-test suites in CI, reducing production regressions by 35%.",
 				"Modernized a legacy React codebase into modular Next.js with shared UI primitives—40% faster builds and SSR caching.",
 			],
 			companyUrl: "https://www.ourbuddy.ai",
@@ -737,7 +732,7 @@ const baseResume = {
 			endDate: "2024",
 			includeInPdf: false,
 			pdfMaxBullets: 3,
-			pdfSortOrder: { vue: 3, react: 3 },
+			pdfSortOrder: { vue: 3 },
 			technologies: [
 				"Jest",
 				"Cucumber.js",
@@ -803,10 +798,10 @@ const baseResume = {
 				"Global AgTech company delivering digital products that help smallholder farmers improve yields and supply-chain visibility.",
 			roles: ["Frontend Developer"],
 			employmentType: "Full-time",
-			startDate: "2022",
-			endDate: "2023",
+			startDate: "2023-06",
+			endDate: "2024-08",
 			pdfMaxBullets: 2,
-			pdfSortOrder: { vue: 3, react: 3 },
+			pdfSortOrder: { vue: 3 },
 			technologies: [
 				"Vue.js 3",
 				"Vuetify",
@@ -859,10 +854,10 @@ const baseResume = {
 			roles: ["Software Developer", "Junior Programmer"],
 			pdfRoles: ["Software Developer"],
 			employmentType: "Full-time",
-			startDate: "2019",
-			endDate: "2022",
+			startDate: "2019-10",
+			endDate: "2023-01",
 			pdfMaxBullets: 2,
-			pdfSortOrder: { vue: 4, react: 4 },
+			pdfSortOrder: { vue: 4 },
 			technologies: [
 				"Playwright",
 				"Behat",
@@ -996,11 +991,11 @@ const baseResume = {
 				"A spiritual and community organization platform with social engagement and multi-branch management.",
 			roles: ["Freelance Full-Stack Developer"],
 			employmentType: "Part-time",
-			startDate: "2019",
+			startDate: "2019-06",
 			endDate: "Present",
 			pdfMaxBullets: 1,
 			pdfMaxBulletsReact: 1,
-			pdfSortOrder: { vue: 5, react: 5 },
+			pdfSortOrder: { vue: 5 },
 			technologies: [
 				"Vue.js",
 				"Nuxt.js",
@@ -1274,7 +1269,7 @@ const baseResume = {
 				{ tooltip: "RadixUI", image: "radixui.png", imgClass: "dark:invert" },
 				{ tooltip: "Axios", image: "axios.svg" },
 				{ tooltip: "GSAP", image: "gsap.png" },
-				{ tooltip: "Tanstack Query", image: "tanstack-query.png" },
+				{ tooltip: "TanStack Query", image: "tanstack-query.png" },
 				{ tooltip: "Zustand", image: "zustand.png" },
 				{ tooltip: "Pinia", image: "pinia.png" },
 				{ tooltip: "Redux Toolkit", image: "redux.png" },
